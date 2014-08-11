@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D112199982370064F8A0 /* AppDelegate.swift */; };
+		ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */; };
+		ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D117199982370064F8A0 /* MasterViewController.swift */; };
+		ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D119199982370064F8A0 /* DetailViewController.swift */; };
+		ABD3D11D199982370064F8A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABD3D11B199982370064F8A0 /* Main.storyboard */; };
+		ABD3D11F199982370064F8A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD3D11E199982370064F8A0 /* Images.xcassets */; };
+		ABD3D12B199982370064F8A0 /* Field_QA2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D12A199982370064F8A0 /* Field_QA2Tests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ABD3D125199982370064F8A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABD3D105199982360064F8A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABD3D10C199982360064F8A0;
+			remoteInfo = "Field QA2";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ABD3D10D199982360064F8A0 /* Field QA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Field QA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABD3D111199982370064F8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABD3D112199982370064F8A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ABD3D115199982370064F8A0 /* Field_QA2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Field_QA2.xcdatamodel; sourceTree = "<group>"; };
+		ABD3D117199982370064F8A0 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		ABD3D119199982370064F8A0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		ABD3D11C199982370064F8A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ABD3D11E199982370064F8A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ABD3D124199982370064F8A0 /* Field QA2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Field QA2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABD3D129199982370064F8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABD3D12A199982370064F8A0 /* Field_QA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field_QA2Tests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABD3D10A199982360064F8A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABD3D121199982370064F8A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABD3D104199982360064F8A0 = {
+			isa = PBXGroup;
+			children = (
+				ABD3D10F199982360064F8A0 /* Field QA2 */,
+				ABD3D127199982370064F8A0 /* Field QA2Tests */,
+				ABD3D10E199982360064F8A0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABD3D10E199982360064F8A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABD3D10D199982360064F8A0 /* Field QA2.app */,
+				ABD3D124199982370064F8A0 /* Field QA2Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABD3D10F199982360064F8A0 /* Field QA2 */ = {
+			isa = PBXGroup;
+			children = (
+				ABD3D112199982370064F8A0 /* AppDelegate.swift */,
+				ABD3D117199982370064F8A0 /* MasterViewController.swift */,
+				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
+				ABD3D11B199982370064F8A0 /* Main.storyboard */,
+				ABD3D11E199982370064F8A0 /* Images.xcassets */,
+				ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */,
+				ABD3D110199982370064F8A0 /* Supporting Files */,
+			);
+			path = "Field QA2";
+			sourceTree = "<group>";
+		};
+		ABD3D110199982370064F8A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABD3D111199982370064F8A0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ABD3D127199982370064F8A0 /* Field QA2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ABD3D12A199982370064F8A0 /* Field_QA2Tests.swift */,
+				ABD3D128199982370064F8A0 /* Supporting Files */,
+			);
+			path = "Field QA2Tests";
+			sourceTree = "<group>";
+		};
+		ABD3D128199982370064F8A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABD3D129199982370064F8A0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABD3D10C199982360064F8A0 /* Field QA2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABD3D12E199982370064F8A0 /* Build configuration list for PBXNativeTarget "Field QA2" */;
+			buildPhases = (
+				ABD3D109199982360064F8A0 /* Sources */,
+				ABD3D10A199982360064F8A0 /* Frameworks */,
+				ABD3D10B199982360064F8A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Field QA2";
+			productName = "Field QA2";
+			productReference = ABD3D10D199982360064F8A0 /* Field QA2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ABD3D123199982370064F8A0 /* Field QA2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABD3D131199982370064F8A0 /* Build configuration list for PBXNativeTarget "Field QA2Tests" */;
+			buildPhases = (
+				ABD3D120199982370064F8A0 /* Sources */,
+				ABD3D121199982370064F8A0 /* Frameworks */,
+				ABD3D122199982370064F8A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ABD3D126199982370064F8A0 /* PBXTargetDependency */,
+			);
+			name = "Field QA2Tests";
+			productName = "Field QA2Tests";
+			productReference = ABD3D124199982370064F8A0 /* Field QA2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABD3D105199982360064F8A0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "University of Nevada, Reno";
+				TargetAttributes = {
+					ABD3D10C199982360064F8A0 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					ABD3D123199982370064F8A0 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = ABD3D10C199982360064F8A0;
+					};
+				};
+			};
+			buildConfigurationList = ABD3D108199982360064F8A0 /* Build configuration list for PBXProject "Field QA2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABD3D104199982360064F8A0;
+			productRefGroup = ABD3D10E199982360064F8A0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABD3D10C199982360064F8A0 /* Field QA2 */,
+				ABD3D123199982370064F8A0 /* Field QA2Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABD3D10B199982360064F8A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABD3D11D199982370064F8A0 /* Main.storyboard in Resources */,
+				ABD3D11F199982370064F8A0 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABD3D122199982370064F8A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABD3D109199982360064F8A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
+				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
+				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
+				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABD3D120199982370064F8A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABD3D12B199982370064F8A0 /* Field_QA2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ABD3D126199982370064F8A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABD3D10C199982360064F8A0 /* Field QA2 */;
+			targetProxy = ABD3D125199982370064F8A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ABD3D11B199982370064F8A0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABD3D11C199982370064F8A0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ABD3D12C199982370064F8A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABD3D12D199982370064F8A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABD3D12F199982370064F8A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "Field QA2/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ABD3D130199982370064F8A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "Field QA2/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		ABD3D132199982370064F8A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Field QA2Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Field QA2.app/Field QA2";
+			};
+			name = Debug;
+		};
+		ABD3D133199982370064F8A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Field QA2Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Field QA2.app/Field QA2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABD3D108199982360064F8A0 /* Build configuration list for PBXProject "Field QA2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABD3D12C199982370064F8A0 /* Debug */,
+				ABD3D12D199982370064F8A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABD3D12E199982370064F8A0 /* Build configuration list for PBXNativeTarget "Field QA2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABD3D12F199982370064F8A0 /* Debug */,
+				ABD3D130199982370064F8A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ABD3D131199982370064F8A0 /* Build configuration list for PBXNativeTarget "Field QA2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABD3D132199982370064F8A0 /* Debug */,
+				ABD3D133199982370064F8A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				ABD3D115199982370064F8A0 /* Field_QA2.xcdatamodel */,
+			);
+			currentVersion = ABD3D115199982370064F8A0 /* Field_QA2.xcdatamodel */;
+			path = Field_QA2.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = ABD3D105199982360064F8A0 /* Project object */;
+}
