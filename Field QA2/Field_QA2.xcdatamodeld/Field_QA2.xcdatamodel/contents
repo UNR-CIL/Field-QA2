@@ -1,9 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Event">
-        <attribute name="timeStamp" optional="YES" attributeType="Date"/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6220.8" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Component" representedClassName="Field_QA2.Component" syncable="YES">
+        <attribute name="accuracy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="attachmentData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="installationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastCalibrationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="manufacturer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="operatingRanage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
+        <attribute name="serialNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="associatedLogicalDevice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LogicalDevice" inverseName="installedComponent" inverseEntity="LogicalDevice" syncable="YES"/>
+        <relationship name="logicalDevice" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LogicalDevice" inverseName="components" inverseEntity="LogicalDevice" syncable="YES"/>
+    </entity>
+    <entity name="LogicalDevice" representedClassName="Field_QA2.LogicalDevice" syncable="YES">
+        <attribute name="centerOffset" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="dataInterval" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dataStreamDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="heightFromGround" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="installationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="installationDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="installationLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="purpose" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unitDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="logicalDevice" inverseEntity="Component" syncable="YES"/>
+        <relationship name="installedComponent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Component" inverseName="associatedLogicalDevice" inverseEntity="Component" syncable="YES"/>
+        <relationship name="system" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="System" inverseName="logicalDevices" inverseEntity="System" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName="Field_QA2.Person" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="managedSystem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="System" inverseName="manager" inverseEntity="System" syncable="YES"/>
+        <relationship name="serviceEntry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="creator" inverseEntity="ServiceEntry" syncable="YES"/>
+    </entity>
+    <entity name="ServiceEntry" representedClassName="Field_QA2.ServiceEntry" syncable="YES">
+        <attribute name="attachmentData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="operation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
+        <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="serviceEntry" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="System" representedClassName="Field_QA2.System">
+        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="installationDate" optional="YES" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <attribute name="installationLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
+        <attribute name="power" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="logicalDevices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LogicalDevice" inverseName="system" inverseEntity="LogicalDevice" syncable="YES"/>
+        <relationship name="manager" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="managedSystem" inverseEntity="Person" syncable="YES"/>
+        <userInfo/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
+        <element name="Component" positionX="270" positionY="207" width="128" height="238"/>
+        <element name="LogicalDevice" positionX="261" positionY="198" width="128" height="268"/>
+        <element name="Person" positionX="288" positionY="216" width="128" height="118"/>
+        <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="133"/>
+        <element name="System" positionX="261" positionY="189" width="128" height="193"/>
     </elements>
 </model>

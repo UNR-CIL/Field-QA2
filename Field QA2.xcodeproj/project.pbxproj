@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB2E2C15199C5C2600C7411D /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C14199C5C2600C7411D /* Person.swift */; };
+		AB2E2C17199C5C2600C7411D /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C16199C5C2600C7411D /* Component.swift */; };
+		AB2E2C19199C5C2700C7411D /* ServiceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */; };
+		AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */; };
+		AB2E2C1D199C5C2700C7411D /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C1C199C5C2700C7411D /* System.swift */; };
 		ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D112199982370064F8A0 /* AppDelegate.swift */; };
 		ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */; };
 		ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D117199982370064F8A0 /* MasterViewController.swift */; };
@@ -14,6 +19,7 @@
 		ABD3D11D199982370064F8A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABD3D11B199982370064F8A0 /* Main.storyboard */; };
 		ABD3D11F199982370064F8A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABD3D11E199982370064F8A0 /* Images.xcassets */; };
 		ABD3D12B199982370064F8A0 /* Field_QA2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D12A199982370064F8A0 /* Field_QA2Tests.swift */; };
+		ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +33,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB2E2C14199C5C2600C7411D /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		AB2E2C16199C5C2600C7411D /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntry.swift; sourceTree = "<group>"; };
+		AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalDevice.swift; sourceTree = "<group>"; };
+		AB2E2C1C199C5C2700C7411D /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		ABD3D10D199982360064F8A0 /* Field QA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Field QA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD3D111199982370064F8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD3D112199982370064F8A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +49,7 @@
 		ABD3D124199982370064F8A0 /* Field QA2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Field QA2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD3D129199982370064F8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD3D12A199982370064F8A0 /* Field_QA2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field_QA2Tests.swift; sourceTree = "<group>"; };
+		ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageToDataTransformer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +94,15 @@
 				ABD3D112199982370064F8A0 /* AppDelegate.swift */,
 				ABD3D117199982370064F8A0 /* MasterViewController.swift */,
 				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
+				ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */,
 				ABD3D11B199982370064F8A0 /* Main.storyboard */,
 				ABD3D11E199982370064F8A0 /* Images.xcassets */,
 				ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */,
+				AB2E2C1C199C5C2700C7411D /* System.swift */,
+				AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */,
+				AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */,
+				AB2E2C16199C5C2600C7411D /* Component.swift */,
+				AB2E2C14199C5C2600C7411D /* Person.swift */,
 				ABD3D110199982370064F8A0 /* Supporting Files */,
 			);
 			path = "Field QA2";
@@ -214,8 +232,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB2E2C1D199C5C2700C7411D /* System.swift in Sources */,
+				AB2E2C19199C5C2700C7411D /* ServiceEntry.swift in Sources */,
+				AB2E2C15199C5C2600C7411D /* Person.swift in Sources */,
+				AB2E2C17199C5C2600C7411D /* Component.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
+				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
+				AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
 			);
@@ -335,9 +359,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Field QA2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -346,6 +372,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Field QA2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -405,6 +432,7 @@
 				ABD3D130199982370064F8A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABD3D131199982370064F8A0 /* Build configuration list for PBXNativeTarget "Field QA2Tests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +441,7 @@
 				ABD3D133199982370064F8A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
