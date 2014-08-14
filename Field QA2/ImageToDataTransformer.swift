@@ -9,22 +9,22 @@
 import Foundation
 import UIKit
 
-class ImageToDataTransformer {
+class ImageToDataTransformer : NSValueTransformer {
     
-    class func allowsReverseTransformation() -> Bool {
+    override class func allowsReverseTransformation() -> Bool {
         return true;
     }
     
-    class func transformedValueClass() -> AnyClass! {
+    override class func transformedValueClass() -> AnyClass! {
         return NSData.self
     }
     
-    func transformedValue(value: AnyObject!) -> AnyObject! {
+    override func transformedValue(value: AnyObject!) -> AnyObject! {
         var data : NSData = UIImagePNGRepresentation(value as UIImage)
         return data
     }
     
-    func reverseTransformedValue(value: AnyObject!) -> AnyObject! {
+    override func reverseTransformedValue(value: AnyObject!) -> AnyObject! {
         return UIImage(data: value as NSData)
     }
 }
