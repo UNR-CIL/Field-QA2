@@ -12,6 +12,8 @@
 		AB2E2C19199C5C2700C7411D /* ServiceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */; };
 		AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */; };
 		AB2E2C1D199C5C2700C7411D /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C1C199C5C2700C7411D /* System.swift */; };
+		AB867F2219A28CAF001E7E5E /* SystemsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2119A28CAF001E7E5E /* SystemsDetailViewController.swift */; };
+		AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2319A299C7001E7E5E /* SystemsViewController.swift */; };
 		ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D112199982370064F8A0 /* AppDelegate.swift */; };
 		ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */; };
 		ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D117199982370064F8A0 /* MasterViewController.swift */; };
@@ -38,6 +40,8 @@
 		AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntry.swift; sourceTree = "<group>"; };
 		AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalDevice.swift; sourceTree = "<group>"; };
 		AB2E2C1C199C5C2700C7411D /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		AB867F2119A28CAF001E7E5E /* SystemsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsDetailViewController.swift; sourceTree = "<group>"; };
+		AB867F2319A299C7001E7E5E /* SystemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
 		ABD3D10D199982360064F8A0 /* Field QA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Field QA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD3D111199982370064F8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD3D112199982370064F8A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				ABD3D117199982370064F8A0 /* MasterViewController.swift */,
 				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
 				ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */,
+				AB867F2319A299C7001E7E5E /* SystemsViewController.swift */,
+				AB867F2119A28CAF001E7E5E /* SystemsDetailViewController.swift */,
 				ABD3D11B199982370064F8A0 /* Main.storyboard */,
 				ABD3D11E199982370064F8A0 /* Images.xcassets */,
 				ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */,
@@ -233,11 +239,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB2E2C1D199C5C2700C7411D /* System.swift in Sources */,
+				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
 				AB2E2C19199C5C2700C7411D /* ServiceEntry.swift in Sources */,
 				AB2E2C15199C5C2600C7411D /* Person.swift in Sources */,
 				AB2E2C17199C5C2600C7411D /* Component.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
+				AB867F2219A28CAF001E7E5E /* SystemsDetailViewController.swift in Sources */,
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
 				AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
