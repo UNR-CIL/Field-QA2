@@ -15,16 +15,17 @@ class ImageToDataTransformer : NSValueTransformer {
         return true;
     }
     
-    override class func transformedValueClass() -> AnyClass! {
+    override class func transformedValueClass() -> AnyClass {
         return NSData.self
     }
     
-    override func transformedValue(value: AnyObject!) -> AnyObject! {
+
+    override func transformedValue(value: AnyObject!) -> AnyObject? {
         var data : NSData = UIImagePNGRepresentation(value as UIImage)
         return data
     }
     
-    override func reverseTransformedValue(value: AnyObject!) -> AnyObject! {
+    override func reverseTransformedValue(value: AnyObject!) -> AnyObject? {
         return UIImage(data: value as NSData)
     }
 }
