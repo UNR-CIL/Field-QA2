@@ -9,6 +9,7 @@
 import UIKit
 
 class ComponentsViewController: UITableViewController {
+    var componentsPredicate : NSPredicate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

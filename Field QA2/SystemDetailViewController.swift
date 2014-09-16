@@ -17,6 +17,7 @@ class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate 
         }
     }
     var datePopoverController : UIPopoverController?
+    var componentsPopoverController : UIPopoverController?
     
     @IBOutlet weak var installationDateButton: UIButton!
     
@@ -46,11 +47,16 @@ class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate 
         self.datePopoverController!.delegate = self
         self.datePopoverController!.presentPopoverFromRect(installationDateButton.bounds, inView: installationDateButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
     }
-    
+
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
-        let datePickerViewController = popoverController.contentViewController as DatePickerViewController
-        installationDate = datePickerViewController.datePicker.date
-        self.updateInstallationDateButtonTitle()
+        if popoverController == self.datePopoverController {
+            let datePickerViewController = popoverController.contentViewController as DatePickerViewController
+            installationDate = datePickerViewController.datePicker.date
+            self.updateInstallationDateButtonTitle()
+        }
+        else if popoverController == self.componentsPopoverController {
+            
+        }
         return true
     }
     
@@ -179,14 +185,17 @@ class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate 
         }
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "ComponentsViewControllerPopover") {
+            if let componentsViewController = segue.destinationViewController as? ComponentsViewController {
+                let predicate = NSPredicate(format: "system == %@", self.detailSystemItem!)
+                componentsViewController.componentsPredicate = predicate
+            }
+        }
     }
-    */
 
 }
