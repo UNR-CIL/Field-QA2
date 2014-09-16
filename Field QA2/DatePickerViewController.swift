@@ -1,15 +1,22 @@
 //
-//  SystemsDetailViewController.swift
+//  DatePickerViewController.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 8/18/14.
+//  Created by John Jusayan on 9/16/14.
 //  Copyright (c) 2014 University of Nevada, Reno. All rights reserved.
 //
 
 import UIKit
 
-class SystemsDetailViewController: UIViewController {
+class DatePickerViewController: UIViewController {
 
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    
+    @IBAction func todayButtonTapped(sender: AnyObject) {
+        datePicker.date = NSDate()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +28,9 @@ class SystemsDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func datePickerValueChanged(picker: UIDatePicker) {
+        println("Picker value Changed \(picker.date)")
+    }
 
     /*
     // MARK: - Navigation

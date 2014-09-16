@@ -11,14 +11,14 @@ import CoreData
 
 class System: NSManagedObject {
 
-    @NSManaged var details: String
-    @NSManaged var installationDate: NSDate
-    @NSManaged var installationLocation: String
-    @NSManaged var latitude: NSNumber
-    @NSManaged var longitude: NSNumber
-    @NSManaged var name: String
-    @NSManaged var photo: AnyObject
-    @NSManaged var power: String
+    @NSManaged var details: String?
+    @NSManaged var installationDate: NSDate?
+    @NSManaged var installationLocation: String?
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var longitude: NSNumber?
+    @NSManaged var name: String?
+    @NSManaged var photo: AnyObject?
+    @NSManaged var power: String?
     @NSManaged var logicalDevices: NSSet
     @NSManaged var manager: Person
 
