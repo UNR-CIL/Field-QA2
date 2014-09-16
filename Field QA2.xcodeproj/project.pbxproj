@@ -29,6 +29,8 @@
 		ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD086619C88FF600742185 /* DatePickerViewController.swift */; };
 		ABFD086919C8900700742185 /* DatePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABFD086819C8900700742185 /* DatePicker.storyboard */; };
 		ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */; };
+		ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD086C19C8F68600742185 /* LogicalDeviceDetailViewController.swift */; };
+		ABFD086F19C8F83800742185 /* ServiceEntryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		ABFD086619C88FF600742185 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		ABFD086819C8900700742185 /* DatePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DatePicker.storyboard; sourceTree = "<group>"; };
 		ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentDetailViewController.swift; sourceTree = "<group>"; };
+		ABFD086C19C8F68600742185 /* LogicalDeviceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalDeviceDetailViewController.swift; sourceTree = "<group>"; };
+		ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntryDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,27 +114,29 @@
 			isa = PBXGroup;
 			children = (
 				ABD3D112199982370064F8A0 /* AppDelegate.swift */,
-				ABD3D117199982370064F8A0 /* MasterViewController.swift */,
-				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
-				ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */,
-				AB867F2319A299C7001E7E5E /* SystemsViewController.swift */,
-				AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */,
-				AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */,
-				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
-				AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */,
-				ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */,
-				AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */,
-				ABD3D11B199982370064F8A0 /* Main.storyboard */,
-				ABFD086619C88FF600742185 /* DatePickerViewController.swift */,
-				ABFD086819C8900700742185 /* DatePicker.storyboard */,
-				ABD3D11E199982370064F8A0 /* Images.xcassets */,
-				ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */,
-				AB2E2C1C199C5C2700C7411D /* System.swift */,
-				AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */,
-				AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */,
 				AB2E2C16199C5C2600C7411D /* Component.swift */,
+				ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */,
+				AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */,
+				ABFD086819C8900700742185 /* DatePicker.storyboard */,
+				ABFD086619C88FF600742185 /* DatePickerViewController.swift */,
+				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
+				ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */,
+				ABD3D11E199982370064F8A0 /* Images.xcassets */,
+				ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */,
+				AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */,
+				AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */,
+				ABFD086C19C8F68600742185 /* LogicalDeviceDetailViewController.swift */,
+				ABD3D11B199982370064F8A0 /* Main.storyboard */,
+				ABD3D117199982370064F8A0 /* MasterViewController.swift */,
 				AB2E2C14199C5C2600C7411D /* Person.swift */,
+				AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */,
+				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
+				ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */,
+				AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */,
 				ABD3D110199982370064F8A0 /* Supporting Files */,
+				AB2E2C1C199C5C2700C7411D /* System.swift */,
+				AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */,
+				AB867F2319A299C7001E7E5E /* SystemsViewController.swift */,
 			);
 			path = "Field QA2";
 			sourceTree = "<group>";
@@ -270,10 +276,12 @@
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
 				AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */,
+				ABFD086F19C8F83800742185 /* ServiceEntryDetailViewController.swift in Sources */,
 				AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */,
 				ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */,
 				AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */,
 				ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */,
+				ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
 				AB6B9E9A19B9824A003734A1 /* ServiceEntriesViewController.swift in Sources */,
