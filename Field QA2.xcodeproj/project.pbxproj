@@ -28,6 +28,7 @@
 		ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */; };
 		ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD086619C88FF600742185 /* DatePickerViewController.swift */; };
 		ABFD086919C8900700742185 /* DatePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABFD086819C8900700742185 /* DatePicker.storyboard */; };
+		ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageToDataTransformer.swift; sourceTree = "<group>"; };
 		ABFD086619C88FF600742185 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		ABFD086819C8900700742185 /* DatePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DatePicker.storyboard; sourceTree = "<group>"; };
+		ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */,
 				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
 				AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */,
+				ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */,
 				AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */,
 				ABD3D11B199982370064F8A0 /* Main.storyboard */,
 				ABFD086619C88FF600742185 /* DatePickerViewController.swift */,
@@ -268,6 +271,7 @@
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
 				AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */,
 				AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */,
+				ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */,
 				AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */,
 				ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,

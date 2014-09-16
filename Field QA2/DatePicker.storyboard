@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="PkE-WR-MrT">
-                                <rect key="frame" x="0.0" y="219" width="600" height="162"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="PkE-WR-MrT">
+                                <rect key="frame" x="140" y="219" width="320" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="432574519.448672">
                                     <!--2014-09-16 15:35:19 +0000-->
                                 </date>

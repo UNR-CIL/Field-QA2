@@ -10,9 +10,51 @@ import UIKit
 import CoreData
 
 class SystemsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    // MARK: - Properties
     
-    var managedObjectContext: NSManagedObjectContext? = nil
+    var componentsPredicate : NSPredicate?
+    var managedObjectContext: NSManagedObjectContext?
     
+    // MARK: - Fetched results controller
+    
+    var fetchedResultsController: NSFetchedResultsController {
+        if _fetchedResultsController != nil {
+            return _fetchedResultsController!
+        }
+            
+        let fetchRequest = NSFetchRequest()
+        // Edit the entity name as appropriate.
+        let entity = NSEntityDescription.entityForName("System", inManagedObjectContext: self.managedObjectContext!)
+        fetchRequest.entity = entity
+            
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+            
+        // Edit the sort key as appropriate.
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
+        let sortDescriptors = [sortDescriptor]
+            
+        fetchRequest.sortDescriptors = [sortDescriptor]
+            
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName:nil)
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+            
+        var error: NSError? = nil
+        if !_fetchedResultsController!.performFetch(&error) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //println("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+            
+        return _fetchedResultsController!
+    }
+    var _fetchedResultsController: NSFetchedResultsController? = nil
+    
+    // MARK: - View Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +66,6 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext;
@@ -39,6 +80,8 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - New Object
     
     func insertNewObject(sender: AnyObject) {
         let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: self.managedObjectContext!) as System
@@ -109,45 +152,6 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
         }
         
     }
-    
-    // MARK: - Fetched results controller
-    
-    var fetchedResultsController: NSFetchedResultsController {
-        if _fetchedResultsController != nil {
-            return _fetchedResultsController!
-            }
-            
-            let fetchRequest = NSFetchRequest()
-            // Edit the entity name as appropriate.
-            let entity = NSEntityDescription.entityForName("System", inManagedObjectContext: self.managedObjectContext!)
-            fetchRequest.entity = entity
-            
-            // Set the batch size to a suitable number.
-            fetchRequest.fetchBatchSize = 20
-            
-            // Edit the sort key as appropriate.
-            let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
-            let sortDescriptors = [sortDescriptor]
-            
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            
-            // Edit the section name key path and cache name if appropriate.
-            // nil for section name key path means "no sections".
-            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName:nil)
-            aFetchedResultsController.delegate = self
-            _fetchedResultsController = aFetchedResultsController
-            
-            var error: NSError? = nil
-            if !_fetchedResultsController!.performFetch(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //println("Unresolved error \(error), \(error.userInfo)")
-                abort()
-            }
-            
-            return _fetchedResultsController!
-    }
-    var _fetchedResultsController: NSFetchedResultsController? = nil
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
