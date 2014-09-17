@@ -11,11 +11,11 @@ import CoreData
 
 class ServiceEntry: NSManagedObject {
 
-    @NSManaged var attachmentData: NSData
-    @NSManaged var date: NSDate
-    @NSManaged var notes: String
-    @NSManaged var operation: String
-    @NSManaged var photo: AnyObject
+    @NSManaged var attachmentData: NSData?
+    @NSManaged var date: NSDate?
+    @NSManaged var notes: String?
+    @NSManaged var operation: String?
+    @NSManaged var photo: AnyObject?
     @NSManaged var creator: Person
 
 }

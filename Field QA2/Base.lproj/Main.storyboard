@@ -724,7 +724,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComponentCell" id="i7A-g7-T5c">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LogicalDeviceCell" id="i7A-g7-T5c">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i7A-g7-T5c" id="RAV-X5-ghb">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -915,9 +915,6 @@
                     <navigationItem key="navigationItem" title="Logical Device" id="ATB-Zv-Ejy" userLabel="Logical Device">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="4Be-7Z-aDl"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="nameTextField" destination="5R9-0f-G2g" id="p2i-tg-Ps1"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jII-cw-2Rj" sceneMemberID="firstResponder"/>
             </objects>
@@ -981,10 +978,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ComponentCell" id="H7d-4c-fiq">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServiceEntryCell" textLabel="66o-c4-N95" detailTextLabel="9dB-Mk-PWA" style="IBUITableViewCellStyleSubtitle" id="H7d-4c-fiq">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H7d-4c-fiq" id="MfK-Yg-rjE">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="66o-c4-N95">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9dB-Mk-PWA">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="T5T-sS-hgf" kind="showDetail" identifier="showServiceEntryDetail" id="W46-Rm-otl"/>
@@ -1172,9 +1183,6 @@
                     <navigationItem key="navigationItem" title="Service Entry" id="POo-Ox-T5y">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="I6I-W7-9A1"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="nameTextField" destination="EZH-gg-FAy" id="oks-Nf-JL7"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Uk-lS-fPl" sceneMemberID="firstResponder"/>
             </objects>

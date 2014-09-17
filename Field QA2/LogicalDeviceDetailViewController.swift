@@ -9,6 +9,13 @@
 import UIKit
 
 class LogicalDeviceDetailViewController: UIViewController {
+    
+    var detailLogicalDeviceItem : LogicalDevice? {
+        didSet {
+            // Set date properties here
+            self.configureView()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,4 +39,7 @@ class LogicalDeviceDetailViewController: UIViewController {
     }
     */
 
+    func configureView() {
+        
+    }
 }

@@ -10,6 +10,13 @@ import UIKit
 
 class ServiceEntryDetailViewController: UIViewController {
 
+    var detailServiceEntryItem : ServiceEntry? {
+        didSet {
+            // Set date properties here
+            self.configureView()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,4 +39,7 @@ class ServiceEntryDetailViewController: UIViewController {
     }
     */
 
+    func configureView() {
+        
+    }
 }
