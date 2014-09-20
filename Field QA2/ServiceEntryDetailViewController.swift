@@ -17,6 +17,11 @@ class ServiceEntryDetailViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var operationTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var dateButton: UIButton!
+    @IBOutlet weak var associatedEntityButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

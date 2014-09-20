@@ -16,7 +16,23 @@ class LogicalDeviceDetailViewController: UIViewController {
             self.configureView()
         }
     }
-
+    
+    @IBOutlet weak var unitDescriptionTextField: UITextField!
+    @IBOutlet weak var typeNameTextField: UITextField!
+    @IBOutlet weak var purposeTextField: UITextField!
+    @IBOutlet weak var installationLocationTextField: UITextField!
+    @IBOutlet weak var installationDetailsTextView: UITextView!
+    @IBOutlet weak var latitudeTextField: UITextField!
+    @IBOutlet weak var longitudeTextField: UITextField!
+    @IBOutlet weak var heightFromGroundTextField: UITextField!
+    @IBOutlet weak var centerOffsetTextField: UITextField!
+    @IBOutlet weak var dataIntervalTextField: UITextField!
+    @IBOutlet weak var dataStreamDetails: UITextField!
+    
+    @IBOutlet weak var systemButton: UIButton!
+    @IBOutlet weak var installationDateButton: UIButton!
+    @IBOutlet weak var componentsButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

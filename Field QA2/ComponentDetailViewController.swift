@@ -16,18 +16,29 @@ class ComponentDetailViewController: UIViewController {
             self.configureView()
         }
     }
-    var datePopoverController : UIPopoverController?
-    var systemsPopoverController : UIPopoverController?
-    var serviceEntriesPopoverController : UIPopoverController?
+    var installationDatePopoverController: UIPopoverController?
+    var lastCallibrationDatePopoverController: UIPopoverController?
+    var logicalDevicePopoverController: UIPopoverController?
+    var serviceEntriesPopoverController: UIPopoverController?
 
-    @IBOutlet weak var accuracyTextField: UITextField!
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
 
-    @IBOutlet weak var manufacturerTextField:  UITextField!
     @IBOutlet weak var modelTextField:  UITextField!
-    @IBOutlet weak var nameTextField:  UITextField!
-    @IBOutlet weak var operatingRanageTextField: UITextField!
+    @IBOutlet weak var manufacturerTextField:  UITextField!
+    
     @IBOutlet weak var serialNumberTextField: UITextField!
     @IBOutlet weak var typeNameTextField: UITextField!
+    
+    @IBOutlet weak var accuracyTextField: UITextField!
+    @IBOutlet weak var operatingRangeTextField: UITextField!
+
+    @IBOutlet weak var installationDateButton: UIButton!
+    @IBOutlet weak var calibrationDateButton: UIButton!
+    
+    
+    @IBOutlet weak var logicalDeviceButton: UIButton!
     
     var installationDate: NSDate?
     var lastCalibrationDate: NSDate?

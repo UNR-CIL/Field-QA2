@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6220.8" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Component" representedClassName="Field_QA2.Component" syncable="YES">
         <attribute name="accuracy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="attachmentData" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -8,7 +8,7 @@
         <attribute name="manufacturer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="operatingRanage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="operatingRange" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
         <attribute name="serialNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,7 +63,7 @@
         <userInfo/>
     </entity>
     <elements>
-        <element name="Component" positionX="270" positionY="207" width="128" height="238"/>
+        <element name="Component" positionX="270" positionY="207" width="128" height="240"/>
         <element name="LogicalDevice" positionX="261" positionY="198" width="128" height="268"/>
         <element name="Person" positionX="288" positionY="216" width="128" height="118"/>
         <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="133"/>
