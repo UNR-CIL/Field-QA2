@@ -18,6 +18,7 @@ class Component: NSManagedObject {
     @NSManaged var manufacturer: String?
     @NSManaged var model: String?
     @NSManaged var name: String?
+    @NSManaged var details: String?
     @NSManaged var operatingRange: String?
     @NSManaged var photo: AnyObject?
     @NSManaged var serialNumber: String?

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ComponentDetailViewController: UIViewController {
+class ComponentDetailViewController: UIViewController, UIPopoverControllerDelegate {
 
     var detailComponentItem : Component? {
         didSet {
@@ -43,15 +43,9 @@ class ComponentDetailViewController: UIViewController {
     var installationDate: NSDate?
     var lastCalibrationDate: NSDate?
     
-// var associatedLogicalDevice: NSManagedObject
-// var logicalDevice: NSManagedObject
-// weak var attachmentData: NSData
-// weak var photo: AnyObject
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.configureView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,19 +53,190 @@ class ComponentDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func installationDateButtonTapped(sender: AnyObject) {
+        let datePickerStoryboard = UIStoryboard(name: "DatePicker", bundle: nil)
+        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as DatePickerViewController
+        self.installationDatePopoverController = UIPopoverController(contentViewController: datePickerViewController)
+        
+        self.installationDatePopoverController!.delegate = self
+        self.installationDatePopoverController!.presentPopoverFromRect(installationDateButton.bounds, inView: installationDateButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
     }
-    */
+    
+    @IBAction func calibrationDateButtonTapped(sender: AnyObject) {
+        let datePickerStoryboard = UIStoryboard(name: "DatePicker", bundle: nil)
+        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as DatePickerViewController
+        self.lastCallibrationDatePopoverController = UIPopoverController(contentViewController: datePickerViewController)
+        
+        self.lastCallibrationDatePopoverController!.delegate = self
+        self.lastCallibrationDatePopoverController!.presentPopoverFromRect(installationDateButton.bounds, inView: calibrationDateButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+    }
+    
+    func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
+        if popoverController == self.installationDatePopoverController {
+            let datePickerViewController = popoverController.contentViewController as DatePickerViewController
+            installationDate = datePickerViewController.datePicker.date
+            self.updateInstallationDateButtonTitle()
+        }
+        else if popoverController == self.lastCallibrationDatePopoverController {
+            let datePickerViewController = popoverController.contentViewController as DatePickerViewController
+            lastCalibrationDate = datePickerViewController.datePicker.date
+            self.updateLastCalibrationDateButtonTitle()
+        }
+        return true
+    }
+    
+    @IBAction func saveBarButtonTapped(sender: AnyObject) {
+        if let name = self.nameTextField.text {
+            detailComponentItem!.name = name
+        }
+        else {
+            detailComponentItem!.name = nil
+        }
+        if let notes = self.notesTextView.text {
+            detailComponentItem!.details = notes
+        }
+        else {
+            detailComponentItem!.details = nil
+        }
+        
+        if let model = self.modelTextField.text {
+            detailComponentItem!.model = model
+        }
+        else {
+            detailComponentItem!.model = nil
+        }
+        if let manufacturer = self.manufacturerTextField.text {
+            detailComponentItem!.manufacturer = manufacturer
+        }
+        else {
+            detailComponentItem!.manufacturer = nil
+        }
+        
+        if let serialNumber = self.serialNumberTextField.text {
+            detailComponentItem!.serialNumber = serialNumber
+        }
+        else {
+            detailComponentItem!.serialNumber = nil
+        }
+        if let typeName = self.typeNameTextField.text {
+            detailComponentItem!.typeName = typeName
+        }
+        else {
+            detailComponentItem!.typeName = nil
+        }
+        
+        if let accuracy = self.accuracyTextField.text {
+            detailComponentItem!.accuracy = accuracy
+        }
+        else {
+            detailComponentItem!.accuracy = nil
+        }
+        if let operatingRange = self.operatingRangeTextField.text {
+            detailComponentItem!.operatingRange = operatingRange
+        }
+        else {
+            detailComponentItem!.operatingRange = nil
+        }
+        
+        var error : NSError?
+        self.detailComponentItem?.managedObjectContext.save(&error)
+    }
 
     
+    
     func configureView() {
+        if let name = detailComponentItem!.name {
+            self.nameTextField?.text = name
+        }
+        else {
+            self.nameTextField?.text = nil
+        }
+        if let notes = detailComponentItem!.details {
+            self.notesTextView?.text = notes
+        }
+        else {
+            self.notesTextView?.text = nil
+        }
+        
+        if let model =  detailComponentItem!.model {
+            self.modelTextField?.text = model
+        }
+        else {
+            self.modelTextField?.text = nil
+        }
+        if let manufacturer =  detailComponentItem!.manufacturer {
+            self.manufacturerTextField?.text = manufacturer
+        }
+        else {
+            self.manufacturerTextField?.text = nil
+        }
+        
+        if let serialNumber = detailComponentItem!.model {
+            self.serialNumberTextField?.text = serialNumber
+        }
+        else {
+            self.serialNumberTextField?.text = nil
+        }
+        if let typeName = detailComponentItem!.typeName {
+            self.typeNameTextField?.text = typeName
+        }
+        else {
+            self.typeNameTextField?.text = nil
+        }
+        
+        if let accuracy = detailComponentItem!.accuracy {
+            self.accuracyTextField?.text = accuracy
+        }
+        else {
+            self.accuracyTextField?.text = nil
+        }
+        if let operatingRange = detailComponentItem!.operatingRange {
+            self.operatingRangeTextField?.text = operatingRange
+        }
+        else {
+            self.operatingRangeTextField?.text = nil
+        }
 
+        self.updateInstallationDateButtonTitle()
+        self.updateLastCalibrationDateButtonTitle()
+    }
+    
+    func updateInstallationDateButtonTitle() {
+        if let installationDate = self.installationDate {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.timeStyle = .ShortStyle
+            dateFormatter.dateStyle = .MediumStyle
+            
+            self.installationDateButton?.setTitle(dateFormatter.stringFromDate(installationDate), forState: .Normal)
+            
+        }
+        else {
+            self.installationDateButton?.setTitle("Installation Date", forState: .Normal)
+        }
+    }
+    
+    func updateLastCalibrationDateButtonTitle() {
+        if let lastCalibrationDate = self.lastCalibrationDate {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.timeStyle = .ShortStyle
+            dateFormatter.dateStyle = .MediumStyle
+            
+            self.calibrationDateButton?.setTitle(dateFormatter.stringFromDate(lastCalibrationDate), forState: .Normal)
+            
+        }
+        else {
+            self.calibrationDateButton?.setTitle("Calibration Date", forState: .Normal)
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "ComponentsViewControllerPopover") {
+            if let componentsViewController = segue.destinationViewController as? ComponentsViewController {
+
+            }
+        }
     }
 }

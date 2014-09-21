@@ -520,7 +520,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl1-qB-6D4">
-                                        <rect key="frame" x="252" y="60" width="46" height="21"/>
+                                        <rect key="frame" x="245.5" y="60" width="46" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="Hy0-Sh-NdI"/>
                                             <constraint firstAttribute="height" constant="21" id="vq8-yG-eud"/>
@@ -541,6 +541,9 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJh-wc-IDo">
                                         <rect key="frame" x="19" y="89" width="498" height="79"/>
                                         <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="79" id="UXP-rR-4HH"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -587,7 +590,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQ4-Up-2k7">
-                                        <rect key="frame" x="168" y="419" width="200" height="30"/>
+                                        <rect key="frame" x="168" y="388" width="200" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="d3Q-8K-TiN"/>
                                         </constraints>
@@ -595,7 +598,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="bO3-NU-EJC" kind="popoverPresentation" identifier="ComponentsViewControllerPopover" popoverAnchorView="HQ4-Up-2k7" id="eoE-cr-Soz">
+                                            <segue destination="bO3-NU-EJC" kind="popoverPresentation" identifier="AssociatedLogicalDeviceViewController" popoverAnchorView="HQ4-Up-2k7" id="eoE-cr-Soz">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
@@ -630,6 +633,9 @@
                                         <state key="normal" title="Calibration Date">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="calibrationDateButtonTapped:" destination="ARC-3I-fIT" eventType="touchUpInside" id="wtA-vv-C7J"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XgG-uC-5U0">
                                         <rect key="frame" x="19" y="338" width="200" height="30"/>
@@ -639,6 +645,9 @@
                                         <state key="normal" title="Installation Date">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="installationDateButtonTapped:" destination="ARC-3I-fIT" eventType="touchUpInside" id="L1j-el-oLn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -648,6 +657,7 @@
                                     <constraint firstItem="2sP-ZU-SQi" firstAttribute="baseline" secondItem="Prp-Mg-roS" secondAttribute="baseline" id="5cj-4h-C8A"/>
                                     <constraint firstItem="qJh-wc-IDo" firstAttribute="leading" secondItem="uZy-Xg-Tgc" secondAttribute="leading" constant="19" id="6cU-vp-1bi"/>
                                     <constraint firstItem="JVx-WL-4tD" firstAttribute="trailing" secondItem="uIa-IX-TUH" secondAttribute="trailing" id="8NZ-lh-5S0"/>
+                                    <constraint firstItem="REW-HO-VeL" firstAttribute="top" secondItem="qfE-j2-oFD" secondAttribute="bottom" constant="30" id="8PC-hP-mBQ"/>
                                     <constraint firstItem="JVx-WL-4tD" firstAttribute="trailing" secondItem="qfE-j2-oFD" secondAttribute="trailing" id="8fr-Hu-IBk"/>
                                     <constraint firstItem="cHB-xe-yo2" firstAttribute="leading" secondItem="33x-N1-sxC" secondAttribute="trailing" constant="13" id="Atw-yn-deg"/>
                                     <constraint firstItem="Prp-Mg-roS" firstAttribute="leading" secondItem="bgp-Fn-WHT" secondAttribute="leading" id="CH9-vx-YcO"/>
@@ -670,15 +680,15 @@
                                     <constraint firstItem="qfE-j2-oFD" firstAttribute="leading" secondItem="Prp-Mg-roS" secondAttribute="trailing" constant="8" symbolic="YES" id="bgz-uO-F2H"/>
                                     <constraint firstItem="d62-KT-KVw" firstAttribute="top" secondItem="ZNB-Wo-cdU" secondAttribute="bottom" constant="24" id="bj6-Mk-yQ2"/>
                                     <constraint firstItem="hrp-M3-iyM" firstAttribute="top" secondItem="t8f-Aq-c8R" secondAttribute="bottom" constant="16" id="chb-MT-Nms"/>
-                                    <constraint firstAttribute="bottom" secondItem="HQ4-Up-2k7" secondAttribute="bottom" constant="21" id="cow-nN-Jiy"/>
                                     <constraint firstAttribute="trailing" secondItem="cHB-xe-yo2" secondAttribute="trailing" constant="19" id="dGB-JV-h6r"/>
                                     <constraint firstItem="qJh-wc-IDo" firstAttribute="leading" secondItem="XgG-uC-5U0" secondAttribute="leading" id="e7v-h7-bIe"/>
+                                    <constraint firstAttribute="centerX" secondItem="fl1-qB-6D4" secondAttribute="centerX" id="eeQ-WX-SO6"/>
                                     <constraint firstItem="qJh-wc-IDo" firstAttribute="top" secondItem="33x-N1-sxC" secondAttribute="bottom" constant="44" id="fMp-h8-5Ft"/>
                                     <constraint firstItem="2sP-ZU-SQi" firstAttribute="leading" secondItem="d62-KT-KVw" secondAttribute="trailing" constant="8" symbolic="YES" id="fbQ-iK-YAY"/>
                                     <constraint firstItem="ZNB-Wo-cdU" firstAttribute="top" secondItem="PQH-0w-4J1" secondAttribute="bottom" constant="25" id="gHi-M7-cAs"/>
                                     <constraint firstItem="MMr-Cw-vwY" firstAttribute="centerX" secondItem="bgp-Fn-WHT" secondAttribute="centerX" id="gl0-UJ-AkC"/>
                                     <constraint firstItem="hrp-M3-iyM" firstAttribute="trailing" secondItem="2sP-ZU-SQi" secondAttribute="trailing" id="guk-U4-gDg"/>
-                                    <constraint firstItem="HQ4-Up-2k7" firstAttribute="top" secondItem="REW-HO-VeL" secondAttribute="bottom" constant="51" id="hyK-aq-79D"/>
+                                    <constraint firstItem="HQ4-Up-2k7" firstAttribute="top" secondItem="REW-HO-VeL" secondAttribute="bottom" constant="20" id="hyK-aq-79D"/>
                                     <constraint firstItem="Prp-Mg-roS" firstAttribute="top" secondItem="bgp-Fn-WHT" secondAttribute="bottom" constant="24" id="ii2-oK-kgj"/>
                                     <constraint firstItem="hrp-M3-iyM" firstAttribute="trailing" secondItem="t8f-Aq-c8R" secondAttribute="trailing" id="itD-z6-Shf"/>
                                     <constraint firstItem="PQH-0w-4J1" firstAttribute="leading" secondItem="uZy-Xg-Tgc" secondAttribute="leading" constant="25" id="k4t-P5-9oi"/>
@@ -700,6 +710,11 @@
                                     <constraint firstItem="REW-HO-VeL" firstAttribute="leading" secondItem="XgG-uC-5U0" secondAttribute="trailing" constant="99" id="zYt-5H-i4Z"/>
                                     <constraint firstItem="bgp-Fn-WHT" firstAttribute="top" secondItem="MMr-Cw-vwY" secondAttribute="bottom" constant="25" id="zeW-Uc-SSR"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="kzJ-ie-Jcs"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -712,7 +727,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Component" id="b7K-nc-CqR" userLabel="Component">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Msj-30-NCi"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Msj-30-NCi">
+                            <connections>
+                                <action selector="saveBarButtonTapped:" destination="ARC-3I-fIT" id="fuX-tq-7nk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="accuracyTextField" destination="2sP-ZU-SQi" id="WUp-3D-Lal"/>
@@ -732,16 +751,16 @@
             </objects>
             <point key="canvasLocation" x="3018" y="579"/>
         </scene>
-        <!--Components View Controller-->
+        <!--Logical Devices View Controller-->
         <scene sceneID="fO6-Oe-j7R">
             <objects>
-                <tableViewController id="bO3-NU-EJC" customClass="ComponentsViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="bO3-NU-EJC" customClass="LogicalDevicesViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jAm-at-SUL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServiceEntryCell" textLabel="n9P-Il-90m" style="IBUITableViewCellStyleDefault" id="lj0-el-xn9">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LogicalDeviceCell" textLabel="n9P-Il-90m" style="IBUITableViewCellStyleDefault" id="lj0-el-xn9">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lj0-el-xn9" id="cyh-R9-wXd">
                                     <autoresizingMask key="autoresizingMask"/>

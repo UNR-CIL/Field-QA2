@@ -197,5 +197,4 @@ class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate 
             }
         }
     }
-
 }
