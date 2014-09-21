@@ -196,10 +196,10 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
         }
         
         if let installationLocation = detailLogicalDeviceItem!.installationLocation {
-            unitDescriptionTextField?.text = installationLocation
+            installationDetailsTextView?.text = installationLocation
         }
         else {
-            unitDescriptionTextField?.text = nil
+            installationDetailsTextView?.text = nil
         }
         if let installationDetails = detailLogicalDeviceItem!.installationDetails {
             installationDetailsTextView?.text = installationDetails

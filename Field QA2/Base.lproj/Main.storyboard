@@ -894,7 +894,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k8V-Pg-JqF">
-                                        <rect key="frame" x="252" y="139" width="46" height="21"/>
+                                        <rect key="frame" x="244.5" y="139" width="46" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="507-yC-epM"/>
                                             <constraint firstAttribute="width" constant="46" id="hxK-b2-Ryc"/>
@@ -922,6 +922,9 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Do-hx-dlZ">
                                         <rect key="frame" x="18" y="163" width="498" height="79"/>
                                         <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="79" id="YYJ-Gb-tvK"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -1086,10 +1089,10 @@
                                     <constraint firstItem="dx0-ks-ozS" firstAttribute="trailing" secondItem="cfl-VK-t9w" secondAttribute="trailing" id="ihK-zz-3ma"/>
                                     <constraint firstItem="7q8-1T-QZV" firstAttribute="top" secondItem="hfX-Q9-fLX" secondAttribute="bottom" constant="9" id="ij7-FV-xCe"/>
                                     <constraint firstItem="cJ3-ly-LnV" firstAttribute="top" secondItem="9hh-b8-vUP" secondAttribute="bottom" constant="25" id="koB-Tn-j0p"/>
+                                    <constraint firstAttribute="centerX" secondItem="k8V-Pg-JqF" secondAttribute="centerX" id="lKP-qz-VXa"/>
                                     <constraint firstItem="LgN-z4-WdQ" firstAttribute="leading" secondItem="mtu-VO-Fcb" secondAttribute="leading" id="le4-Em-6A2"/>
                                     <constraint firstItem="ttA-9I-ebd" firstAttribute="top" secondItem="1Do-hx-dlZ" secondAttribute="bottom" constant="9" id="mb7-7Y-bip"/>
                                     <constraint firstAttribute="trailing" secondItem="7q8-1T-QZV" secondAttribute="trailing" constant="25" id="peq-qh-ckU"/>
-                                    <constraint firstItem="k8V-Pg-JqF" firstAttribute="leading" secondItem="Q5P-gf-U2a" secondAttribute="leading" constant="252" id="qyO-r3-sAJ"/>
                                     <constraint firstItem="9TC-tp-d0t" firstAttribute="leading" secondItem="WVk-fm-EjJ" secondAttribute="leading" id="rP8-y0-Wyy"/>
                                     <constraint firstItem="cJ3-ly-LnV" firstAttribute="leading" secondItem="kKt-HK-GjS" secondAttribute="leading" id="rWV-G0-4IT"/>
                                     <constraint firstItem="3DR-i2-8LH" firstAttribute="top" secondItem="5R9-0f-G2g" secondAttribute="bottom" constant="21" id="rYZ-SH-9as"/>
@@ -1110,6 +1113,7 @@
                                     <mask key="constraints">
                                         <exclude reference="iS7-GX-Xaf"/>
                                         <exclude reference="zeV-rM-fdT"/>
+                                        <exclude reference="sso-di-P91"/>
                                     </mask>
                                 </variation>
                             </view>
