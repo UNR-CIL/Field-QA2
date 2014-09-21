@@ -40,8 +40,6 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
     @IBOutlet weak var installationDateButton: UIButton!
     @IBOutlet weak var componentsButton: UIButton!
     
-    
-    
     var installationDate: NSDate?
 
     override func viewDidLoad() {

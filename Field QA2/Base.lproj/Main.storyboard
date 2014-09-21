@@ -1349,7 +1349,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Service Entry" id="POo-Ox-T5y">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="I6I-W7-9A1"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="I6I-W7-9A1">
+                            <connections>
+                                <action selector="saveBarButtonTapped:" destination="Zie-6b-aUO" id="pWg-cB-UWI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="associatedEntityButton" destination="gXF-F0-gvo" id="oxs-Of-Ooe"/>
