@@ -191,6 +191,7 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
         
         var error : NSError?
         self.detailLogicalDeviceItem?.managedObjectContext.save(&error)
+        configureView()
     }
     
     func configureView() {
@@ -297,6 +298,9 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
             else {
                 self.systemButton?.setTitle("Choose System", forState: .Normal)
             }
+        }
+        else {
+            self.systemButton?.setTitle("Choose System", forState: .Normal)
         }
         self.updateInstallationDateButtonTitle()
     }

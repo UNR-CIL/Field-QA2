@@ -42,6 +42,7 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
     
     var installationDate: NSDate?
     var lastCalibrationDate: NSDate?
+    var associatedLogicalDevice: LogicalDevice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,15 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
         self.lastCallibrationDatePopoverController!.presentPopoverFromRect(installationDateButton.bounds, inView: calibrationDateButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
     }
     
+    @IBAction func logicalDeviceButtonTapped(sender: AnyObject) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let systemsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("AssociatedLogicalDeviceViewController") as LogicalDevicesViewController
+        self.logicalDevicePopoverController = UIPopoverController(contentViewController: systemsViewController)
+        
+        self.logicalDevicePopoverController!.delegate = self
+        self.logicalDevicePopoverController!.presentPopoverFromRect(logicalDeviceButton.bounds, inView: logicalDeviceButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+    }
+    
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
         if popoverController == self.installationDatePopoverController {
             let datePickerViewController = popoverController.contentViewController as DatePickerViewController
@@ -81,6 +91,10 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             let datePickerViewController = popoverController.contentViewController as DatePickerViewController
             lastCalibrationDate = datePickerViewController.datePicker.date
             self.updateLastCalibrationDateButtonTitle()
+        }
+        else if popoverController == self.logicalDevicePopoverController {
+            let logicalDevicesViewController = popoverController.contentViewController as LogicalDevicesViewController
+            associatedLogicalDevice = logicalDevicesViewController.currentlySelectedLogicalDevice
         }
         return true
     }
@@ -138,11 +152,14 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             detailComponentItem!.operatingRange = nil
         }
         
+        if let logicalDevice = self.associatedLogicalDevice {
+            detailComponentItem!.logicalDevice = logicalDevice
+        }
+        
         var error : NSError?
         self.detailComponentItem?.managedObjectContext.save(&error)
     }
 
-    
     
     func configureView() {
         if let name = detailComponentItem!.name {
@@ -197,6 +214,18 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             self.operatingRangeTextField?.text = nil
         }
 
+        
+        if let logicalDevice = detailComponentItem!.logicalDevice {
+            if let unitDescription = logicalDevice.unitDescription {
+                self.logicalDeviceButton?.setTitle(logicalDevice.unitDescription, forState: .Normal)
+            }
+            else {
+                self.logicalDeviceButton?.setTitle("Choose Logical Device", forState: .Normal)
+            }
+        }
+        else {
+            self.logicalDeviceButton?.setTitle("Choose Logical Device", forState: .Normal)
+        }
         self.updateInstallationDateButtonTitle()
         self.updateLastCalibrationDateButtonTitle()
     }

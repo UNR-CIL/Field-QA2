@@ -15,6 +15,7 @@ class LogicalDevicesViewController: UITableViewController, NSFetchedResultsContr
     var systemsPredicate: NSPredicate?
     var componentsPredicate : NSPredicate?
     var managedObjectContext: NSManagedObjectContext?
+    var currentlySelectedLogicalDevice: LogicalDevice?
     
     // MARK: - Fetched results controller
     
@@ -186,6 +187,14 @@ class LogicalDevicesViewController: UITableViewController, NSFetchedResultsContr
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexPath = self.tableView.indexPathForSelectedRow()
+        let logicalDevice = self.fetchedResultsController.objectAtIndexPath(indexPath!) as LogicalDevice
+        currentlySelectedLogicalDevice = logicalDevice
+    }
+    
+    // AssociatedLogicalDeviceViewController
     
     /*
     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.

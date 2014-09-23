@@ -25,7 +25,7 @@ class Component: NSManagedObject {
     @NSManaged var typeName: String?
     // associatedLogicalDevice and logicalDevice should both point to the same object
     // The reason that there's two references is because Core Data insists on one-to-one inverses
-    @NSManaged var associatedLogicalDevice: NSManagedObject
-    @NSManaged var logicalDevice: NSManagedObject
+    @NSManaged var associatedLogicalDevice: LogicalDevice?
+    @NSManaged var logicalDevice: LogicalDevice?
 
 }
