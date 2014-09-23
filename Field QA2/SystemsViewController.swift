@@ -14,6 +14,7 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
     
     var componentsPredicate : NSPredicate?
     var managedObjectContext: NSManagedObjectContext?
+    var currentlySelectedSystem: System?
     
     // MARK: - Fetched results controller
     
@@ -188,6 +189,11 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
         self.tableView.endUpdates()
 }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let indexPath = self.tableView.indexPathForSelectedRow()
+        let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as System
+        currentlySelectedSystem = system
+    }
 /*
 // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
 
@@ -206,6 +212,7 @@ self.tableView.reloadData()
         
         let indexPath = self.tableView.indexPathForSelectedRow()
         let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as System
+        currentlySelectedSystem = system
         let controller = (segue.destinationViewController as UINavigationController).topViewController as SystemDetailViewController
         controller.detailSystemItem = system
         controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()

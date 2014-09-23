@@ -195,7 +195,7 @@
         <!--Systems-->
         <scene sceneID="mB8-tD-Prp">
             <objects>
-                <tableViewController title="Systems" id="kRH-Xb-Nh8" customClass="SystemsViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SystemsViewController" title="Systems" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kRH-Xb-Nh8" customClass="SystemsViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mIh-eU-8Vc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -852,9 +852,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="XEP-KJ-AMG" kind="popoverPresentation" identifier="ComponentsViewControllerPopover" popoverAnchorView="dPC-gT-kGE" id="9v6-JN-sue">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <action selector="componentsButtonTapped:" destination="JYm-DS-qeN" eventType="touchUpInside" id="2Wl-TM-eci"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GeQ-Yr-c4e">
@@ -908,6 +906,9 @@
                                         <state key="normal" title="Installation Date">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="installationDateButtonTapped:" destination="JYm-DS-qeN" eventType="touchUpInside" id="n98-YR-y16"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgN-z4-WdQ">
                                         <rect key="frame" x="32" y="24" width="74" height="21"/>
@@ -1019,6 +1020,9 @@
                                         <state key="normal" title="System">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="systemButtonTapped:" destination="JYm-DS-qeN" eventType="touchUpInside" id="6KU-OE-dQK"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TC-tp-d0t">
                                         <rect key="frame" x="25" y="355" width="83" height="21"/>
@@ -1155,39 +1159,31 @@
             </objects>
             <point key="canvasLocation" x="3076" y="-304"/>
         </scene>
-        <!--Components View Controller-->
-        <scene sceneID="rS4-oh-l55">
+        <!--Systems View Controller-->
+        <scene sceneID="Y6C-x1-um2">
             <objects>
-                <tableViewController id="XEP-KJ-AMG" customClass="ComponentsViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Evm-L2-8E1">
+                <tableViewController storyboardIdentifier="AssociatedSystemViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7ye-Kf-gkg" customClass="SystemsViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hJi-ge-bkg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ServiceEntryCell" textLabel="6v8-OM-PjU" style="IBUITableViewCellStyleDefault" id="Ydf-X7-40T">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SystemCell" id="Gq6-bh-qpT">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ydf-X7-40T" id="WJf-1k-sln">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gq6-bh-qpT" id="55O-3x-oDI">
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6v8-OM-PjU">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="XEP-KJ-AMG" id="lrg-Wi-Oxh"/>
-                            <outlet property="delegate" destination="XEP-KJ-AMG" id="IzN-8d-lTZ"/>
+                            <outlet property="dataSource" destination="7ye-Kf-gkg" id="8kB-Hk-Q90"/>
+                            <outlet property="delegate" destination="7ye-Kf-gkg" id="tmH-6h-pS7"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kbM-zQ-VeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EgM-7X-TCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3716" y="-304"/>
+            <point key="canvasLocation" x="3710" y="-300"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cOF-Al-57R">

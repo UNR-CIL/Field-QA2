@@ -18,6 +18,7 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
     }
     var installationDatePopoverController: UIPopoverController?
     var systemPopoverController: UIPopoverController?
+    var componentsPopoverController: UIPopoverController?
     var serviceEntriesPopoverController: UIPopoverController?
     
     @IBOutlet weak var unitDescriptionTextField: UITextField!
@@ -41,7 +42,8 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
     @IBOutlet weak var componentsButton: UIButton!
     
     var installationDate: NSDate?
-
+    var associatedSystem: System?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
@@ -62,13 +64,18 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
     }
     
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
+        println("popoverController dismissed \(popoverController)")
         if popoverController == self.installationDatePopoverController {
             let datePickerViewController = popoverController.contentViewController as DatePickerViewController
             installationDate = datePickerViewController.datePicker.date
             self.updateInstallationDateButtonTitle()
         }
         else if popoverController == self.systemPopoverController {
-
+            let systemsViewController = popoverController.contentViewController as SystemsViewController
+            associatedSystem = systemsViewController.currentlySelectedSystem
+        }
+        else if popoverController == self.componentsPopoverController {
+            
         }
         return true
     }
@@ -169,6 +176,17 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
         }
         else {
             detailLogicalDeviceItem!.dataStreamDetails = nil
+        }
+        
+        if let installationDate = self.installationDate {
+            detailLogicalDeviceItem!.installationDate = installationDate
+        }
+        else {
+            detailLogicalDeviceItem!.installationDate = nil
+        }
+        
+        if let system = self.associatedSystem {
+            detailLogicalDeviceItem!.system = system
         }
         
         var error : NSError?
@@ -272,18 +290,46 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
             self.dataStreamDetailsTextField?.text = nil
         }
         
+        if let system = detailLogicalDeviceItem!.system {
+            if let name = system.name {
+                self.systemButton?.setTitle(system.name, forState: .Normal)
+            }
+            else {
+                self.systemButton?.setTitle("Choose System", forState: .Normal)
+            }
+        }
         self.updateInstallationDateButtonTitle()
     }
     
-    /*
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        println("segue destination: \(segue.destinationViewController)")
+        
     }
-    */
+    
+    @IBAction func systemButtonTapped(sender: AnyObject) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let systemsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("AssociatedSystemViewController") as SystemsViewController
+        self.systemPopoverController = UIPopoverController(contentViewController: systemsViewController)
+        
+        self.systemPopoverController!.delegate = self
+        self.systemPopoverController!.presentPopoverFromRect(systemButton.bounds, inView: systemButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+    }
+    
+    @IBAction func componentsButtonTapped(sender: AnyObject) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let componentsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ComponentsViewController") as ComponentsViewController
+        self.componentsPopoverController = UIPopoverController(contentViewController: componentsViewController)
+        
+        self.componentsPopoverController!.delegate = self
+        self.componentsPopoverController!.presentPopoverFromRect(componentsButton.bounds, inView: componentsButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+    }
+    
     
     func updateInstallationDateButtonTitle() {
         if let installationDate = self.installationDate {

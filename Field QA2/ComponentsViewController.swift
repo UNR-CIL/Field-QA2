@@ -14,6 +14,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     
     var componentsPredicate : NSPredicate?
     var managedObjectContext: NSManagedObjectContext?
+    var currentlySelectedComponent: Component?
     
     // MARK: - Fetched results controller
     
@@ -204,6 +205,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
         
         let indexPath = self.tableView.indexPathForSelectedRow()
         let component = self.fetchedResultsController.objectAtIndexPath(indexPath!) as Component
+        currentlySelectedComponent = component
         let controller = (segue.destinationViewController as UINavigationController).topViewController as ComponentDetailViewController
         controller.detailComponentItem = component
         controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()

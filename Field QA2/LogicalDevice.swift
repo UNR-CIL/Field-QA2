@@ -24,7 +24,7 @@ class LogicalDevice: NSManagedObject {
     @NSManaged var typeName: String?
     @NSManaged var unitDescription: String?
     @NSManaged var components: NSSet
-    @NSManaged var installedComponent: Component
-    @NSManaged var system: System
+    @NSManaged var installedComponent: Component?
+    @NSManaged var system: System?
 
 }
