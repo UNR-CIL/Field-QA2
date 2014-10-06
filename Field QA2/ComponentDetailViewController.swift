@@ -39,6 +39,7 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
     
     
     @IBOutlet weak var logicalDeviceButton: UIButton!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var installationDate: NSDate?
     var lastCalibrationDate: NSDate?
@@ -46,6 +47,17 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            let viewHeight = self.view.bounds.size.height
+            let userInfo = notification.userInfo as NSDictionary!
+            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+            let keyboardRect = keyboardValue.CGRectValue()
+            let keyboardHeight = keyboardRect.size.height
+            
+            self.bottomConstraint.constant =  keyboardHeight
+        }
+        
         self.configureView()
     }
 
