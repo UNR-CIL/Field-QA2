@@ -157,7 +157,7 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
         }
         
         var error : NSError?
-        self.detailComponentItem?.managedObjectContext.save(&error)
+        self.detailComponentItem?.managedObjectContext!.save(&error)
     }
 
     

@@ -117,7 +117,7 @@ class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate 
         }
         
         var error : NSError?
-        self.detailSystemItem?.managedObjectContext.save(&error)
+        self.detailSystemItem?.managedObjectContext!.save(&error)
     }
     
     func configureView() {

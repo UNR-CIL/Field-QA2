@@ -190,7 +190,7 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
         }
         
         var error : NSError?
-        self.detailLogicalDeviceItem?.managedObjectContext.save(&error)
+        self.detailLogicalDeviceItem?.managedObjectContext!.save(&error)
         configureView()
     }
     

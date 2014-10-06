@@ -74,7 +74,7 @@ class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDel
         }
 
         var error : NSError?
-        self.detailServiceEntryItem?.managedObjectContext.save(&error)
+        self.detailServiceEntryItem?.managedObjectContext!.save(&error)
     }
     
     func configureView() {
