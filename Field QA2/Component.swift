@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class Component: NSManagedObject {
 
@@ -20,7 +21,7 @@ class Component: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var details: String?
     @NSManaged var operatingRange: String?
-    @NSManaged var photo: AnyObject?
+    @NSManaged var photo: UIImage?
     @NSManaged var serialNumber: String?
     @NSManaged var typeName: String?
     // associatedLogicalDevice and logicalDevice should both point to the same object

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class ServiceEntry: NSManagedObject {
 
@@ -15,7 +16,7 @@ class ServiceEntry: NSManagedObject {
     @NSManaged var date: NSDate?
     @NSManaged var notes: String?
     @NSManaged var operation: String?
-    @NSManaged var photo: AnyObject?
+    @NSManaged var photo: UIImage?
     @NSManaged var creator: Person
 
 }
