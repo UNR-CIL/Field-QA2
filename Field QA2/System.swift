@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKIt
 
 class System: NSManagedObject {
 
@@ -17,7 +18,7 @@ class System: NSManagedObject {
     @NSManaged var latitude: NSNumber?
     @NSManaged var longitude: NSNumber?
     @NSManaged var name: String?
-    @NSManaged var photo: AnyObject?
+    @NSManaged var photo: UIImage?
     @NSManaged var power: String?
     @NSManaged var logicalDevices: NSSet
     @NSManaged var manager: Person
