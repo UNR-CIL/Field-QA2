@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDelegate {
+class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     var detailServiceEntryItem : ServiceEntry? {
         didSet {
@@ -19,6 +19,10 @@ class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDel
     
     var datePopoverController: UIPopoverController?
     var associatedEntityPopoverController: UIPopoverController?
+    var cameraPopoverController: UIPopoverController?
+    
+    var image: UIImage?
+    @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var operationTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
@@ -96,6 +100,12 @@ class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDel
         else {
             operationTextField?.text = nil
         }
+        if let image = detailServiceEntryItem!.photo {
+            self.imageView?.image = image as UIImage
+        }
+        else {
+            self.imageView?.image = nil
+        }
         if let notes = detailServiceEntryItem!.notes {
             notesTextView?.text = notes
         }
@@ -128,5 +138,43 @@ class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDel
         else {
             self.dateButton?.setTitle("Installation Date", forState: .Normal)
         }
+    }
+    
+    @IBAction func imageViewTapped(sender: UITapGestureRecognizer) {
+        var imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+            
+            self.presentViewController(imagePickerController, animated: true) { () -> Void in
+                
+            }
+        }
+        else {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.cameraPopoverController = UIPopoverController(contentViewController: imagePickerController)
+            self.cameraPopoverController?.presentPopoverFromRect(sender.view!.bounds, inView: sender.view!, permittedArrowDirections: .Any, animated: true)
+        }
+    }
+    
+    // MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        self.detailServiceEntryItem?.photo = image
+        
+        self.imageView.image = self.detailServiceEntryItem?.photo
+        
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
     }
 }

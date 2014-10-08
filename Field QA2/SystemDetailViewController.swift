@@ -243,10 +243,7 @@ class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate,
     
     // MARK: UIImagePickerControllerDelegate
 
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        
-        
         let image = info[UIImagePickerControllerEditedImage] as UIImage
         self.detailSystemItem?.photo = image
         
@@ -258,10 +255,8 @@ class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate,
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             
         })
     }
-    
 }

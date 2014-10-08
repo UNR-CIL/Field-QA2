@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ComponentDetailViewController: UIViewController, UIPopoverControllerDelegate {
+class ComponentDetailViewController: UIViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var detailComponentItem : Component? {
         didSet {
@@ -16,12 +16,16 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             self.configureView()
         }
     }
+    
     var installationDatePopoverController: UIPopoverController?
     var lastCallibrationDatePopoverController: UIPopoverController?
     var logicalDevicePopoverController: UIPopoverController?
     var serviceEntriesPopoverController: UIPopoverController?
+    var cameraPopoverController: UIPopoverController?
 
-    
+    var image: UIImage?
+    @IBOutlet weak var imageView: UIImageView!
+
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
 
@@ -180,6 +184,13 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
         else {
             self.nameTextField?.text = nil
         }
+        if let image = detailComponentItem!.photo {
+            self.imageView?.image = image as UIImage
+        }
+        else {
+            self.imageView?.image = nil
+        }
+        
         if let notes = detailComponentItem!.details {
             self.notesTextView?.text = notes
         }
@@ -279,5 +290,43 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
 
             }
         }
+    }
+    
+    @IBAction func imageViewTapped(sender: UITapGestureRecognizer) {
+        var imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+            
+            self.presentViewController(imagePickerController, animated: true) { () -> Void in
+                
+            }
+        }
+        else {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.cameraPopoverController = UIPopoverController(contentViewController: imagePickerController)
+            self.cameraPopoverController?.presentPopoverFromRect(sender.view!.bounds, inView: sender.view!, permittedArrowDirections: .Any, animated: true)
+        }
+    }
+    
+    // MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        self.detailComponentItem?.photo = image
+        
+        self.imageView.image = self.detailComponentItem?.photo
+        
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
     }
 }
