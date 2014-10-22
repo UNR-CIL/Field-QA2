@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB2E2C15199C5C2600C7411D /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C14199C5C2600C7411D /* Person.swift */; };
-		AB2E2C17199C5C2600C7411D /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C16199C5C2600C7411D /* Component.swift */; };
-		AB2E2C19199C5C2700C7411D /* ServiceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */; };
-		AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */; };
-		AB2E2C1D199C5C2700C7411D /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2E2C1C199C5C2700C7411D /* System.swift */; };
 		AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */; };
 		AB6B9E9A19B9824A003734A1 /* ServiceEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */; };
 		AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */; };
 		AB6B9E9E19B98284003734A1 /* PersonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */; };
 		AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */; };
 		AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2319A299C7001E7E5E /* SystemsViewController.swift */; };
+		ABCE55E619F769D0003B685B /* ServiceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55E519F769D0003B685B /* ServiceEntry.swift */; };
+		ABCE55E819F769D0003B685B /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55E719F769D0003B685B /* Component.swift */; };
+		ABCE55EA19F769D1003B685B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55E919F769D1003B685B /* Person.swift */; };
+		ABCE55EC19F769D1003B685B /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55EB19F769D1003B685B /* Document.swift */; };
+		ABCE55EE19F769D1003B685B /* LogicalDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55ED19F769D1003B685B /* LogicalDevice.swift */; };
+		ABCE55F019F769D1003B685B /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55EF19F769D1003B685B /* System.swift */; };
+		ABCE55F219F769D1003B685B /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55F119F769D1003B685B /* Project.swift */; };
 		ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D112199982370064F8A0 /* AppDelegate.swift */; };
 		ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */; };
 		ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D117199982370064F8A0 /* MasterViewController.swift */; };
@@ -44,17 +46,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AB2E2C14199C5C2600C7411D /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
-		AB2E2C16199C5C2600C7411D /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
-		AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntry.swift; sourceTree = "<group>"; };
-		AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalDevice.swift; sourceTree = "<group>"; };
-		AB2E2C1C199C5C2700C7411D /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalDevicesViewController.swift; sourceTree = "<group>"; };
 		AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntriesViewController.swift; sourceTree = "<group>"; };
 		AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsViewController.swift; sourceTree = "<group>"; };
 		AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonsViewController.swift; sourceTree = "<group>"; };
 		AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemDetailViewController.swift; sourceTree = "<group>"; };
 		AB867F2319A299C7001E7E5E /* SystemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
+		ABCE55E519F769D0003B685B /* ServiceEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntry.swift; sourceTree = "<group>"; };
+		ABCE55E719F769D0003B685B /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		ABCE55E919F769D1003B685B /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		ABCE55EB19F769D1003B685B /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		ABCE55ED19F769D1003B685B /* LogicalDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalDevice.swift; sourceTree = "<group>"; };
+		ABCE55EF19F769D1003B685B /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		ABCE55F119F769D1003B685B /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		ABD3D10D199982360064F8A0 /* Field QA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Field QA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD3D111199982370064F8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD3D112199982370064F8A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ABCE55F319F769E0003B685B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */,
+				ABCE55E719F769D0003B685B /* Component.swift */,
+				ABCE55EB19F769D1003B685B /* Document.swift */,
+				ABCE55ED19F769D1003B685B /* LogicalDevice.swift */,
+				ABCE55E919F769D1003B685B /* Person.swift */,
+				ABCE55F119F769D1003B685B /* Project.swift */,
+				ABCE55E519F769D0003B685B /* ServiceEntry.swift */,
+				ABCE55EF19F769D1003B685B /* System.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		ABD3D104199982360064F8A0 = {
 			isa = PBXGroup;
 			children = (
@@ -114,27 +133,22 @@
 			isa = PBXGroup;
 			children = (
 				ABD3D112199982370064F8A0 /* AppDelegate.swift */,
-				AB2E2C16199C5C2600C7411D /* Component.swift */,
 				ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */,
 				AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */,
 				ABFD086819C8900700742185 /* DatePicker.storyboard */,
 				ABFD086619C88FF600742185 /* DatePickerViewController.swift */,
 				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
-				ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */,
+				ABCE55F319F769E0003B685B /* Model */,
 				ABD3D11E199982370064F8A0 /* Images.xcassets */,
 				ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */,
-				AB2E2C1A199C5C2700C7411D /* LogicalDevice.swift */,
 				AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */,
 				ABFD086C19C8F68600742185 /* LogicalDeviceDetailViewController.swift */,
 				ABD3D11B199982370064F8A0 /* Main.storyboard */,
 				ABD3D117199982370064F8A0 /* MasterViewController.swift */,
-				AB2E2C14199C5C2600C7411D /* Person.swift */,
 				AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */,
 				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
 				ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */,
-				AB2E2C18199C5C2700C7411D /* ServiceEntry.swift */,
 				ABD3D110199982370064F8A0 /* Supporting Files */,
-				AB2E2C1C199C5C2700C7411D /* System.swift */,
 				AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */,
 				AB867F2319A299C7001E7E5E /* SystemsViewController.swift */,
 			);
@@ -266,26 +280,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB2E2C1D199C5C2700C7411D /* System.swift in Sources */,
+				ABCE55E619F769D0003B685B /* ServiceEntry.swift in Sources */,
+				ABCE55F019F769D1003B685B /* System.swift in Sources */,
 				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
-				AB2E2C19199C5C2700C7411D /* ServiceEntry.swift in Sources */,
-				AB2E2C15199C5C2600C7411D /* Person.swift in Sources */,
-				AB2E2C17199C5C2600C7411D /* Component.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
+				ABCE55E819F769D0003B685B /* Component.swift in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
+				ABCE55F219F769D1003B685B /* Project.swift in Sources */,
+				ABCE55EA19F769D1003B685B /* Person.swift in Sources */,
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
 				AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */,
 				ABFD086F19C8F83800742185 /* ServiceEntryDetailViewController.swift in Sources */,
-				AB2E2C1B199C5C2700C7411D /* LogicalDevice.swift in Sources */,
 				ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */,
 				AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */,
 				ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */,
+				ABCE55EE19F769D1003B685B /* LogicalDevice.swift in Sources */,
 				ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
 				AB6B9E9A19B9824A003734A1 /* ServiceEntriesViewController.swift in Sources */,
 				AB6B9E9E19B98284003734A1 /* PersonsViewController.swift in Sources */,
+				ABCE55EC19F769D1003B685B /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

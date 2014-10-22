@@ -123,10 +123,10 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             detailComponentItem!.name = nil
         }
         if let notes = self.notesTextView.text {
-            detailComponentItem!.details = notes
+            detailComponentItem!.installationDetails = notes
         }
         else {
-            detailComponentItem!.details = nil
+            detailComponentItem!.installationDetails = nil
         }
         
         if let model = self.modelTextField.text {
@@ -155,23 +155,6 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             detailComponentItem!.typeName = nil
         }
         
-        if let accuracy = self.accuracyTextField.text {
-            detailComponentItem!.accuracy = accuracy
-        }
-        else {
-            detailComponentItem!.accuracy = nil
-        }
-        if let operatingRange = self.operatingRangeTextField.text {
-            detailComponentItem!.operatingRange = operatingRange
-        }
-        else {
-            detailComponentItem!.operatingRange = nil
-        }
-        
-        if let logicalDevice = self.associatedLogicalDevice {
-            detailComponentItem!.logicalDevice = logicalDevice
-        }
-        
         var error : NSError?
         self.detailComponentItem?.managedObjectContext!.save(&error)
     }
@@ -191,7 +174,7 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             self.imageView?.image = nil
         }
         
-        if let notes = detailComponentItem!.details {
+        if let notes = detailComponentItem!.installationDetails {
             self.notesTextView?.text = notes
         }
         else {
@@ -224,31 +207,7 @@ class ComponentDetailViewController: UIViewController, UIPopoverControllerDelega
             self.typeNameTextField?.text = nil
         }
         
-        if let accuracy = detailComponentItem!.accuracy {
-            self.accuracyTextField?.text = accuracy
-        }
-        else {
-            self.accuracyTextField?.text = nil
-        }
-        if let operatingRange = detailComponentItem!.operatingRange {
-            self.operatingRangeTextField?.text = operatingRange
-        }
-        else {
-            self.operatingRangeTextField?.text = nil
-        }
-
         
-        if let logicalDevice = detailComponentItem!.logicalDevice {
-            if let unitDescription = logicalDevice.unitDescription {
-                self.logicalDeviceButton?.setTitle(logicalDevice.unitDescription, forState: .Normal)
-            }
-            else {
-                self.logicalDeviceButton?.setTitle("Choose Logical Device", forState: .Normal)
-            }
-        }
-        else {
-            self.logicalDeviceButton?.setTitle("Choose Logical Device", forState: .Normal)
-        }
         self.updateInstallationDateButtonTitle()
         self.updateLastCalibrationDateButtonTitle()
     }

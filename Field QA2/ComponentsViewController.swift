@@ -142,12 +142,12 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
         let component = self.fetchedResultsController.objectAtIndexPath(indexPath) as Component
         
         if let name = component.name {
-            cell.textLabel!.text = component.name
-            cell.textLabel!.textColor = UIColor.darkTextColor()
+            cell.textLabel.text = component.name
+            cell.textLabel.textColor = UIColor.darkTextColor()
         }
         else {
-            cell.textLabel!.text = "A Component"
-            cell.textLabel!.textColor = UIColor.darkGrayColor()
+            cell.textLabel.text = "A Component"
+            cell.textLabel.textColor = UIColor.darkGrayColor()
         }
         
     }

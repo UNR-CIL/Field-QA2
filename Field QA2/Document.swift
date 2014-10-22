@@ -1,5 +1,5 @@
 //
-//  LogicalDevice.swift
+//  Document.swift
 //  Field QA2
 //
 //  Created by John Jusayan on 10/21/14.
@@ -9,10 +9,13 @@
 import Foundation
 import CoreData
 
-class LogicalDevice: NSManagedObject {
+class Document: NSManagedObject {
 
-    @NSManaged var deviceId: String?
+    @NSManaged var path: String?
     @NSManaged var name: String?
+    @NSManaged var notes: String?
+    @NSManaged var project: Project?
     @NSManaged var component: Component?
+    @NSManaged var serviceEntry: ServiceEntry?
 
 }

@@ -2,13 +2,13 @@
 //  System.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 8/13/14.
+//  Created by John Jusayan on 10/21/14.
 //  Copyright (c) 2014 University of Nevada, Reno. All rights reserved.
 //
 
 import Foundation
 import CoreData
-import UIKIt
+import UIKit
 
 class System: NSManagedObject {
 
@@ -20,7 +20,7 @@ class System: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var photo: UIImage?
     @NSManaged var power: String?
-    @NSManaged var logicalDevices: NSSet
-    @NSManaged var manager: Person
+    @NSManaged var components: NSSet
+    @NSManaged var manager: Person?
 
 }

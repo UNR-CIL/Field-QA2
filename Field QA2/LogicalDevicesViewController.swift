@@ -142,14 +142,7 @@ class LogicalDevicesViewController: UITableViewController, NSFetchedResultsContr
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let logicalDevice = self.fetchedResultsController.objectAtIndexPath(indexPath) as LogicalDevice
         
-        if let unitDescription = logicalDevice.unitDescription {
-            cell.textLabel!.text = unitDescription
-            cell.textLabel!.textColor = UIColor.darkTextColor()
-        }
-        else {
-            cell.textLabel!.text = "A Logical Device"
-            cell.textLabel!.textColor = UIColor.darkGrayColor()
-        }
+
         
     }
     
