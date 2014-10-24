@@ -13,6 +13,8 @@
 		AB6B9E9E19B98284003734A1 /* PersonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */; };
 		AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */; };
 		AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2319A299C7001E7E5E /* SystemsViewController.swift */; };
+		ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */; };
+		ABA4879319F83F100024BFF2 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */; };
 		ABCE55E619F769D0003B685B /* ServiceEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55E519F769D0003B685B /* ServiceEntry.swift */; };
 		ABCE55E819F769D0003B685B /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55E719F769D0003B685B /* Component.swift */; };
 		ABCE55EA19F769D1003B685B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCE55E919F769D1003B685B /* Person.swift */; };
@@ -52,6 +54,8 @@
 		AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonsViewController.swift; sourceTree = "<group>"; };
 		AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemDetailViewController.swift; sourceTree = "<group>"; };
 		AB867F2319A299C7001E7E5E /* SystemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
+		ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
+		ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		ABCE55E519F769D0003B685B /* ServiceEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntry.swift; sourceTree = "<group>"; };
 		ABCE55E719F769D0003B685B /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		ABCE55E919F769D1003B685B /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */,
 				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
 				ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */,
+				ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */,
+				ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */,
 				ABD3D110199982370064F8A0 /* Supporting Files */,
 				AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */,
 				AB867F2319A299C7001E7E5E /* SystemsViewController.swift */,
@@ -280,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA4879319F83F100024BFF2 /* ProjectsViewController.swift in Sources */,
 				ABCE55E619F769D0003B685B /* ServiceEntry.swift in Sources */,
 				ABCE55F019F769D1003B685B /* System.swift in Sources */,
 				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
@@ -287,6 +294,7 @@
 				ABCE55E819F769D0003B685B /* Component.swift in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
+				ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */,
 				ABCE55F219F769D1003B685B /* Project.swift in Sources */,
 				ABCE55EA19F769D1003B685B /* Person.swift in Sources */,
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
