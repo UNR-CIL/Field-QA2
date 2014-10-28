@@ -11,6 +11,10 @@
 		AB6B9E9A19B9824A003734A1 /* ServiceEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */; };
 		AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */; };
 		AB6B9E9E19B98284003734A1 /* PersonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */; };
+		AB864A9719FE4E6E007FD1E9 /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB864A9619FE4E6E007FD1E9 /* TextFieldCell.swift */; };
+		AB864A9919FE4E79007FD1E9 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB864A9819FE4E79007FD1E9 /* DatePickerCell.swift */; };
+		AB864A9B19FE4E87007FD1E9 /* DateDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB864A9A19FE4E87007FD1E9 /* DateDisplayCell.swift */; };
+		AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */; };
 		AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */; };
 		AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2319A299C7001E7E5E /* SystemsViewController.swift */; };
 		ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */; };
@@ -52,6 +56,10 @@
 		AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntriesViewController.swift; sourceTree = "<group>"; };
 		AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsViewController.swift; sourceTree = "<group>"; };
 		AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonsViewController.swift; sourceTree = "<group>"; };
+		AB864A9619FE4E6E007FD1E9 /* TextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		AB864A9819FE4E79007FD1E9 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
+		AB864A9A19FE4E87007FD1E9 /* DateDisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateDisplayCell.swift; sourceTree = "<group>"; };
+		AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateCell.swift; sourceTree = "<group>"; };
 		AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemDetailViewController.swift; sourceTree = "<group>"; };
 		AB867F2319A299C7001E7E5E /* SystemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
 		ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +108,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB864A9C19FE4EC1007FD1E9 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AB864A9619FE4E6E007FD1E9 /* TextFieldCell.swift */,
+				AB864A9819FE4E79007FD1E9 /* DatePickerCell.swift */,
+				AB864A9A19FE4E87007FD1E9 /* DateDisplayCell.swift */,
+				AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
 		ABCE55F319F769E0003B685B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +163,7 @@
 				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
 				ABCE55F319F769E0003B685B /* Model */,
 				ABD3D11E199982370064F8A0 /* Images.xcassets */,
+				AB864A9C19FE4EC1007FD1E9 /* Table View Cells */,
 				ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */,
 				AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */,
 				ABFD086C19C8F68600742185 /* LogicalDeviceDetailViewController.swift */,
@@ -305,10 +325,14 @@
 				ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */,
 				ABCE55EE19F769D1003B685B /* LogicalDevice.swift in Sources */,
 				ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */,
+				AB864A9919FE4E79007FD1E9 /* DatePickerCell.swift in Sources */,
+				AB864A9719FE4E6E007FD1E9 /* TextFieldCell.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
+				AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */,
 				AB6B9E9A19B9824A003734A1 /* ServiceEntriesViewController.swift in Sources */,
 				AB6B9E9E19B98284003734A1 /* PersonsViewController.swift in Sources */,
+				AB864A9B19FE4E87007FD1E9 /* DateDisplayCell.swift in Sources */,
 				ABCE55EC19F769D1003B685B /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
