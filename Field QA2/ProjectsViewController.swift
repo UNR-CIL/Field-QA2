@@ -24,14 +24,14 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("ServiceEntry", inManagedObjectContext: self.managedObjectContext!)
+        let entity = NSEntityDescription.entityForName("Project", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
         let sortDescriptors = [sortDescriptor]
         
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -82,9 +82,8 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     // MARK: - New Object
     
     func insertNewObject(sender: AnyObject) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: self.managedObjectContext!) as ServiceEntry
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Project", inManagedObjectContext: self.managedObjectContext!) as Project
         
-        newManagedObject.date = NSDate()
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
         
@@ -111,7 +110,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ServiceEntryCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ProjectCell", forIndexPath: indexPath) as UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -139,21 +138,20 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let serviceEntry = self.fetchedResultsController.objectAtIndexPath(indexPath) as ServiceEntry
+        let project = self.fetchedResultsController.objectAtIndexPath(indexPath) as Project
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .ShortStyle
         dateFormatter.dateStyle = .MediumStyle
-        if let date = serviceEntry.date {
-            cell.textLabel.text = dateFormatter.stringFromDate(serviceEntry.date!)
-        }
         
-        if let notes = serviceEntry.notes {
-            cell.detailTextLabel!.text = notes
-            cell.detailTextLabel!.textColor = UIColor.darkTextColor()
+
+        
+        if let notes = project.name {
+            cell.textLabel.text = notes
+            cell.textLabel.textColor = UIColor.darkTextColor()
         }
         else {
-            cell.detailTextLabel!.text = "A ServiceEntry"
-            cell.detailTextLabel!.textColor = UIColor.darkGrayColor()
+            cell.textLabel.text = "A Project"
+            cell.textLabel.textColor = UIColor.darkGrayColor()
         }
     }
     
@@ -194,7 +192,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let indexPath = self.tableView.indexPathForSelectedRow()
-        let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as ServiceEntry
+        let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as Project
         //currentlySelectedSystem = system
     }
     
@@ -215,9 +213,9 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
         // Pass the selected object to the new view controller.
         
         let indexPath = self.tableView.indexPathForSelectedRow()
-        let serviceEntry = self.fetchedResultsController.objectAtIndexPath(indexPath!) as ServiceEntry
+        let project = self.fetchedResultsController.objectAtIndexPath(indexPath!) as Project
         let controller = (segue.destinationViewController as UINavigationController).topViewController as ProjectDetailViewController
-        //controller.detailServiceEntryItem = serviceEntry
+        controller.detailProjectItem = project
         controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()
         controller.navigationItem.leftItemsSupplementBackButton = true
     }

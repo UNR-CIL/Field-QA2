@@ -29,6 +29,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     weak var grantNumberTextField: UITextField? = nil
     weak var institutionTextField: UITextField? = nil
     weak var datePicker: UIDatePicker? = nil
+    weak var dateLabel: UILabel? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,29 +179,22 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             switch indexPath.row {
             case 0...3:
                 cellIdentifier = "TextFieldCell"
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
             case 4:
                 cellIdentifier = "DateDisplayCell"
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
             default:
                 cellIdentifier = "TextFieldCell"
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
             }
         }
         else {
             switch indexPath.row {
             case 0...3:
                 cellIdentifier = "TextFieldCell"
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
             case 4:
                 cellIdentifier = "DateDisplayCell"
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
             default:
                 cellIdentifier = "DatePickerCell"
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
             }
         }
-        
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
@@ -241,6 +235,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
             case 4:
                 if let cell: DateDisplayCell = cell as? DateDisplayCell {
+                    dateLabel = cell.detailLabel
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeStyle = .MediumStyle
                     dateFormatter.dateStyle = .MediumStyle
@@ -288,6 +283,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
             case 4:
                 if let cell: DateDisplayCell = cell as? DateDisplayCell {
+                    dateLabel = cell.detailLabel
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeStyle = .MediumStyle
                     dateFormatter.dateStyle = .MediumStyle
@@ -324,11 +320,28 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         println("textField ended \(textField.text)")
+        
+        if textField == nameTextField {
+            detailProjectItem?.name = textField.text
+        }
+        
+        if textField == fundingAgencyTextField {
+            detailProjectItem?.originalFundingAgencyName = textField.text
+        }
+        
+        if textField == grantNumberTextField {
+            detailProjectItem?.grantNumberString = textField.text
+        }
+        
+        if textField == institutionTextField {
+            detailProjectItem?.institutionName = textField.text
+        }
+        
         return true
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        println("Value changed: \(sender.date)")
+        detailProjectItem?.startedDate = sender.date
     }
     
     /*

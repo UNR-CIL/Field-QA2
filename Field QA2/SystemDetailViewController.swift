@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SystemDetailViewController: UIViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SystemDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
