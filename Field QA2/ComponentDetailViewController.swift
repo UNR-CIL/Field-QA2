@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ComponentDetailViewController: UIViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ComponentDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var detailComponentItem : Component? {
         didSet {
