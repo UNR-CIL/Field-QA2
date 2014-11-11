@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class ServiceEntryDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     var detailServiceEntryItem : ServiceEntry? {
         didSet {
@@ -43,7 +43,6 @@ class ServiceEntryDetailViewController: UIViewController, UIPopoverControllerDel
             let keyboardRect = keyboardValue.CGRectValue()
             let keyboardHeight = keyboardRect.size.height
             
-            self.bottomConstraint.constant =  keyboardHeight
         }
         
         self.configureView()

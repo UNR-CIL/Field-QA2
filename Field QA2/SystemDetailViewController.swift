@@ -45,7 +45,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             let keyboardRect = keyboardValue.CGRectValue()
             let keyboardHeight = keyboardRect.size.height
             
-            self.bottomConstraint.constant =  keyboardHeight
         }
         
         
@@ -139,6 +138,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     }
     
     func configureView() {
+        /*
         if let name = detailSystemItem!.name {
             self.nameTextField?.text = name
         }
@@ -194,6 +194,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
         
         self.updateInstallationDateButtonTitle()
+
+*/
     }
     
     func updateInstallationDateButtonTitle() {
