@@ -342,7 +342,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     }
     
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
-        
+        if textView == notesTextView {
+            detailSystemItem?.details = textView.text
+        }
         return true
     }
     
