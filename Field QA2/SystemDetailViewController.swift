@@ -8,9 +8,11 @@
 
 import UIKit
 
-class SystemDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SystemDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    var displayMode: DisplayMode = .NotShowingDatePicker
     
     var detailSystemItem : System? {
         didSet {
@@ -23,8 +25,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     var cameraPopoverController: UIPopoverController?
     
     var image: UIImage?
-    @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var installationDateButton: UIButton!
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -32,6 +34,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var latitudeTextField: UITextField!
     @IBOutlet weak var longitudeTextField: UITextField!
+    
+    weak var datePicker: UIDatePicker? = nil
+    weak var dateLabel: UILabel? = nil
     
     var installationDate : NSDate?
     
@@ -136,6 +141,219 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         var error : NSError?
         self.detailSystemItem?.managedObjectContext!.save(&error)
     }
+    // >>>
+    
+    /*
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var installationDateButton: UIButton!
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var latitudeTextField: UITextField!
+    @IBOutlet weak var longitudeTextField: UITextField!
+
+*/
+    
+    // MARK: - Table view data source
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row == 1 {
+            return 162.0
+        }
+        if displayMode == DisplayMode.ShowingDatePicker {
+            if indexPath.row == 6 {
+                return 162.0
+            }
+        }
+        return 44.0
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in the section.
+        return displayMode == .ShowingDatePicker ? 7 : 6
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cellIdentifier: String? = nil
+        
+        switch indexPath.row {
+        case 1:
+            cellIdentifier = "NotesCell"
+        case 5:
+            cellIdentifier = "DateDisplayCell"
+        case 6:
+            cellIdentifier = "DatePickerCell"
+        default:
+            cellIdentifier = "TextFieldCell"
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
+        configureCell(cell, forIndexPath: indexPath)
+        
+        return cell
+    }
+    
+    func configureCell(cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+        switch (displayMode, indexPath.row) {
+        case (_, 0):
+            if let cell: TextFieldCell = cell as? TextFieldCell {
+                nameTextField = cell.textField
+                nameTextField?.delegate = self
+                cell.titleLabel.text = "Name"
+                cell.textField.text = detailSystemItem?.name
+            }
+        case (_, 1):
+            if let cell: NotesCell = cell as? NotesCell {
+                notesTextView = cell.textView
+                notesTextView?.delegate = self
+                cell.textView.text = "Notes"
+                cell.textView.text = detailSystemItem?.details
+            }
+        case (_, 2):
+            if let cell: TextFieldCell = cell as? TextFieldCell {
+                locationTextField = cell.textField
+                locationTextField?.delegate = self
+                cell.titleLabel.text = "Location"
+                cell.textField.text = detailSystemItem?.installationLocation
+            }
+        case (_, 3):
+            if let cell: TextFieldCell = cell as? TextFieldCell {
+                latitudeTextField = cell.textField
+                latitudeTextField?.delegate = self
+                cell.titleLabel.text = "Latitude"
+                
+                let numberFormater = NSNumberFormatter()
+                if let latitude = detailSystemItem?.latitude {
+                    cell.textField.text = numberFormater.stringFromNumber(latitude)
+                }
+                else {
+                    cell.textField.text = nil
+                }
+            }
+        case (_, 4):
+            if let cell: TextFieldCell = cell as? TextFieldCell {
+                longitudeTextField = cell.textField
+                longitudeTextField?.delegate = self
+                cell.titleLabel.text = "Longitude"
+                
+                let numberFormater = NSNumberFormatter()
+                if let longitude = detailSystemItem?.longitude {
+                    cell.textField.text = numberFormater.stringFromNumber(longitude)
+                }
+                else {
+                    cell.textField.text = nil
+                }
+                
+            }
+        case (_, 5):
+            if let cell: DateDisplayCell = cell as? DateDisplayCell {
+                dateLabel = cell.detailLabel
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                cell.titleLabel.text = "Installation Date"
+                if let date = detailSystemItem?.installationDate {
+                    cell.detailLabel.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailLabel.text = ""
+                }
+            }
+        case (.ShowingDatePicker, 6):
+            if let cell: DatePickerCell = cell as? DatePickerCell {
+                datePicker = cell.datePicker
+                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                
+            }
+            
+        default:
+            println("mode \(displayMode.rawValue) row \(indexPath.row)")
+        }
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if (indexPath.row == 5) {
+            if displayMode == DisplayMode.NotShowingDatePicker {
+                displayMode = .ShowingDatePicker
+            }
+            else {
+                displayMode = .NotShowingDatePicker
+            }
+            tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+            
+        }
+    }
+    
+    /*
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var installationDateButton: UIButton!
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var latitudeTextField: UITextField!
+    @IBOutlet weak var longitudeTextField: UITextField!
+    
+    */
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        println("textField ended \(textField.text)")
+        
+        if textField == nameTextField {
+            detailSystemItem?.name = textField.text
+        }
+        
+        if textField == locationTextField {
+            detailSystemItem?.installationLocation = textField.text
+        }
+        
+        if textField == latitudeTextField {
+            let numberFormatter = NSNumberFormatter()
+            detailSystemItem?.latitude = numberFormatter.numberFromString(textField.text)
+        }
+        
+        if textField == longitudeTextField {
+            let numberFormatter = NSNumberFormatter()
+            detailSystemItem?.longitude = numberFormatter.numberFromString(textField.text)
+        }
+        
+        return true
+    }
+    
+    func dateValueChanged(sender: UIDatePicker) {
+        detailSystemItem?.installationDate = sender.date
+    }
+    
+    
+    // MARK: UITextViewDelegate
+    
+    func textViewDidChange(textView: UITextView) {
+        
+    }
+    
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        
+        return true
+    }
+    
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        
+    }
+
+    // >>>
+    
+    
     
     func configureView() {
         /*

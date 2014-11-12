@@ -359,6 +359,42 @@
                                     <outlet property="datePicker" destination="7LD-cm-8p8" id="bP8-Un-iy3"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" rowHeight="162" id="vZi-G6-J0X" customClass="NotesCell" customModule="Field_QA2" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vZi-G6-J0X" id="lGM-dx-8Yx">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAU-bI-yea">
+                                            <rect key="frame" x="23" y="8" width="46" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="9Jg-FX-FiO"/>
+                                                <constraint firstAttribute="width" constant="46" id="dc0-jO-b77"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbx-e5-chH">
+                                            <rect key="frame" x="23" y="37" width="564" height="117"/>
+                                            <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Tbx-e5-chH" firstAttribute="top" secondItem="AAU-bI-yea" secondAttribute="bottom" constant="8" id="5xK-2H-i8H"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Tbx-e5-chH" secondAttribute="bottom" constant="-0.5" id="BIH-IZ-nff"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Tbx-e5-chH" secondAttribute="trailing" constant="5" id="FUO-C0-WAU"/>
+                                        <constraint firstItem="Tbx-e5-chH" firstAttribute="leading" secondItem="lGM-dx-8Yx" secondAttribute="leadingMargin" constant="15" id="Lho-j2-AaC"/>
+                                        <constraint firstItem="AAU-bI-yea" firstAttribute="top" secondItem="lGM-dx-8Yx" secondAttribute="topMargin" id="Oyu-lB-ISa"/>
+                                        <constraint firstItem="AAU-bI-yea" firstAttribute="leading" secondItem="lGM-dx-8Yx" secondAttribute="leadingMargin" constant="15" id="stb-Zx-NRw"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textView" destination="Tbx-e5-chH" id="B9k-ml-oUp"/>
+                                    <outlet property="titleLabel" destination="AAU-bI-yea" id="i5n-7c-sXO"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Ra1-pI-cdp" id="xgB-WW-j5b"/>

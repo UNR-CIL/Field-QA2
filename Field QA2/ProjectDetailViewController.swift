@@ -8,13 +8,14 @@
 
 import UIKit
 
+enum DisplayMode: String {
+    case NotShowingDatePicker = "NotShowingDatePicker"
+    case ShowingDatePicker = "ShowingDatePicker"
+}
+
 class ProjectDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
 
-    enum DisplayMode: String {
-        case NotShowingDatePicker = "NotShowingDatePicker"
-        case ShowingDatePicker = "ShowingDatePicker"
-    }
-    
+
     var displayMode: DisplayMode = .NotShowingDatePicker
     
     var detailProjectItem : Project? {

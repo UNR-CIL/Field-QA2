@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB3991721A12E37B00046045 /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3991711A12E37B00046045 /* NotesCell.swift */; };
 		AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */; };
 		AB6B9E9A19B9824A003734A1 /* ServiceEntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */; };
 		AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB3991711A12E37B00046045 /* NotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicalDevicesViewController.swift; sourceTree = "<group>"; };
 		AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceEntriesViewController.swift; sourceTree = "<group>"; };
 		AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				AB864A9619FE4E6E007FD1E9 /* TextFieldCell.swift */,
+				AB3991711A12E37B00046045 /* NotesCell.swift */,
 				AB864A9819FE4E79007FD1E9 /* DatePickerCell.swift */,
 				AB864A9A19FE4E87007FD1E9 /* DateDisplayCell.swift */,
 				AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */,
@@ -311,6 +314,7 @@
 				ABCE55F019F769D1003B685B /* System.swift in Sources */,
 				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
+				AB3991721A12E37B00046045 /* NotesCell.swift in Sources */,
 				ABCE55E819F769D0003B685B /* Component.swift in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
