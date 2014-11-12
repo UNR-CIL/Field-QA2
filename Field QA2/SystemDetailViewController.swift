@@ -161,7 +161,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         if indexPath.row == 1 {
             return 162.0
         }
-        if displayMode == DisplayMode.ShowingDatePicker {
+        if displayMode == DisplayMode.ShowingFirstDatePicker {
             if indexPath.row == 6 {
                 return 162.0
             }
@@ -176,7 +176,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return displayMode == .ShowingDatePicker ? 7 : 6
+        return displayMode == .ShowingFirstDatePicker ? 7 : 6
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -266,7 +266,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                     cell.detailLabel.text = ""
                 }
             }
-        case (.ShowingDatePicker, 6):
+        case (.ShowingFirstDatePicker, 6):
             if let cell: DatePickerCell = cell as? DatePickerCell {
                 datePicker = cell.datePicker
                 datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
@@ -284,7 +284,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         
         if (indexPath.row == 5) {
             if displayMode == DisplayMode.NotShowingDatePicker {
-                displayMode = .ShowingDatePicker
+                displayMode = .ShowingFirstDatePicker
             }
             else {
                 displayMode = .NotShowingDatePicker

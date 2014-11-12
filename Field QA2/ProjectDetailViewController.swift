@@ -10,7 +10,11 @@ import UIKit
 
 enum DisplayMode: String {
     case NotShowingDatePicker = "NotShowingDatePicker"
-    case ShowingDatePicker = "ShowingDatePicker"
+    case ShowingFirstDatePicker = "ShowingFirstDatePicker"
+    case ShowingSecondDatePicker = "ShowingSecondDatePicker"
+    case ShowingThirdDatePicker = "ShowingThirdDatePicker"
+    case ShowingFourthDatePicker = "ShowingFourthDatePicker"
+    case ShowingFifthDatePicker = "ShowingFifthDatePicker"
 }
 
 class ProjectDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
@@ -152,7 +156,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if displayMode == DisplayMode.ShowingDatePicker {
+        if displayMode == DisplayMode.ShowingFirstDatePicker {
             if indexPath.row == 5 {
                 return 162.0
             }
@@ -169,7 +173,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return displayMode == .ShowingDatePicker ? 6 : 5
+        return displayMode == .ShowingFirstDatePicker ? 6 : 5
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -311,7 +315,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if displayMode == DisplayMode.NotShowingDatePicker {
-            displayMode = .ShowingDatePicker
+            displayMode = .ShowingFirstDatePicker
         }
         else {
             displayMode = .NotShowingDatePicker
