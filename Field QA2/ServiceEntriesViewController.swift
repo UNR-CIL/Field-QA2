@@ -144,7 +144,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         dateFormatter.timeStyle = .ShortStyle
         dateFormatter.dateStyle = .MediumStyle
         if let date = serviceEntry.date {
-            cell.textLabel.text = dateFormatter.stringFromDate(serviceEntry.date!)
+            cell.textLabel?.text = dateFormatter.stringFromDate(serviceEntry.date!)
         }
         
         if let notes = serviceEntry.notes {

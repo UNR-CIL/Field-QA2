@@ -144,12 +144,12 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
         let system = self.fetchedResultsController.objectAtIndexPath(indexPath) as System
         
         if let name = system.name {
-            cell.textLabel.text = system.name
-            cell.textLabel.textColor = UIColor.darkTextColor()
+            cell.textLabel?.text = system.name
+            cell.textLabel?.textColor = UIColor.darkTextColor()
         }
         else {
-            cell.textLabel.text = "A System"
-            cell.textLabel.textColor = UIColor.darkGrayColor()
+            cell.textLabel?.text = "A System"
+            cell.textLabel?.textColor = UIColor.darkGrayColor()
         }
         
     }

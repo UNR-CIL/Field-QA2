@@ -146,12 +146,12 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
 
         
         if let notes = project.name {
-            cell.textLabel.text = notes
-            cell.textLabel.textColor = UIColor.darkTextColor()
+            cell.textLabel?.text = notes
+            cell.textLabel?.textColor = UIColor.darkTextColor()
         }
         else {
-            cell.textLabel.text = "A Project"
-            cell.textLabel.textColor = UIColor.darkGrayColor()
+            cell.textLabel?.text = "A Project"
+            cell.textLabel?.textColor = UIColor.darkGrayColor()
         }
     }
     
