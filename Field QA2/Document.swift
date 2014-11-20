@@ -17,5 +17,7 @@ class Document: NSManagedObject {
     @NSManaged var component: Component?
     @NSManaged var project: Project?
     @NSManaged var serviceEntry: ServiceEntry?
-
+    
+    @NSManaged var creationDate: NSDate?
+    @NSManaged var modificationDate: NSDate?
 }

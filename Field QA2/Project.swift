@@ -20,5 +20,7 @@ class Project: NSManagedObject {
     @NSManaged var documents: Document?
     @NSManaged var principalInvestigator: Person?
     @NSManaged var serviceEntries: NSSet
-
+    
+    @NSManaged var creationDate: NSDate?
+    @NSManaged var modificationDate: NSDate?
 }

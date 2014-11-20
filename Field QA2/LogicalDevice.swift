@@ -15,4 +15,6 @@ class LogicalDevice: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var component: Component?
 
+    @NSManaged var creationDate: NSDate?
+    @NSManaged var modificationDate: NSDate?
 }

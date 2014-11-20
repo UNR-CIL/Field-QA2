@@ -19,9 +19,6 @@ enum DisplayMode: String {
 }
 
 class ProjectDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
-
-
-    var displayMode: DisplayMode = .NotShowingDatePicker
     
     var detailProjectItem : Project? {
         didSet {
@@ -53,6 +50,11 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
         self.configureView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -198,69 +200,61 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             
         })
     }
-    
-    
-    /*
-    @NSManaged var name: String?
-    @NSManaged var originalFundingAgencyName: String?
-    @NSManaged var grantNumberString: String?
-    @NSManaged var institutionName: String?
-    @NSManaged var startedDate: NSDate?
-    
-    @NSManaged var principalInvestigator: Person?
-    @NSManaged var do cuments: Document?
-    
-    */
+
     
     // MARK: UITableView
     
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if displayMode == DisplayMode.ShowingFirstDatePicker {
-            if indexPath.row == 5 {
-                return 162.0
-            }
+        if indexPath.row == 5 {
+            return 162.0
         }
         return 44.0
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return displayMode == .ShowingFirstDatePicker ? 6 : 5
+        
+        switch (section) {
+        case 0:
+            if section == 0 {
+                return 6
+            }
+            return 0
+        case 1:
+            if let systems = detailProjectItem?.systems {
+                return systems.count
+            }
+            return 0
+        case 2:
+            if let serviceEntries = detailProjectItem?.serviceEntries {
+                return serviceEntries.count
+            }
+            return 0
+        default:
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cellIdentifier: String? = nil
         
-        if displayMode == .NotShowingDatePicker {
-            switch indexPath.row {
-            case 0...3:
-                cellIdentifier = "TextFieldCell"
-            case 4:
-                cellIdentifier = "DateDisplayCell"
-            default:
-                cellIdentifier = "TextFieldCell"
-            }
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0...3):
+            cellIdentifier = "TextFieldCell"
+        case (0, 4):
+            cellIdentifier = "DateDisplayCell"
+        case (0, 5):
+            cellIdentifier = "DatePickerCell"
+        default:
+            cellIdentifier = "Cell"
         }
-        else {
-            switch indexPath.row {
-            case 0...3:
-                cellIdentifier = "TextFieldCell"
-            case 4:
-                cellIdentifier = "DateDisplayCell"
-            default:
-                cellIdentifier = "DatePickerCell"
-            }
-        }
+        
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
@@ -269,38 +263,37 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     }
     
     func configureCell(cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
-        if displayMode == .NotShowingDatePicker {
-            switch indexPath.row {
-            case 0:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
+            switch (indexPath.section, indexPath.row) {
+            case (0, 0):
+                if let cell = cell as? TextFieldCell {
                     nameTextField = cell.textField
                     nameTextField?.delegate = self
                     cell.titleLabel.text = "Name"
                     cell.textField.text = detailProjectItem?.name
                 }
-            case 1:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
+            case (0, 1):
+                if let cell = cell as? TextFieldCell {
                     fundingAgencyTextField = cell.textField
                     fundingAgencyTextField?.delegate = self
                     cell.titleLabel.text = "Funding Agency"
                     cell.textField.text = detailProjectItem?.originalFundingAgencyName
                 }
-            case 2:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
+            case (0, 2):
+                if let cell = cell as? TextFieldCell {
                     grantNumberTextField = cell.textField
                     grantNumberTextField?.delegate = self
                     cell.titleLabel.text = "Grant Number"
                     cell.textField.text = detailProjectItem?.grantNumberString
                 }
-            case 3:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
+            case (0, 3):
+                if let cell = cell as? TextFieldCell {
                     institutionTextField = cell.textField
                     institutionTextField?.delegate = self
                     cell.titleLabel.text = "Institution"
                     cell.textField.text = detailProjectItem?.institutionName
                 }
-            case 4:
-                if let cell: DateDisplayCell = cell as? DateDisplayCell {
+            case (0, 4):
+                if let cell = cell as? DateDisplayCell {
                     dateLabel = cell.detailLabel
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeStyle = .MediumStyle
@@ -313,75 +306,99 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                         cell.detailLabel.text = ""
                     }
                 }
-            default:
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
-            }
-        }
-        else {
-            switch indexPath.row {
-            case 0:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
-                    nameTextField = cell.textField
-                    nameTextField?.delegate = self
-                    cell.titleLabel.text = "Name"
-                    cell.textField.text = detailProjectItem?.name
-                }
-            case 1:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
-                    fundingAgencyTextField = cell.textField
-                    fundingAgencyTextField?.delegate = self
-                    cell.titleLabel.text = "Funding Agency"
-                    cell.textField.text = detailProjectItem?.originalFundingAgencyName
-                }
-            case 2:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
-                    grantNumberTextField = cell.textField
-                    grantNumberTextField?.delegate = self
-                    cell.titleLabel.text = "Grant Number"
-                    cell.textField.text = detailProjectItem?.grantNumberString
-                }
-            case 3:
-                if let cell: TextFieldCell = cell as? TextFieldCell {
-                    institutionTextField = cell.textField
-                    institutionTextField?.delegate = self
-                    cell.titleLabel.text = "Institution"
-                    cell.textField.text = detailProjectItem?.institutionName
-                }
-            case 4:
-                if let cell: DateDisplayCell = cell as? DateDisplayCell {
-                    dateLabel = cell.detailLabel
-                    let dateFormatter = NSDateFormatter()
-                    dateFormatter.timeStyle = .MediumStyle
-                    dateFormatter.dateStyle = .MediumStyle
-                    cell.titleLabel.text = "Started Date"
-                    if let date = detailProjectItem?.startedDate {
-                        cell.detailLabel.text = dateFormatter.stringFromDate(date)
-                    }
-                    else {
-                        cell.detailLabel.text = ""
-                    }
-                }
-            case 5:
-                if let cell: DatePickerCell = cell as? DatePickerCell {
+            case (0, 5):
+                if let cell = cell as? DatePickerCell {
                     datePicker = cell.datePicker
                     datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                     
                 }
+            case (1, _):
+                let systems = sortedSystemsForProject(detailProjectItem)
+                if systems.count == 0 {
+                    return
+                }
+                else {
+                    let system = systems[indexPath.row] as System
+                    cell.textLabel?.text = system.name
+                    
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.timeStyle = .MediumStyle
+                    dateFormatter.dateStyle = .MediumStyle
+                    if let date = system.creationDate {
+                        cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
+                    }
+                    else {
+                        cell.detailTextLabel?.text = ""
+                    }
+                }
+            case (2, _):
+                let serviceEntries = sortedServiceEntriesForProject(detailProjectItem)
+                if serviceEntries.count == 0 {
+                    return
+                }
+                else {
+                    let serviceEntry = serviceEntries[indexPath.row] as ServiceEntry
+                    cell.textLabel?.text = serviceEntry.name
+                    
+                    let dateFormatter = NSDateFormatter()
+                    dateFormatter.timeStyle = .MediumStyle
+                    dateFormatter.dateStyle = .MediumStyle
+                    if let date = serviceEntry.creationDate {
+                        cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
+                    }
+                    else {
+                        cell.detailTextLabel?.text = ""
+                    }
+                }
             default:
-                println("mode \(displayMode.rawValue) row \(indexPath.row)")
-            }
+                cell.textLabel?.text = "Default"
         }
+    }
+    
+    func sortedSystemsForProject(project: Project?) -> [AnyObject] {
+        if let project = project {
+            let systems = project.systems
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            let sortedSystems = NSArray(array:systems.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+            return sortedSystems
+        }
+        return [System]()
+    }
+    
+    func sortedServiceEntriesForProject(project: Project?) -> [AnyObject] {
+        if let project = project {
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            let sortedServiceEntries = NSArray(array: project.serviceEntries.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+            return sortedServiceEntries
+        }
+        return [ServiceEntry]()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if displayMode == DisplayMode.NotShowingDatePicker {
-            displayMode = .ShowingFirstDatePicker
+        if indexPath.section == 0 {
+            
         }
         else {
-            displayMode = .NotShowingDatePicker
+            if let context = detailProjectItem?.managedObjectContext {
+                let systems = sortedSystemsForProject(detailProjectItem)
+                let selectedSystem = systems[indexPath.row] as System
+                self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: selectedSystem)
+            }
         }
-        tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Project Details"
+        case 1:
+            return "Systems"
+        case 2:
+            return "Service Entries"
+        default:
+            return nil
+        }
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {

@@ -133,6 +133,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         self.configureView()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Component Details"
+        case 1:
+            return "Service Entries"
+        default:
+            return nil
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -43,5 +43,7 @@ class Component: NSManagedObject {
     @NSManaged var logicalDevices: NSSet
     @NSManaged var system: System?
     @NSManaged var serviceEntries: NSSet
-
+    
+    @NSManaged var creationDate: NSDate?
+    @NSManaged var modificationDate: NSDate?
 }

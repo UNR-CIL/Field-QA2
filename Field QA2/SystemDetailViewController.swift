@@ -60,6 +60,22 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         self.configureView()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "System Details"
+        case 1:
+            return "Components"
+        default:
+            return nil
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

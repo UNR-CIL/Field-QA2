@@ -23,9 +23,6 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     var datePopoverController: UIPopoverController?
     var associatedEntityPopoverController: UIPopoverController?
     var cameraPopoverController: UIPopoverController?
-    
-    
-
 
     var image: UIImage?
     weak var imageView: UIImageView!
@@ -71,7 +68,21 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         
         self.configureView()
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Service Entry Details"
+        default:
+            return nil
+        }
+    }
+    
     func done(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }

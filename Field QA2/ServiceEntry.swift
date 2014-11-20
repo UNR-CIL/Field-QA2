@@ -12,7 +12,6 @@ import UIKit
 
 class ServiceEntry: NSManagedObject {
 
-    @NSManaged var creationDate: NSDate?
     @NSManaged var date: NSDate?
     @NSManaged var name: String?
     @NSManaged var notes: String?
@@ -23,5 +22,8 @@ class ServiceEntry: NSManagedObject {
     @NSManaged var project: Project?
     @NSManaged var system: System?
     @NSManaged var component: Component?
-
+    
+    
+    @NSManaged var creationDate: NSDate?
+    @NSManaged var modificationDate: NSDate?
 }

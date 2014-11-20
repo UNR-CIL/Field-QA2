@@ -17,5 +17,7 @@ class Person: NSManagedObject {
     @NSManaged var managedSystems: NSSet
     @NSManaged var projects: NSSet
     @NSManaged var serviceEntries: NSSet
-
+    
+    @NSManaged var creationDate: NSDate?
+    @NSManaged var modificationDate: NSDate?
 }

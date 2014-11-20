@@ -25,4 +25,7 @@ class System: NSManagedObject {
     @NSManaged var manager: Person?
     @NSManaged var serviceEntries: NSSet
 
+    
+    @NSManaged var creationDate: NSDate?
+    @NSManaged var modificationDate: NSDate?
 }
