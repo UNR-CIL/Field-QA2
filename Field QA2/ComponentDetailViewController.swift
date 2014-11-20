@@ -177,95 +177,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
 
     }
 
-    // >>>
-    
-    /*
-
-    var image: UIImage?
-    var imageView: UIImageView?
-    //@NSManaged var photo: UIImage?
-    
-    var nameTextField: UITextField?
-    //@NSManaged var name: String?
-    
-    var purposeTextView: UITextView?
-    //@NSManaged var purpose: String?
-    
-    var typeNameTextField: UITextField?
-    //@NSManaged var typeName: String?
-    
-    var unitDescriptionTextView: UITextView?
-    //@NSManaged var unitDescription: String?
-    
-    var modelTextField: UITextField?
-    //@NSManaged var model: String?
-    
-    var serialNumberTextField: UITextField?
-    //@NSManaged var serialNumber: String?
-    
-    var vendorTextField: UITextField?
-    //@NSManaged var vendor: String?
-    
-    var manufacturerTextField: UITextField?
-    //@NSManaged var manufacturer: String?
-    
-    var supplierTextField: UITextField?
-    //@NSManaged var supplier: String?
-    
-    var centerOffset: UITextField?
-    //@NSManaged var centerOffset: NSNumber?
-    
-    var heightFromGroundTextField: UITextField?
-    //@NSManaged var heightFromGround: NSNumber?
-    
-    var installationDate: NSDate?
-    var installationDateLabel: UILabel?
-    //@NSManaged var installationDate: NSDate?
-    
-    var installationDetailsTextView: UITextView?
-    //@NSManaged var installationDetails: String?
-    
-    var installationTextField: UITextField?
-    //@NSManaged var installationLocation: String?
-    
-    var wiringNotesTextView: UITextView?
-    //@NSManaged var wiringNotes: String?
-    
-    var latitudeTextField: UITextField?
-    //@NSManaged var latitude: NSNumber?
-    
-    var longitudeTextField: UITextField?
-    //@NSManaged var longitude: NSNumber?
-    
-    var lastCalibratedDate: NSDate?
-    var lastCalibratedDateLabel: UILabel?
-    //@NSManaged var lastCalibratedDate: NSDate?
-    
-    var dateIntervalTextField: UITextField?
-    //@NSManaged var dataInterval: String?
-    
-    var dataStreamDetails: UITextView?
-    //@NSManaged var dataStreamDetails: String?
-    
-    var measuremetPropertyTextField: UITextField?
-    //@NSManaged var measurementProperty: String?
-    
-    var minimumOpeatingRangeTextField: UITextField?
-    //@NSManaged var minimumOperatingRange: NSNumber?
-    
-    var maximumOperatingRangeTextField: UITextField?
-    //@NSManaged var maximumOperatingRange: NSNumber?
-    
-    var minimumAccuracyBoundTextField: UITextField?
-    //@NSManaged var minimumAccuracyBound: NSNumber?
-    
-    var maximumAccuracyBoundTextField: UITextField?
-    //@NSManaged var maxiumumAccuracyBound: NSNumber?
-    
-    var parentLoggerTextField: UITextField?
-    //@NSManaged var parentLogger: String?
-    
-    */
     
     // MARK: - Table view data source
     
@@ -683,22 +594,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
         if textView == purposeTextView {
-            detailComponentItem?.purpose = purposeTextView?.text
+            detailComponentItem?.purpose = textView.text
         }
         if textView == unitDescriptionTextView {
-            detailComponentItem?.unitDescription = unitDescriptionTextView?.text
+            detailComponentItem?.unitDescription = textView.text
         }
         if textView == installationDetailsTextView {
-            detailComponentItem?.installationDetails = installationDetailsTextView?.text
+            detailComponentItem?.installationDetails = textView.text
         }
         
         
         if textView == wiringNotesTextView {
-            detailComponentItem?.wiringNotes = wiringNotesTextView?.text
+            detailComponentItem?.wiringNotes = textView.text
         }
         
         if textView == dataStreamDetails {
-            detailComponentItem?.dataStreamDetails = dataStreamDetails?.text
+            detailComponentItem?.dataStreamDetails = textView.text
         }
         
         return true

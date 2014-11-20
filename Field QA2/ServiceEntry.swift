@@ -18,7 +18,6 @@ class ServiceEntry: NSManagedObject {
     @NSManaged var photo: UIImage?
     @NSManaged var name: String?
     @NSManaged var creationDate: NSDate?
-    @NSManaged var manualDate: NSDate?
     @NSManaged var creator: Person?
     @NSManaged var documents: NSSet
 

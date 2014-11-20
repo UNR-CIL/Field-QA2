@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ServiceEntryDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class ServiceEntryDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 
     var detailServiceEntryItem : ServiceEntry? {
         didSet {
@@ -21,18 +21,34 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     var associatedEntityPopoverController: UIPopoverController?
     var cameraPopoverController: UIPopoverController?
     
-    var image: UIImage?
-    @IBOutlet weak var imageView: UIImageView!
     
-    @IBOutlet weak var operationTextField: UITextField!
-    @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var dateButton: UIButton!
-    @IBOutlet weak var associatedEntityButton: UIButton!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
-    var date: NSDate?
 
+
+    var image: UIImage?
+    weak var imageView: UIImageView!
+    //    @NSManaged var photo: UIImage?
     
+    weak var nameTextField: UITextField?
+    //    @NSManaged var name: String?
+    
+    weak var operationTextField: UITextField?
+    //    @NSManaged var operation: String?
+    
+    weak var notesTextView: UITextView?
+    //    @NSManaged var notes: String?
+
+
+    var date: NSDate?
+    var dateLabel: UILabel?
+    var datePicker: UIDatePicker?
+    //    @NSManaged var date: NSDate?
+
+    var creationDate: NSDate?
+    //    var creationDatePicker: NSDate?
+    //    @NSManaged var creationDate: NSDate?
+    //    @NSManaged var creator: Person?
+    //    @NSManaged var documents: NSSet
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,20 +69,11 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func dateButtonTapped(sender: AnyObject) {
-        let datePickerStoryboard = UIStoryboard(name: "DatePicker", bundle: nil)
-        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as DatePickerViewController
-        self.datePopoverController = UIPopoverController(contentViewController: datePickerViewController)
-        
-        self.datePopoverController!.delegate = self
-        self.datePopoverController!.presentPopoverFromRect(dateButton.bounds, inView: dateButton, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
-    }
     
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
         if popoverController == self.datePopoverController {
             let datePickerViewController = popoverController.contentViewController as DatePickerViewController
             date = datePickerViewController.datePicker.date
-            self.updateDateButtonTitle()
         }
         else if popoverController == self.associatedEntityPopoverController {
             
@@ -75,13 +82,13 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     }
     
     @IBAction func saveBarButtonTapped(sender: AnyObject) {
-        if let operation = operationTextField.text {
+        if let operation = operationTextField?.text {
             detailServiceEntryItem!.operation = operation
         }
         else {
             detailServiceEntryItem!.operation = nil
         }
-        if let notes = self.notesTextView.text {
+        if let notes = self.notesTextView?.text {
             detailServiceEntryItem!.notes = notes
         }
         else {
@@ -112,7 +119,6 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             notesTextView?.text = nil
         }
         
-        self.updateDateButtonTitle()
     }
 
 
@@ -126,18 +132,6 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     }
     */
     
-    func updateDateButtonTitle() {
-        if let date = self.date {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeStyle = .ShortStyle
-            dateFormatter.dateStyle = .MediumStyle
-            
-            self.dateButton?.setTitle(dateFormatter.stringFromDate(date), forState: .Normal)
-        }
-        else {
-            self.dateButton?.setTitle("Installation Date", forState: .Normal)
-        }
-    }
     
     @IBAction func imageViewTapped(sender: UITapGestureRecognizer) {
         var imagePickerController = UIImagePickerController()
@@ -176,4 +170,166 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             
         })
     }
+    
+    /*
+    0 weak var nameTextField: UITextField?
+    //    @NSManaged var name: String?
+    
+    1 weak var operationTextField: UITextField?
+    //    @NSManaged var operation: String?
+    
+    2 weak var notesTextView: UITextView?
+    //    @NSManaged var notes: String?
+    
+    3
+    var date: NSDate?
+    4 var datePicker: UIDatePicker?
+    //    @NSManaged var date: NSDate?
+    
+    var creationDate: NSDate?
+    //    var creationDatePicker: NSDate?
+    //    @NSManaged var creationDate: NSDate?
+    //    @NSManaged var creator: Person?
+    //    @NSManaged var documents: NSSet
+
+*/
+    
+    // MARK: - Table view data source
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 2), (0, 4):
+            return 162
+        default:
+            return 44.0
+        }
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // Return the number of sections.
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Return the number of rows in the section.
+        return 5
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cellIdentifier: String? = nil
+        
+        switch (indexPath.section, indexPath.row) {
+        case (0, 2):
+            cellIdentifier = "NotesCell"
+        case (0, 3):
+            cellIdentifier = "DateDisplayCell"
+        case (0, 4):
+            cellIdentifier = "DatePickerCell"
+        default:
+            cellIdentifier = "TextFieldCell"
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
+        configureCell(cell, forIndexPath: indexPath)
+        
+        return cell
+    }
+    
+    
+    func configureCell(cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            if let cell = cell as? TextFieldCell {
+                nameTextField = cell.textField
+                nameTextField?.delegate = self
+                cell.titleLabel.text = "Name"
+                cell.textField.text = detailServiceEntryItem?.name
+            }
+        case (0, 1):
+            if let cell = cell as? TextFieldCell {
+                operationTextField = cell.textField
+                operationTextField?.delegate = self
+                cell.textField.text = detailServiceEntryItem?.operation
+                cell.titleLabel.text = "Operation"
+            }
+        case (0, 2):
+            if let cell = cell as? NotesCell {
+                notesTextView = cell.textView
+                notesTextView?.delegate = self
+                cell.textView.text = detailServiceEntryItem?.notes
+            }
+        case (0, 3):
+            if let cell = cell as? DateDisplayCell {
+                dateLabel = cell.detailLabel
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                cell.titleLabel.text = "Installation Date"
+                
+                if let date = detailServiceEntryItem?.date {
+                    cell.detailLabel.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailLabel.text = ""
+                }
+            }
+        case (0, 4):
+            if let cell = cell as? DatePickerCell {
+                datePicker = cell.datePicker
+                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+            }
+        default:
+            println("Default")
+        }
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        if textField == nameTextField {
+            detailServiceEntryItem?.name = textField.text
+        }
+        if textField ==  operationTextField {
+            detailServiceEntryItem?.operation = textField.text
+        }
+
+        return true
+    }
+    
+    func dateValueChanged(sender: UIDatePicker) {
+        if sender == self.datePicker {
+            detailServiceEntryItem?.date = sender.date
+            
+            
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 3, inSection: 0)], withRowAnimation: .None)
+        }
+    }
+    
+    
+    // MARK: UITextViewDelegate
+    
+    func textViewDidChange(textView: UITextView) {
+        
+    }
+    
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        if textView == notesTextView {
+            detailServiceEntryItem?.notes = textView.text
+        }
+        
+        return true
+    }
+    
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        
+    }
+
 }
