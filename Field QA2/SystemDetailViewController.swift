@@ -53,8 +53,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
         }
         
-        let addSystemBarButton = UIBarButtonItem(title: "+ Component", style: UIBarButtonItemStyle.Plain, target: self, action: "addComponentToProject:")
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToProject:")
+        let addSystemBarButton = UIBarButtonItem(title: "+ Component", style: UIBarButtonItemStyle.Plain, target: self, action: "addComponentToSystem:")
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToSystem:")
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
         self.configureView()
@@ -65,16 +65,71 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    func addServiceEntryToProject(sender: UIBarButtonItem) {
-        
+    func addServiceEntryToSystem(sender: UIBarButtonItem) {
+        if let context = detailSystemItem?.managedObjectContext {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as ServiceEntryDetailViewController
+            serviceEntryDetailViewController.presentedAsFormStyle = true
+            
+            let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
+            navigationController.modalPresentationStyle = .FormSheet
+            self.presentViewController(navigationController, animated: true, completion: nil)
+            
+            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as ServiceEntry
+            newServiceEntry.system = detailSystemItem
+            
+            // Save the context.
+            var error: NSError? = nil
+            if context.save(&error) == false {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                //println("Unresolved error \(error), \(error.userInfo)")
+                abort()
+            }
+        }
     }
     
-    func addComponentToProject(sender: UIBarButtonItem) {
-        
+    func addComponentToSystem(sender: UIBarButtonItem) {
+        if let context = detailSystemItem?.managedObjectContext {
+            
+            let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as Component
+            newComponent.system = detailSystemItem
+            
+            // Save the context.
+            var error: NSError? = nil
+            if context.save(&error) == false {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                //println("Unresolved error \(error), \(error.userInfo)")
+                abort()
+            }
+            self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: newComponent)
+        }
     }
 
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+        if (segue.identifier == "SystemDetailToComponentDetail") {
+            if let componentDetailViewController = segue.destinationViewController as? ComponentDetailViewController {
+                if let newComponent = sender as? Component {
+                    println("Yay")
+                }
+            }
+        }
+        else if (segue.identifier == "ComponentsViewControllerPopover") {
+            if let componentsViewController = segue.destinationViewController as? ComponentsViewController {
+                let predicate = NSPredicate(format: "system == %@", self.detailSystemItem!)
+                componentsViewController.componentsPredicate = predicate
+            }
+        }
+    }
+    
+    
     @IBAction func installationDateButtonTapped(sender: AnyObject) {
     let datePickerStoryboard = UIStoryboard(name: "DatePicker", bundle: nil)
         let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as DatePickerViewController
@@ -443,18 +498,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
         else {
             self.installationDateButton?.setTitle("Installation Date", forState: .Normal)
-        }
-    }
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "ComponentsViewControllerPopover") {
-            if let componentsViewController = segue.destinationViewController as? ComponentsViewController {
-                let predicate = NSPredicate(format: "system == %@", self.detailSystemItem!)
-                componentsViewController.componentsPredicate = predicate
-            }
         }
     }
     

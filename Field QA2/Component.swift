@@ -41,7 +41,7 @@ class Component: NSManagedObject {
     @NSManaged var wiringNotes: String?
     @NSManaged var documents: NSSet
     @NSManaged var logicalDevices: NSSet
-    @NSManaged var system: System
+    @NSManaged var system: System?
     @NSManaged var serviceEntries: NSSet
 
 }
