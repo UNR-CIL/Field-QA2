@@ -110,9 +110,9 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         if (segue.identifier == "ProjectDetailToSystemDetail") {
-            if let projectDetailViewController = segue.destinationViewController as? ProjectDetailViewController {
+            if let systemDetailViewController = segue.destinationViewController as? SystemDetailViewController {
                 if let newSystem = sender as? System {
-                    println("Yay")
+                    systemDetailViewController.detailSystemItem = newSystem
                 }
             }
         }

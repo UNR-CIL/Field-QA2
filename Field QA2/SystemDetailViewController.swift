@@ -92,7 +92,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     func addComponentToSystem(sender: UIBarButtonItem) {
         if let context = detailSystemItem?.managedObjectContext {
-            
             let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as Component
             newComponent.system = detailSystemItem
             
@@ -117,7 +116,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         if (segue.identifier == "SystemDetailToComponentDetail") {
             if let componentDetailViewController = segue.destinationViewController as? ComponentDetailViewController {
                 if let newComponent = sender as? Component {
-                    println("Yay")
+                    componentDetailViewController.detailComponentItem = newComponent
                 }
             }
         }
