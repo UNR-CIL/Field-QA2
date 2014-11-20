@@ -12,7 +12,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
 
     var displayMode: DisplayMode = .NotShowingDatePicker
 
-    
     var detailComponentItem : Component? {
         didSet {
             self.installationDate = detailComponentItem?.installationDate
@@ -66,6 +65,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     var installationDate: NSDate?
     var installationDateLabel: UILabel?
     //@NSManaged var installationDate: NSDate?
+    var installationDatePicker: UIDatePicker?
+    
     
     var installationDetailsTextView: UITextView?
     //@NSManaged var installationDetails: String?
@@ -85,17 +86,18 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     var lastCalibratedDate: NSDate?
     var lastCalibratedDateLabel: UILabel?
     //@NSManaged var lastCalibratedDate: NSDate?
+    var lastCalibratedDatePicker: UIDatePicker?
     
-    var dateIntervalTextField: UITextField?
+    var dataIntervalTextField: UITextField?
     //@NSManaged var dataInterval: String?
     
     var dataStreamDetails: UITextView?
     //@NSManaged var dataStreamDetails: String?
     
-    var measuremetPropertyTextField: UITextField?
+    var measurementPropertyTextField: UITextField?
     //@NSManaged var measurementProperty: String?
     
-    var minimumOpeatingRangeTextField: UITextField?
+    var minimumOperatingRangeTextField: UITextField?
     //@NSManaged var minimumOperatingRange: NSNumber?
     
     var maximumOperatingRangeTextField: UITextField?
@@ -268,15 +270,12 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 1 {
-            return 162.0
+        switch (indexPath.section, indexPath.row) {
+        case (0, 1), (0, 3), (0, 12), (0, 13), (0, 15), (0, 19), (0, 21):
+            return 162
+        default:
+            return 44.0
         }
-        if displayMode == DisplayMode.ShowingFirstDatePicker {
-            if indexPath.row == 6 {
-                return 162.0
-            }
-        }
-        return 44.0
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -286,154 +285,132 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return displayMode == .ShowingFirstDatePicker ? 26 : 24
+        return 27
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cellIdentifier: String? = nil
         
-        switch indexPath.row {
-        case 1:
+        switch (indexPath.section, indexPath.row) {
+        case (0, 1), (0, 3), (0, 13), (0, 15), (0, 21):
             cellIdentifier = "NotesCell"
-        case 5:
+        case (0, 11), (0, 18):
             cellIdentifier = "DateDisplayCell"
-        case 6:
+        case (0, 12),  (0, 19):
             cellIdentifier = "DatePickerCell"
         default:
             cellIdentifier = "TextFieldCell"
         }
+        
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
     }
-    
-    /*
 
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var notesTextView: UITextView!
-    
-    @IBOutlet weak var modelTextField:  UITextField!
-    @IBOutlet weak var manufacturerTextField:  UITextField!
-    
-    @IBOutlet weak var serialNumberTextField: UITextField!
-    @IBOutlet weak var typeNameTextField: UITextField!
-    
-    @IBOutlet weak var accuracyTextField: UITextField!
-    @IBOutlet weak var operatingRangeTextField: UITextField!
-
-
-
-*/
     
     func configureCell(cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
-        switch (displayMode, indexPath.row) {
-        case (_, 0):
-            if let cell: TextFieldCell = cell as? TextFieldCell {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            if let cell = cell as? TextFieldCell {
                 nameTextField = cell.textField
                 nameTextField?.delegate = self
                 cell.titleLabel.text = "Name"
                 cell.textField.text = detailComponentItem?.name
             }
-            /*
+        case (0, 1):
+            if let cell = cell as? NotesCell {
+                purposeTextView = cell.textView
+                purposeTextView?.delegate = self
+                cell.textView.text = detailComponentItem?.purpose
+            }
+        case (0, 2):
+            if let cell = cell as? TextFieldCell {
+                typeNameTextField = cell.textField
+                typeNameTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.typeName
+                cell.titleLabel.text = "Type"
+            }
+        case (0, 3):
+            if let cell = cell as? NotesCell {
+                unitDescriptionTextView = cell.textView
+                unitDescriptionTextView?.delegate = self
+                cell.textView.text = detailComponentItem?.unitDescription
+            }
+        case (0, 4):
+            if let cell = cell as? TextFieldCell {
+                modelTextField = cell.textField
+                modelTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.model
+                cell.titleLabel.text = "Model"
+            }
+        case (0, 5):
+            if let cell = cell as? TextFieldCell {
+                serialNumberTextField = cell.textField
+                serialNumberTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.serialNumber
+                cell.titleLabel.text = "Serial"
+            }
+        case (0, 6):
+            if let cell = cell as? TextFieldCell {
+                vendorTextField = cell.textField
+                vendorTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.vendor
+                cell.titleLabel.text = "Vendor"
+            }
+        case (0, 7):
+            if let cell = cell as? TextFieldCell {
+                manufacturerTextField = cell.textField
+                manufacturerTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.manufacturer
+                cell.titleLabel.text = "Manufacturer"
+            }
+        case (0, 8):
+            if let cell = cell as? TextFieldCell {
+                supplierTextField = cell.textField
+                supplierTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.supplier
+                cell.titleLabel.text = "Supplier"
+            }
+        case (0, 9):
+            if let cell = cell as? TextFieldCell {
+               centerOffset = cell.textField
+               centerOffset?.delegate = self
             
-            var image: UIImage?
-            var imageView: UIImageView?
-            //@NSManaged var photo: UIImage?
-            
-            var nameTextField: UITextField?
-            //@NSManaged var name: String?
-            
-            var purposeTextView: UITextView?
-            //@NSManaged var purpose: String?
-            
-            var typeNameTextField: UITextField?
-            //@NSManaged var typeName: String?
-            
-            var unitDescriptionTextView: UITextView?
-            //@NSManaged var unitDescription: String?
-            
-            var modelTextField: UITextField?
-            //@NSManaged var model: String?
-            
-            var serialNumberTextField: UITextField?
-            //@NSManaged var serialNumber: String?
-            
-            var vendorTextField: UITextField?
-            //@NSManaged var vendor: String?
-            
-            var manufacturerTextField: UITextField?
-            //@NSManaged var manufacturer: String?
-            
-            var supplierTextField: UITextField?
-            //@NSManaged var supplier: String?
-            
-            var centerOffset: UITextField?
-            //@NSManaged var centerOffset: NSNumber?
-            
-            var heightFromGroundTextField: UITextField?
-            //@NSManaged var heightFromGround: NSNumber?
-            
-            var installationDate: NSDate?
-            var installationDateLabel: UILabel?
-            //@NSManaged var installationDate: NSDate?
-            
-            var installationDetailsTextView: UITextView?
-            //@NSManaged var installationDetails: String?
-            
-            var installationTextField: UITextField?
-            //@NSManaged var installationLocation: String?
-            
-            var wiringNotesTextView: UITextView?
-            //@NSManaged var wiringNotes: String?
-            
-            var latitudeTextField: UITextField?
-            //@NSManaged var latitude: NSNumber?
-            
-            var longitudeTextField: UITextField?
-            //@NSManaged var longitude: NSNumber?
-            
-            var lastCalibratedDate: NSDate?
-            var lastCalibratedDateLabel: UILabel?
-            //@NSManaged var lastCalibratedDate: NSDate?
-            
-            var dateIntervalTextField: UITextField?
-            //@NSManaged var dataInterval: String?
-            
-            var dataStreamDetails: UITextView?
-            //@NSManaged var dataStreamDetails: String?
-            
-            var measuremetPropertyTextField: UITextField?
-            //@NSManaged var measurementProperty: String?
-            
-            var minimumOpeatingRangeTextField: UITextField?
-            //@NSManaged var minimumOperatingRange: NSNumber?
-            
-            var maximumOperatingRangeTextField: UITextField?
-            //@NSManaged var maximumOperatingRange: NSNumber?
-            
-            var minimumAccuracyBoundTextField: UITextField?
-            //@NSManaged var minimumAccuracyBound: NSNumber?
-            
-            var maximumAccuracyBoundTextField: UITextField?
-            //@NSManaged var maxiumumAccuracyBound: NSNumber?
-            
-            var parentLoggerTextField: UITextField?
-            //@NSManaged var parentLogger: String?
-            
-            */
-
-            
-        /*
-        case (_, 5):
-            if let cell: DateDisplayCell = cell as? DateDisplayCell {
-                dateLabel = cell.detailLabel
+               let numberFormatter = NSNumberFormatter()
+                if let offsetNumber = detailComponentItem?.centerOffset {
+                    cell.textField.text = numberFormatter.stringFromNumber(offsetNumber)
+                }
+                else {
+                    cell.textField.text = nil
+                }
+                cell.titleLabel.text = "Center Offset"
+            }
+        case (0, 10):
+            if let cell = cell as? TextFieldCell {
+                heightFromGroundTextField = cell.textField
+                heightFromGroundTextField?.delegate = self
+                
+                let numberFormatter = NSNumberFormatter()
+                if let offsetNumber = detailComponentItem?.heightFromGround {
+                    cell.textField.text = numberFormatter.stringFromNumber(offsetNumber)
+                }
+                else {
+                    cell.textField.text = nil
+                }
+                cell.titleLabel.text = "Height From Ground"
+            }
+        case (0, 11):
+            if let cell = cell as? DateDisplayCell {
+                installationDateLabel = cell.detailLabel
+                
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
                 dateFormatter.dateStyle = .MediumStyle
                 cell.titleLabel.text = "Installation Date"
+                
                 if let date = detailComponentItem?.installationDate {
                     cell.detailLabel.text = dateFormatter.stringFromDate(date)
                 }
@@ -441,13 +418,157 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                     cell.detailLabel.text = ""
                 }
             }
-        case (.ShowingFirstDatePicker, 6):
-            if let cell: DatePickerCell = cell as? DatePickerCell {
-                datePicker = cell.datePicker
-                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        case (0, 12):
+            if let cell = cell as? DatePickerCell {
+                installationDatePicker = cell.datePicker
+                installationDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+            }
+        case (0, 13):
+            if let cell = cell as? NotesCell {
+                installationDetailsTextView = cell.textView
+                installationDetailsTextView?.delegate = self
+                cell.textView.text = detailComponentItem?.installationDetails
+            }
+        case (0, 14):
+            if let cell = cell as? TextFieldCell {
+                installationTextField = cell.textField
+                installationTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.installationLocation
+                cell.titleLabel.text = "Location"
+            }
+        case (0, 15):
+            if let cell = cell as? NotesCell {
+                wiringNotesTextView = cell.textView
+                wiringNotesTextView?.delegate = self
+                cell.textView.text = detailComponentItem?.wiringNotes
+            }
+        case (0, 16):
+            if let cell = cell as? TextFieldCell {
+                latitudeTextField = cell.textField
+                latitudeTextField?.delegate = self
+                
+                let numberFormatter = NSNumberFormatter()
+                
+                if let latitudeString = detailComponentItem?.latitude {
+                    cell.textField.text = numberFormatter.stringFromNumber(latitudeString)
+                }
+                cell.titleLabel.text = "Latitude"
                 
             }
-          */
+        case (0, 17):
+            if let cell = cell as? TextFieldCell {
+                longitudeTextField = cell.textField
+                longitudeTextField?.delegate = self
+                
+                let numberFormatter = NSNumberFormatter()
+                
+                if let longitudeString = detailComponentItem?.latitude {
+                    cell.textField.text = numberFormatter.stringFromNumber(longitudeString)
+                }
+                cell.titleLabel.text = "Longitude"
+            }
+        case (0, 18):
+            if let cell = cell as? DateDisplayCell {
+                lastCalibratedDateLabel = cell.detailLabel
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                cell.titleLabel.text = "Last Calibration"
+                
+                if let date = detailComponentItem?.lastCalibratedDate {
+                    cell.detailLabel.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailLabel.text = ""
+                }
+            }
+        case (0, 19):
+            if let cell = cell as? DatePickerCell {
+                lastCalibratedDatePicker = cell.datePicker
+                lastCalibratedDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+            }
+        case (0, 20):
+            if let cell = cell as? TextFieldCell {
+                dataIntervalTextField = cell.textField
+                dataIntervalTextField?.delegate = self
+                dataIntervalTextField?.text = detailComponentItem?.dataInterval
+                cell.titleLabel.text = "Interval"
+            }
+        case (0, 21):
+            if let cell = cell as? NotesCell {
+                dataStreamDetails = cell.textView
+                dataStreamDetails?.delegate = self
+                dataStreamDetails?.text = detailComponentItem?.dataStreamDetails
+            }
+        case (0, 22):
+            if let cell = cell as? TextFieldCell {
+                measurementPropertyTextField = cell.textField
+                measurementPropertyTextField?.delegate = self
+                measurementPropertyTextField?.text = detailComponentItem?.measurementProperty
+                cell.titleLabel.text = "Measurement Property"
+            }
+        case (0, 23):
+            if let cell = cell as? TextFieldCell {
+                minimumOperatingRangeTextField = cell.textField
+                minimumOperatingRangeTextField?.delegate = self
+                
+                let numberFormatter = NSNumberFormatter()
+                
+                if let minimum = detailComponentItem?.minimumOperatingRange {
+                    minimumOperatingRangeTextField?.text = numberFormatter.stringFromNumber(minimum)
+                }
+                
+                cell.titleLabel.text = "Min Range"
+            }
+        case (0, 24):
+            if let cell = cell as? TextFieldCell {
+                maximumOperatingRangeTextField = cell.textField
+                maximumOperatingRangeTextField?.delegate = self
+                
+                let numberFormatter = NSNumberFormatter()
+                
+                if let maximum = detailComponentItem?.maximumOperatingRange {
+                    maximumOperatingRangeTextField?.text = numberFormatter.stringFromNumber(maximum)
+                }
+                
+                cell.titleLabel.text = "Max Range"
+            }
+        case (0, 25):
+            if let cell = cell as? TextFieldCell {
+                minimumAccuracyBoundTextField = cell.textField
+                minimumAccuracyBoundTextField?.delegate = self
+                
+                let numberFormatter = NSNumberFormatter()
+                
+                if let minimum = detailComponentItem?.minimumAccuracyBound {
+                    minimumAccuracyBoundTextField?.text = numberFormatter.stringFromNumber(minimum)
+                }
+                
+                cell.titleLabel.text = "Min Accuracy"
+            }
+        case (0, 26):
+            if let cell = cell as? TextFieldCell {
+                maximumAccuracyBoundTextField = cell.textField
+                maximumAccuracyBoundTextField = cell.textField
+                maximumAccuracyBoundTextField?.delegate = self
+                
+                let numberFormatter = NSNumberFormatter()
+                
+                if let maximum = detailComponentItem?.maxiumumAccuracyBound {
+                    maximumAccuracyBoundTextField?.text = numberFormatter.stringFromNumber(maximum)
+                }
+                
+                cell.titleLabel.text = "Max Range"
+            }
+        case (0, 27):
+            if let cell = cell as? TextFieldCell {
+                parentLoggerTextField = cell.textField
+                parentLoggerTextField?.delegate = self
+                parentLoggerTextField?.text = detailComponentItem?.parentLogger
+                cell.titleLabel.text = "Parent Logger"
+            }
+
             
         default:
             println("mode \(displayMode.rawValue) row \(indexPath.row)")
@@ -458,42 +579,99 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if (indexPath.row == 5) {
-            if displayMode == DisplayMode.NotShowingDatePicker {
-                displayMode = .ShowingFirstDatePicker
-            }
-            else {
-                displayMode = .NotShowingDatePicker
-            }
-            tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
-            
-        }
+        
     }
     
-    /*
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var installationDateButton: UIButton!
-    
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var latitudeTextField: UITextField!
-    @IBOutlet weak var longitudeTextField: UITextField!
-    
-    */
-    
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        println("textField ended \(textField.text)")
         
         if textField == nameTextField {
             detailComponentItem?.name = textField.text
         }
+        if textField ==  typeNameTextField {
+            detailComponentItem?.typeName = textField.text
+        }
+        if textField ==  modelTextField {
+            detailComponentItem?.model = textField.text
+        }
+        if textField ==  serialNumberTextField {
+            detailComponentItem?.serialNumber = textField.text
+        }
+        if textField ==  vendorTextField {
+            detailComponentItem?.vendor = textField.text
+        }
+        if textField ==  manufacturerTextField {
+            detailComponentItem?.manufacturer = textField.text
+        }
+        if textField ==  supplierTextField {
+            detailComponentItem?.supplier = textField.text
+        }
+        if textField ==  centerOffset {
+            let numberFormatter = NSNumberFormatter()
+            detailComponentItem?.centerOffset = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  heightFromGroundTextField {
+            let numberFormatter = NSNumberFormatter()
+            detailComponentItem?.heightFromGround = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  installationTextField {
+            detailComponentItem?.installationLocation = textField.text
+        }
+        if textField ==  latitudeTextField{
+            let numberFormatter = NSNumberFormatter()
 
+            detailComponentItem?.latitude = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  longitudeTextField {
+            let numberFormatter = NSNumberFormatter()
+
+            detailComponentItem?.longitude = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  dataIntervalTextField {
+            detailComponentItem?.dataInterval = textField.text
+        }
+        if textField ==  measurementPropertyTextField {
+            detailComponentItem?.measurementProperty = textField.text
+        }
+        if textField ==  minimumOperatingRangeTextField {
+            let numberFormatter = NSNumberFormatter()
+
+            detailComponentItem?.minimumOperatingRange = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  maximumOperatingRangeTextField{
+            let numberFormatter = NSNumberFormatter()
+
+            detailComponentItem?.maximumOperatingRange = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  minimumAccuracyBoundTextField{
+            let numberFormatter = NSNumberFormatter()
+
+            detailComponentItem?.minimumAccuracyBound = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  maximumAccuracyBoundTextField{
+            let numberFormatter = NSNumberFormatter()
+
+            detailComponentItem?.maxiumumAccuracyBound = numberFormatter.numberFromString(textField.text)
+        }
+        if textField ==  parentLoggerTextField {
+            detailComponentItem?.parentLogger = textField.text
+        }
+        
         return true
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        detailComponentItem?.installationDate = sender.date
+        
+        if sender == self.installationDatePicker {
+            detailComponentItem?.installationDate = sender.date
+            
+            
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 11, inSection: 0)], withRowAnimation: .None)
+        }
+        else if sender == self.lastCalibratedDatePicker {
+            detailComponentItem?.lastCalibratedDate = sender.date
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 18, inSection: 0)], withRowAnimation: .None)
+
+        }
     }
     
     
@@ -504,9 +682,25 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     }
     
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
-        if textView == unitDescriptionTextView {
-            detailComponentItem?.unitDescription = textView.text
+        if textView == purposeTextView {
+            detailComponentItem?.purpose = purposeTextView?.text
         }
+        if textView == unitDescriptionTextView {
+            detailComponentItem?.unitDescription = unitDescriptionTextView?.text
+        }
+        if textView == installationDetailsTextView {
+            detailComponentItem?.installationDetails = installationDetailsTextView?.text
+        }
+        
+        
+        if textView == wiringNotesTextView {
+            detailComponentItem?.wiringNotes = wiringNotesTextView?.text
+        }
+        
+        if textView == dataStreamDetails {
+            detailComponentItem?.dataStreamDetails = dataStreamDetails?.text
+        }
+        
         return true
     }
     

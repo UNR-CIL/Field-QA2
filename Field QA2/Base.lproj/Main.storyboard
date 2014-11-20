@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -257,7 +257,7 @@
         <scene sceneID="qN8-IF-WPO">
             <objects>
                 <tableViewController id="Ra1-pI-cdp" customClass="SystemDetailViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="J5m-qw-Vx3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="J5m-qw-Vx3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -411,7 +411,7 @@
         <scene sceneID="6Ei-tx-flK">
             <objects>
                 <tableViewController id="n5R-iL-SBJ" customClass="ComponentDetailViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OyM-W5-5ID">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OyM-W5-5ID">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -511,6 +511,42 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="datePicker" destination="CKM-tA-0Rw" id="wO5-gF-zXf"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" rowHeight="162" id="B5H-ur-0Mn" customClass="NotesCell" customModule="Field_QA2" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B5H-ur-0Mn" id="Azs-oz-hU4">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYj-RB-usn">
+                                            <rect key="frame" x="23" y="8" width="46" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="9cB-w4-OQw"/>
+                                                <constraint firstAttribute="width" constant="46" id="Xz8-Mo-1oq"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNz-bO-OiS">
+                                            <rect key="frame" x="23" y="37" width="564" height="117"/>
+                                            <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pNz-bO-OiS" firstAttribute="top" secondItem="xYj-RB-usn" secondAttribute="bottom" constant="8" id="Uwa-V3-soH"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="pNz-bO-OiS" secondAttribute="bottom" constant="-0.5" id="X9r-NP-BH0"/>
+                                        <constraint firstItem="xYj-RB-usn" firstAttribute="leading" secondItem="Azs-oz-hU4" secondAttribute="leadingMargin" constant="15" id="eV5-AP-C28"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="pNz-bO-OiS" secondAttribute="trailing" constant="5" id="ptw-pR-X7g"/>
+                                        <constraint firstItem="pNz-bO-OiS" firstAttribute="leading" secondItem="Azs-oz-hU4" secondAttribute="leadingMargin" constant="15" id="r92-f3-9HK"/>
+                                        <constraint firstItem="xYj-RB-usn" firstAttribute="top" secondItem="Azs-oz-hU4" secondAttribute="topMargin" id="wVe-ep-jfh"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textView" destination="pNz-bO-OiS" id="VeX-wg-CjT"/>
+                                    <outlet property="titleLabel" destination="xYj-RB-usn" id="Thx-sT-GYa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -662,7 +698,7 @@
         <scene sceneID="7Og-bI-a7i">
             <objects>
                 <tableViewController id="eV1-Eo-nHM" customClass="ProjectDetailViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="1l1-0g-to5">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="1l1-0g-to5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -817,7 +853,7 @@
         <scene sceneID="PwV-B1-aP6">
             <objects>
                 <tableViewController id="noC-nU-TDg" customClass="ServiceEntryDetailViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iWI-j7-vYt">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iWI-j7-vYt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -917,6 +953,42 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="datePicker" destination="3hr-ef-Wij" id="KXh-CU-LJh"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" rowHeight="162" id="pmk-ba-5aC" customClass="NotesCell" customModule="Field_QA2" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pmk-ba-5aC" id="c9e-UF-6dB">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMA-NT-JRb">
+                                            <rect key="frame" x="23" y="8" width="46" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="7tm-7L-fDm"/>
+                                                <constraint firstAttribute="width" constant="46" id="sxh-ce-UFS"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emp-fl-Fp8">
+                                            <rect key="frame" x="23" y="37" width="564" height="117"/>
+                                            <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Emp-fl-Fp8" secondAttribute="trailing" constant="5" id="84L-TY-R3m"/>
+                                        <constraint firstItem="Emp-fl-Fp8" firstAttribute="top" secondItem="rMA-NT-JRb" secondAttribute="bottom" constant="8" id="LHL-lx-ZPZ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Emp-fl-Fp8" secondAttribute="bottom" constant="-0.5" id="YDu-Vd-mQd"/>
+                                        <constraint firstItem="rMA-NT-JRb" firstAttribute="leading" secondItem="c9e-UF-6dB" secondAttribute="leadingMargin" constant="15" id="h76-ik-ean"/>
+                                        <constraint firstItem="rMA-NT-JRb" firstAttribute="top" secondItem="c9e-UF-6dB" secondAttribute="topMargin" id="zXH-Az-zTy"/>
+                                        <constraint firstItem="Emp-fl-Fp8" firstAttribute="leading" secondItem="c9e-UF-6dB" secondAttribute="leadingMargin" constant="15" id="zqU-Vj-dR3"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textView" destination="Emp-fl-Fp8" id="ZXN-SG-9w0"/>
+                                    <outlet property="titleLabel" destination="rMA-NT-JRb" id="GML-83-wzv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
