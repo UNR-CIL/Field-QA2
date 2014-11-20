@@ -10,11 +10,6 @@ import UIKit
 import CoreData
 
 class SystemDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
-
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
-    var displayMode: DisplayMode = .NotShowingDatePicker
-    
     var detailSystemItem : System? {
         didSet {
             self.installationDate = detailSystemItem?.installationDate
@@ -71,6 +66,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             return "System Details"
         case 1:
             return "Components"
+        case 2:
+            return "Service Entries"
         default:
             return nil
         }
@@ -237,45 +234,64 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     @IBOutlet weak var latitudeTextField: UITextField!
     @IBOutlet weak var longitudeTextField: UITextField!
 
-*/
+    */
     
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 1 {
+        switch(indexPath.section, indexPath.row) {
+        case (0, 1):
             return 162.0
+        case(0, 6):
+            return 162.0
+        default:
+            return 44.0
         }
-        if displayMode == DisplayMode.ShowingFirstDatePicker {
-            if indexPath.row == 6 {
-                return 162.0
-            }
-        }
-        return 44.0
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
-        return 1
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return displayMode == .ShowingFirstDatePicker ? 7 : 6
+        switch (section) {
+        case 0:
+            if section == 0 {
+                return 7
+            }
+            return 0
+        case 1:
+            if let components = detailSystemItem?.components {
+                return components.count
+            }
+            return 0
+        case 2:
+            if let serviceEntries = detailSystemItem?.serviceEntries {
+                return serviceEntries.count
+            }
+            return 0
+        default:
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cellIdentifier: String? = nil
         
-        switch indexPath.row {
-        case 1:
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0), (0, 2...4):
+            cellIdentifier = "TextFieldCell"
+        case (0, 1):
             cellIdentifier = "NotesCell"
-        case 5:
+        case (0, 5):
             cellIdentifier = "DateDisplayCell"
-        case 6:
+        case (0, 6):
             cellIdentifier = "DatePickerCell"
         default:
-            cellIdentifier = "TextFieldCell"
+            cellIdentifier = "Cell"
         }
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
@@ -285,29 +301,29 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     }
     
     func configureCell(cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
-        switch (displayMode, indexPath.row) {
-        case (_, 0):
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
             if let cell: TextFieldCell = cell as? TextFieldCell {
                 nameTextField = cell.textField
                 nameTextField?.delegate = self
                 cell.titleLabel.text = "Name"
                 cell.textField.text = detailSystemItem?.name
             }
-        case (_, 1):
+        case (0, 1):
             if let cell: NotesCell = cell as? NotesCell {
                 notesTextView = cell.textView
                 notesTextView?.delegate = self
                 cell.textView.text = "Notes"
                 cell.textView.text = detailSystemItem?.details
             }
-        case (_, 2):
+        case (0, 2):
             if let cell: TextFieldCell = cell as? TextFieldCell {
                 locationTextField = cell.textField
                 locationTextField?.delegate = self
                 cell.titleLabel.text = "Location"
                 cell.textField.text = detailSystemItem?.installationLocation
             }
-        case (_, 3):
+        case (0, 3):
             if let cell: TextFieldCell = cell as? TextFieldCell {
                 latitudeTextField = cell.textField
                 latitudeTextField?.delegate = self
@@ -321,7 +337,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                     cell.textField.text = nil
                 }
             }
-        case (_, 4):
+        case (0, 4):
             if let cell: TextFieldCell = cell as? TextFieldCell {
                 longitudeTextField = cell.textField
                 longitudeTextField?.delegate = self
@@ -336,7 +352,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 }
                 
             }
-        case (_, 5):
+        case (0, 5):
             if let cell: DateDisplayCell = cell as? DateDisplayCell {
                 dateLabel = cell.detailLabel
                 let dateFormatter = NSDateFormatter()
@@ -350,32 +366,79 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                     cell.detailLabel.text = ""
                 }
             }
-        case (.ShowingFirstDatePicker, 6):
+        case (0, 6):
             if let cell: DatePickerCell = cell as? DatePickerCell {
                 datePicker = cell.datePicker
                 datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                 
             }
-            
+        case (1, _):
+            let components = sortedComponentsForSystem(detailSystemItem)
+            if components.count == 0 {
+                return
+            }
+            else {
+                let component = components[indexPath.row] as Component
+                cell.textLabel?.text = component.name
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                if let date = component.creationDate {
+                    cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailTextLabel?.text = ""
+                }
+            }
+        case (2, _):
+            let serviceEntries = sortedServiceEntriesForSystem(detailSystemItem)
+            if serviceEntries.count == 0 {
+                return
+            }
+            else {
+                let serviceEntry = serviceEntries[indexPath.row] as ServiceEntry
+                cell.textLabel?.text = serviceEntry.name
+                
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                if let date = serviceEntry.creationDate {
+                    cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailTextLabel?.text = ""
+                }
+            }
         default:
-            println("mode \(displayMode.rawValue) row \(indexPath.row)")
+            println("")
         }
         
+    }
+    
+    func sortedComponentsForSystem(system: System?) -> [AnyObject] {
+        if let system = system {
+            let components = system.components
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            let sortedComponents = NSArray(array:components.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+            return sortedComponents
+        }
+        return [Component]()
+    }
+    
+    func sortedServiceEntriesForSystem(system: System?) -> [AnyObject] {
+        if let system = system {
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            let sortedServiceEntries = NSArray(array: system.serviceEntries.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+            return sortedServiceEntries
+        }
+        return [ServiceEntry]()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if (indexPath.row == 5) {
-            if displayMode == DisplayMode.NotShowingDatePicker {
-                displayMode = .ShowingFirstDatePicker
-            }
-            else {
-                displayMode = .NotShowingDatePicker
-            }
-            tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
-            
-        }
+
     }
     
     /*
