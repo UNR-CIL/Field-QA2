@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum DisplayMode: String {
     case NotShowingDatePicker = "NotShowingDatePicker"
@@ -47,6 +48,10 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             let keyboardHeight = keyboardRect.size.height
         }
         
+        let addSystemBarButton = UIBarButtonItem(title: "+ System", style: UIBarButtonItemStyle.Plain, target: self, action: "addSystemToProject:")
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToProject:")
+        navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
+        
         self.configureView()
     }
     
@@ -55,7 +60,63 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         // Dispose of any resources that can be recreated.
     }
     
-
+    func addServiceEntryToProject(sender: UIBarButtonItem) {
+        if let context = detailProjectItem?.managedObjectContext {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as ServiceEntryDetailViewController
+            serviceEntryDetailViewController.presentedAsFormStyle = true
+            
+            let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
+            navigationController.modalPresentationStyle = .FormSheet
+            self.presentViewController(navigationController, animated: true, completion: nil)
+            
+            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as ServiceEntry
+            newServiceEntry.project = detailProjectItem
+            
+            // Save the context.
+            var error: NSError? = nil
+            if context.save(&error) == false {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                //println("Unresolved error \(error), \(error.userInfo)")
+                abort()
+            }
+        }
+    }
+    
+    func addSystemToProject(sender: UIBarButtonItem) {
+        if let context = detailProjectItem?.managedObjectContext {
+    
+            let newSystem = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: context) as System
+            newSystem.project = detailProjectItem
+            
+            // Save the context.
+            var error: NSError? = nil
+            if context.save(&error) == false {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                //println("Unresolved error \(error), \(error.userInfo)")
+                abort()
+            }
+            self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: newSystem)
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+        if (segue.identifier == "ProjectDetailToSystemDetail") {
+            if let projectDetailViewController = segue.destinationViewController as? ProjectDetailViewController {
+                if let newSystem = sender as? System {
+                    println("Yay")
+                }
+            }
+        }
+    }
     
     @IBAction func saveBarButtonTapped(sender: AnyObject) {
         /*
@@ -383,17 +444,4 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     return true
     }
     */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    }
-    */
-    
-
-
 }

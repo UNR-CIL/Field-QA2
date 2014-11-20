@@ -30,6 +30,7 @@
         <attribute name="wiringNotes" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="documents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="component" inverseEntity="Document" syncable="YES"/>
         <relationship name="logicalDevices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LogicalDevice" inverseName="component" inverseEntity="LogicalDevice" syncable="YES"/>
+        <relationship name="serviceEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="component" inverseEntity="ServiceEntry" syncable="YES"/>
         <relationship name="system" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="System" inverseName="components" inverseEntity="System" syncable="YES"/>
     </entity>
     <entity name="Document" representedClassName="Field_QA2.Document" syncable="YES">
@@ -61,6 +62,8 @@
         <attribute name="startedDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="documents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Document" inverseName="project" inverseEntity="Document" syncable="YES"/>
         <relationship name="principalInvestigator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="projects" inverseEntity="Person" syncable="YES"/>
+        <relationship name="serviceEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="project" inverseEntity="ServiceEntry" syncable="YES"/>
+        <relationship name="systems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="System" inverseName="project" inverseEntity="System" syncable="YES"/>
     </entity>
     <entity name="ServiceEntry" representedClassName="Field_QA2.ServiceEntry" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -69,8 +72,11 @@
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="operation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
+        <relationship name="component" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Component" inverseName="serviceEntries" inverseEntity="Component" syncable="YES"/>
         <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="serviceEntries" inverseEntity="Person" syncable="YES"/>
         <relationship name="documents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="serviceEntry" inverseEntity="Document" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="serviceEntries" inverseEntity="Project" syncable="YES"/>
+        <relationship name="system" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="System" inverseName="serviceEntries" inverseEntity="System" syncable="YES"/>
     </entity>
     <entity name="System" representedClassName="Field_QA2.System">
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
@@ -85,15 +91,17 @@
         <attribute name="power" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="system" inverseEntity="Component" syncable="YES"/>
         <relationship name="manager" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="managedSystems" inverseEntity="Person" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="systems" inverseEntity="Project" syncable="YES"/>
+        <relationship name="serviceEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="system" inverseEntity="ServiceEntry" syncable="YES"/>
         <userInfo/>
     </entity>
     <elements>
-        <element name="Component" positionX="261" positionY="198" width="128" height="493"/>
+        <element name="Component" positionX="261" positionY="198" width="128" height="510"/>
         <element name="Document" positionX="288" positionY="324" width="128" height="133"/>
         <element name="LogicalDevice" positionX="306" positionY="360" width="128" height="88"/>
         <element name="Person" positionX="288" positionY="216" width="128" height="133"/>
-        <element name="Project" positionX="279" positionY="315" width="128" height="148"/>
-        <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="165"/>
-        <element name="System" positionX="261" positionY="189" width="128" height="193"/>
+        <element name="Project" positionX="279" positionY="315" width="128" height="178"/>
+        <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="208"/>
+        <element name="System" positionX="261" positionY="189" width="128" height="223"/>
     </elements>
 </model>

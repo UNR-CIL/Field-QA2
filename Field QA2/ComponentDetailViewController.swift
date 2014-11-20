@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ComponentDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 
@@ -126,12 +127,19 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             
         }
         
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToProject:")
+        navigationItem.rightBarButtonItems = [addServiceEntryBarButton]
+        
         self.configureView()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func addServiceEntryToProject(sender: UIBarButtonItem) {
+        
     }
     
     @IBAction func installationDateButtonTapped(sender: AnyObject) {

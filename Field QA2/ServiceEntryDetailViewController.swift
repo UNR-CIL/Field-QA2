@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ServiceEntryDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
 
@@ -16,6 +17,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             self.configureView()
         }
     }
+    
+    var presentedAsFormStyle = false
     
     var datePopoverController: UIPopoverController?
     var associatedEntityPopoverController: UIPopoverController?
@@ -61,9 +64,17 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             
         }
         
+        if presentedAsFormStyle {
+            let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+            self.navigationItem.rightBarButtonItem = doneBarButtonItem
+        }
+        
         self.configureView()
     }
 
+    func done(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -100,24 +111,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     }
     
     func configureView() {
-        if let operation = detailServiceEntryItem!.operation {
-            operationTextField?.text = operation
-        }
-        else {
-            operationTextField?.text = nil
-        }
-        if let image = detailServiceEntryItem!.photo {
-            self.imageView?.image = image as UIImage
-        }
-        else {
-            self.imageView?.image = nil
-        }
-        if let notes = detailServiceEntryItem!.notes {
-            notesTextView?.text = notes
-        }
-        else {
-            notesTextView?.text = nil
-        }
+
         
     }
 

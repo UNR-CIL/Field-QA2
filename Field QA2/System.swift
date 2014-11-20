@@ -2,7 +2,7 @@
 //  System.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 10/21/14.
+//  Created by John Jusayan on 11/20/14.
 //  Copyright (c) 2014 University of Nevada, Reno. All rights reserved.
 //
 
@@ -20,7 +20,9 @@ class System: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var photo: UIImage?
     @NSManaged var power: String?
+    @NSManaged var project: Project?
     @NSManaged var components: NSSet
     @NSManaged var manager: Person?
+    @NSManaged var serviceEntries: NSSet
 
 }
