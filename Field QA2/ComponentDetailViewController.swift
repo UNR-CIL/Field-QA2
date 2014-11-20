@@ -143,7 +143,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         case 0:
             return "Component Details"
         case 1:
-            return "Service Entries"
+            return detailComponentItem?.serviceEntries.count > 0 ? "Service Entries" : nil
         default:
             return nil
         }

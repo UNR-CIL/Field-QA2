@@ -393,9 +393,9 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         case 0:
             return "Project Details"
         case 1:
-            return "Systems"
+            return detailProjectItem?.systems.count > 0 ? "Systems" : nil
         case 2:
-            return "Service Entries"
+            return detailProjectItem?.serviceEntries.count > 0 ? "Service Entries" : nil
         default:
             return nil
         }

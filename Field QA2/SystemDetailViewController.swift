@@ -65,9 +65,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         case 0:
             return "System Details"
         case 1:
-            return "Components"
+            return detailSystemItem?.components.count > 0 ? "Components" : nil
         case 2:
-            return "Service Entries"
+            return detailSystemItem?.serviceEntries.count > 0 ? "Service Entries" : nil
         default:
             return nil
         }
