@@ -144,5 +144,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
      }
      */
 
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == 0 {
+            let versionNumber = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? NSString
+            let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? NSString
+            
+            return NSString(format:"Field QA v%@ (%@). © UNR CSE, 2014", versionNumber!, buildNumber!)
+        }
+        return nil;
+    }
+
+
 }
 

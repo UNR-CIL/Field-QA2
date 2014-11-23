@@ -379,12 +379,15 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         if indexPath.section == 0 {
             
         }
-        else {
+        else if indexPath.section == 1 {
             if let context = detailProjectItem?.managedObjectContext {
                 let systems = sortedSystemsForProject(detailProjectItem)
                 let selectedSystem = systems[indexPath.row] as System
                 self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: selectedSystem)
             }
+        }
+        else {
+            
         }
     }
     

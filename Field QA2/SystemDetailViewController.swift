@@ -438,7 +438,16 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-
+        if indexPath.section == 0 {
+            
+        }
+        else if indexPath.section == 1 {
+            if let context = detailSystemItem?.managedObjectContext {
+                let components = sortedComponentsForSystem(detailSystemItem)
+                let selectedComponent = components[indexPath.row] as Component
+                self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
+            }
+        }
     }
     
     /*
