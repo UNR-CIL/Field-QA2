@@ -380,6 +380,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         case (0, 16):
             if let cell = cell as? TextFieldCell {
                 latitudeTextField = cell.textField
+                latitudeTextField?.keyboardType = .DecimalPad
                 latitudeTextField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
@@ -393,6 +394,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         case (0, 17):
             if let cell = cell as? TextFieldCell {
                 longitudeTextField = cell.textField
+                longitudeTextField?.keyboardType = .DecimalPad
                 longitudeTextField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
