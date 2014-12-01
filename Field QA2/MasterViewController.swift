@@ -31,7 +31,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            self.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()
             self.navigationItem.leftItemsSupplementBackButton = true
     }
 
