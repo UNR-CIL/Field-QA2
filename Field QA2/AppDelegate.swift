@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let masterNavigationController = splitViewController.viewControllers[0] as UINavigationController
         let controller = masterNavigationController.topViewController as MasterViewController
         controller.managedObjectContext = self.managedObjectContext
+        
+        self.window?.tintColor = UIColor(red:0.118, green:0.898, blue:0.243, alpha:1.000)
+        
         return true
     }
 
