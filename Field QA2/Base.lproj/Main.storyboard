@@ -676,10 +676,10 @@
             </objects>
             <point key="canvasLocation" x="1404" y="94"/>
         </scene>
-        <!--Projects View Controller-->
+        <!--Projects-->
         <scene sceneID="lHW-CM-y99">
             <objects>
-                <tableViewController storyboardIdentifier="ProjectsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wWw-0k-PxB" customClass="ProjectsViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProjectsViewController" title="Projects" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wWw-0k-PxB" customClass="ProjectsViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NYV-oZ-3d0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
