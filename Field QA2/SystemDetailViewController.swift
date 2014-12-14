@@ -240,6 +240,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch(indexPath.section, indexPath.row) {
+        case (0, 0):
+            return 52.0
         case (0, 1):
             return 162.0
         case(0, 6):
@@ -282,7 +284,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         var cellIdentifier: String? = nil
         
         switch (indexPath.section, indexPath.row) {
-        case (0, 0), (0, 2...4):
+        case (0, 0):
+            cellIdentifier = "PhotoTextFieldCell"
+        case (0, 2...4):
             cellIdentifier = "TextFieldCell"
         case (0, 1):
             cellIdentifier = "NotesCell"
@@ -308,6 +312,17 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 nameTextField?.delegate = self
                 cell.titleLabel.text = "Name"
                 cell.textField.text = detailSystemItem?.name
+                
+                cell.photoImageView?.layer.borderColor = UIColor.lightGrayColor().CGColor
+                cell.photoImageView?.layer.borderWidth = 1.0
+                cell.photoImageView?.layer.cornerRadius = 20
+                
+                if let photo = detailSystemItem?.photo {
+                    cell.photoImageView?.image = photo
+                }
+                else {
+                    cell.photoImageView?.image = nil
+                }
             }
         case (0, 1):
             if let cell: NotesCell = cell as? NotesCell {

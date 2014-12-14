@@ -207,7 +207,10 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 5 {
+        if indexPath.row == 0 {
+            return 52.0
+        }
+        else if indexPath.row == 5 {
             return 162.0
         }
         return 44.0

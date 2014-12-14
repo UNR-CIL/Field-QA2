@@ -203,6 +203,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            return 52.0
         case (0, 2), (0, 4):
             return 162
         default:
@@ -225,6 +227,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         var cellIdentifier: String? = nil
         
         switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            cellIdentifier = "PhotoTextFieldCell"
         case (0, 2):
             cellIdentifier = "NotesCell"
         case (0, 3):
@@ -250,6 +254,17 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
                 nameTextField?.delegate = self
                 cell.titleLabel.text = "Name"
                 cell.textField.text = detailServiceEntryItem?.name
+                
+                cell.photoImageView?.layer.borderColor = UIColor.lightGrayColor().CGColor
+                cell.photoImageView?.layer.borderWidth = 1.0
+                cell.photoImageView?.layer.cornerRadius = 20
+                
+                if let photo = detailServiceEntryItem?.photo {
+                    cell.photoImageView?.image = photo
+                }
+                else {
+                    cell.photoImageView?.image = nil
+                }
             }
         case (0, 1):
             if let cell = cell as? TextFieldCell {
