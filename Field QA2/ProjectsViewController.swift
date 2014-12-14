@@ -95,6 +95,8 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
+        
+        newManagedObject.newlyCreated = true
         self.tableView.reloadData()
     }
     
@@ -216,7 +218,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
         let project = self.fetchedResultsController.objectAtIndexPath(indexPath!) as Project
         let controller = (segue.destinationViewController as UINavigationController).topViewController as ProjectDetailViewController
         controller.detailProjectItem = project
-        controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()
+        controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true
     }
     

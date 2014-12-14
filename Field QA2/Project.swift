@@ -24,6 +24,8 @@ class Project: NSManagedObject {
     @NSManaged var creationDate: NSDate?
     @NSManaged var modificationDate: NSDate?
     
+    var newlyCreated: Bool = false
+    
     override func awakeFromInsert() {
         if uniqueIdentifier == nil {
             uniqueIdentifier = NSUUID().UUIDString

@@ -49,6 +49,13 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToProject:")
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
+        if detailProjectItem?.newlyCreated == true {
+            self.setEditing(true, animated: false)
+        }
+        else {
+            self.setEditing(false, animated: false)
+        }
+        
         self.configureView()
     }
     
@@ -269,6 +276,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             switch (indexPath.section, indexPath.row) {
             case (0, 0):
                 if let cell = cell as? TextFieldCell {
+                    cell.textField.userInteractionEnabled = self.editing
+
                     nameTextField = cell.textField
                     nameTextField?.delegate = self
                     cell.titleLabel.text = "Name"
@@ -276,6 +285,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
             case (0, 1):
                 if let cell = cell as? TextFieldCell {
+                    cell.textField.userInteractionEnabled = self.editing
+
                     fundingAgencyTextField = cell.textField
                     fundingAgencyTextField?.delegate = self
                     cell.titleLabel.text = "Funding Agency"
@@ -283,6 +294,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
             case (0, 2):
                 if let cell = cell as? TextFieldCell {
+                    cell.textField.userInteractionEnabled = self.editing
+
                     grantNumberTextField = cell.textField
                     grantNumberTextField?.delegate = self
                     cell.titleLabel.text = "Grant Number"
@@ -290,6 +303,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
             case (0, 3):
                 if let cell = cell as? TextFieldCell {
+                    cell.textField.userInteractionEnabled = self.editing
+
                     institutionTextField = cell.textField
                     institutionTextField?.delegate = self
                     cell.titleLabel.text = "Institution"
@@ -311,6 +326,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
             case (0, 5):
                 if let cell = cell as? DatePickerCell {
+                    cell.datePicker.userInteractionEnabled = self.editing
+
                     datePicker = cell.datePicker
                     datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                     
@@ -433,13 +450,16 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         detailProjectItem?.startedDate = sender.date
     }
     
-    /*
+    
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-    // Return NO if you do not want the specified item to be editable.
-    return true
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
-    */
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.reloadData()
+    }
     
     /*
     // Override to support editing the table view.
