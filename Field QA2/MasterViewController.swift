@@ -13,7 +13,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-
+    var currentUser: Person?
+    
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +24,27 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
+    }
+    
+    func updateHeader() {
+        
+        userImageView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        userImageView.layer.borderWidth = 1.0
+        userImageView.layer.cornerRadius = 20
+        
+        if let user = currentUser {
+            let fullName = user.firstName + " " + user.lastName
+            userNameLabel.text = fullName
+        }
+        else {
+            userNameLabel.text = "Not logged in"
+            userImageView.backgroundColor = UIColor.whiteColor()
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        updateHeader()
     }
 
     override func didReceiveMemoryWarning() {

@@ -13,8 +13,8 @@ import UIKit
 class Person: NSManagedObject {
     @NSManaged var uniqueIdentifier: String?
     @NSManaged var email: String?
-    @NSManaged var firstName: String?
-    @NSManaged var lastName: String?
+    @NSManaged var firstName: String
+    @NSManaged var lastName: String
     @NSManaged var phone: String?
     @NSManaged var managedSystems: NSSet
     @NSManaged var projects: NSSet

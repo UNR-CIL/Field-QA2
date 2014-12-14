@@ -25,6 +25,8 @@
 		AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */; };
 		AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */; };
 		AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2319A299C7001E7E5E /* SystemsViewController.swift */; };
+		AB86B0E91A3D762300B5E02D /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */; };
+		AB86B0EB1A3D76B500B5E02D /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */; };
 		ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */; };
 		ABA4879319F83F100024BFF2 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */; };
 		ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D112199982370064F8A0 /* AppDelegate.swift */; };
@@ -71,6 +73,8 @@
 		AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateCell.swift; sourceTree = "<group>"; };
 		AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemDetailViewController.swift; sourceTree = "<group>"; };
 		AB867F2319A299C7001E7E5E /* SystemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
+		AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
+		AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
 		ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
 		ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		ABD3D10D199982360064F8A0 /* Field QA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Field QA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,8 +175,10 @@
 				AB6B9E9719B98150003734A1 /* LogicalDevicesViewController.swift */,
 				ABFD086C19C8F68600742185 /* LogicalDeviceDetailViewController.swift */,
 				ABD3D11B199982370064F8A0 /* Main.storyboard */,
+				AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */,
 				ABD3D117199982370064F8A0 /* MasterViewController.swift */,
 				AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */,
+				AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */,
 				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
 				ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */,
 				ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */,
@@ -329,7 +335,9 @@
 				ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */,
 				AB864A9919FE4E79007FD1E9 /* DatePickerCell.swift in Sources */,
 				AB864A9719FE4E6E007FD1E9 /* TextFieldCell.swift in Sources */,
+				AB86B0EB1A3D76B500B5E02D /* AddUserViewController.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
+				AB86B0E91A3D762300B5E02D /* UserLoginViewController.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
 				AB643B1A1A1E3E7B00993C5F /* System.swift in Sources */,
 				AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */,
