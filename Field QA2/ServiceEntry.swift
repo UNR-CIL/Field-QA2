@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 class ServiceEntry: NSManagedObject {
-
+    @NSManaged var uniqueIdentifier: String?
     @NSManaged var date: NSDate?
     @NSManaged var name: String?
     @NSManaged var notes: String?
@@ -23,7 +23,14 @@ class ServiceEntry: NSManagedObject {
     @NSManaged var system: System?
     @NSManaged var component: Component?
     
-    
     @NSManaged var creationDate: NSDate?
     @NSManaged var modificationDate: NSDate?
+    
+    override func awakeFromInsert() {
+        if uniqueIdentifier == nil {
+            uniqueIdentifier = NSUUID().UUIDString
+        }
+        creationDate = NSDate()
+        modificationDate = NSDate()
+    }
 }

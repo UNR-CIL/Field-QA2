@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class Project: NSManagedObject {
-
+    @NSManaged var uniqueIdentifier: String?
     @NSManaged var grantNumberString: String?
     @NSManaged var institutionName: String?
     @NSManaged var name: String?
@@ -23,4 +23,12 @@ class Project: NSManagedObject {
     
     @NSManaged var creationDate: NSDate?
     @NSManaged var modificationDate: NSDate?
+    
+    override func awakeFromInsert() {
+        if uniqueIdentifier == nil {
+            uniqueIdentifier = NSUUID().UUIDString
+        }
+        creationDate = NSDate()
+        modificationDate = NSDate()
+    }
 }

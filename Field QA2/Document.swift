@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class Document: NSManagedObject {
-
+    @NSManaged var uniqueIdentifier: String?
     @NSManaged var name: String?
     @NSManaged var notes: String?
     @NSManaged var path: String?
@@ -20,4 +20,12 @@ class Document: NSManagedObject {
     
     @NSManaged var creationDate: NSDate?
     @NSManaged var modificationDate: NSDate?
+    
+    override func awakeFromInsert() {
+        if uniqueIdentifier == nil {
+            uniqueIdentifier = NSUUID().UUIDString
+        }
+        creationDate = NSDate()
+        modificationDate = NSDate()
+    }
 }

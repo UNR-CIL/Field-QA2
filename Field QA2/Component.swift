@@ -11,7 +11,7 @@ import CoreData
 import UIKit
 
 class Component: NSManagedObject {
-
+    @NSManaged var uniqueIdentifier: String?
     @NSManaged var centerOffset: NSNumber?
     @NSManaged var dataInterval: String?
     @NSManaged var dataStreamDetails: String?
@@ -46,4 +46,12 @@ class Component: NSManagedObject {
     
     @NSManaged var creationDate: NSDate?
     @NSManaged var modificationDate: NSDate?
+    
+    override func awakeFromInsert() {
+        if uniqueIdentifier == nil {
+            uniqueIdentifier = NSUUID().UUIDString
+        }
+        creationDate = NSDate()
+        modificationDate = NSDate()
+    }
 }
