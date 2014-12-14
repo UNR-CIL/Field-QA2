@@ -433,11 +433,15 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQ5-Ul-RBx">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQ5-Ul-RBx">
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="v2F-Lj-pUm"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="DX8-FO-ueL" appends="YES" id="wWm-0d-E1j"/>
+                                            </connections>
                                         </imageView>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UPk-6r-qic">
                                             <rect key="frame" x="146" y="11" width="446" height="30"/>
@@ -558,6 +562,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8hE-6t-d9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="DX8-FO-ueL">
+                    <connections>
+                        <action selector="photoImageViewTapped:" destination="Ra1-pI-cdp" id="fzn-7d-RBY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3476" y="-1758"/>
         </scene>
@@ -653,11 +662,15 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="73R-TZ-wRb">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="73R-TZ-wRb">
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="vKC-4V-pRz"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="26N-CZ-Dov" appends="YES" id="hFv-v2-4pD"/>
+                                            </connections>
                                         </imageView>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s0Y-1D-mUo">
                                             <rect key="frame" x="146" y="11" width="446" height="30"/>
@@ -775,6 +788,11 @@
                     <navigationItem key="navigationItem" id="XgO-33-bWS"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHU-QS-Aru" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="26N-CZ-Dov">
+                    <connections>
+                        <action selector="photoImageViewTapped:" destination="n5R-iL-SBJ" id="23X-aL-6cn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3597" y="-676"/>
         </scene>
@@ -967,11 +985,15 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y07-oh-U90">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y07-oh-U90">
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="psL-nq-TsS"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="x4w-mk-AVH" appends="YES" id="iiC-Fa-HYa"/>
+                                            </connections>
                                         </imageView>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hdi-bO-ZYl">
                                             <rect key="frame" x="146" y="11" width="446" height="30"/>
@@ -1093,6 +1115,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4K-tb-bnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="x4w-mk-AVH"/>
             </objects>
             <point key="canvasLocation" x="2785" y="-2082"/>
         </scene>
@@ -1224,11 +1247,15 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwP-RH-S6z">
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwP-RH-S6z">
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="jPZ-1e-nU6"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="hym-Oa-bA8" appends="YES" id="0jf-b7-XIx"/>
+                                            </connections>
                                         </imageView>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R9Y-1K-1Dx">
                                             <rect key="frame" x="146" y="11" width="446" height="30"/>
@@ -1326,6 +1353,11 @@
                     <navigationItem key="navigationItem" id="QGL-N8-BKk"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFY-4S-Npb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="hym-Oa-bA8">
+                    <connections>
+                        <action selector="photoImageViewTapped:" destination="noC-nU-TDg" id="aXL-xZ-AXN"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2795" y="94"/>
         </scene>

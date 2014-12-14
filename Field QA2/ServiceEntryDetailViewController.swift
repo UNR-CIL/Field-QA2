@@ -351,5 +351,10 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     func textViewDidBeginEditing(textView: UITextView) {
         
     }
+    
+    @IBAction func photoImageViewTapped(sender: AnyObject) {
+        NSLog("Tapped!")
+        
+    }
 
 }

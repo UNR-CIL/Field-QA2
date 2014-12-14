@@ -642,4 +642,11 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
         })
     }
+    
+    @IBAction func photoImageViewTapped(sender: AnyObject) {
+        NSLog("Tapped!")
+        
+    }
+    
+    
 }

@@ -721,4 +721,9 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             
         })
     }
+    
+    @IBAction func photoImageViewTapped(sender: AnyObject) {
+        NSLog("Tapped!")
+        
+    }
 }
