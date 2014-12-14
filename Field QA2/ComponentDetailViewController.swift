@@ -259,6 +259,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? NotesCell {
                 purposeTextView = cell.textView
                 purposeTextView?.delegate = self
+                cell.titleLabel.text = "Purpose"
                 cell.textView.text = detailComponentItem?.purpose
             }
         case (0, 2):
@@ -272,6 +273,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? NotesCell {
                 unitDescriptionTextView = cell.textView
                 unitDescriptionTextView?.delegate = self
+                cell.titleLabel.text = "Unit Description"
                 cell.textView.text = detailComponentItem?.unitDescription
             }
         case (0, 4):
@@ -335,7 +337,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 else {
                     cell.textField.text = nil
                 }
-                cell.titleLabel.text = "Height From Ground"
+                cell.titleLabel.text = "Height"
             }
         case (0, 11):
             if let cell = cell as? DateDisplayCell {
@@ -362,6 +364,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? NotesCell {
                 installationDetailsTextView = cell.textView
                 installationDetailsTextView?.delegate = self
+                cell.titleLabel.text = "Installation Details"
                 cell.textView.text = detailComponentItem?.installationDetails
             }
         case (0, 14):
@@ -375,6 +378,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? NotesCell {
                 wiringNotesTextView = cell.textView
                 wiringNotesTextView?.delegate = self
+                cell.titleLabel.text = "Wiring Notes"
                 cell.textView.text = detailComponentItem?.wiringNotes
             }
         case (0, 16):
@@ -436,6 +440,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? NotesCell {
                 dataStreamDetails = cell.textView
                 dataStreamDetails?.delegate = self
+                cell.titleLabel.text = "Data Stream Details"
                 dataStreamDetails?.text = detailComponentItem?.dataStreamDetails
             }
         case (0, 22):
@@ -443,7 +448,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 measurementPropertyTextField = cell.textField
                 measurementPropertyTextField?.delegate = self
                 measurementPropertyTextField?.text = detailComponentItem?.measurementProperty
-                cell.titleLabel.text = "Measurement Property"
+                cell.titleLabel.text = "Measurement"
             }
         case (0, 23):
             if let cell = cell as? TextFieldCell {

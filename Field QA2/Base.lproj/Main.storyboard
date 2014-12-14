@@ -453,10 +453,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAU-bI-yea">
-                                            <rect key="frame" x="23" y="8" width="46" height="21"/>
+                                            <rect key="frame" x="23" y="8" width="564" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="9Jg-FX-FiO"/>
-                                                <constraint firstAttribute="width" constant="46" id="dc0-jO-b77"/>
+                                                <constraint firstAttribute="width" constant="564" id="zQP-hH-tBE"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -630,10 +630,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYj-RB-usn">
-                                            <rect key="frame" x="23" y="8" width="46" height="21"/>
+                                            <rect key="frame" x="23" y="8" width="564" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="9cB-w4-OQw"/>
-                                                <constraint firstAttribute="width" constant="46" id="Xz8-Mo-1oq"/>
+                                                <constraint firstAttribute="width" constant="564" id="oZa-Ij-UC4"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
