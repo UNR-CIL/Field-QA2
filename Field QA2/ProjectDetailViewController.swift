@@ -56,6 +56,13 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             self.setEditing(false, animated: false)
         }
         
+        if detailProjectItem?.newlyCreated == true {
+            self.setEditing(true, animated: false)
+        }
+        else {
+            self.setEditing(false, animated: false)
+        }
+        
         self.configureView()
     }
     

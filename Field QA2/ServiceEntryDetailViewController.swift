@@ -66,6 +66,13 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             self.navigationItem.rightBarButtonItem = doneBarButtonItem
         }
         
+        if detailServiceEntryItem?.newlyCreated == true {
+            self.setEditing(true, animated: false)
+        }
+        else {
+            self.setEditing(false, animated: false)
+        }
+        
         self.configureView()
     }
     
@@ -250,6 +257,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 nameTextField = cell.textField
                 nameTextField?.delegate = self
                 cell.titleLabel.text = "Name"
@@ -268,6 +277,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             }
         case (0, 1):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 operationTextField = cell.textField
                 operationTextField?.delegate = self
                 cell.textField.text = detailServiceEntryItem?.operation
@@ -275,6 +286,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             }
         case (0, 2):
             if let cell = cell as? NotesCell {
+                cell.textView.userInteractionEnabled = self.editing
+
                 notesTextView = cell.textView
                 notesTextView?.delegate = self
                 cell.textView.text = detailServiceEntryItem?.notes
@@ -297,6 +310,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             }
         case (0, 4):
             if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
+
                 datePicker = cell.datePicker
                 datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
             }
@@ -355,6 +370,16 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     @IBAction func photoImageViewTapped(sender: AnyObject) {
         NSLog("Tapped!")
         
+    }
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.reloadData()
     }
 
 }

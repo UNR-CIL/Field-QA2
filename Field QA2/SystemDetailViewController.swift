@@ -52,6 +52,13 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToSystem:")
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
+        if detailSystemItem?.newlyCreated == true {
+            self.setEditing(true, animated: false)
+        }
+        else {
+            self.setEditing(false, animated: false)
+        }
+        
         self.configureView()
     }
     
@@ -648,5 +655,13 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         
     }
     
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
     
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.reloadData()
+    }
 }

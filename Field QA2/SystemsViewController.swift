@@ -98,6 +98,8 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
+        
+        newManagedObject.newlyCreated = true
         self.tableView.reloadData()
     }
     
@@ -215,7 +217,7 @@ self.tableView.reloadData()
         currentlySelectedSystem = system
         let controller = (segue.destinationViewController as UINavigationController).topViewController as SystemDetailViewController
         controller.detailSystemItem = system
-        controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()
+        controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true
     }
 }

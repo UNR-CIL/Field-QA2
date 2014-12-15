@@ -96,6 +96,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
+        newManagedObject.newlyCreated = true
         self.tableView.reloadData()
     }
 
@@ -208,7 +209,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
         currentlySelectedComponent = component
         let controller = (segue.destinationViewController as UINavigationController).topViewController as ComponentDetailViewController
         controller.detailComponentItem = component
-        controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()
+        controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true
     }
 }

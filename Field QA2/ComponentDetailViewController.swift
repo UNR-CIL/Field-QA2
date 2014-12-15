@@ -130,6 +130,13 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToProject:")
         navigationItem.rightBarButtonItems = [addServiceEntryBarButton]
         
+        if detailComponentItem?.newlyCreated == true {
+            self.setEditing(true, animated: false)
+        }
+        else {
+            self.setEditing(false, animated: false)
+        }
+        
         self.configureView()
     }
     
@@ -254,6 +261,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 nameTextField = cell.textField
                 nameTextField?.delegate = self
                 cell.titleLabel.text = "Name"
@@ -272,6 +281,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 1):
             if let cell = cell as? NotesCell {
+                cell.textView.userInteractionEnabled = self.editing
+
                 purposeTextView = cell.textView
                 purposeTextView?.delegate = self
                 cell.titleLabel.text = "Purpose"
@@ -279,6 +290,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 2):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 typeNameTextField = cell.textField
                 typeNameTextField?.delegate = self
                 cell.textField.text = detailComponentItem?.typeName
@@ -286,6 +299,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 3):
             if let cell = cell as? NotesCell {
+                cell.textView.userInteractionEnabled = self.editing
+
                 unitDescriptionTextView = cell.textView
                 unitDescriptionTextView?.delegate = self
                 cell.titleLabel.text = "Unit Description"
@@ -293,6 +308,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 4):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 modelTextField = cell.textField
                 modelTextField?.delegate = self
                 cell.textField.text = detailComponentItem?.model
@@ -300,6 +317,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 5):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 serialNumberTextField = cell.textField
                 serialNumberTextField?.delegate = self
                 cell.textField.text = detailComponentItem?.serialNumber
@@ -307,6 +326,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 6):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 vendorTextField = cell.textField
                 vendorTextField?.delegate = self
                 cell.textField.text = detailComponentItem?.vendor
@@ -314,6 +335,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 7):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 manufacturerTextField = cell.textField
                 manufacturerTextField?.delegate = self
                 cell.textField.text = detailComponentItem?.manufacturer
@@ -321,6 +344,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 8):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 supplierTextField = cell.textField
                 supplierTextField?.delegate = self
                 cell.textField.text = detailComponentItem?.supplier
@@ -328,6 +353,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 9):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                centerOffset = cell.textField
                centerOffset?.delegate = self
             
@@ -342,6 +369,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 10):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 heightFromGroundTextField = cell.textField
                 heightFromGroundTextField?.delegate = self
                 
@@ -372,11 +401,15 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 12):
             if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
+
                 installationDatePicker = cell.datePicker
                 installationDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
             }
         case (0, 13):
             if let cell = cell as? NotesCell {
+                cell.textView.userInteractionEnabled = self.editing
+
                 installationDetailsTextView = cell.textView
                 installationDetailsTextView?.delegate = self
                 cell.titleLabel.text = "Installation Details"
@@ -384,6 +417,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 14):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 installationTextField = cell.textField
                 installationTextField?.delegate = self
                 cell.textField.text = detailComponentItem?.installationLocation
@@ -391,6 +426,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 15):
             if let cell = cell as? NotesCell {
+                cell.textView.userInteractionEnabled = self.editing
+
                 wiringNotesTextView = cell.textView
                 wiringNotesTextView?.delegate = self
                 cell.titleLabel.text = "Wiring Notes"
@@ -398,6 +435,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 16):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 latitudeTextField = cell.textField
                 latitudeTextField?.keyboardType = .DecimalPad
                 latitudeTextField?.delegate = self
@@ -412,6 +451,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 17):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 longitudeTextField = cell.textField
                 longitudeTextField?.keyboardType = .DecimalPad
                 longitudeTextField?.delegate = self
@@ -441,11 +482,15 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 19):
             if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
+
                 lastCalibratedDatePicker = cell.datePicker
                 lastCalibratedDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
             }
         case (0, 20):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 dataIntervalTextField = cell.textField
                 dataIntervalTextField?.delegate = self
                 dataIntervalTextField?.text = detailComponentItem?.dataInterval
@@ -453,6 +498,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 21):
             if let cell = cell as? NotesCell {
+                cell.textView.userInteractionEnabled = self.editing
+
                 dataStreamDetails = cell.textView
                 dataStreamDetails?.delegate = self
                 cell.titleLabel.text = "Data Stream Details"
@@ -460,6 +507,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 22):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 measurementPropertyTextField = cell.textField
                 measurementPropertyTextField?.delegate = self
                 measurementPropertyTextField?.text = detailComponentItem?.measurementProperty
@@ -467,6 +516,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 23):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 minimumOperatingRangeTextField = cell.textField
                 minimumOperatingRangeTextField?.delegate = self
                 
@@ -480,6 +531,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 24):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 maximumOperatingRangeTextField = cell.textField
                 maximumOperatingRangeTextField?.delegate = self
                 
@@ -493,6 +546,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 25):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 minimumAccuracyBoundTextField = cell.textField
                 minimumAccuracyBoundTextField?.delegate = self
                 
@@ -506,6 +561,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 26):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 maximumAccuracyBoundTextField = cell.textField
                 maximumAccuracyBoundTextField = cell.textField
                 maximumAccuracyBoundTextField?.delegate = self
@@ -520,6 +577,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 27):
             if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 parentLoggerTextField = cell.textField
                 parentLoggerTextField?.delegate = self
                 parentLoggerTextField?.text = detailComponentItem?.parentLogger
@@ -725,5 +784,15 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     @IBAction func photoImageViewTapped(sender: AnyObject) {
         NSLog("Tapped!")
         
+    }
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.reloadData()
     }
 }

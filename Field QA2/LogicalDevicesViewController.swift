@@ -97,6 +97,7 @@ class LogicalDevicesViewController: UITableViewController, NSFetchedResultsContr
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
+        newManagedObject.newlyCreated = true
         self.tableView.reloadData()
     }
     
@@ -209,7 +210,7 @@ class LogicalDevicesViewController: UITableViewController, NSFetchedResultsContr
         let logicalDevice = self.fetchedResultsController.objectAtIndexPath(indexPath!) as LogicalDevice
         let controller = (segue.destinationViewController as UINavigationController).topViewController as LogicalDeviceDetailViewController
         controller.detailLogicalDeviceItem = logicalDevice
-        controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()
+        controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true
     }
 }

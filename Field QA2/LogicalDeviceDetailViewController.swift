@@ -34,6 +34,13 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
             self.bottomConstraint.constant =  keyboardHeight
         }
         
+        if detailLogicalDeviceItem?.newlyCreated == true {
+            self.setEditing(true, animated: false)
+        }
+        else {
+            self.setEditing(false, animated: false)
+        }
+        
         self.configureView()
     }
     
@@ -58,5 +65,4 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
         println("segue destination: \(segue.destinationViewController)")
         
     }
-    
 }

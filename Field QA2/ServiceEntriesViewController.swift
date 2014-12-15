@@ -96,6 +96,8 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
+        
+        newManagedObject.newlyCreated = true
         self.tableView.reloadData()
     }
     
@@ -212,7 +214,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         let serviceEntry = self.fetchedResultsController.objectAtIndexPath(indexPath!) as ServiceEntry
         let controller = (segue.destinationViewController as UINavigationController).topViewController as ServiceEntryDetailViewController
         controller.detailServiceEntryItem = serviceEntry
-        controller.navigationItem.leftBarButtonItem = self.splitViewController!.displayModeButtonItem()
+        controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true
     }
 }
