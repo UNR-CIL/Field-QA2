@@ -27,6 +27,7 @@
 		AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2319A299C7001E7E5E /* SystemsViewController.swift */; };
 		AB86B0E91A3D762300B5E02D /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */; };
 		AB86B0EB1A3D76B500B5E02D /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */; };
+		AB86B0EE1A3FBCAF00B5E02D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0ED1A3FBCAF00B5E02D /* DataManager.swift */; };
 		ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */; };
 		ABA4879319F83F100024BFF2 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */; };
 		ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D112199982370064F8A0 /* AppDelegate.swift */; };
@@ -75,6 +76,7 @@
 		AB867F2319A299C7001E7E5E /* SystemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
 		AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
 		AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
+		AB86B0ED1A3FBCAF00B5E02D /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
 		ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		ABD3D10D199982360064F8A0 /* Field QA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Field QA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +139,7 @@
 				AB643B191A1E3E7B00993C5F /* System.swift */,
 				AB643B171A1E3E7B00993C5F /* Document.swift */,
 				AB643B151A1E3E7A00993C5F /* Person.swift */,
+				AB86B0ED1A3FBCAF00B5E02D /* DataManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABA4879319F83F100024BFF2 /* ProjectsViewController.swift in Sources */,
+				AB86B0EE1A3FBCAF00B5E02D /* DataManager.swift in Sources */,
 				AB643B201A1E3E7B00993C5F /* Component.swift in Sources */,
 				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,

@@ -66,7 +66,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         super.viewDidLoad()
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.managedObjectContext = appDelegate.managedObjectContext;
+        self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
