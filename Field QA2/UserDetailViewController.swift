@@ -30,6 +30,8 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate {
         else {
             self.setEditing(false, animated: false)
         }
+        
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,16 +102,16 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate {
             if let detailUser = self.detailUser {
                 if let cell = cell as? TextFieldCell {
                     cell.textField.userInteractionEnabled = self.editing
-
+                    cell.textField.delegate = self
                     cell.textField.tag = indexPath.row
-                    cell.textField.text = detailUser.valueForKey(cellTuple.name) as NSString
+                    cell.textField.text = detailUser.valueForKey(cellTuple.name) as? NSString
                     cell.titleLabel.text = cellTuple.title as NSString
                 }
             }
             else {
                 if let cell = cell as? TextFieldCell {
                     cell.textField.userInteractionEnabled = self.editing
-
+                    cell.textField.delegate = self
                     cell.textField.tag = indexPath.row
                     cell.titleLabel.text = cellTuple.title as NSString
                 }
@@ -122,6 +124,8 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         let cellTuple = rowItems[textField.tag]
+        
+        NSLog("tag %i", textField.tag)
         
         switch textField.tag {
         default:
@@ -178,4 +182,14 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     */
 
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.reloadData()
+    }
 }

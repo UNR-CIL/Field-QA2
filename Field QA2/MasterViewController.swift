@@ -14,6 +14,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var currentUser: Person?
+    var currentUserSelectedObserverToken: NSObjectProtocol?
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
@@ -31,14 +32,38 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         userImageView.layer.borderColor = UIColor.lightGrayColor().CGColor
         userImageView.layer.borderWidth = 1.0
         userImageView.layer.cornerRadius = 20
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        currentUser = appDelegate.currentUser
         
         if let user = currentUser {
-            let fullName = user.firstName! + " " + user.lastName!
-            userNameLabel.text = fullName
+            if user.firstName != nil && user.lastName != nil {
+                let fullName = user.firstName! + " " + user.lastName!
+                userNameLabel.text = fullName
+            }
+            else {
+                userNameLabel.text = "A User"
+            }
         }
         else {
             userNameLabel.text = "Not logged in"
             userImageView.backgroundColor = UIColor.whiteColor()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        currentUserSelectedObserverToken = NSNotificationCenter.defaultCenter().addObserverForName("CurrentUserSelectedNotification", object: nil, queue: nil) {
+            [weak self]
+            (_) -> Void in
+            self?.updateHeader()
+            return
+        }
+    }
+    
+    deinit {
+        if let currentUserSelectedObserverToken = self.currentUserSelectedObserverToken {
+            NSNotificationCenter.defaultCenter().removeObserver(currentUserSelectedObserverToken, name: "CurrentUserSelectedNotification", object: nil)
         }
     }
     

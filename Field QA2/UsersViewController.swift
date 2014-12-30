@@ -76,6 +76,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.leftItemsSupplementBackButton = true
+        self.title = "Users"
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,6 +120,19 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath) as UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if self.editing {
+            self.performSegueWithIdentifier("showUserDetailViewController", sender: self)
+        }
+        else {
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            appDelegate.currentUser = fetchedResultsController.objectAtIndexPath(indexPath) as? Person
+            NSLog("logged in as %@", appDelegate.currentUser!)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("CurrentUserSelectedNotification", object: nil)
+        }
     }
     
     // MARK: - Table View
@@ -205,16 +219,15 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         
         let indexPath = self.tableView.indexPathForSelectedRow()
         let person = self.fetchedResultsController.objectAtIndexPath(indexPath!) as Person
-        let controller = (segue.destinationViewController as UINavigationController).topViewController as UserDetailViewController
+        let controller = segue.destinationViewController as UserDetailViewController
         controller.detailUser = person
-        controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true
     }
-
 
 }
