@@ -61,6 +61,7 @@
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="organization" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
         <attribute name="uniqueIdentifier" optional="YES" attributeType="String" syncable="YES"/>
@@ -121,7 +122,7 @@
         <element name="Component" positionX="261" positionY="198" width="128" height="555"/>
         <element name="Document" positionX="288" positionY="324" width="128" height="180"/>
         <element name="LogicalDevice" positionX="306" positionY="360" width="128" height="135"/>
-        <element name="Person" positionX="288" positionY="216" width="128" height="208"/>
+        <element name="Person" positionX="288" positionY="216" width="128" height="225"/>
         <element name="Project" positionX="279" positionY="315" width="128" height="223"/>
         <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="238"/>
         <element name="System" positionX="261" positionY="189" width="128" height="268"/>

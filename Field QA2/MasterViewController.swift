@@ -33,7 +33,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         userImageView.layer.cornerRadius = 20
         
         if let user = currentUser {
-            let fullName = user.firstName + " " + user.lastName
+            let fullName = user.firstName! + " " + user.lastName!
             userNameLabel.text = fullName
         }
         else {
@@ -53,11 +53,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     // MARK: - Segues
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationItem.leftItemsSupplementBackButton = true
     }
-
+    
     // MARK: - Table View
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

@@ -598,6 +598,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         
     }
     
+    // MARK: UITextFieldDelegate
+    
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         
         if textField == nameTextField {

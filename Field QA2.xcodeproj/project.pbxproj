@@ -25,8 +25,8 @@
 		AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */; };
 		AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */; };
 		AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB867F2319A299C7001E7E5E /* SystemsViewController.swift */; };
-		AB86B0E91A3D762300B5E02D /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */; };
-		AB86B0EB1A3D76B500B5E02D /* AddUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */; };
+		AB86B0E91A3D762300B5E02D /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0E81A3D762300B5E02D /* UsersViewController.swift */; };
+		AB86B0EB1A3D76B500B5E02D /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0EA1A3D76B500B5E02D /* UserDetailViewController.swift */; };
 		AB86B0EE1A3FBCAF00B5E02D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0ED1A3FBCAF00B5E02D /* DataManager.swift */; };
 		ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */; };
 		ABA4879319F83F100024BFF2 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */; };
@@ -74,8 +74,8 @@
 		AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateCell.swift; sourceTree = "<group>"; };
 		AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemDetailViewController.swift; sourceTree = "<group>"; };
 		AB867F2319A299C7001E7E5E /* SystemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemsViewController.swift; sourceTree = "<group>"; };
-		AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
-		AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddUserViewController.swift; sourceTree = "<group>"; };
+		AB86B0E81A3D762300B5E02D /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		AB86B0EA1A3D76B500B5E02D /* UserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		AB86B0ED1A3FBCAF00B5E02D /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
 		ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		ABD3D10F199982360064F8A0 /* Field QA2 */ = {
 			isa = PBXGroup;
 			children = (
-				AB86B0EA1A3D76B500B5E02D /* AddUserViewController.swift */,
+				AB86B0EA1A3D76B500B5E02D /* UserDetailViewController.swift */,
 				ABD3D112199982370064F8A0 /* AppDelegate.swift */,
 				ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */,
 				AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */,
@@ -188,7 +188,7 @@
 				AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */,
 				AB867F2319A299C7001E7E5E /* SystemsViewController.swift */,
 				AB864A9C19FE4EC1007FD1E9 /* Table View Cells */,
-				AB86B0E81A3D762300B5E02D /* UserLoginViewController.swift */,
+				AB86B0E81A3D762300B5E02D /* UsersViewController.swift */,
 			);
 			path = "Field QA2";
 			sourceTree = "<group>";
@@ -339,9 +339,9 @@
 				ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */,
 				AB864A9919FE4E79007FD1E9 /* DatePickerCell.swift in Sources */,
 				AB864A9719FE4E6E007FD1E9 /* TextFieldCell.swift in Sources */,
-				AB86B0EB1A3D76B500B5E02D /* AddUserViewController.swift in Sources */,
+				AB86B0EB1A3D76B500B5E02D /* UserDetailViewController.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
-				AB86B0E91A3D762300B5E02D /* UserLoginViewController.swift in Sources */,
+				AB86B0E91A3D762300B5E02D /* UsersViewController.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
 				AB643B1A1A1E3E7B00993C5F /* System.swift in Sources */,
 				AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */,

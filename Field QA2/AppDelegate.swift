@@ -9,10 +9,13 @@
 import UIKit
 import CoreData
 
+let CurrentUserIdKey = "CurrentUserIdKey"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
+    var currentUser: Person?
 
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
@@ -28,6 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         controller.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.window?.tintColor = UIColor(red:0.093, green:0.732, blue:0.194, alpha:1.000)
+        
+        if let userId = NSUserDefaults.standardUserDefaults().objectForKey(CurrentUserIdKey) as? NSNumber {
+            var error: NSError?
+            let fetchRequest = NSFetchRequest(entityName: "Person")
+            fetchRequest.predicate = NSPredicate(format: "id == %@", userId)
+            let users = DataManager.sharedManager.managedObjectContext?.executeFetchRequest(fetchRequest, error: &error)
+            if let user = users?[0] as? Person {
+                currentUser = user
+            }
+        }
         
         return true
     }
