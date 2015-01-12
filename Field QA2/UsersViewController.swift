@@ -130,7 +130,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
             let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             appDelegate.currentUser = fetchedResultsController.objectAtIndexPath(indexPath) as? Person
             NSLog("logged in as %@", appDelegate.currentUser!)
-            
+            NSUserDefaults.standardUserDefaults().setObject(appDelegate.currentUser?.uniqueIdentifier, forKey: CurrentUserIdKey)
             NSNotificationCenter.defaultCenter().postNotificationName("CurrentUserSelectedNotification", object: nil)
         }
     }

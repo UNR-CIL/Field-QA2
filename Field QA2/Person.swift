@@ -34,4 +34,21 @@ class Person: NSManagedObject {
         creationDate = NSDate()
         modificationDate = NSDate()
     }
+    
+    func personWithIdentifier(identifier: String, inManagedObjectContext context: NSManagedObjectContext) -> Person? {
+        let fetchRequest = NSFetchRequest(entityName: "Person")
+        fetchRequest.predicate = NSPredicate(format: "uniqueIdentifier == %@", identifier)
+        var error: NSError?
+        let results = context.executeFetchRequest(fetchRequest, error: &error)
+        
+        if results?.count == 0 {
+            return nil
+        }
+        if let person = results?.first as? Person {
+            return person
+        }
+        else {
+            return nil
+        }
+    }
 }

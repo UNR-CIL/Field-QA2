@@ -32,16 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         self.window?.tintColor = UIColor(red:0.093, green:0.732, blue:0.194, alpha:1.000)
         
-        if let userId = NSUserDefaults.standardUserDefaults().objectForKey(CurrentUserIdKey) as? NSNumber {
+        if let userId = NSUserDefaults.standardUserDefaults().objectForKey(CurrentUserIdKey) as? String {
             var error: NSError?
             let fetchRequest = NSFetchRequest(entityName: "Person")
-            fetchRequest.predicate = NSPredicate(format: "id == %@", userId)
+            fetchRequest.predicate = NSPredicate(format: "uniqueIdentifier == %@", userId)
             let users = DataManager.sharedManager.managedObjectContext?.executeFetchRequest(fetchRequest, error: &error)
             if let user = users?[0] as? Person {
                 currentUser = user
             }
         }
-        
         return true
     }
 
