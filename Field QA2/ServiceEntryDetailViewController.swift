@@ -144,36 +144,14 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     }
     */
     
-    
-    @IBAction func imageViewTapped(sender: UITapGestureRecognizer) {
-        var imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-            
-            self.presentViewController(imagePickerController, animated: true) { () -> Void in
-                
-            }
-        }
-        else {
-            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            self.cameraPopoverController = UIPopoverController(contentViewController: imagePickerController)
-            self.cameraPopoverController?.presentPopoverFromRect(sender.view!.bounds, inView: sender.view!, permittedArrowDirections: .Any, animated: true)
-        }
-    }
-    
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerEditedImage] as UIImage
         self.detailServiceEntryItem?.photo = image
         
-        self.imageView.image = self.detailServiceEntryItem?.photo
-        
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
+            self.tableView.reloadData()
         })
     }
     
@@ -267,6 +245,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
                 cell.photoImageView?.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.photoImageView?.layer.borderWidth = 1.0
                 cell.photoImageView?.layer.cornerRadius = 20
+                cell.photoImageView?.layer.masksToBounds = true
                 
                 if let photo = detailServiceEntryItem?.photo {
                     cell.photoImageView?.image = photo
@@ -367,9 +346,24 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         
     }
     
-    @IBAction func photoImageViewTapped(sender: AnyObject) {
+    @IBAction func photoImageViewTapped(sender: UITapGestureRecognizer) {
         NSLog("Tapped!")
+        var imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
         
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+            
+            self.presentViewController(imagePickerController, animated: true) { () -> Void in
+                
+            }
+        }
+        else {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.cameraPopoverController = UIPopoverController(contentViewController: imagePickerController)
+            self.cameraPopoverController?.presentPopoverFromRect(sender.view!.bounds, inView: sender.view!, permittedArrowDirections: .Any, animated: true)
+        }
     }
     
     // Override to support conditional editing of the table view.

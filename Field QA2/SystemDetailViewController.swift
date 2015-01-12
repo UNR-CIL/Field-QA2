@@ -323,7 +323,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 cell.photoImageView?.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.photoImageView?.layer.borderWidth = 1.0
                 cell.photoImageView?.layer.cornerRadius = 20
-                
+                cell.photoImageView?.layer.masksToBounds = true
                 if let photo = detailSystemItem?.photo {
                     cell.photoImageView?.image = photo
                 }
@@ -612,7 +612,26 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
     }
     
-    @IBAction func imageViewTapped(sender: UITapGestureRecognizer) {
+    // MARK: UIImagePickerControllerDelegate
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        self.detailSystemItem?.photo = image
+        
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.tableView.reloadData()
+        })
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
+    @IBAction func photoImageViewTapped(sender: UITapGestureRecognizer) {
+        NSLog("Tapped!")
+        
         var imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
@@ -629,30 +648,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             self.cameraPopoverController = UIPopoverController(contentViewController: imagePickerController)
             self.cameraPopoverController?.presentPopoverFromRect(sender.view!.bounds, inView: sender.view!, permittedArrowDirections: .Any, animated: true)
         }
-    }
-    
-    // MARK: UIImagePickerControllerDelegate
-
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as UIImage
-        self.detailSystemItem?.photo = image
-        
-        self.imageView.image = self.detailSystemItem?.photo
-        
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
-        })
-    }
-    
-    @IBAction func photoImageViewTapped(sender: AnyObject) {
-        NSLog("Tapped!")
-        
     }
     
     // Override to support conditional editing of the table view.

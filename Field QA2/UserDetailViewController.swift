@@ -8,12 +8,13 @@
 
 import UIKit
 
-class UserDetailViewController: UITableViewController, UITextFieldDelegate {
+class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
     var rowItems = [(title:"First", name:"firstName", identifier:"PhotoTextFieldCell"), (title:"Last", name:"lastName", identifier:"TextFieldCell"), (title:"Email", name:"email", identifier:"TextFieldCell"), (title:"Organization", name:"organization", identifier:"TextFieldCell")]
     var nameTextField: UITextField?
     var detailUser: Person?
+    var cameraPopoverController: UIPopoverController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate {
                 cell.photoImageView?.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.photoImageView?.layer.borderWidth = 1.0
                 cell.photoImageView?.layer.cornerRadius = 20
+                cell.photoImageView?.layer.masksToBounds = true
                 
                 if let photo = detailUser?.photo {
                     cell.photoImageView?.image = photo
@@ -192,4 +194,43 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate {
         super.setEditing(editing, animated: animated)
         tableView.reloadData()
     }
+    
+    // MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        self.detailUser?.photo = image
+        
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.tableView.reloadData()
+        })
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
+    
+    @IBAction func photoImageViewTapped(sender: UITapGestureRecognizer) {
+        NSLog("Tapped!")
+        
+        var imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+            
+            self.presentViewController(imagePickerController, animated: true) { () -> Void in
+                
+            }
+        }
+        else {
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.cameraPopoverController = UIPopoverController(contentViewController: imagePickerController)
+            self.cameraPopoverController?.presentPopoverFromRect(sender.view!.bounds, inView: sender.view!, permittedArrowDirections: .Any, animated: true)
+        }
+    }
+
 }

@@ -142,7 +142,11 @@
                                             <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="JLS-SQ-oNF"/>
+                                                <constraint firstAttribute="height" constant="40" id="fAN-g8-yUd"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="foV-ET-NHo" appends="YES" id="0J1-5s-P1H"/>
+                                            </connections>
                                         </imageView>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tcu-IE-Vrs">
                                             <rect key="frame" x="126" y="11" width="466" height="30"/>
@@ -175,6 +179,11 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIr-v4-yNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="foV-ET-NHo">
+                    <connections>
+                        <action selector="photoImageViewTapped:" destination="6rW-10-nJo" id="aoE-EN-h5S"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="543" y="-1817"/>
         </scene>
@@ -487,6 +496,7 @@
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
                                             <gestureRecognizers/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="Szz-in-IWs"/>
                                                 <constraint firstAttribute="width" constant="40" id="v2F-Lj-pUm"/>
                                             </constraints>
                                             <connections>
@@ -716,6 +726,7 @@
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
                                             <gestureRecognizers/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="fxV-Bl-uZX"/>
                                                 <constraint firstAttribute="width" constant="40" id="vKC-4V-pRz"/>
                                             </constraints>
                                             <connections>
@@ -1039,6 +1050,7 @@
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
                                             <gestureRecognizers/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="Y5m-qo-Uye"/>
                                                 <constraint firstAttribute="width" constant="40" id="psL-nq-TsS"/>
                                             </constraints>
                                             <connections>
@@ -1301,6 +1313,7 @@
                                             <rect key="frame" x="18" y="6" width="40" height="40"/>
                                             <gestureRecognizers/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="JBX-92-rJv"/>
                                                 <constraint firstAttribute="width" constant="40" id="jPZ-1e-nU6"/>
                                             </constraints>
                                             <connections>

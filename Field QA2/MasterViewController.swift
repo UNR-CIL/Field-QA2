@@ -32,6 +32,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         userImageView.layer.borderColor = UIColor.lightGrayColor().CGColor
         userImageView.layer.borderWidth = 1.0
         userImageView.layer.cornerRadius = 20
+        userImageView.layer.masksToBounds = true
+        
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         currentUser = appDelegate.currentUser
         
@@ -43,6 +45,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             else {
                 userNameLabel.text = "A User"
             }
+            userImageView.image = user.photo
         }
         else {
             userNameLabel.text = "Not logged in"
