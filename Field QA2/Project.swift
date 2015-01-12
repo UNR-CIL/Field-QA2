@@ -17,7 +17,7 @@ class Project: NSManagedObject {
     @NSManaged var originalFundingAgencyName: String?
     @NSManaged var startedDate: NSDate?
     @NSManaged var systems: NSSet
-    @NSManaged var documents: Document?
+    @NSManaged var documents: NSSet
     @NSManaged var principalInvestigator: Person?
     @NSManaged var serviceEntries: NSSet
     

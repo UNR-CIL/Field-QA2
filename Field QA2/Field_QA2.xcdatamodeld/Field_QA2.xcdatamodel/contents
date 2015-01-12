@@ -78,7 +78,7 @@
         <attribute name="originalFundingAgencyName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startedDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="uniqueIdentifier" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="documents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Document" inverseName="project" inverseEntity="Document" syncable="YES"/>
+        <relationship name="documents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="project" inverseEntity="Document" syncable="YES"/>
         <relationship name="principalInvestigator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="projects" inverseEntity="Person" syncable="YES"/>
         <relationship name="serviceEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="project" inverseEntity="ServiceEntry" syncable="YES"/>
         <relationship name="systems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="System" inverseName="project" inverseEntity="System" syncable="YES"/>
@@ -123,7 +123,7 @@
         <element name="Document" positionX="288" positionY="324" width="128" height="180"/>
         <element name="LogicalDevice" positionX="306" positionY="360" width="128" height="135"/>
         <element name="Person" positionX="288" positionY="216" width="128" height="225"/>
-        <element name="Project" positionX="279" positionY="315" width="128" height="223"/>
+        <element name="Project" positionX="279" positionY="315" width="128" height="225"/>
         <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="238"/>
         <element name="System" positionX="261" positionY="189" width="128" height="268"/>
     </elements>
