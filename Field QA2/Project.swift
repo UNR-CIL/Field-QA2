@@ -16,6 +16,7 @@ class Project: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var originalFundingAgencyName: String?
     @NSManaged var startedDate: NSDate?
+    
     @NSManaged var systems: NSSet
     @NSManaged var documents: NSSet
     @NSManaged var principalInvestigator: Person?
@@ -32,5 +33,53 @@ class Project: NSManagedObject {
         }
         creationDate = NSDate()
         modificationDate = NSDate()
+    }
+    
+    private lazy var dictionaryValue: NSMutableDictionary? = {
+        var dictionary = NSMutableDictionary()
+        
+        for entityProperty in self.entity.propertiesByName {
+            let propertyName: NSString = entityProperty.1.name
+            
+            switch  propertyName {
+            case "startedDate":
+                if let date = self.valueForKey(propertyName) as? NSDate {
+                    dictionary[propertyName] = date.timeIntervalSince1970
+                }
+            case "creationDate":
+                if let date = self.valueForKey(propertyName) as? NSDate {
+                    dictionary[propertyName] = date.timeIntervalSince1970
+                }
+            case "modificationDate":
+                if let date = self.valueForKey(propertyName) as? NSDate {
+                    dictionary[propertyName] = date.timeIntervalSince1970
+                }
+            case "principalInvestigator":
+                if let person = self.valueForKey(propertyName) as? Person {
+                    dictionary[propertyName] = [person.uniqueIdentifier!]
+                }
+            case "systems":
+                fallthrough
+            case "documents":
+                fallthrough
+            case "serviceEntries":
+                if let set = self.valueForKey(propertyName) as? NSSet {
+                    var itemIds = [AnyObject]()
+                    for item in set {
+                        itemIds.append(item.valueForKey("uniqueIdentifier")!)
+                    }
+                    dictionary[propertyName] = itemIds
+                }
+            default:
+                if let value: AnyObject = self.valueForKey(propertyName) {
+                    dictionary[propertyName] = value
+                }
+            }
+        }
+        return dictionary
+    }()
+    
+    private func json() -> NSData? {
+        return NSJSONSerialization.dataWithJSONObject(self.dictionaryValue!, options: NSJSONWritingOptions.allZeros, error: nil)
     }
 }
