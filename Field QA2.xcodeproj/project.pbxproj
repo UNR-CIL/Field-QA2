@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB052B441A65DE940076FD15 /* CDJSONExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B431A65DE940076FD15 /* CDJSONExporter.m */; };
+		AB052B481A65DEB80076FD15 /* CodingValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B471A65DEB80076FD15 /* CodingValueTransformer.m */; };
+		AB052B4C1A65FDD00076FD15 /* TNImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B4B1A65FDD00076FD15 /* TNImageToDataTransformer.m */; };
 		AB3991721A12E37B00046045 /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3991711A12E37B00046045 /* NotesCell.swift */; };
 		AB643B161A1E3E7A00993C5F /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB643B151A1E3E7A00993C5F /* Person.swift */; };
 		AB643B181A1E3E7B00993C5F /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB643B171A1E3E7B00993C5F /* Document.swift */; };
@@ -56,6 +59,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB052B421A65DE940076FD15 /* Field QA2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Field QA2-Bridging-Header.h"; sourceTree = "<group>"; };
+		AB052B431A65DE940076FD15 /* CDJSONExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDJSONExporter.m; sourceTree = "<group>"; };
+		AB052B451A65DEAC0076FD15 /* CDJSONExporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDJSONExporter.h; sourceTree = "<group>"; };
+		AB052B461A65DEB80076FD15 /* CodingValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodingValueTransformer.h; sourceTree = "<group>"; };
+		AB052B471A65DEB80076FD15 /* CodingValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodingValueTransformer.m; sourceTree = "<group>"; };
+		AB052B4A1A65FDD00076FD15 /* TNImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNImageToDataTransformer.h; sourceTree = "<group>"; };
+		AB052B4B1A65FDD00076FD15 /* TNImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNImageToDataTransformer.m; sourceTree = "<group>"; };
 		AB3991711A12E37B00046045 /* NotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		AB643B151A1E3E7A00993C5F /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AB643B171A1E3E7B00993C5F /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -116,6 +126,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB052B411A65DE7B0076FD15 /* CDJSON */ = {
+			isa = PBXGroup;
+			children = (
+				AB052B421A65DE940076FD15 /* Field QA2-Bridging-Header.h */,
+				AB052B451A65DEAC0076FD15 /* CDJSONExporter.h */,
+				AB052B431A65DE940076FD15 /* CDJSONExporter.m */,
+				AB052B461A65DEB80076FD15 /* CodingValueTransformer.h */,
+				AB052B471A65DEB80076FD15 /* CodingValueTransformer.m */,
+				AB052B4A1A65FDD00076FD15 /* TNImageToDataTransformer.h */,
+				AB052B4B1A65FDD00076FD15 /* TNImageToDataTransformer.m */,
+			);
+			name = CDJSON;
+			sourceTree = "<group>";
+		};
 		AB864A9C19FE4EC1007FD1E9 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,8 +189,8 @@
 		ABD3D10F199982360064F8A0 /* Field QA2 */ = {
 			isa = PBXGroup;
 			children = (
-				AB86B0EA1A3D76B500B5E02D /* UserDetailViewController.swift */,
 				ABD3D112199982370064F8A0 /* AppDelegate.swift */,
+				AB052B411A65DE7B0076FD15 /* CDJSON */,
 				ABFD086A19C8DEA100742185 /* ComponentDetailViewController.swift */,
 				AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */,
 				ABFD086819C8900700742185 /* DatePicker.storyboard */,
@@ -188,6 +212,7 @@
 				AB867F2119A28CAF001E7E5E /* SystemDetailViewController.swift */,
 				AB867F2319A299C7001E7E5E /* SystemsViewController.swift */,
 				AB864A9C19FE4EC1007FD1E9 /* Table View Cells */,
+				AB86B0EA1A3D76B500B5E02D /* UserDetailViewController.swift */,
 				AB86B0E81A3D762300B5E02D /* UsersViewController.swift */,
 			);
 			path = "Field QA2";
@@ -324,6 +349,7 @@
 				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
 				AB3991721A12E37B00046045 /* NotesCell.swift in Sources */,
+				AB052B441A65DE940076FD15 /* CDJSONExporter.m in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
 				ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */,
@@ -331,11 +357,13 @@
 				AB643B181A1E3E7B00993C5F /* Document.swift in Sources */,
 				AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */,
 				AB643B161A1E3E7A00993C5F /* Person.swift in Sources */,
+				AB052B4C1A65FDD00076FD15 /* TNImageToDataTransformer.m in Sources */,
 				ABFD086F19C8F83800742185 /* ServiceEntryDetailViewController.swift in Sources */,
 				ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */,
 				AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */,
 				AB643B1C1A1E3E7B00993C5F /* ServiceEntry.swift in Sources */,
 				ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */,
+				AB052B481A65DEB80076FD15 /* CodingValueTransformer.m in Sources */,
 				ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */,
 				AB864A9919FE4E79007FD1E9 /* DatePickerCell.swift in Sources */,
 				AB864A9719FE4E6E007FD1E9 /* TextFieldCell.swift in Sources */,
@@ -471,6 +499,7 @@
 				INFOPLIST_FILE = "Field QA2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Field QA2/Field QA2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -484,6 +513,7 @@
 				INFOPLIST_FILE = "Field QA2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Field QA2/Field QA2-Bridging-Header.h";
 			};
 			name = Release;
 		};
