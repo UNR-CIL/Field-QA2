@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import MessageUI
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate {
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
@@ -62,7 +63,56 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             self?.updateHeader()
             return
         }
+        
+        let exportButton = UIBarButtonItem(title: "Export", style: UIBarButtonItemStyle.Plain, target: self, action: "export:")
+        self.navigationItem.leftBarButtonItem = exportButton
     }
+    
+    func export(sender: UIBarButtonItem) {
+        var error: NSError?
+        DataManager.sharedManager.managedObjectContext?.save(&error)
+        
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposeViewController = MFMailComposeViewController()
+        mailComposeViewController.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        mailComposeViewController.setToRecipients(["john@renocollective.com"])
+        mailComposeViewController.setSubject("Field QA Export")
+        mailComposeViewController.setMessageBody("Data Export:\n", isHTML: false)
+        
+        
+        let data = CDJSONExporter.exportContext(DataManager.sharedManager.managedObjectContext, auxiliaryInfo: nil)
+
+        
+        mailComposeViewController.addAttachmentData(data, mimeType: "application/json", fileName:"export.json")
+        
+        return mailComposeViewController
+    }
+    
+    func showSendMailErrorAlert() {
+        let alertViewController = UIAlertController(title: nil, message: "Unable to send email", preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (_) -> Void in
+            
+        }
+        alertViewController.addAction(okAction)
+        self.presentViewController(alertViewController, animated: true) { () -> Void in
+            
+        }
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate Method
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     deinit {
         if let currentUserSelectedObserverToken = self.currentUserSelectedObserverToken {

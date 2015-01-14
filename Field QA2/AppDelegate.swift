@@ -49,9 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         self.saveContext()
 
+        /*
         let data = CDJSONExporter.exportContext(DataManager.sharedManager.managedObjectContext, auxiliaryInfo: nil)
         
-        /*
+        
         if let json = NSJSONSerialization.JSONObjectWithData(data, options: .allZeros, error: nil) {
             println("\(json)")
         }
@@ -59,9 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             println("Failed")
         }
 
-*/
+
         
         CDJSONExporter.importData(data, toContext: DataManager.sharedManager.managedObjectContext, clear: true)
+
+        */
     }
 
     func applicationDidEnterBackground(application: UIApplication!) {

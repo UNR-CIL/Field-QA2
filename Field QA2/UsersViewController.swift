@@ -132,6 +132,10 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
             NSLog("logged in as %@", appDelegate.currentUser!)
             NSUserDefaults.standardUserDefaults().setObject(appDelegate.currentUser?.uniqueIdentifier, forKey: CurrentUserIdKey)
             NSNotificationCenter.defaultCenter().postNotificationName("CurrentUserSelectedNotification", object: nil)
+            
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                self.tableView.reloadData()
+            })
         }
     }
     
