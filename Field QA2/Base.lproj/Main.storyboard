@@ -990,6 +990,33 @@
             </objects>
             <point key="canvasLocation" x="2104" y="-2088"/>
         </scene>
+        <!--Photo Detail View Controller-->
+        <scene sceneID="VFe-Os-Trk">
+            <objects>
+                <viewController storyboardIdentifier="PhotoDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0AA-lz-4Jp" customClass="PhotoDetailViewController" customModule="Field_QA2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zBw-xc-WHq"/>
+                        <viewControllerLayoutGuide type="bottom" id="kp8-0y-Msi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9cU-wg-5Yh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3K-U7-Bvh">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LdM-f1-bqE"/>
+                    <connections>
+                        <outlet property="photoDetailImageView" destination="E3K-U7-Bvh" id="gpA-f5-IZw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7kn-AA-UPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4033" y="-2830"/>
+        </scene>
         <!--Project Detail View Controller-->
         <scene sceneID="7Og-bI-a7i">
             <objects>

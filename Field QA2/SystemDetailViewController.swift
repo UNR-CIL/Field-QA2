@@ -18,7 +18,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     }
     var datePopoverController : UIPopoverController?
     var componentsPopoverController : UIPopoverController?
-    var cameraPopoverController: UIPopoverController?
     
     var image: UIImage?
     
@@ -631,22 +630,49 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     @IBAction func photoImageViewTapped(sender: UITapGestureRecognizer) {
         NSLog("Tapped!")
+        if self.detailSystemItem?.photo != nil {
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as PhotoDetailViewController
+            photoDetailViewController.photoImage = self.detailSystemItem?.photo
+            
+            var viewController: UIViewController?
+            if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+                viewController = photoDetailViewController
+            }
+            else {
+                viewController = UINavigationController(rootViewController: photoDetailViewController)
+            }
+            
+            viewController!.modalPresentationStyle = .Popover
+            presentViewController(viewController!, animated: true, completion: { () -> Void in })
+            
+            if let popoverPresentationController = viewController!.popoverPresentationController {
+                popoverPresentationController.sourceView = sender.view
+                popoverPresentationController.sourceRect = sender.view!.bounds
+                popoverPresentationController.permittedArrowDirections = .Any
+            }
+            
+            return;
+        }
+        
         
         var imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
+        imagePickerController.modalPresentationStyle = .Popover
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-            
-            self.presentViewController(imagePickerController, animated: true) { () -> Void in
-                
-            }
         }
         else {
             imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            self.cameraPopoverController = UIPopoverController(contentViewController: imagePickerController)
-            self.cameraPopoverController?.presentPopoverFromRect(sender.view!.bounds, inView: sender.view!, permittedArrowDirections: .Any, animated: true)
+        }
+        
+        self.presentViewController(imagePickerController, animated: true) { () -> Void in }
+        if let popoverPresentationController = imagePickerController.popoverPresentationController {
+            popoverPresentationController.sourceView = sender.view
+            popoverPresentationController.sourceRect = sender.view!.bounds
+            popoverPresentationController.permittedArrowDirections = .Any
         }
     }
     

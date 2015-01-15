@@ -33,6 +33,7 @@
 		AB86B0EE1A3FBCAF00B5E02D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB86B0ED1A3FBCAF00B5E02D /* DataManager.swift */; };
 		ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */; };
 		ABA4879319F83F100024BFF2 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */; };
+		ABC08F671A6728A30066E8BE /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC08F661A6728A30066E8BE /* PhotoDetailViewController.swift */; };
 		ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D112199982370064F8A0 /* AppDelegate.swift */; };
 		ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */; };
 		ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D117199982370064F8A0 /* MasterViewController.swift */; };
@@ -89,6 +90,7 @@
 		AB86B0ED1A3FBCAF00B5E02D /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
 		ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
+		ABC08F661A6728A30066E8BE /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
 		ABD3D10D199982360064F8A0 /* Field QA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Field QA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD3D111199982370064F8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD3D112199982370064F8A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				ABCE55F319F769E0003B685B /* Model */,
 				AB6B9E9D19B98284003734A1 /* PersonsViewController.swift */,
 				ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */,
+				ABC08F661A6728A30066E8BE /* PhotoDetailViewController.swift */,
 				ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */,
 				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
 				ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */,
@@ -349,6 +352,7 @@
 				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
 				AB3991721A12E37B00046045 /* NotesCell.swift in Sources */,
+				ABC08F671A6728A30066E8BE /* PhotoDetailViewController.swift in Sources */,
 				AB052B441A65DE940076FD15 /* CDJSONExporter.m in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
