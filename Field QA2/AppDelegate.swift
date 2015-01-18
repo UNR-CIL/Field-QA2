@@ -43,7 +43,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         return true
     }
-
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        
+        var jsonData = NSData(contentsOfURL: url)
+        if let data = jsonData {
+            let success = CDJSONExporter.importData(data, toContext: DataManager.sharedManager.managedObjectContext, clear: true)
+            
+            if success {
+                var error: NSError?
+                var deleted = NSFileManager.defaultManager().removeItemAtURL(url, error: &error)
+                if deleted == true {
+                    println("Deleted")
+                }
+                if let error = error {
+                    println("There was an error while deleting \(error.userInfo)")
+                }
+                
+            }
+            else {
+                println("Could not import")
+            }
+        }
+        
+        return true
+    }
+    
     func applicationWillResignActive(application: UIApplication!) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
