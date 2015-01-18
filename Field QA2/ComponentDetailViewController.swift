@@ -126,7 +126,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             
         }
         
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToProject:")
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToComponent:")
         navigationItem.rightBarButtonItems = [addServiceEntryBarButton]
         
         if detailComponentItem?.newlyCreated == true {
@@ -160,8 +160,30 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         // Dispose of any resources that can be recreated.
     }
     
-    func addServiceEntryToProject(sender: UIBarButtonItem) {
-        
+    func addServiceEntryToComponent(sender: UIBarButtonItem) {
+        if let context = detailComponentItem?.managedObjectContext {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as ServiceEntryDetailViewController
+            serviceEntryDetailViewController.presentedAsFormStyle = true
+            
+            let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
+            navigationController.modalPresentationStyle = .FormSheet
+            self.presentViewController(navigationController, animated: true, completion: nil)
+            
+            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as ServiceEntry
+            newServiceEntry.component = detailComponentItem
+            
+            // Save the context.
+            var error: NSError? = nil
+            if context.save(&error) == false {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                //println("Unresolved error \(error), \(error.userInfo)")
+                abort()
+            }
+        }
+
     }
     
     @IBAction func installationDateButtonTapped(sender: AnyObject) {

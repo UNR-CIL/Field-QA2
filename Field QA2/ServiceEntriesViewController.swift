@@ -69,8 +69,6 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.leftItemsSupplementBackButton = true
     }
     
