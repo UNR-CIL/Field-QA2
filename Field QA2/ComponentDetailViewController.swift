@@ -464,7 +464,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 latitudeTextField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
-                
+                numberFormatter.minimumFractionDigits = 6
+
                 if let latitudeString = detailComponentItem?.latitude {
                     cell.textField.text = numberFormatter.stringFromNumber(latitudeString)
                 }
@@ -480,7 +481,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 longitudeTextField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
-                
+                numberFormatter.minimumFractionDigits = 6
+
                 if let longitudeString = detailComponentItem?.latitude {
                     cell.textField.text = numberFormatter.stringFromNumber(longitudeString)
                 }

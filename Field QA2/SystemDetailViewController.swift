@@ -314,6 +314,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             if let cell: TextFieldCell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
                 nameTextField = cell.textField
                 nameTextField?.delegate = self
                 cell.titleLabel.text = "Name"
@@ -332,6 +333,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             }
         case (0, 1):
             if let cell: NotesCell = cell as? NotesCell {
+                cell.textView.userInteractionEnabled = self.editing
+
                 notesTextView = cell.textView
                 notesTextView?.delegate = self
                 cell.textView.text = "Notes"
@@ -339,6 +342,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             }
         case (0, 2):
             if let cell: TextFieldCell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 locationTextField = cell.textField
                 locationTextField?.delegate = self
                 cell.titleLabel.text = "Location"
@@ -346,14 +351,18 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             }
         case (0, 3):
             if let cell: TextFieldCell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 latitudeTextField = cell.textField
                 latitudeTextField?.keyboardType = .DecimalPad
                 latitudeTextField?.delegate = self
                 cell.titleLabel.text = "Latitude"
                 
-                let numberFormater = NSNumberFormatter()
+                let numberFormatter = NSNumberFormatter()
+                numberFormatter.minimumFractionDigits = 6
+
                 if let latitude = detailSystemItem?.latitude {
-                    cell.textField.text = numberFormater.stringFromNumber(latitude)
+                    cell.textField.text = numberFormatter.stringFromNumber(latitude)
                 }
                 else {
                     cell.textField.text = nil
@@ -361,14 +370,17 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             }
         case (0, 4):
             if let cell: TextFieldCell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+
                 longitudeTextField = cell.textField
                 longitudeTextField?.keyboardType = .DecimalPad
                 longitudeTextField?.delegate = self
                 cell.titleLabel.text = "Longitude"
                 
-                let numberFormater = NSNumberFormatter()
+                let numberFormatter = NSNumberFormatter()
+                numberFormatter.minimumFractionDigits = 6
                 if let longitude = detailSystemItem?.longitude {
-                    cell.textField.text = numberFormater.stringFromNumber(longitude)
+                    cell.textField.text = numberFormatter.stringFromNumber(longitude)
                 }
                 else {
                     cell.textField.text = nil
