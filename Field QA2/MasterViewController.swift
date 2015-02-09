@@ -250,7 +250,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let versionNumber = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? NSString
             let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? NSString
             
-            return NSString(format:"Field QA v%@ (%@). © UNR CSE, 2014", versionNumber!, buildNumber!) as! String
+            return NSString(format:"Field QA v%@ (%@). © UNR CSE, 2014", versionNumber!, buildNumber!) as String
         }
         return nil;
     }
