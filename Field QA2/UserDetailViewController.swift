@@ -56,7 +56,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(rowItems[indexPath.row].identifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(rowItems[indexPath.row].identifier, forIndexPath: indexPath) as! UITableViewCell
 
         configureCell(cell, forRowAtIndexPath: indexPath)
         return cell
@@ -98,15 +98,15 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
                 }
             }
         default:
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
             if let detailUser = self.detailUser {
                 if let cell = cell as? TextFieldCell {
                     cell.textField.userInteractionEnabled = self.editing
                     cell.textField.delegate = self
                     cell.textField.tag = indexPath.row
-                    cell.textField.text = detailUser.valueForKey(cellTuple.name) as? NSString
-                    cell.titleLabel.text = cellTuple.title as NSString
+                    cell.textField.text = detailUser.valueForKey(cellTuple.name) as? NSString as! String
+                    cell.titleLabel.text = cellTuple.title as NSString as? String
                 }
             }
             else {
@@ -114,7 +114,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
                     cell.textField.userInteractionEnabled = self.editing
                     cell.textField.delegate = self
                     cell.textField.tag = indexPath.row
-                    cell.titleLabel.text = cellTuple.title as NSString
+                    cell.titleLabel.text = cellTuple.title as NSString as? String
                 }
             }
             
@@ -197,7 +197,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
         self.detailUser?.photo = image
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
@@ -215,7 +215,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
         NSLog("Tapped!")
         if self.detailUser?.photo != nil {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as PhotoDetailViewController
+            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as! PhotoDetailViewController
             photoDetailViewController.photoImage = self.detailUser?.photo
             
             var viewController: UIViewController?
@@ -227,6 +227,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
             }
             
             viewController!.modalPresentationStyle = .Popover
+            // The popver needs to be presented before configuring
             presentViewController(viewController!, animated: true, completion: { () -> Void in })
             
             if let popoverPresentationController = viewController!.popoverPresentationController {

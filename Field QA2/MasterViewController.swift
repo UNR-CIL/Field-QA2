@@ -35,7 +35,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         userImageView.layer.cornerRadius = 20
         userImageView.layer.masksToBounds = true
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         currentUser = appDelegate.currentUser
         
         if let user = currentUser {
@@ -146,7 +146,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
                 
             var error: NSError? = nil
             if !context.save(&error) {
@@ -159,7 +159,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
+        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
     }
 
     // MARK: - Fetched results controller
@@ -216,19 +216,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
-            case .Insert:
-                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-            case .Delete:
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            case .Update:
-                self.configureCell(tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
-            case .Move:
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-            default:
-                return
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Update:
+            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+        case .Move:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        default:
+            return
         }
     }
 
@@ -250,7 +250,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let versionNumber = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? NSString
             let buildNumber = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? NSString
             
-            return NSString(format:"Field QA v%@ (%@). © UNR CSE, 2014", versionNumber!, buildNumber!)
+            return NSString(format:"Field QA v%@ (%@). © UNR CSE, 2014", versionNumber!, buildNumber!) as! String
         }
         return nil;
     }

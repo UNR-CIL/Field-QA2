@@ -65,7 +65,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -80,7 +80,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
     // MARK: - New Object
     
     func insertNewObject(sender: AnyObject) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: self.managedObjectContext!) as ServiceEntry
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: self.managedObjectContext!) as! ServiceEntry
         
         newManagedObject.date = NSDate()
         // If appropriate, configure the new managed object.
@@ -106,12 +106,12 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ServiceEntryCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ServiceEntryCell", forIndexPath: indexPath) as! UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -126,7 +126,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
             
             var error: NSError? = nil
             if !context.save(&error) {
@@ -139,7 +139,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let serviceEntry = self.fetchedResultsController.objectAtIndexPath(indexPath) as ServiceEntry
+        let serviceEntry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! ServiceEntry
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .ShortStyle
         dateFormatter.dateStyle = .MediumStyle
@@ -172,17 +172,17 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
+            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
         case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         default:
             return
         }
@@ -209,8 +209,8 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         // Pass the selected object to the new view controller.
         
         let indexPath = self.tableView.indexPathForSelectedRow()
-        let serviceEntry = self.fetchedResultsController.objectAtIndexPath(indexPath!) as ServiceEntry
-        let controller = (segue.destinationViewController as UINavigationController).topViewController as ServiceEntryDetailViewController
+        let serviceEntry = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! ServiceEntry
+        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! ServiceEntryDetailViewController
         controller.detailServiceEntryItem = serviceEntry
         controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true

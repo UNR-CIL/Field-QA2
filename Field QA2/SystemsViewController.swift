@@ -68,7 +68,7 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -85,7 +85,7 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
     // MARK: - New Object
     
     func insertNewObject(sender: AnyObject) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: self.managedObjectContext!) as System
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: self.managedObjectContext!) as! System
         
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
@@ -110,12 +110,12 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SystemCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SystemCell", forIndexPath: indexPath) as! UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -130,7 +130,7 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
             
             var error: NSError? = nil
             if !context.save(&error) {
@@ -143,7 +143,7 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let system = self.fetchedResultsController.objectAtIndexPath(indexPath) as System
+        let system = self.fetchedResultsController.objectAtIndexPath(indexPath) as! System
         
         if let name = system.name {
             cell.textLabel?.text = system.name
@@ -171,17 +171,17 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
+            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
         case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         default:
             return
         }
@@ -193,7 +193,7 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let indexPath = self.tableView.indexPathForSelectedRow()
-        let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as System
+        let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! System
         currentlySelectedSystem = system
     }
 /*
@@ -213,9 +213,9 @@ self.tableView.reloadData()
         // Pass the selected object to the new view controller.
         
         let indexPath = self.tableView.indexPathForSelectedRow()
-        let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as System
+        let system = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! System
         currentlySelectedSystem = system
-        let controller = (segue.destinationViewController as UINavigationController).topViewController as SystemDetailViewController
+        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! SystemDetailViewController
         controller.detailSystemItem = system
         controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true

@@ -41,7 +41,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             let viewHeight = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
-            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
             let keyboardHeight = keyboardRect.size.height
             
@@ -88,14 +88,14 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         if let context = detailSystemItem?.managedObjectContext {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as ServiceEntryDetailViewController
+            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
             serviceEntryDetailViewController.presentedAsFormStyle = true
             
             let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
             navigationController.modalPresentationStyle = .FormSheet
             self.presentViewController(navigationController, animated: true, completion: nil)
             
-            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as ServiceEntry
+            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.system = detailSystemItem
             
             // Save the context.
@@ -111,7 +111,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     func addComponentToSystem(sender: UIBarButtonItem) {
         if let context = detailSystemItem?.managedObjectContext {
-            let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as Component
+            let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as! Component
             newComponent.system = detailSystemItem
             
             // Save the context.
@@ -150,7 +150,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     @IBAction func installationDateButtonTapped(sender: AnyObject) {
     let datePickerStoryboard = UIStoryboard(name: "DatePicker", bundle: nil)
-        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as DatePickerViewController
+        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as! DatePickerViewController
         self.datePopoverController = UIPopoverController(contentViewController: datePickerViewController)
         
         self.datePopoverController!.delegate = self
@@ -159,7 +159,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
 
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
         if popoverController == self.datePopoverController {
-            let datePickerViewController = popoverController.contentViewController as DatePickerViewController
+            let datePickerViewController = popoverController.contentViewController as! DatePickerViewController
             installationDate = datePickerViewController.datePicker.date
             self.updateInstallationDateButtonTitle()
         }
@@ -304,7 +304,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             cellIdentifier = "Cell"
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as! UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
@@ -401,7 +401,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 return
             }
             else {
-                let component = components[indexPath.row] as Component
+                let component = components[indexPath.row] as! Component
                 cell.textLabel?.text = component.name
                 
                 let dateFormatter = NSDateFormatter()
@@ -420,7 +420,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 return
             }
             else {
-                let serviceEntry = serviceEntries[indexPath.row] as ServiceEntry
+                let serviceEntry = serviceEntries[indexPath.row] as! ServiceEntry
                 cell.textLabel?.text = serviceEntry.name
                 
                 let dateFormatter = NSDateFormatter()
@@ -467,7 +467,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         else if indexPath.section == 1 {
             if let context = detailSystemItem?.managedObjectContext {
                 let components = sortedComponentsForSystem(detailSystemItem)
-                let selectedComponent = components[indexPath.row] as Component
+                let selectedComponent = components[indexPath.row] as! Component
                 self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
             }
         }
@@ -614,7 +614,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     // MARK: UIImagePickerControllerDelegate
 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
         self.detailSystemItem?.photo = image
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
@@ -632,7 +632,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         NSLog("Tapped!")
         if self.detailSystemItem?.photo != nil {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as PhotoDetailViewController
+            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as! PhotoDetailViewController
             photoDetailViewController.photoImage = self.detailSystemItem?.photo
             
             var viewController: UIViewController?

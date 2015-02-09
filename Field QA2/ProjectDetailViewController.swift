@@ -40,7 +40,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             let viewHeight = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
-            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
             let keyboardHeight = keyboardRect.size.height
         }
@@ -80,14 +80,14 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         if let context = detailProjectItem?.managedObjectContext {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as ServiceEntryDetailViewController
+            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
             serviceEntryDetailViewController.presentedAsFormStyle = true
             
             let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
             navigationController.modalPresentationStyle = .FormSheet
             self.presentViewController(navigationController, animated: true, completion: nil)
             
-            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as ServiceEntry
+            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.project = detailProjectItem
             
             // Save the context.
@@ -104,7 +104,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     func addSystemToProject(sender: UIBarButtonItem) {
         if let context = detailProjectItem?.managedObjectContext {
     
-            let newSystem = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: context) as System
+            let newSystem = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: context) as! System
             newSystem.project = detailProjectItem
             
             // Save the context.
@@ -196,7 +196,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
         /*
         self.detailServiceEntryItem?.photo = image
         
@@ -273,7 +273,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         }
         
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as! UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
@@ -345,7 +345,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                     return
                 }
                 else {
-                    let system = systems[indexPath.row] as System
+                    let system = systems[indexPath.row] as! System
                     cell.textLabel?.text = system.name
                     
                     let dateFormatter = NSDateFormatter()
@@ -364,7 +364,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                     return
                 }
                 else {
-                    let serviceEntry = serviceEntries[indexPath.row] as ServiceEntry
+                    let serviceEntry = serviceEntries[indexPath.row] as! ServiceEntry
                     cell.textLabel?.text = serviceEntry.name
                     
                     let dateFormatter = NSDateFormatter()
@@ -409,7 +409,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         else if indexPath.section == 1 {
             if let context = detailProjectItem?.managedObjectContext {
                 let systems = sortedSystemsForProject(detailProjectItem)
-                let selectedSystem = systems[indexPath.row] as System
+                let selectedSystem = systems[indexPath.row] as! System
                 self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: selectedSystem)
             }
         }

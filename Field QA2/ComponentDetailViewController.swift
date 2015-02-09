@@ -120,7 +120,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             let viewHeight = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
-            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
             let keyboardHeight = keyboardRect.size.height
             
@@ -164,14 +164,14 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         if let context = detailComponentItem?.managedObjectContext {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as ServiceEntryDetailViewController
+            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
             serviceEntryDetailViewController.presentedAsFormStyle = true
             
             let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
             navigationController.modalPresentationStyle = .FormSheet
             self.presentViewController(navigationController, animated: true, completion: nil)
             
-            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as ServiceEntry
+            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.component = detailComponentItem
             
             // Save the context.
@@ -188,7 +188,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     
     @IBAction func installationDateButtonTapped(sender: AnyObject) {
         let datePickerStoryboard = UIStoryboard(name: "DatePicker", bundle: nil)
-        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as DatePickerViewController
+        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as! DatePickerViewController
         self.installationDatePopoverController = UIPopoverController(contentViewController: datePickerViewController)
         
         self.installationDatePopoverController!.delegate = self
@@ -196,7 +196,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     
     @IBAction func calibrationDateButtonTapped(sender: AnyObject) {
         let datePickerStoryboard = UIStoryboard(name: "DatePicker", bundle: nil)
-        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as DatePickerViewController
+        let datePickerViewController = datePickerStoryboard.instantiateViewControllerWithIdentifier("DatePickerViewController") as! DatePickerViewController
         self.lastCallibrationDatePopoverController = UIPopoverController(contentViewController: datePickerViewController)
         
         self.lastCallibrationDatePopoverController!.delegate = self
@@ -204,7 +204,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     
     @IBAction func logicalDeviceButtonTapped(sender: AnyObject) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let systemsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("AssociatedLogicalDeviceViewController") as LogicalDevicesViewController
+        let systemsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("AssociatedLogicalDeviceViewController") as! LogicalDevicesViewController
         self.logicalDevicePopoverController = UIPopoverController(contentViewController: systemsViewController)
         
         self.logicalDevicePopoverController!.delegate = self
@@ -212,14 +212,14 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
         if popoverController == self.installationDatePopoverController {
-            let datePickerViewController = popoverController.contentViewController as DatePickerViewController
+            let datePickerViewController = popoverController.contentViewController as! DatePickerViewController
             installationDate = datePickerViewController.datePicker.date
         }
         else if popoverController == self.lastCallibrationDatePopoverController {
-            let datePickerViewController = popoverController.contentViewController as DatePickerViewController
+            let datePickerViewController = popoverController.contentViewController as! DatePickerViewController
         }
         else if popoverController == self.logicalDevicePopoverController {
-            let logicalDevicesViewController = popoverController.contentViewController as LogicalDevicesViewController
+            let logicalDevicesViewController = popoverController.contentViewController as! LogicalDevicesViewController
             associatedLogicalDevice = logicalDevicesViewController.currentlySelectedLogicalDevice
         }
         return true
@@ -271,7 +271,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         }
         
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as! UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
@@ -770,7 +770,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as UIImage
+        let image = info[UIImagePickerControllerEditedImage] as! UIImage
         self.detailComponentItem?.photo = image
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
@@ -788,7 +788,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         NSLog("Tapped!")
         if self.detailComponentItem?.photo != nil {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as PhotoDetailViewController
+            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as! PhotoDetailViewController
             photoDetailViewController.photoImage = self.detailComponentItem?.photo
             
             var viewController: UIViewController?
