@@ -143,17 +143,27 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .ShortStyle
         dateFormatter.dateStyle = .MediumStyle
-        if let date = serviceEntry.date {
-            cell.textLabel?.text = dateFormatter.stringFromDate(serviceEntry.date!)
-        }
         
-        if let notes = serviceEntry.notes {
-            cell.detailTextLabel!.text = notes
-            cell.detailTextLabel!.textColor = UIColor.darkTextColor()
+
+        if let operation = serviceEntry.operation {
+            cell.textLabel!.text = operation
+            cell.textLabel!.textColor = UIColor.darkTextColor()
         }
         else {
-            cell.detailTextLabel!.text = "A ServiceEntry"
-            cell.detailTextLabel!.textColor = UIColor.darkGrayColor()
+            cell.textLabel!.text = "A ServiceEntry"
+            cell.textLabel!.textColor = UIColor.darkGrayColor()
+        }
+        
+        if let component = serviceEntry.component {
+            cell.detailTextLabel?.text = component.name
+        }
+        
+        if let system = serviceEntry.system {
+            cell.detailTextLabel?.text = system.name
+        }
+        
+        if let project = serviceEntry.project {
+            cell.detailTextLabel?.text = project.name
         }
     }
     

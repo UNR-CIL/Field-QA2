@@ -97,6 +97,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
             let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.system = detailSystemItem
+            newServiceEntry.newlyCreated = true
+            serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
             
             // Save the context.
             var error: NSError? = nil
@@ -113,6 +115,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         if let context = detailSystemItem?.managedObjectContext {
             let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as! Component
             newComponent.system = detailSystemItem
+            newComponent.newlyCreated = true
             
             // Save the context.
             var error: NSError? = nil

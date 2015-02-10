@@ -75,13 +75,14 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
             serviceEntryDetailViewController.presentedAsFormStyle = true
-            
             let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
             navigationController.modalPresentationStyle = .FormSheet
             self.presentViewController(navigationController, animated: true, completion: nil)
             
             let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.project = detailProjectItem
+            newServiceEntry.newlyCreated = true
+            serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
             
             // Save the context.
             var error: NSError? = nil
@@ -99,6 +100,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     
             let newSystem = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: context) as! System
             newSystem.project = detailProjectItem
+            newSystem.newlyCreated = true
             
             // Save the context.
             var error: NSError? = nil

@@ -277,7 +277,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
                 dateFormatter.dateStyle = .MediumStyle
-                cell.titleLabel.text = "Installation Date"
+                cell.titleLabel.text = "Service Date"
                 
                 if let date = detailServiceEntryItem?.date {
                     cell.detailLabel.text = dateFormatter.stringFromDate(date)
