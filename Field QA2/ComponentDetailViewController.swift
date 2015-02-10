@@ -27,92 +27,45 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
 
     var image: UIImage?
     var imageView: UIImageView?
-    //@NSManaged var photo: UIImage?
-    
     var nameTextField: UITextField?
-    //@NSManaged var name: String?
-  
     var purposeTextView: UITextView?
-    //@NSManaged var purpose: String?
-    
     var typeNameTextField: UITextField?
-    //@NSManaged var typeName: String?
-    
     var unitDescriptionTextView: UITextView?
-    //@NSManaged var unitDescription: String?
-    
     var modelTextField: UITextField?
-    //@NSManaged var model: String?
-    
     var serialNumberTextField: UITextField?
-    //@NSManaged var serialNumber: String?
-    
     var vendorTextField: UITextField?
-    //@NSManaged var vendor: String?
-    
     var manufacturerTextField: UITextField?
-    //@NSManaged var manufacturer: String?
-    
     var supplierTextField: UITextField?
-    //@NSManaged var supplier: String?
-    
     var centerOffset: UITextField?
-    //@NSManaged var centerOffset: NSNumber?
-    
     var heightFromGroundTextField: UITextField?
-    //@NSManaged var heightFromGround: NSNumber?
-    
     var installationDate: NSDate?
     var installationDateLabel: UILabel?
-    //@NSManaged var installationDate: NSDate?
-    var installationDatePicker: UIDatePicker?
-    
-    
+    var installationYearDatePicker: UIDatePicker?
+    var installationTimeDatePicker: UIDatePicker?
     var installationDetailsTextView: UITextView?
-    //@NSManaged var installationDetails: String?
-    
     var installationTextField: UITextField?
-    //@NSManaged var installationLocation: String?
-    
     var wiringNotesTextView: UITextView?
-    //@NSManaged var wiringNotes: String?
-
     var latitudeTextField: UITextField?
-    //@NSManaged var latitude: NSNumber?
-    
     var longitudeTextField: UITextField?
-    //@NSManaged var longitude: NSNumber?
-    
     var lastCalibratedDate: NSDate?
     var lastCalibratedDateLabel: UILabel?
-    //@NSManaged var lastCalibratedDate: NSDate?
-    var lastCalibratedDatePicker: UIDatePicker?
-    
+    var lastCalibratedYearDatePicker: UIDatePicker?
+    var lastCalibratedTimeDatePicker: UIDatePicker?
     var dataIntervalTextField: UITextField?
-    //@NSManaged var dataInterval: String?
-    
     var dataStreamDetails: UITextView?
-    //@NSManaged var dataStreamDetails: String?
-    
     var measurementPropertyTextField: UITextField?
-    //@NSManaged var measurementProperty: String?
-    
     var minimumOperatingRangeTextField: UITextField?
-    //@NSManaged var minimumOperatingRange: NSNumber?
-    
     var maximumOperatingRangeTextField: UITextField?
-    //@NSManaged var maximumOperatingRange: NSNumber?
-    
     var minimumAccuracyBoundTextField: UITextField?
-    //@NSManaged var minimumAccuracyBound: NSNumber?
-    
     var maximumAccuracyBoundTextField: UITextField?
-    //@NSManaged var maxiumumAccuracyBound: NSNumber?
-    
     var parentLoggerTextField: UITextField?
-    //@NSManaged var parentLogger: String?
     
     var associatedLogicalDevice: LogicalDevice?
+    
+    var yearAndDayInstallationDate: NSDate?
+    var timeInstallationDate: NSDate?
+    var yearAndDayLastCalibratedDate: NSDate?
+    var timeLastCalibratedDate: NSDate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -238,7 +191,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             return 52.0
-        case (0, 1), (0, 3), (0, 12), (0, 13), (0, 14), (0, 19), (0, 21):
+        case (0, 1), (0, 3), (0, 12), (0, 13), (0, 14), (0, 15), (0, 20), (0, 21), (0, 23):
             return 162
         default:
             return 44.0
@@ -252,7 +205,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return 27
+        return 29
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -262,11 +215,11 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             cellIdentifier = "PhotoTextFieldCell"
-        case (0, 1), (0, 3), (0, 13), (0, 14), (0, 21):
+        case (0, 1), (0, 3), (0, 14), (0, 15), (0, 23):
             cellIdentifier = "NotesCell"
-        case (0, 11), (0, 18):
+        case (0, 11), (0, 19):
             cellIdentifier = "DateDisplayCell"
-        case (0, 12),  (0, 19):
+        case (0, 12), (0, 13), (0, 20), (0, 21):
             cellIdentifier = "DatePickerCell"
         default:
             cellIdentifier = "TextFieldCell"
@@ -429,10 +382,37 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
 
-                installationDatePicker = cell.datePicker
-                installationDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                installationYearDatePicker = cell.datePicker
+                installationYearDatePicker?.datePickerMode = .Date
+                installationYearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                
+                installationYearDatePicker?.tag = 1
+                
+                if let date = detailComponentItem?.installationDate {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    installationYearDatePicker?.date = normalizedDate ?? NSDate()
+                }
+
             }
         case (0, 13):
+            if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
+                
+                installationTimeDatePicker = cell.datePicker
+                installationTimeDatePicker?.datePickerMode = .Time
+                installationTimeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                installationTimeDatePicker?.tag = 2
+                
+                if let date = detailComponentItem?.installationDate {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    installationTimeDatePicker?.date = normalizedDate ?? NSDate()
+                }
+            }
+        case (0, 14):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
 
@@ -441,7 +421,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.titleLabel.text = "Installation Details"
                 cell.textView.text = detailComponentItem?.installationDetails
             }
-        case (0, 14):
+        case (0, 15):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
                 
@@ -451,7 +431,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.textView.text = detailComponentItem?.wiringNotes
             }
  
-        case (0, 15):
+        case (0, 16):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
                 
@@ -461,7 +441,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.titleLabel.text = "Location"
             }
 
-        case (0, 16):
+        case (0, 17):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -478,7 +458,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.titleLabel.text = "Latitude"
                 
             }
-        case (0, 17):
+        case (0, 18):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -494,7 +474,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 }
                 cell.titleLabel.text = "Longitude"
             }
-        case (0, 18):
+        case (0, 19):
             if let cell = cell as? DateDisplayCell {
                 lastCalibratedDateLabel = cell.detailLabel
                 
@@ -510,14 +490,37 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                     cell.detailLabel.text = ""
                 }
             }
-        case (0, 19):
+        case (0, 20):
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
 
-                lastCalibratedDatePicker = cell.datePicker
-                lastCalibratedDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                lastCalibratedYearDatePicker = cell.datePicker
+                lastCalibratedYearDatePicker?.datePickerMode = .Date
+                lastCalibratedYearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                
+                if let date = detailComponentItem?.lastCalibratedDate {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    lastCalibratedYearDatePicker?.date = normalizedDate ?? NSDate()
+                }
             }
-        case (0, 20):
+        case (0, 21):
+            if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
+                
+                lastCalibratedTimeDatePicker = cell.datePicker
+                lastCalibratedTimeDatePicker?.datePickerMode = .Time
+                lastCalibratedTimeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                
+                if let date = detailComponentItem?.lastCalibratedDate {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    lastCalibratedTimeDatePicker?.date = normalizedDate ?? NSDate()
+                }
+            }
+        case (0, 22):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -526,7 +529,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 dataIntervalTextField?.text = detailComponentItem?.dataInterval
                 cell.titleLabel.text = "Interval"
             }
-        case (0, 21):
+        case (0, 23):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
 
@@ -535,7 +538,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.titleLabel.text = "Data Stream Details"
                 dataStreamDetails?.text = detailComponentItem?.dataStreamDetails
             }
-        case (0, 22):
+        case (0, 24):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -544,7 +547,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 measurementPropertyTextField?.text = detailComponentItem?.measurementProperty
                 cell.titleLabel.text = "Measurement"
             }
-        case (0, 23):
+        case (0, 25):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -559,7 +562,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 cell.titleLabel.text = "Min Range"
             }
-        case (0, 24):
+        case (0, 26):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -574,7 +577,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 cell.titleLabel.text = "Max Range"
             }
-        case (0, 25):
+        case (0, 27):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -589,7 +592,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 cell.titleLabel.text = "Min Accuracy"
             }
-        case (0, 26):
+        case (0, 28):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -605,7 +608,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 cell.titleLabel.text = "Max Range"
             }
-        case (0, 27):
+        case (0, 29):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -708,17 +711,38 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        
-        if sender == self.installationDatePicker {
-            detailComponentItem?.installationDate = sender.date
-            
-            
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 11, inSection: 0)], withRowAnimation: .None)
+        switch (sender) {
+        case installationYearDatePicker!:
+            yearAndDayInstallationDate = installationYearDatePicker!.date
+        case installationTimeDatePicker!:
+            timeInstallationDate = installationTimeDatePicker!.date
+        case lastCalibratedYearDatePicker!:
+            yearAndDayLastCalibratedDate = lastCalibratedYearDatePicker!.date
+        case lastCalibratedTimeDatePicker!:
+            timeLastCalibratedDate = lastCalibratedTimeDatePicker!.date
+        default:
+            println("No picker found")
         }
-        else if sender == self.lastCalibratedDatePicker {
-            detailComponentItem?.lastCalibratedDate = sender.date
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 18, inSection: 0)], withRowAnimation: .None)
-
+        
+        let calendar = NSCalendar.currentCalendar()
+        if let yearDate = yearAndDayInstallationDate, timeDate = timeInstallationDate {
+            let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
+            let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+            yearDateComponents.hour = timeDateComponents.hour
+            yearDateComponents.minute = timeDateComponents.minute
+            
+            detailComponentItem?.installationDate = calendar.dateFromComponents(yearDateComponents)
+            tableView.reloadData()
+        }
+        
+        if let yearDate = yearAndDayLastCalibratedDate, timeDate = timeLastCalibratedDate {
+            let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
+            let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+            yearDateComponents.hour = timeDateComponents.hour
+            yearDateComponents.minute = timeDateComponents.minute
+            
+            detailComponentItem?.lastCalibratedDate = calendar.dateFromComponents(yearDateComponents)
+            tableView.reloadData()
         }
     }
     
