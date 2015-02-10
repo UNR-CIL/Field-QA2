@@ -35,6 +35,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     var installationDate : NSDate?
     
+    var yearAndDayInstallationDate: NSDate?
+    var timeInstallationDate: NSDate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -253,7 +256,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             return 52.0
         case (0, 1):
             return 162.0
-        case(0, 6):
+        case(0, 6...7):
             return 162.0
         default:
             return 44.0
@@ -269,10 +272,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         // Return the number of rows in the section.
         switch (section) {
         case 0:
-            if section == 0 {
-                return 7
-            }
-            return 0
+            return 8
         case 1:
             if let components = detailSystemItem?.components {
                 return components.count
@@ -301,7 +301,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             cellIdentifier = "NotesCell"
         case (0, 5):
             cellIdentifier = "DateDisplayCell"
-        case (0, 6):
+        case (0, 6...7):
             cellIdentifier = "DatePickerCell"
         default:
             cellIdentifier = "Cell"
@@ -405,10 +405,38 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 }
             }
         case (0, 6):
-            if let cell: DatePickerCell = cell as? DatePickerCell {
-                datePicker = cell.datePicker
-                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+            if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
                 
+                
+                datePicker = cell.datePicker
+                datePicker?.datePickerMode = .Date
+                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                datePicker?.tag = 1
+                
+                if let date = detailSystemItem?.installationDate {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    datePicker?.date = normalizedDate ?? NSDate()
+                }
+                
+            }
+        case (0, 7):
+            if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
+                
+                datePicker = cell.datePicker
+                datePicker?.datePickerMode = .Time
+                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                datePicker?.tag = 2
+                
+                if let date = detailSystemItem?.installationDate {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    datePicker?.date = normalizedDate ?? NSDate()
+                }
             }
         case (1, _):
             let components = sortedComponentsForSystem(detailSystemItem)
@@ -525,7 +553,23 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        detailSystemItem?.installationDate = sender.date
+        if sender.tag == 1 {
+            yearAndDayInstallationDate = sender.date
+        }
+        else {
+            timeInstallationDate = sender.date
+        }
+        
+        let calendar = NSCalendar.currentCalendar()
+        if let yearDate = yearAndDayInstallationDate, timeDate = timeInstallationDate {
+            let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
+            let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+            yearDateComponents.hour = timeDateComponents.hour
+            yearDateComponents.minute = timeDateComponents.minute
+            
+            detailSystemItem?.installationDate = calendar.dateFromComponents(yearDateComponents)
+            tableView.reloadData()
+        }
     }
     
     

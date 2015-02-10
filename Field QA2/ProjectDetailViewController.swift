@@ -222,9 +222,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             return 52.0
-        case (0, 5):
-            return 162.0
-        case (0, 6):
+        case (0, 5...6):
             return 162.0
         default:
             return 44.0
@@ -264,9 +262,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             cellIdentifier = "TextFieldCell"
         case (0, 4):
             cellIdentifier = "DateDisplayCell"
-        case (0, 5):
-            cellIdentifier = "DatePickerCell"
-        case (0, 6):
+        case (0, 5...6):
             cellIdentifier = "DatePickerCell"
         default:
             cellIdentifier = "Cell"
