@@ -25,29 +25,23 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
 
     var image: UIImage?
     weak var imageView: UIImageView!
-    //    @NSManaged var photo: UIImage?
-    
     weak var nameTextField: UITextField?
-    //    @NSManaged var name: String?
-    
     weak var operationTextField: UITextField?
-    //    @NSManaged var operation: String?
-    
     weak var notesTextView: UITextView?
-    //    @NSManaged var notes: String?
 
 
     var date: NSDate?
+    var yearServiceDate: NSDate?
+    var timeServiceDate: NSDate?
+    
     var dateLabel: UILabel?
-    var datePicker: UIDatePicker?
-    //    @NSManaged var date: NSDate?
+    var yearDatePicker: UIDatePicker?
+    var timeDatePicker: UIDatePicker?
+    
 
     var creationDate: NSDate?
-    //    var creationDatePicker: NSDate?
-    //    @NSManaged var creationDate: NSDate?
-    //    @NSManaged var creator: Person?
-    //    @NSManaged var documents: NSSet
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -160,36 +154,13 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         })
     }
     
-    /*
-    0 weak var nameTextField: UITextField?
-    //    @NSManaged var name: String?
-    
-    1 weak var operationTextField: UITextField?
-    //    @NSManaged var operation: String?
-    
-    2 weak var notesTextView: UITextView?
-    //    @NSManaged var notes: String?
-    
-    3
-    var date: NSDate?
-    4 var datePicker: UIDatePicker?
-    //    @NSManaged var date: NSDate?
-    
-    var creationDate: NSDate?
-    //    var creationDatePicker: NSDate?
-    //    @NSManaged var creationDate: NSDate?
-    //    @NSManaged var creator: Person?
-    //    @NSManaged var documents: NSSet
-
-*/
-    
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             return 52.0
-        case (0, 2), (0, 4):
+        case (0, 2), (0, 4), (0, 5):
             return 162
         default:
             return 44.0
@@ -203,7 +174,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return 5
+        return 6
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -217,7 +188,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             cellIdentifier = "NotesCell"
         case (0, 3):
             cellIdentifier = "DateDisplayCell"
-        case (0, 4):
+        case (0, 4...5):
             cellIdentifier = "DatePickerCell"
         default:
             cellIdentifier = "TextFieldCell"
@@ -289,9 +260,34 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         case (0, 4):
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
-
-                datePicker = cell.datePicker
-                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                
+                
+                yearDatePicker = cell.datePicker
+                yearDatePicker?.datePickerMode = .Date
+                yearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                
+                if let date = detailServiceEntryItem?.date {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    yearDatePicker?.date = normalizedDate ?? NSDate()
+                }
+                
+            }
+        case (0, 5):
+            if let cell = cell as? DatePickerCell {
+                cell.datePicker.userInteractionEnabled = self.editing
+                
+                timeDatePicker = cell.datePicker
+                timeDatePicker?.datePickerMode = .Time
+                timeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                
+                if let date = detailServiceEntryItem?.date {
+                    let calendar = NSCalendar.currentCalendar()
+                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let normalizedDate = calendar.dateFromComponents(dateComponents)
+                    timeDatePicker?.date = normalizedDate ?? NSDate()
+                }
             }
         default:
             println("Default")
@@ -317,11 +313,22 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        if sender == self.datePicker {
-            detailServiceEntryItem?.date = sender.date
+        if sender == yearDatePicker {
+            yearServiceDate = yearDatePicker!.date
+        }
+        else if sender == timeDatePicker {
+            timeServiceDate = timeDatePicker!.date
+        }
+        
+        let calendar = NSCalendar.currentCalendar()
+        if let yearDate = yearServiceDate, timeDate = timeServiceDate {
+            let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
+            let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+            yearDateComponents.hour = timeDateComponents.hour
+            yearDateComponents.minute = timeDateComponents.minute
             
-            
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 3, inSection: 0)], withRowAnimation: .None)
+            detailServiceEntryItem?.date = calendar.dateFromComponents(yearDateComponents)
+            tableView.reloadData()
         }
     }
     
