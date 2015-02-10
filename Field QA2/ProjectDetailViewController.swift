@@ -27,12 +27,13 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         }
     }
     
-    weak var nameTextField: UITextField? = nil
-    weak var fundingAgencyTextField: UITextField? = nil
-    weak var grantNumberTextField: UITextField? = nil
-    weak var institutionTextField: UITextField? = nil
-    weak var datePicker: UIDatePicker? = nil
-    weak var dateLabel: UILabel? = nil
+    weak var nameTextField: UITextField?
+    weak var fundingAgencyTextField: UITextField?
+    weak var grantNumberTextField: UITextField?
+    weak var institutionTextField: UITextField?
+    weak var yearDatePicker: UIDatePicker?
+    weak var timeDatePicker: UIDatePicker?
+    weak var dateLabel: UILabel?
     
     var yearAndDayStartedDate: NSDate?
     var timeStartedDate: NSDate?
@@ -332,16 +333,15 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                     cell.datePicker.userInteractionEnabled = self.editing
 
 
-                    datePicker = cell.datePicker
-                    datePicker?.datePickerMode = .Date
-                    datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-                    datePicker?.tag = 1
+                    yearDatePicker = cell.datePicker
+                    yearDatePicker?.datePickerMode = .Date
+                    yearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                     
                     if let date = detailProjectItem?.startedDate {
                         let calendar = NSCalendar.currentCalendar()
                         let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
                         let normalizedDate = calendar.dateFromComponents(dateComponents)
-                        datePicker?.date = normalizedDate ?? NSDate()
+                        yearDatePicker?.date = normalizedDate ?? NSDate()
                     }
                     
                 }
@@ -349,16 +349,15 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 if let cell = cell as? DatePickerCell {
                     cell.datePicker.userInteractionEnabled = self.editing
                     
-                    datePicker = cell.datePicker
-                    datePicker?.datePickerMode = .Time
-                    datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-                    datePicker?.tag = 2
+                    timeDatePicker = cell.datePicker
+                    timeDatePicker?.datePickerMode = .Time
+                    timeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                     
                     if let date = detailProjectItem?.startedDate {
                         let calendar = NSCalendar.currentCalendar()
                         let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
                         let normalizedDate = calendar.dateFromComponents(dateComponents)
-                        datePicker?.date = normalizedDate ?? NSDate()
+                        timeDatePicker?.date = normalizedDate ?? NSDate()
                     }
                 }
             case (1, _):
@@ -476,11 +475,11 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        if sender.tag == 1 {
-            yearAndDayStartedDate = sender.date
+        if sender == yearDatePicker {
+            yearAndDayStartedDate = yearDatePicker!.date
         }
-        else {
-            timeStartedDate = sender.date
+        else if sender == timeDatePicker {
+            timeStartedDate = timeDatePicker!.date
         }
         
         let calendar = NSCalendar.currentCalendar()
