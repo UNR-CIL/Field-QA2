@@ -236,7 +236,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             return 52.0
-        case (0, 1), (0, 3), (0, 12), (0, 13), (0, 15), (0, 19), (0, 21):
+        case (0, 1), (0, 3), (0, 12), (0, 13), (0, 14), (0, 19), (0, 21):
             return 162
         default:
             return 44.0
@@ -260,7 +260,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             cellIdentifier = "PhotoTextFieldCell"
-        case (0, 1), (0, 3), (0, 13), (0, 15), (0, 21):
+        case (0, 1), (0, 3), (0, 13), (0, 14), (0, 21):
             cellIdentifier = "NotesCell"
         case (0, 11), (0, 18):
             cellIdentifier = "DateDisplayCell"
@@ -388,6 +388,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                     cell.textField.text = nil
                 }
                 cell.titleLabel.text = "Center Offset"
+                cell.textField.keyboardType = UIKeyboardType.NumberPad
             }
         case (0, 10):
             if let cell = cell as? TextFieldCell {
@@ -404,6 +405,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                     cell.textField.text = nil
                 }
                 cell.titleLabel.text = "Height"
+                cell.textField.keyboardType = UIKeyboardType.NumberPad
             }
         case (0, 11):
             if let cell = cell as? DateDisplayCell {
@@ -438,23 +440,25 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.textView.text = detailComponentItem?.installationDetails
             }
         case (0, 14):
-            if let cell = cell as? TextFieldCell {
-                cell.textField.userInteractionEnabled = self.editing
-
-                installationTextField = cell.textField
-                installationTextField?.delegate = self
-                cell.textField.text = detailComponentItem?.installationLocation
-                cell.titleLabel.text = "Location"
-            }
-        case (0, 15):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
-
+                
                 wiringNotesTextView = cell.textView
                 wiringNotesTextView?.delegate = self
                 cell.titleLabel.text = "Wiring Notes"
                 cell.textView.text = detailComponentItem?.wiringNotes
             }
+ 
+        case (0, 15):
+            if let cell = cell as? TextFieldCell {
+                cell.textField.userInteractionEnabled = self.editing
+                
+                installationTextField = cell.textField
+                installationTextField?.delegate = self
+                cell.textField.text = detailComponentItem?.installationLocation
+                cell.titleLabel.text = "Location"
+            }
+
         case (0, 16):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
