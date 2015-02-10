@@ -34,6 +34,9 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     weak var datePicker: UIDatePicker? = nil
     weak var dateLabel: UILabel? = nil
     
+    var yearAndDayStartedDate: NSDate?
+    var timeStartedDate: NSDate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -209,20 +212,23 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             
         })
     }
-
+    
     
     // MARK: UITableView
     
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
             return 52.0
-        }
-        else if indexPath.row == 5 {
+        case (0, 5):
             return 162.0
+        case (0, 6):
+            return 162.0
+        default:
+            return 44.0
         }
-        return 44.0
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -233,10 +239,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         
         switch (section) {
         case 0:
-            if section == 0 {
-                return 6
-            }
-            return 0
+            return 7
         case 1:
             if let systems = detailProjectItem?.systems {
                 return systems.count
@@ -262,6 +265,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         case (0, 4):
             cellIdentifier = "DateDisplayCell"
         case (0, 5):
+            cellIdentifier = "DatePickerCell"
+        case (0, 6):
             cellIdentifier = "DatePickerCell"
         default:
             cellIdentifier = "Cell"
@@ -330,9 +335,35 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 if let cell = cell as? DatePickerCell {
                     cell.datePicker.userInteractionEnabled = self.editing
 
+
                     datePicker = cell.datePicker
+                    datePicker?.datePickerMode = .Date
                     datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                    datePicker?.tag = 1
                     
+                    if let date = detailProjectItem?.startedDate {
+                        let calendar = NSCalendar.currentCalendar()
+                        let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                        let normalizedDate = calendar.dateFromComponents(dateComponents)
+                        datePicker?.date = normalizedDate ?? NSDate()
+                    }
+                    
+                }
+            case (0, 6):
+                if let cell = cell as? DatePickerCell {
+                    cell.datePicker.userInteractionEnabled = self.editing
+                    
+                    datePicker = cell.datePicker
+                    datePicker?.datePickerMode = .Time
+                    datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                    datePicker?.tag = 2
+                    
+                    if let date = detailProjectItem?.startedDate {
+                        let calendar = NSCalendar.currentCalendar()
+                        let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                        let normalizedDate = calendar.dateFromComponents(dateComponents)
+                        datePicker?.date = normalizedDate ?? NSDate()
+                    }
                 }
             case (1, _):
                 let systems = sortedSystemsForProject(detailProjectItem)
@@ -449,7 +480,23 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        detailProjectItem?.startedDate = sender.date
+        if sender.tag == 1 {
+            yearAndDayStartedDate = sender.date
+        }
+        else {
+            timeStartedDate = sender.date
+        }
+        
+        let calendar = NSCalendar.currentCalendar()
+        if let yearDate = yearAndDayStartedDate, timeDate = timeStartedDate {
+            let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
+            let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+            yearDateComponents.hour = timeDateComponents.hour
+            yearDateComponents.minute = timeDateComponents.minute
+            
+            detailProjectItem?.startedDate = calendar.dateFromComponents(yearDateComponents)
+            tableView.reloadData()
+        }
     }
     
     
