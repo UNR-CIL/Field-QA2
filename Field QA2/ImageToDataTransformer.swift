@@ -21,11 +21,11 @@ class ImageToDataTransformer : NSValueTransformer {
     
 
     override func transformedValue(value: AnyObject!) -> AnyObject? {
-        var data : NSData = UIImagePNGRepresentation(value as! UIImage)
+        var data : NSData = UIImagePNGRepresentation(value as? UIImage)
         return data
     }
     
     override func reverseTransformedValue(value: AnyObject!) -> AnyObject? {
-        return UIImage(data: value as! NSData)
+        return UIImage(data: value as NSData)
     }
 }

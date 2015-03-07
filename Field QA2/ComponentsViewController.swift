@@ -66,7 +66,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -83,7 +83,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     // MARK: - New Object
 
     func insertNewObject(sender: AnyObject) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: self.managedObjectContext!) as! Component
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: self.managedObjectContext!) as Component
         
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
@@ -107,12 +107,12 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ComponentCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ComponentCell", forIndexPath: indexPath) as UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -127,7 +127,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
             
             var error: NSError? = nil
             if !context.save(&error) {
@@ -140,7 +140,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let component = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Component
+        let component = self.fetchedResultsController.objectAtIndexPath(indexPath) as Component
         
         if let name = component.name {
             cell.textLabel?.text = component.name
@@ -205,9 +205,9 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
         // Pass the selected object to the new view controller.
         
         let indexPath = self.tableView.indexPathForSelectedRow()
-        let component = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Component
+        let component = self.fetchedResultsController.objectAtIndexPath(indexPath!) as? Component
         currentlySelectedComponent = component
-        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! ComponentDetailViewController
+        let controller = (segue.destinationViewController as UINavigationController).topViewController as ComponentDetailViewController
         controller.detailComponentItem = component
         controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true

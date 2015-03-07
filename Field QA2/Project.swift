@@ -43,19 +43,19 @@ class Project: NSManagedObject {
             
             switch  propertyName {
             case "startedDate":
-                if let date = self.valueForKey(propertyName as! String) as? NSDate {
+                if let date = self.valueForKey(propertyName as String) as? NSDate {
                     dictionary[propertyName] = date.timeIntervalSince1970
                 }
             case "creationDate":
-                if let date = self.valueForKey(propertyName as! String) as? NSDate {
+                if let date = self.valueForKey(propertyName as String) as? NSDate {
                     dictionary[propertyName] = date.timeIntervalSince1970
                 }
             case "modificationDate":
-                if let date = self.valueForKey(propertyName as! String) as? NSDate {
+                if let date = self.valueForKey(propertyName as String) as? NSDate {
                     dictionary[propertyName] = date.timeIntervalSince1970
                 }
             case "principalInvestigator":
-                if let person = self.valueForKey(propertyName as! String) as? Person {
+                if let person = self.valueForKey(propertyName as String) as? Person {
                     dictionary[propertyName] = [person.uniqueIdentifier!]
                 }
             case "systems":
@@ -63,7 +63,7 @@ class Project: NSManagedObject {
             case "documents":
                 fallthrough
             case "serviceEntries":
-                if let set = self.valueForKey(propertyName as! String) as? NSSet {
+                if let set = self.valueForKey(propertyName as String) as? NSSet {
                     var itemIds = [AnyObject]()
                     for item in set {
                         itemIds.append(item.valueForKey("uniqueIdentifier")!)
@@ -71,7 +71,7 @@ class Project: NSManagedObject {
                     dictionary[propertyName] = itemIds
                 }
             default:
-                if let value: AnyObject = self.valueForKey(propertyName as! String) {
+                if let value: AnyObject = self.valueForKey(propertyName as String) {
                     dictionary[propertyName] = value
                 }
             }
