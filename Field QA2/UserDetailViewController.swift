@@ -105,7 +105,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
                     cell.textField.userInteractionEnabled = self.editing
                     cell.textField.delegate = self
                     cell.textField.tag = indexPath.row
-                    cell.textField.text = detailUser.valueForKey(cellTuple.name) as String
+                    cell.textField.text = detailUser.valueForKey(cellTuple.name) as? String
                     cell.titleLabel.text = cellTuple.title
                 }
             }
