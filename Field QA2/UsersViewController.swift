@@ -88,7 +88,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     // MARK: - New Object
     
     func insertNewObject(sender: AnyObject) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Person", inManagedObjectContext: self.managedObjectContext!) as Person
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Person", inManagedObjectContext: self.managedObjectContext!) as! Person
         
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
@@ -112,12 +112,12 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell", forIndexPath: indexPath) as! UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -127,7 +127,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
             self.performSegueWithIdentifier("showUserDetailViewController", sender: self)
         }
         else {
-            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.currentUser = fetchedResultsController.objectAtIndexPath(indexPath) as? Person
             NSLog("logged in as %@", appDelegate.currentUser!)
             NSUserDefaults.standardUserDefaults().setObject(appDelegate.currentUser?.uniqueIdentifier, forKey: CurrentUserIdKey)
@@ -149,7 +149,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
             
             var error: NSError? = nil
             if !context.save(&error) {
@@ -162,7 +162,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let person = self.fetchedResultsController.objectAtIndexPath(indexPath) as Person
+        let person = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Person
         
         if let name = person.firstName {
             cell.textLabel?.text = person.firstName
@@ -228,8 +228,8 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         // Pass the selected object to the new view controller.
         
         let indexPath = self.tableView.indexPathForSelectedRow()
-        let person = self.fetchedResultsController.objectAtIndexPath(indexPath!) as Person
-        let controller = segue.destinationViewController as UserDetailViewController
+        let person = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Person
+        let controller = segue.destinationViewController as! UserDetailViewController
         controller.detailUser = person
         controller.navigationItem.leftItemsSupplementBackButton = true
     }

@@ -26,6 +26,6 @@ class ImageToDataTransformer : NSValueTransformer {
     }
     
     override func reverseTransformedValue(value: AnyObject!) -> AnyObject? {
-        return UIImage(data: value as NSData)
+        return UIImage(data: value as! NSData)
     }
 }

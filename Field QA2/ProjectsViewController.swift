@@ -65,7 +65,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -82,7 +82,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     // MARK: - New Object
     
     func insertNewObject(sender: AnyObject) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Project", inManagedObjectContext: self.managedObjectContext!) as Project
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Project", inManagedObjectContext: self.managedObjectContext!) as! Project
         
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
@@ -107,12 +107,12 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ProjectCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ProjectCell", forIndexPath: indexPath) as! UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -127,7 +127,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
             
             var error: NSError? = nil
             if !context.save(&error) {
@@ -140,7 +140,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let project = self.fetchedResultsController.objectAtIndexPath(indexPath) as Project
+        let project = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Project
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .ShortStyle
         dateFormatter.dateStyle = .MediumStyle
@@ -225,7 +225,7 @@ class ProjectsViewController: UITableViewController, NSFetchedResultsControllerD
         
         let indexPath = self.tableView.indexPathForSelectedRow()
         let project = self.fetchedResultsController.objectAtIndexPath(indexPath!) as? Project
-        let controller = (segue.destinationViewController as UINavigationController).topViewController as ProjectDetailViewController
+        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! ProjectDetailViewController
         controller.detailProjectItem = project
         controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true

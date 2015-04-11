@@ -56,7 +56,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(rowItems[indexPath.row].identifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(rowItems[indexPath.row].identifier, forIndexPath: indexPath) as! UITableViewCell
 
         configureCell(cell, forRowAtIndexPath: indexPath)
         return cell
@@ -215,7 +215,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
         NSLog("Tapped!")
         if self.detailUser?.photo != nil {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as PhotoDetailViewController
+            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as! PhotoDetailViewController
             photoDetailViewController.photoImage = self.detailUser?.photo
             
             var viewController: UIViewController?

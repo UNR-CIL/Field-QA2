@@ -48,7 +48,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
             let viewHeight = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
-            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+            let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
             let keyboardHeight = keyboardRect.size.height
             
@@ -94,7 +94,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
         if popoverController == self.datePopoverController {
-            let datePickerViewController = popoverController.contentViewController as DatePickerViewController
+            let datePickerViewController = popoverController.contentViewController as! DatePickerViewController
             date = datePickerViewController.datePicker.date
         }
         else if popoverController == self.associatedEntityPopoverController {
@@ -194,7 +194,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             cellIdentifier = "TextFieldCell"
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as! UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
@@ -358,7 +358,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         NSLog("Tapped!")
         if self.detailServiceEntryItem?.photo != nil {
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as PhotoDetailViewController
+            let photoDetailViewController = mainStoryboard.instantiateViewControllerWithIdentifier("PhotoDetailViewController") as! PhotoDetailViewController
             photoDetailViewController.photoImage = self.detailServiceEntryItem?.photo
             
             var viewController: UIViewController?
