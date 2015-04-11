@@ -602,7 +602,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 let numberFormatter = NSNumberFormatter()
                 
-                if let maximum = detailComponentItem?.maxiumumAccuracyBound {
+                if let maximum = detailComponentItem?.maximumAccuracyBound {
                     maximumAccuracyBoundTextField?.text = numberFormatter.stringFromNumber(maximum)
                 }
                 
@@ -701,7 +701,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         if textField ==  maximumAccuracyBoundTextField{
             let numberFormatter = NSNumberFormatter()
 
-            detailComponentItem?.maxiumumAccuracyBound = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.maximumAccuracyBound = numberFormatter.numberFromString(textField.text)
         }
         if textField ==  parentLoggerTextField {
             detailComponentItem?.parentLogger = textField.text

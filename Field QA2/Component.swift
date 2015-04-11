@@ -24,7 +24,7 @@ class Component: NSManagedObject {
     @NSManaged var longitude: NSNumber?
     @NSManaged var manufacturer: String?
     @NSManaged var maximumOperatingRange: NSNumber?
-    @NSManaged var maxiumumAccuracyBound: NSNumber?
+    @NSManaged var maximumAccuracyBound: NSNumber?
     @NSManaged var measurementProperty: String?
     @NSManaged var minimumAccuracyBound: NSNumber?
     @NSManaged var minimumOperatingRange: NSNumber?
