@@ -118,7 +118,11 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         }
 
         var error : NSError?
-        self.detailServiceEntryItem?.managedObjectContext!.save(&error)
+        do {
+            try self.detailServiceEntryItem?.managedObjectContext!.save()
+        } catch let error1 as NSError {
+            error = error1
+        }
     }
     
     func configureView() {
@@ -139,7 +143,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
     
     // MARK: UIImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerEditedImage] as? UIImage
         self.detailServiceEntryItem?.photo = image
         
@@ -194,7 +198,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             cellIdentifier = "TextFieldCell"
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
@@ -268,7 +272,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
                 
                 if let date = detailServiceEntryItem?.date {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     yearDatePicker?.date = normalizedDate ?? NSDate()
                 }
@@ -284,13 +288,13 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
                 
                 if let date = detailServiceEntryItem?.date {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let dateComponents = calendar.components([.Hour, .Minute] , fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     timeDatePicker?.date = normalizedDate ?? NSDate()
                 }
             }
         default:
-            println("Default")
+            print("Default")
         }
         
     }
@@ -323,8 +327,8 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         let calendar = NSCalendar.currentCalendar()
         if let yearDate = yearServiceDate {
             if let timeDate = timeServiceDate {
-                let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
-                let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+                let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
+                let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
                 yearDateComponents.hour = timeDateComponents.hour
                 yearDateComponents.minute = timeDateComponents.minute
                 
@@ -382,7 +386,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         }
         
         
-        var imagePickerController = UIImagePickerController()
+        let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.modalPresentationStyle = .Popover

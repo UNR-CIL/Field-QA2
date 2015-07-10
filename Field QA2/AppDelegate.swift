@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = .AllVisible
         
@@ -35,7 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             var error: NSError?
             let fetchRequest = NSFetchRequest(entityName: "Person")
             fetchRequest.predicate = NSPredicate(format: "uniqueIdentifier == %@", userId)
-            let users = DataManager.sharedManager.managedObjectContext?.executeFetchRequest(fetchRequest, error: &error)
+            let users: [AnyObject]?
+            do {
+                users = try DataManager.sharedManager.managedObjectContext?.executeFetchRequest(fetchRequest)
+            } catch let error1 as NSError {
+                error = error1
+                users = nil
+            }
             if let user = users?[0] as? Person {
                 currentUser = user
             }
@@ -43,25 +49,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
-        var jsonData = NSData(contentsOfURL: url)
+        let jsonData = NSData(contentsOfURL: url)
         if let data = jsonData {
             let success = CDJSONExporter.importData(data, toContext: DataManager.sharedManager.managedObjectContext, clear: true)
             
             if success {
                 var error: NSError?
-                var deleted = NSFileManager.defaultManager().removeItemAtURL(url, error: &error)
+                var deleted: Bool
+                do {
+                    try NSFileManager.defaultManager().removeItemAtURL(url)
+                    deleted = true
+                } catch let error1 as NSError {
+                    error = error1
+                    deleted = false
+                }
                 if deleted == true {
-                    println("Deleted")
+                    print("Deleted")
                 }
                 if let error = error {
-                    println("There was an error while deleting \(error.userInfo)")
+                    print("There was an error while deleting \(error.userInfo)")
                 }
                 
             }
             else {
-                println("Could not import")
+                print("Could not import")
             }
         }
         
@@ -113,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     // MARK: - Split view
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
         if let secondaryAsNavController = secondaryViewController as? UINavigationController {
             if let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController {
                 if topAsDetailController.detailItem == nil {
@@ -131,11 +144,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func saveContext () {
         if let moc = DataManager.sharedManager.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                } catch let error1 as NSError {
+                    error = error1
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                }
             }
         }
     }

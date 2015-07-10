@@ -80,6 +80,10 @@ class Project: NSManagedObject {
     }()
     
     private func json() -> NSData? {
-        return NSJSONSerialization.dataWithJSONObject(self.dictionaryValue!, options: NSJSONWritingOptions.allZeros, error: nil)
+        do {
+            return try NSJSONSerialization.dataWithJSONObject(self.dictionaryValue!, options: NSJSONWritingOptions())
+        } catch _ {
+            return nil
+        }
     }
 }

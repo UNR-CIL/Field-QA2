@@ -103,12 +103,10 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             newServiceEntry.newlyCreated = true
             serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
             
-            // Save the context.
-            var error: NSError? = nil
-            if context.save(&error) == false {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //println("Unresolved error \(error), \(error.userInfo)")
+            do {
+                try context.save()
+            }
+            catch {
                 abort()
             }
         }
@@ -120,12 +118,10 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             newComponent.system = detailSystemItem
             newComponent.newlyCreated = true
             
-            // Save the context.
-            var error: NSError? = nil
-            if context.save(&error) == false {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //println("Unresolved error \(error), \(error.userInfo)")
+            do {
+                try context.save()
+            }
+            catch {
                 abort()
             }
             self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: newComponent)
@@ -232,7 +228,11 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
         
         var error : NSError?
-        self.detailSystemItem?.managedObjectContext!.save(&error)
+        do {
+            try self.detailSystemItem?.managedObjectContext!.save()
+        } catch let error1 as NSError {
+            error = error1
+        }
     }
     // >>>
     
@@ -307,7 +307,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             cellIdentifier = "Cell"
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
@@ -416,7 +416,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 
                 if let date = detailSystemItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     datePicker?.date = normalizedDate ?? NSDate()
                 }
@@ -433,7 +433,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 
                 if let date = detailSystemItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let dateComponents = calendar.components([.Hour, .Minute] , fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     datePicker?.date = normalizedDate ?? NSDate()
                 }
@@ -477,7 +477,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 }
             }
         default:
-            println("")
+            print("")
         }
         
     }
@@ -529,7 +529,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     */
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        println("textField ended \(textField.text)")
+        print("textField ended \(textField.text)")
         
         if textField == nameTextField {
             detailSystemItem?.name = textField.text
@@ -540,13 +540,17 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
         
         if textField == latitudeTextField {
-            let numberFormatter = NSNumberFormatter()
-            detailSystemItem?.latitude = numberFormatter.numberFromString(textField.text)
+            if let text = textField.text {
+                let numberFormatter = NSNumberFormatter()
+                detailSystemItem?.latitude = numberFormatter.numberFromString(text)
+            }
         }
         
         if textField == longitudeTextField {
-            let numberFormatter = NSNumberFormatter()
-            detailSystemItem?.longitude = numberFormatter.numberFromString(textField.text)
+            if let text = textField.text {
+                let numberFormatter = NSNumberFormatter()
+                detailSystemItem?.longitude = numberFormatter.numberFromString(text)
+            }
         }
         
         return true
@@ -563,8 +567,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         let calendar = NSCalendar.currentCalendar()
         if let yearDate = yearAndDayInstallationDate {
             if let timeDate = timeInstallationDate {
-                let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
-                let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+                let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
+                let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
                 yearDateComponents.hour = timeDateComponents.hour
                 yearDateComponents.minute = timeDateComponents.minute
                 
@@ -674,7 +678,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     
     // MARK: UIImagePickerControllerDelegate
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerEditedImage] as? UIImage
         self.detailSystemItem?.photo = image
         
@@ -717,7 +721,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
         
         
-        var imagePickerController = UIImagePickerController()
+        let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.modalPresentationStyle = .Popover

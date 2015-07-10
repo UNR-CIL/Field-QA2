@@ -56,7 +56,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(rowItems[indexPath.row].identifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(rowItems[indexPath.row].identifier, forIndexPath: indexPath) as UITableViewCell
 
         configureCell(cell, forRowAtIndexPath: indexPath)
         return cell
@@ -131,7 +131,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
         switch textField.tag {
         default:
             detailUser?.setValue(textField.text, forKey: cellTuple.name)
-            println("\(textField.tag)")
+            print("\(textField.tag)")
 
             
         }
@@ -196,7 +196,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
     
     // MARK: UIImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerEditedImage] as? UIImage
         self.detailUser?.photo = image
         
@@ -240,7 +240,7 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
         }
         
         
-        var imagePickerController = UIImagePickerController()
+        let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.modalPresentationStyle = .Popover

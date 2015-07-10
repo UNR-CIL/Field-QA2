@@ -29,7 +29,7 @@ class DatePickerViewController: UIViewController {
     }
     
     @IBAction func datePickerValueChanged(picker: UIDatePicker) {
-        println("Picker value Changed \(picker.date)")
+        print("Picker value Changed \(picker.date)")
     }
 
     /*

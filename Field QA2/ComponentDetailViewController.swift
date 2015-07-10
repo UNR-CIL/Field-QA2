@@ -129,12 +129,10 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             newServiceEntry.newlyCreated = true
             serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
             
-            // Save the context.
-            var error: NSError? = nil
-            if context.save(&error) == false {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //println("Unresolved error \(error), \(error.userInfo)")
+            do {
+                try context.save()
+            }
+            catch {
                 abort()
             }
         }
@@ -226,7 +224,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         }
         
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
@@ -390,7 +388,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 if let date = detailComponentItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     installationYearDatePicker?.date = normalizedDate ?? NSDate()
                 }
@@ -407,7 +405,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 if let date = detailComponentItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let dateComponents = calendar.components([.Hour, .Minute] , fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     installationTimeDatePicker?.date = normalizedDate ?? NSDate()
                 }
@@ -500,7 +498,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 if let date = detailComponentItem?.lastCalibratedDate {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: date)
+                    let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     lastCalibratedYearDatePicker?.date = normalizedDate ?? NSDate()
                 }
@@ -515,7 +513,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 if let date = detailComponentItem?.lastCalibratedDate {
                     let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute , fromDate: date)
+                    let dateComponents = calendar.components([.Hour, .Minute] , fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
                     lastCalibratedTimeDatePicker?.date = normalizedDate ?? NSDate()
                 }
@@ -620,7 +618,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
 
             
         default:
-            println("mode \(displayMode.rawValue) row \(indexPath.row)")
+            print("mode \(displayMode.rawValue) row \(indexPath.row)")
         }
         
     }
@@ -658,11 +656,11 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         }
         if textField ==  centerOffset {
             let numberFormatter = NSNumberFormatter()
-            detailComponentItem?.centerOffset = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.centerOffset = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  heightFromGroundTextField {
             let numberFormatter = NSNumberFormatter()
-            detailComponentItem?.heightFromGround = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.heightFromGround = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  installationTextField {
             detailComponentItem?.installationLocation = textField.text
@@ -670,12 +668,12 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         if textField ==  latitudeTextField{
             let numberFormatter = NSNumberFormatter()
 
-            detailComponentItem?.latitude = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.latitude = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  longitudeTextField {
             let numberFormatter = NSNumberFormatter()
 
-            detailComponentItem?.longitude = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.longitude = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  dataIntervalTextField {
             detailComponentItem?.dataInterval = textField.text
@@ -686,22 +684,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         if textField ==  minimumOperatingRangeTextField {
             let numberFormatter = NSNumberFormatter()
 
-            detailComponentItem?.minimumOperatingRange = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.minimumOperatingRange = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  maximumOperatingRangeTextField{
             let numberFormatter = NSNumberFormatter()
 
-            detailComponentItem?.maximumOperatingRange = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.maximumOperatingRange = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  minimumAccuracyBoundTextField{
             let numberFormatter = NSNumberFormatter()
 
-            detailComponentItem?.minimumAccuracyBound = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.minimumAccuracyBound = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  maximumAccuracyBoundTextField{
             let numberFormatter = NSNumberFormatter()
 
-            detailComponentItem?.maximumAccuracyBound = numberFormatter.numberFromString(textField.text)
+            detailComponentItem?.maximumAccuracyBound = numberFormatter.numberFromString(textField.text ?? "")
         }
         if textField ==  parentLoggerTextField {
             detailComponentItem?.parentLogger = textField.text
@@ -721,14 +719,14 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         case lastCalibratedTimeDatePicker!:
             timeLastCalibratedDate = lastCalibratedTimeDatePicker!.date
         default:
-            println("No picker found")
+            print("No picker found")
         }
         
         let calendar = NSCalendar.currentCalendar()
         if let yearDate = yearAndDayInstallationDate {
             if let timeDate = timeInstallationDate {
-                let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
-                let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+                let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
+                let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
                 yearDateComponents.hour = timeDateComponents.hour
                 yearDateComponents.minute = timeDateComponents.minute
                 
@@ -738,8 +736,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         }
         if let yearDate = yearAndDayLastCalibratedDate {
             if let timeDate = timeLastCalibratedDate {
-                let yearDateComponents = calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: yearDate)
-                let timeDateComponents = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: timeDate)
+                let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
+                let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
                 yearDateComponents.hour = timeDateComponents.hour
                 yearDateComponents.minute = timeDateComponents.minute
                 
@@ -804,7 +802,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
 
     // MARK: UIImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerEditedImage] as? UIImage
         self.detailComponentItem?.photo = image
         
@@ -847,7 +845,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         }
         
         
-        var imagePickerController = UIImagePickerController()
+        let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.modalPresentationStyle = .Popover

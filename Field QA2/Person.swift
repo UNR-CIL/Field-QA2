@@ -39,7 +39,13 @@ class Person: NSManagedObject {
         let fetchRequest = NSFetchRequest(entityName: "Person")
         fetchRequest.predicate = NSPredicate(format: "uniqueIdentifier == %@", identifier)
         var error: NSError?
-        let results = context.executeFetchRequest(fetchRequest, error: &error)
+        let results: [AnyObject]?
+        do {
+            results = try context.executeFetchRequest(fetchRequest)
+        } catch let error1 as NSError {
+            error = error1
+            results = nil
+        }
         
         if results?.count == 0 {
             return nil

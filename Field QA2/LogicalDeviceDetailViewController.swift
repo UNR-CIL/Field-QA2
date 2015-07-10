@@ -62,7 +62,7 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        println("segue destination: \(segue.destinationViewController)")
+        print("segue destination: \(segue.destinationViewController)")
         
     }
 }

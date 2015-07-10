@@ -290,6 +290,8 @@
 		ABD3D105199982360064F8A0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "University of Nevada, Reno";
 				TargetAttributes = {
