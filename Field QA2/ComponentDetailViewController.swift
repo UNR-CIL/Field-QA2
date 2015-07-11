@@ -71,11 +71,11 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            let viewHeight = self.view.bounds.size.height
+            _ = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
             let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
-            let keyboardHeight = keyboardRect.size.height
+            _ = keyboardRect.size.height
             
         }
         
@@ -169,7 +169,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             installationDate = datePickerViewController.datePicker.date
         }
         else if popoverController == self.lastCallibrationDatePopoverController {
-            let datePickerViewController = popoverController.contentViewController as? DatePickerViewController
+            _ = popoverController.contentViewController as? DatePickerViewController
         }
         else if popoverController == self.logicalDevicePopoverController {
             let logicalDevicesViewController = popoverController.contentViewController as! LogicalDevicesViewController
@@ -794,7 +794,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "ComponentsViewControllerPopover") {
-            if let componentsViewController = segue.destinationViewController as? ComponentsViewController {
+            if let _ = segue.destinationViewController as? ComponentsViewController {
 
             }
         }

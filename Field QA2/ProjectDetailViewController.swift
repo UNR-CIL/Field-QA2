@@ -42,11 +42,11 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            let viewHeight = self.view.bounds.size.height
+            _ = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
             let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
-            let keyboardHeight = keyboardRect.size.height
+            _ = keyboardRect.size.height
         }
         
         let addSystemBarButton = UIBarButtonItem(title: "+ System", style: UIBarButtonItemStyle.Plain, target: self, action: "addSystemToProject:")
@@ -147,12 +147,11 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         
 
 */
-        var error : NSError?
 
         do {
             try self.detailProjectItem?.managedObjectContext!.save()
-        } catch let error1 as NSError {
-            error = error1
+        }
+        catch {
         }
     }
     
@@ -196,7 +195,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as? UIImage
+        _ = info[UIImagePickerControllerEditedImage] as? UIImage
         /*
         self.detailServiceEntryItem?.photo = image
         
@@ -429,7 +428,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             
         }
         else if indexPath.section == 1 {
-            if let context = detailProjectItem?.managedObjectContext {
+            if let _ = detailProjectItem?.managedObjectContext {
                 let systems = sortedSystemsForProject(detailProjectItem)
                 let selectedSystem = systems[indexPath.row] as? System
                 self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: selectedSystem)

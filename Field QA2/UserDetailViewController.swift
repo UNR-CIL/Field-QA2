@@ -98,7 +98,6 @@ class UserDetailViewController: UITableViewController, UITextFieldDelegate, UIPo
                 }
             }
         default:
-            let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
             
             if let detailUser = self.detailUser {
                 if let cell = cell as? TextFieldCell {

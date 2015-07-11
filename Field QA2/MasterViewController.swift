@@ -69,11 +69,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     func export(sender: UIBarButtonItem) {
-        var error: NSError?
         do {
             try DataManager.sharedManager.managedObjectContext?.save()
-        } catch let error1 as NSError {
-            error = error1
+        } catch {
         }
         
         let mailComposeViewController = configuredMailComposeViewController()
@@ -152,11 +150,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let context = self.fetchedResultsController.managedObjectContext
             context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
                 
-            var error: NSError? = nil
             do {
                 try context.save()
-            } catch let error1 as NSError {
-                error = error1
+            }
+            catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 //println("Unresolved error \(error), \(error.userInfo)")
@@ -166,7 +163,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as? NSManagedObject
+        _ = self.fetchedResultsController.objectAtIndexPath(indexPath)
     }
 
     // MARK: - Fetched results controller
@@ -186,7 +183,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-        let sortDescriptors = [sortDescriptor]
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
@@ -196,11 +192,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
-    	var error: NSError? = nil
     	do {
             try _fetchedResultsController!.performFetch()
-        } catch let error1 as NSError {
-            error = error1
+        }
+        catch {
     	     // Replace this implementation with code to handle the error appropriately.
     	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
              //println("Unresolved error \(error), \(error.userInfo)")
@@ -237,8 +232,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         case .Move:
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        default:
-            return
         }
     }
 

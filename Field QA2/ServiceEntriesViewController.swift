@@ -32,8 +32,7 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
             
             // Edit the sort key as appropriate.
             let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
-            let sortDescriptors = [sortDescriptor]
-            
+        
             fetchRequest.sortDescriptors = [sortDescriptor]
             
             // Edit the section name key path and cache name if appropriate.
@@ -42,11 +41,9 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
             aFetchedResultsController.delegate = self
             _fetchedResultsController = aFetchedResultsController
             
-            var error: NSError? = nil
             do {
                 try _fetchedResultsController!.performFetch()
-            } catch let error1 as NSError {
-                error = error1
+            } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 //println("Unresolved error \(error), \(error.userInfo)")
@@ -68,7 +65,6 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -127,11 +123,10 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
             let context = self.fetchedResultsController.managedObjectContext
             context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
             
-            var error: NSError? = nil
             do {
                 try context.save()
-            } catch let error1 as NSError {
-                error = error1
+            }
+            catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 //println("Unresolved error \(error), \(error.userInfo)")
@@ -195,8 +190,6 @@ class ServiceEntriesViewController: UITableViewController, NSFetchedResultsContr
         case .Move:
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        default:
-            return
         }
     }
     

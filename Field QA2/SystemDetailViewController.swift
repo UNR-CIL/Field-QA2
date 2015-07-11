@@ -42,11 +42,11 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            let viewHeight = self.view.bounds.size.height
+            _ = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
             let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
-            let keyboardHeight = keyboardRect.size.height
+            _ = keyboardRect.size.height
             
         }
         
@@ -227,11 +227,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             detailSystemItem!.installationDate = nil
         }
         
-        var error : NSError?
         do {
             try self.detailSystemItem?.managedObjectContext!.save()
-        } catch let error1 as NSError {
-            error = error1
+        } catch {
         }
     }
     // >>>
@@ -508,7 +506,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
         }
         else if indexPath.section == 1 {
-            if let context = detailSystemItem?.managedObjectContext {
+            if let _ = detailSystemItem?.managedObjectContext {
                 let components = sortedComponentsForSystem(detailSystemItem)
                 let selectedComponent = components[indexPath.row] as? Component
                 self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
