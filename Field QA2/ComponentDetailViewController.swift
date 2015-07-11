@@ -25,47 +25,25 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     var logicalDevicePopoverController: UIPopoverController?
     var serviceEntriesPopoverController: UIPopoverController?
 
-    var image: UIImage?
-    var imageView: UIImageView?
-    var nameTextField: UITextField?
-    var purposeTextView: UITextView?
-    var typeNameTextField: UITextField?
-    var unitDescriptionTextView: UITextView?
-    var modelTextField: UITextField?
-    var serialNumberTextField: UITextField?
-    var vendorTextField: UITextField?
-    var manufacturerTextField: UITextField?
-    var supplierTextField: UITextField?
-    var centerOffset: UITextField?
-    var heightFromGroundTextField: UITextField?
     var installationDate: NSDate?
-    var installationDateLabel: UILabel?
-    var installationYearDatePicker: UIDatePicker?
-    var installationTimeDatePicker: UIDatePicker?
-    var installationDetailsTextView: UITextView?
-    var installationTextField: UITextField?
-    var wiringNotesTextView: UITextView?
-    var latitudeTextField: UITextField?
-    var longitudeTextField: UITextField?
     var lastCalibratedDate: NSDate?
-    var lastCalibratedDateLabel: UILabel?
-    var lastCalibratedYearDatePicker: UIDatePicker?
-    var lastCalibratedTimeDatePicker: UIDatePicker?
-    var dataIntervalTextField: UITextField?
-    var dataStreamDetails: UITextView?
-    var measurementPropertyTextField: UITextField?
-    var minimumOperatingRangeTextField: UITextField?
-    var maximumOperatingRangeTextField: UITextField?
-    var minimumAccuracyBoundTextField: UITextField?
-    var maximumAccuracyBoundTextField: UITextField?
-    var parentLoggerTextField: UITextField?
-    
+
     var associatedLogicalDevice: LogicalDevice?
     
     var yearAndDayInstallationDate: NSDate?
     var timeInstallationDate: NSDate?
     var yearAndDayLastCalibratedDate: NSDate?
     var timeLastCalibratedDate: NSDate?
+    
+    
+    
+    var tableItems = [
+        (section: 0, row: 0, propertyName: "blah", cellIdentifier: "Cell")
+    
+    
+    
+    
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -274,10 +252,14 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 3):
             if let cell = cell as? NotesCell {
+                NSLog(">>> assigned unit descripition %i %i", indexPath.section, indexPath.row)
                 cell.textView.userInteractionEnabled = self.editing
 
+                
                 unitDescriptionTextView = cell.textView
                 unitDescriptionTextView?.delegate = self
+                
+
                 cell.titleLabel.text = "Unit Description"
                 cell.textView.text = detailComponentItem?.unitDescription
             }
@@ -531,6 +513,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
 
+                NSLog(">>> assigned %i %i", indexPath.section, indexPath.row)
                 dataStreamDetails = cell.textView
                 dataStreamDetails?.delegate = self
                 cell.titleLabel.text = "Data Stream Details"
@@ -755,22 +738,31 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     }
     
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        NSLog(">>> should end")
         if textView == purposeTextView {
+            NSLog(">>> here 0")
             detailComponentItem?.purpose = textView.text
         }
-        if textView == unitDescriptionTextView {
+            /*
+        else if textView == unitDescriptionTextView {
+            NSLog(">>> here 1")
+
             detailComponentItem?.unitDescription = textView.text
         }
-        if textView == installationDetailsTextView {
+*/
+        else if textView == installationDetailsTextView {
+            NSLog(">>> here 2")
+
             detailComponentItem?.installationDetails = textView.text
         }
-        
-        
-        if textView == wiringNotesTextView {
+        else if textView == wiringNotesTextView {
+            NSLog(">>> here 3")
+
             detailComponentItem?.wiringNotes = textView.text
         }
-        
-        if textView == dataStreamDetails {
+        else if textView == dataStreamDetails {
+            NSLog(">>> here 4")
+
             detailComponentItem?.dataStreamDetails = textView.text
         }
         
