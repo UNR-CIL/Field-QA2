@@ -127,6 +127,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         updateHeader()
+
+        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
+
+            if self.currentUser == nil {
+                let alertController = UIAlertController(title: nil, message: "Please log in", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Log In", style: UIAlertActionStyle.Default, handler: { (_) -> Void in
+                    self.performSegueWithIdentifier("showUsersViewController", sender: nil)
+                }))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
+            }
+
+        }
     }
 
     override func didReceiveMemoryWarning() {

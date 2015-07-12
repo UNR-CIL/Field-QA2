@@ -46,11 +46,11 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            let viewHeight = self.view.bounds.size.height
+            let _ = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
             let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()
-            let keyboardHeight = keyboardRect.size.height
+            let _ = keyboardRect.size.height
             
         }
         
@@ -61,6 +61,12 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         
         if detailServiceEntryItem?.newlyCreated == true {
             self.setEditing(true, animated: false)
+
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            if let currentUser = appDelegate.currentUser, firstName = currentUser.firstName, lastName = currentUser.lastName {
+                detailServiceEntryItem?.name = firstName + " " + lastName
+            }
+
         }
         else {
             self.setEditing(false, animated: false)
