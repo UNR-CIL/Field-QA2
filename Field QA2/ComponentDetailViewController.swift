@@ -93,6 +93,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         
         if detailComponentItem?.newlyCreated == true {
             self.setEditing(true, animated: false)
+
+            if let parentSystem = detailComponentItem?.system {
+                if detailComponentItem?.installationDate == nil {
+                    detailComponentItem?.installationDate = parentSystem.installationDate
+                }
+                if detailComponentItem?.installationLocation == nil {
+                    detailComponentItem?.installationLocation = parentSystem.installationLocation
+                }
+                if detailComponentItem?.latitude == nil {
+                    detailComponentItem?.latitude = parentSystem.latitude
+                }
+                if detailComponentItem?.longitude == nil {
+                    detailComponentItem?.longitude = parentSystem.longitude
+                }
+            }
+
         }
         else {
             self.setEditing(false, animated: false)
