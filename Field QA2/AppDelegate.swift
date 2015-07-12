@@ -8,15 +8,17 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 let CurrentUserIdKey = "CurrentUserIdKey"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     var currentUser: Person?
-
+    var locationManager: CLLocationManager? = nil
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
@@ -42,6 +44,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             }
             if let user = users?[0] as? Person {
                 currentUser = user
+            }
+        }
+        
+        let status = CLLocationManager.authorizationStatus()
+        if status == .Restricted || status == .Denied {
+            // TODO: Display alert and prompt user to allow location monitoring
+        }
+        else {
+            locationManager = CLLocationManager()
+            if locationManager != nil {
+                locationManager!.delegate = self
+                
+                locationManager!.requestWhenInUseAuthorization()
             }
         }
         return true

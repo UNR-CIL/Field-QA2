@@ -425,9 +425,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
 
-                if let latitudeString = detailComponentItem?.latitude {
-                    cell.textField.text = numberFormatter.stringFromNumber(latitudeString)
+                if let latitudeNumber = detailComponentItem?.latitude {
+                    cell.textField.text = numberFormatter.stringFromNumber(latitudeNumber)
                 }
+                
+                if detailComponentItem?.latitude == nil || detailComponentItem?.latitude?.integerValue == 0 {
+                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    
+                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
+                        let latitude = location.coordinate.latitude
+                        cell.textField.text = numberFormatter.stringFromNumber(latitude)
+                    }
+                }
+                else {
+                    cell.textField.text = nil
+                }
+                
                 cell.titleLabel.text = "Latitude"
                 
             }
@@ -441,9 +454,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
 
-                if let longitudeString = detailComponentItem?.longitude {
-                    cell.textField.text = numberFormatter.stringFromNumber(longitudeString)
+                if let longitudeNumber = detailComponentItem?.longitude {
+                    cell.textField.text = numberFormatter.stringFromNumber(longitudeNumber)
                 }
+                
+                if detailComponentItem?.longitude == nil || detailComponentItem?.longitude?.integerValue == 0 {
+                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    
+                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
+                        let longitude = location.coordinate.longitude
+                        cell.textField.text = numberFormatter.stringFromNumber(longitude)
+                    }
+                }
+                else {
+                    cell.textField.text = nil
+                }
+                
                 cell.titleLabel.text = "Longitude"
             }
         case (0, 19):

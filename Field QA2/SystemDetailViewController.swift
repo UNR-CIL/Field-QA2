@@ -232,19 +232,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         } catch {
         }
     }
-    // >>>
-    
-    /*
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var installationDateButton: UIButton!
-    
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var latitudeTextField: UITextField!
-    @IBOutlet weak var longitudeTextField: UITextField!
-
-    */
     
     // MARK: - Table view data source
     
@@ -362,8 +349,17 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
 
-                if let latitude = detailSystemItem?.latitude {
-                    cell.textField.text = numberFormatter.stringFromNumber(latitude)
+                if let latitudeNumber = detailSystemItem?.latitude {
+                    cell.textField.text = numberFormatter.stringFromNumber(latitudeNumber)
+                }
+                  
+                if detailSystemItem?.latitude == nil || detailSystemItem?.latitude?.integerValue == 0 {
+                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    
+                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
+                        let latitude = location.coordinate.latitude
+                        cell.textField.text = numberFormatter.stringFromNumber(latitude)
+                    }
                 }
                 else {
                     cell.textField.text = nil
@@ -382,6 +378,15 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 numberFormatter.minimumFractionDigits = 6
                 if let longitude = detailSystemItem?.longitude {
                     cell.textField.text = numberFormatter.stringFromNumber(longitude)
+                }
+
+                if detailSystemItem?.longitude == nil || detailSystemItem?.longitude?.integerValue == 0 {
+                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
+                        let longitude = location.coordinate.longitude
+                        cell.textField.text = numberFormatter.stringFromNumber(longitude)
+                    }
                 }
                 else {
                     cell.textField.text = nil
@@ -513,19 +518,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             }
         }
     }
-    
-    /*
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var installationDateButton: UIButton!
-    
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var notesTextView: UITextView!
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var latitudeTextField: UITextField!
-    @IBOutlet weak var longitudeTextField: UITextField!
-    
-    */
-    
+
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         print("textField ended \(textField.text)")
         
