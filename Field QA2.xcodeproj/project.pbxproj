@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47E3C17A1B52418600B7E08B /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */; };
 		AB052B441A65DE940076FD15 /* CDJSONExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B431A65DE940076FD15 /* CDJSONExporter.m */; };
 		AB052B481A65DEB80076FD15 /* CodingValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B471A65DEB80076FD15 /* CodingValueTransformer.m */; };
 		AB052B4C1A65FDD00076FD15 /* TNImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B4B1A65FDD00076FD15 /* TNImageToDataTransformer.m */; };
@@ -49,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47E3C1781B52407A00B7E08B /* Field_QA 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Field_QA 2.xcdatamodel"; sourceTree = "<group>"; };
+		47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
 		AB052B421A65DE940076FD15 /* Field QA2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Field QA2-Bridging-Header.h"; sourceTree = "<group>"; };
 		AB052B431A65DE940076FD15 /* CDJSONExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDJSONExporter.m; sourceTree = "<group>"; };
 		AB052B451A65DEAC0076FD15 /* CDJSONExporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDJSONExporter.h; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 				AB864A9819FE4E79007FD1E9 /* DatePickerCell.swift */,
 				AB864A9A19FE4E87007FD1E9 /* DateDisplayCell.swift */,
 				AB864A9D19FE50B2007FD1E9 /* CoordinateCell.swift */,
+				47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -295,6 +299,7 @@
 				AB643B161A1E3E7A00993C5F /* Person.swift in Sources */,
 				AB052B4C1A65FDD00076FD15 /* TNImageToDataTransformer.m in Sources */,
 				ABFD086F19C8F83800742185 /* ServiceEntryDetailViewController.swift in Sources */,
+				47E3C17A1B52418600B7E08B /* SegmentedControlCell.swift in Sources */,
 				ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */,
 				AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */,
 				AB643B1C1A1E3E7B00993C5F /* ServiceEntry.swift in Sources */,
@@ -467,9 +472,10 @@
 		ABD3D114199982370064F8A0 /* Field_QA2.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				47E3C1781B52407A00B7E08B /* Field_QA 2.xcdatamodel */,
 				ABD3D115199982370064F8A0 /* Field_QA2.xcdatamodel */,
 			);
-			currentVersion = ABD3D115199982370064F8A0 /* Field_QA2.xcdatamodel */;
+			currentVersion = 47E3C1781B52407A00B7E08B /* Field_QA 2.xcdatamodel */;
 			path = Field_QA2.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

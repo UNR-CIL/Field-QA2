@@ -39,8 +39,10 @@ class DataManager: NSObject {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("FetchTest.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
+        
+        
         do {
-            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: [NSInferMappingModelAutomaticallyOption: true, NSMigratePersistentStoresAutomaticallyOption: true])
         } catch var error1 as NSError {
             error = error1
             coordinator = nil

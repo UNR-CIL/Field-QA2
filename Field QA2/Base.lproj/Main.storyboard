@@ -788,7 +788,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DatePickerCell" rowHeight="162" id="wek-UJ-aGc" customClass="DatePickerCell" customModule="Field_QA2" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="254" width="600" height="162"/>
+                                <rect key="frame" x="0.0" y="253.5" width="600" height="162"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wek-UJ-aGc" id="DiD-98-V39">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="162"/>
@@ -855,21 +855,52 @@
                                     <outlet property="titleLabel" destination="xYj-RB-usn" id="Thx-sT-GYa"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="yGR-Yk-q3R" detailTextLabel="vUJ-Ej-IAs" style="IBUITableViewCellStyleSubtitle" id="Lbv-nr-ANo">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SegmentedControlCell" id="Lbv-nr-ANo" customClass="SegmentedControlCell" customModule="Field_QA2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="577.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lbv-nr-ANo" id="MI7-4C-8Lg">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yGR-Yk-q3R">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gS3-E4-SG0">
+                                            <rect key="frame" x="165" y="7" width="270" height="29"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="270" id="ZTV-fQ-Jwj"/>
+                                            </constraints>
+                                            <segments>
+                                                <segment title="Yes"/>
+                                                <segment title="No"/>
+                                                <segment title="N/A"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="selectedValueChanged:" destination="Lbv-nr-ANo" eventType="valueChanged" id="bCD-7S-TJ5"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gS3-E4-SG0" firstAttribute="centerX" secondItem="MI7-4C-8Lg" secondAttribute="centerX" id="aVI-5k-Fq3"/>
+                                        <constraint firstItem="gS3-E4-SG0" firstAttribute="centerY" secondItem="MI7-4C-8Lg" secondAttribute="centerY" id="dkG-an-tMT"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="segmentedControl" destination="gS3-E4-SG0" id="pTx-8H-WDL"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="Tp4-Ma-gIl" detailTextLabel="IED-3K-Rsm" style="IBUITableViewCellStyleSubtitle" id="dyb-aP-mw8">
+                                <rect key="frame" x="0.0" y="621.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dyb-aP-mw8" id="IUM-NY-HnA">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tp4-Ma-gIl">
                                             <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vUJ-Ej-IAs">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IED-3K-Rsm">
                                             <rect key="frame" x="15" y="25.5" width="41" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>

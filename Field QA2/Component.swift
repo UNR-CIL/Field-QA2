@@ -19,6 +19,7 @@ class Component: NSManagedObject {
     @NSManaged var installationDate: NSDate?
     @NSManaged var installationDetails: String?
     @NSManaged var installationLocation: String?
+    @NSManaged var calibrationStatus: NSNumber?
     @NSManaged var lastCalibratedDate: NSDate?
     @NSManaged var latitude: NSNumber?
     @NSManaged var longitude: NSNumber?

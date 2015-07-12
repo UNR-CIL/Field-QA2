@@ -34,27 +34,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     var timeInstallationDate: NSDate?
     var yearAndDayLastCalibratedDate: NSDate?
     var timeLastCalibratedDate: NSDate?
-    
-    
-    /*
-
-switch (indexPath.section, indexPath.row) {
-case (0, 0):
-cellIdentifier = "PhotoTextFieldCell"
-
-    case (0, 1), (0, 3), (0, 14), (0, 15), (0, 23):
-cellIdentifier = "NotesCell"
-
-    case (0, 11), (0, 19):
-cellIdentifier = "DateDisplayCell"
-
-    case (0, 12), (0, 13), (0, 20), (0, 21):
-cellIdentifier = "DatePickerCell"
-
-    default:
-cellIdentifier = "TextFieldCell"
-    
-}*/
 
     var tableItems = [
         (propertyName: "name", title: "Name", cellIdentifier: "PhotoTextFieldCell", valueType: "text"),
@@ -77,6 +56,7 @@ cellIdentifier = "TextFieldCell"
         (propertyName: "latitude", title: "Latitude", cellIdentifier: "TextFieldCell", valueType: "number"),
         (propertyName: "latitude", title: "Longitude", cellIdentifier: "TextFieldCell", valueType: "number"),
         (propertyName: "lastCalibratedDate", title: "Last Calibration", cellIdentifier: "DateDisplayCell", valueType: "text"),
+        (propertyName: "calibrationStatus", title: "", cellIdentifier: "SegmentedControlCell", valueType: "number"),
         (propertyName: "lastCalibratedDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
         (propertyName: "lastCalibratedDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
         (propertyName: "dataInterval", title: "Interval", cellIdentifier: "TextFieldCell", valueType: "text"),
@@ -100,6 +80,13 @@ cellIdentifier = "TextFieldCell"
             _ = keyboardRect.size.height
             
         }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("SegmentedValueChanged", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
+            if let segmentedControl = notification.userInfo?["segmentedControl"] as? UISegmentedControl {
+                self.detailComponentItem?.calibrationStatus = segmentedControl.selectedSegmentIndex
+            }
+        }
+        
         
         let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToComponent:")
         navigationItem.rightBarButtonItems = [addServiceEntryBarButton]
@@ -475,6 +462,10 @@ cellIdentifier = "TextFieldCell"
                 }
             }
         case (0, 20):
+            if let cell = cell as? SegmentedControlCell, selectedIndex = detailComponentItem?.calibrationStatus?.integerValue {
+                cell.segmentedControl.selectedSegmentIndex = selectedIndex
+            }
+        case (0, 21):
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
 
@@ -488,7 +479,7 @@ cellIdentifier = "TextFieldCell"
                     cell.datePicker?.date = normalizedDate ?? NSDate()
                 }
             }
-        case (0, 21):
+        case (0, 22):
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
                 
@@ -502,7 +493,7 @@ cellIdentifier = "TextFieldCell"
                     cell.datePicker?.date = normalizedDate ?? NSDate()
                 }
             }
-        case (0, 22):
+        case (0, 23):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -510,7 +501,7 @@ cellIdentifier = "TextFieldCell"
                 cell.textField?.text = detailComponentItem?.dataInterval
                 cell.titleLabel.text = "Interval"
             }
-        case (0, 23):
+        case (0, 24):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
 
@@ -518,7 +509,7 @@ cellIdentifier = "TextFieldCell"
                 cell.titleLabel.text = "Data Stream Details"
                 cell.textView?.text = detailComponentItem?.dataStreamDetails
             }
-        case (0, 24):
+        case (0, 25):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -526,7 +517,7 @@ cellIdentifier = "TextFieldCell"
                 cell.textField?.text = detailComponentItem?.measurementProperty
                 cell.titleLabel.text = "Measurement"
             }
-        case (0, 25):
+        case (0, 26):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -540,7 +531,7 @@ cellIdentifier = "TextFieldCell"
                 
                 cell.titleLabel.text = "Min Range"
             }
-        case (0, 26):
+        case (0, 27):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -554,7 +545,7 @@ cellIdentifier = "TextFieldCell"
                 
                 cell.titleLabel.text = "Max Range"
             }
-        case (0, 27):
+        case (0, 28):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -568,7 +559,7 @@ cellIdentifier = "TextFieldCell"
                 
                 cell.titleLabel.text = "Min Accuracy"
             }
-        case (0, 28):
+        case (0, 29):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -582,7 +573,7 @@ cellIdentifier = "TextFieldCell"
                 
                 cell.titleLabel.text = "Max Accuracy"
             }
-        case (0, 29):
+        case (0, 30):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
@@ -608,8 +599,6 @@ cellIdentifier = "TextFieldCell"
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         if let contentView = textField.superview, tableViewCell = contentView.superview, indexPath = tableView.indexPathForCell(tableViewCell as! UITableViewCell) {
-            NSLog(">>> indexPath %@", indexPath)
-            
             let tableItem = tableItems[indexPath.row]
             
             if tableItem.valueType == "number" {
@@ -631,9 +620,9 @@ cellIdentifier = "TextFieldCell"
                 yearAndDayInstallationDate = sender.date
             case 13:
                 timeInstallationDate = sender.date
-            case 20:
-                yearAndDayLastCalibratedDate = sender.date
             case 21:
+                yearAndDayLastCalibratedDate = sender.date
+            case 22:
                 timeLastCalibratedDate = sender.date
             default:
                 break
