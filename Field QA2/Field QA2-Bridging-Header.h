@@ -3,4 +3,5 @@
 //
 
 #import "CDJSONExporter.h"
+#import "NEXJSONExporter.h"
 #import "CodingValueTransformer.h"

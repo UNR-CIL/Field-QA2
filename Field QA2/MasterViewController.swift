@@ -92,10 +92,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         
         let data = CDJSONExporter.exportContext(DataManager.sharedManager.managedObjectContext, auxiliaryInfo: nil)
+        let data2 = NEXJSONExporter.exportContext(DataManager.sharedManager.managedObjectContext, auxiliaryInfo: nil)
 
         
-        mailComposeViewController.addAttachmentData(data, mimeType: "application/json", fileName:"export.json")
-        
+        mailComposeViewController.addAttachmentData(data, mimeType: "application/json", fileName:"app-export.json")
+        mailComposeViewController.addAttachmentData(data2, mimeType: "application/json", fileName:"server-export.json")
+
         return mailComposeViewController
     }
     

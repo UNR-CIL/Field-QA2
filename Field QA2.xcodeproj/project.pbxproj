@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47E3C17A1B52418600B7E08B /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */; };
+		47E3C17D1B524F9600B7E08B /* NEXJSONExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E3C17C1B524F9600B7E08B /* NEXJSONExporter.m */; };
 		AB052B441A65DE940076FD15 /* CDJSONExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B431A65DE940076FD15 /* CDJSONExporter.m */; };
 		AB052B481A65DEB80076FD15 /* CodingValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B471A65DEB80076FD15 /* CodingValueTransformer.m */; };
 		AB052B4C1A65FDD00076FD15 /* TNImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB052B4B1A65FDD00076FD15 /* TNImageToDataTransformer.m */; };
@@ -52,6 +53,8 @@
 /* Begin PBXFileReference section */
 		47E3C1781B52407A00B7E08B /* Field_QA 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Field_QA 2.xcdatamodel"; sourceTree = "<group>"; };
 		47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
+		47E3C17B1B524F9600B7E08B /* NEXJSONExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEXJSONExporter.h; sourceTree = "<group>"; };
+		47E3C17C1B524F9600B7E08B /* NEXJSONExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEXJSONExporter.m; sourceTree = "<group>"; };
 		AB052B421A65DE940076FD15 /* Field QA2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Field QA2-Bridging-Header.h"; sourceTree = "<group>"; };
 		AB052B431A65DE940076FD15 /* CDJSONExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDJSONExporter.m; sourceTree = "<group>"; };
 		AB052B451A65DEAC0076FD15 /* CDJSONExporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDJSONExporter.h; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				AB052B421A65DE940076FD15 /* Field QA2-Bridging-Header.h */,
 				AB052B451A65DEAC0076FD15 /* CDJSONExporter.h */,
 				AB052B431A65DE940076FD15 /* CDJSONExporter.m */,
+				47E3C17B1B524F9600B7E08B /* NEXJSONExporter.h */,
+				47E3C17C1B524F9600B7E08B /* NEXJSONExporter.m */,
 				AB052B461A65DEB80076FD15 /* CodingValueTransformer.h */,
 				AB052B471A65DEB80076FD15 /* CodingValueTransformer.m */,
 				AB052B4A1A65FDD00076FD15 /* TNImageToDataTransformer.h */,
@@ -312,6 +317,7 @@
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
 				AB86B0E91A3D762300B5E02D /* UsersViewController.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
+				47E3C17D1B524F9600B7E08B /* NEXJSONExporter.m in Sources */,
 				AB643B1A1A1E3E7B00993C5F /* System.swift in Sources */,
 				AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */,
 				AB643B221A1E3E7B00993C5F /* LogicalDevice.swift in Sources */,
@@ -371,7 +377,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -408,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
