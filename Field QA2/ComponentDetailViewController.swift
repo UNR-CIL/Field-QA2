@@ -36,13 +36,57 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     var timeLastCalibratedDate: NSDate?
     
     
+    /*
+
+switch (indexPath.section, indexPath.row) {
+case (0, 0):
+cellIdentifier = "PhotoTextFieldCell"
+
+    case (0, 1), (0, 3), (0, 14), (0, 15), (0, 23):
+cellIdentifier = "NotesCell"
+
+    case (0, 11), (0, 19):
+cellIdentifier = "DateDisplayCell"
+
+    case (0, 12), (0, 13), (0, 20), (0, 21):
+cellIdentifier = "DatePickerCell"
+
+    default:
+cellIdentifier = "TextFieldCell"
     
+}*/
+
     var tableItems = [
-        (section: 0, row: 0, propertyName: "blah", cellIdentifier: "Cell")
-    
-    
-    
-    
+        (propertyName: "name", title: "Name", cellIdentifier: "PhotoTextFieldCell", valueType: "text"),
+        (propertyName: "purpose", title: "Purpose", cellIdentifier: "NotesCell", valueType: "text"),
+        (propertyName: "typeName", title: "Type", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "unitDescription", title: "Unit Description", cellIdentifier: "NotesCell", valueType: "text"),
+        (propertyName: "model", title: "Model", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "serialNumber", title: "Serial", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "vendor", title: "Vendor", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "manufacturer", title: "Manufacturer", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "supplier", title: "Supplier", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "centerOffset", title: "Center Offset", cellIdentifier: "TextFieldCell", valueType: "number"),
+        (propertyName: "heightFromGround", title: "Height", cellIdentifier: "TextFieldCell",valueType: "number"),
+        (propertyName: "installationDate", title: "Installation Date", cellIdentifier: "DateDisplayCell", valueType: "date"),
+        (propertyName: "installationDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
+        (propertyName: "installationDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
+        (propertyName: "installationDetails", title: "Installation Details", cellIdentifier: "NotesCell", valueType: "text"),
+        (propertyName: "wiringNotes", title: "Wiring Notes", cellIdentifier: "NotesCell", valueType: "text"),
+        (propertyName: "installationLocation", title: "Location", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "latitude", title: "Latitude", cellIdentifier: "TextFieldCell", valueType: "number"),
+        (propertyName: "latitude", title: "Longitude", cellIdentifier: "TextFieldCell", valueType: "number"),
+        (propertyName: "lastCalibratedDate", title: "Last Calibration", cellIdentifier: "DateDisplayCell", valueType: "text"),
+        (propertyName: "lastCalibratedDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
+        (propertyName: "lastCalibratedDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
+        (propertyName: "dataInterval", title: "Interval", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "dataStreamDetails", title: "Data Stream Details", cellIdentifier: "NotesCell", valueType: "text"),
+        (propertyName: "measurementProperty", title: "Measurement", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "minimumOperatingRange", title: "Min Range", cellIdentifier: "TextFieldCell", valueType: "number"),
+        (propertyName: "maximumOperatingRange", title: "Max Range", cellIdentifier: "TextFieldCell", valueType: "number"),
+        (propertyName: "minimumAccuracyBound", title: "Min Accuracy", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "maximumAccuracyBound", title: "Max Accuracy", cellIdentifier: "TextFieldCell", valueType: "text"),
+        (propertyName: "parentLogger", title: "Parent Logger", cellIdentifier: "TextFieldCell", valueType: "text")
     ]
     
     override func viewDidLoad() {
@@ -164,61 +208,43 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
+        switch (tableItems[indexPath.row].cellIdentifier) {
+        case "PhotoTextFieldCell":
             return 52.0
-        case (0, 1), (0, 3), (0, 12), (0, 13), (0, 14), (0, 15), (0, 20), (0, 21), (0, 23):
-            return 162
+        case "NotesCell", "DatePickerCell":
+            return 162.0
         default:
             return 44.0
         }
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections.
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows in the section.
-        return 29
+        return tableItems.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cellIdentifier: String? = nil
-        
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            cellIdentifier = "PhotoTextFieldCell"
-        case (0, 1), (0, 3), (0, 14), (0, 15), (0, 23):
-            cellIdentifier = "NotesCell"
-        case (0, 11), (0, 19):
-            cellIdentifier = "DateDisplayCell"
-        case (0, 12), (0, 13), (0, 20), (0, 21):
-            cellIdentifier = "DatePickerCell"
-        default:
-            cellIdentifier = "TextFieldCell"
-        }
-        
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier!, forIndexPath: indexPath) as UITableViewCell
+        let cellIdentifier = tableItems[indexPath.row].cellIdentifier
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
         return cell
     }
-
     
+    // TODO: Re-write using the tableItems array for configuration
     func configureCell(cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
-
-                nameTextField = cell.textField
-                nameTextField?.delegate = self
-                cell.titleLabel.text = "Name"
-                cell.textField.text = detailComponentItem?.name
+                
+                cell.textField.delegate = self
+                cell.titleLabel.text = tableItems[0].title
+                cell.textField.text = detailComponentItem?.valueForKey(tableItems[0].propertyName) as! String?
                 
                 cell.photoImageView?.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.photoImageView?.layer.borderWidth = 1.0
@@ -235,29 +261,24 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         case (0, 1):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
-
-                purposeTextView = cell.textView
-                purposeTextView?.delegate = self
-                cell.titleLabel.text = "Purpose"
-                cell.textView.text = detailComponentItem?.purpose
+                
+                cell.textView?.delegate = self
+                cell.titleLabel.text = tableItems[1].title
+                cell.textView.text = detailComponentItem?.valueForKey(tableItems[1].propertyName) as! String?
             }
         case (0, 2):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                typeNameTextField = cell.textField
-                typeNameTextField?.delegate = self
+                cell.textField?.delegate = self
                 cell.textField.text = detailComponentItem?.typeName
                 cell.titleLabel.text = "Type"
             }
         case (0, 3):
             if let cell = cell as? NotesCell {
-                NSLog(">>> assigned unit descripition %i %i", indexPath.section, indexPath.row)
                 cell.textView.userInteractionEnabled = self.editing
-
-                
-                unitDescriptionTextView = cell.textView
-                unitDescriptionTextView?.delegate = self
+    
+                cell.textView?.delegate = self
                 
 
                 cell.titleLabel.text = "Unit Description"
@@ -267,8 +288,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                modelTextField = cell.textField
-                modelTextField?.delegate = self
+                cell.textField?.delegate = self
                 cell.textField.text = detailComponentItem?.model
                 cell.titleLabel.text = "Model"
             }
@@ -276,8 +296,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                serialNumberTextField = cell.textField
-                serialNumberTextField?.delegate = self
+                cell.textField?.delegate = self
                 cell.textField.text = detailComponentItem?.serialNumber
                 cell.titleLabel.text = "Serial"
             }
@@ -285,8 +304,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                vendorTextField = cell.textField
-                vendorTextField?.delegate = self
+                cell.textField?.delegate = self
                 cell.textField.text = detailComponentItem?.vendor
                 cell.titleLabel.text = "Vendor"
             }
@@ -294,8 +312,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                manufacturerTextField = cell.textField
-                manufacturerTextField?.delegate = self
+                cell.textField?.delegate = self
                 cell.textField.text = detailComponentItem?.manufacturer
                 cell.titleLabel.text = "Manufacturer"
             }
@@ -303,8 +320,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                supplierTextField = cell.textField
-                supplierTextField?.delegate = self
+                cell.textField?.delegate = self
                 cell.textField.text = detailComponentItem?.supplier
                 cell.titleLabel.text = "Supplier"
             }
@@ -312,8 +328,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-               centerOffset = cell.textField
-               centerOffset?.delegate = self
+               cell.textField?.delegate = self
             
                let numberFormatter = NSNumberFormatter()
                 if let offsetNumber = detailComponentItem?.centerOffset {
@@ -329,8 +344,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                heightFromGroundTextField = cell.textField
-                heightFromGroundTextField?.delegate = self
+                cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
                 if let offsetNumber = detailComponentItem?.heightFromGround {
@@ -344,8 +358,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             }
         case (0, 11):
             if let cell = cell as? DateDisplayCell {
-                installationDateLabel = cell.detailLabel
-                
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
                 dateFormatter.dateStyle = .MediumStyle
@@ -362,17 +374,16 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
 
-                installationYearDatePicker = cell.datePicker
-                installationYearDatePicker?.datePickerMode = .Date
-                installationYearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.datePicker?.datePickerMode = .Date
+                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                 
-                installationYearDatePicker?.tag = 1
+                cell.datePicker?.tag = 1
                 
                 if let date = detailComponentItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
                     let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
-                    installationYearDatePicker?.date = normalizedDate ?? NSDate()
+                    cell.datePicker?.date = normalizedDate ?? NSDate()
                 }
 
             }
@@ -380,24 +391,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
                 
-                installationTimeDatePicker = cell.datePicker
-                installationTimeDatePicker?.datePickerMode = .Time
-                installationTimeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
-                installationTimeDatePicker?.tag = 2
+                cell.datePicker?.datePickerMode = .Time
+                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.datePicker?.tag = 2
                 
                 if let date = detailComponentItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
                     let dateComponents = calendar.components([.Hour, .Minute] , fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
-                    installationTimeDatePicker?.date = normalizedDate ?? NSDate()
+                    cell.datePicker?.date = normalizedDate ?? NSDate()
                 }
             }
         case (0, 14):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
 
-                installationDetailsTextView = cell.textView
-                installationDetailsTextView?.delegate = self
+                cell.textView?.delegate = self
                 cell.titleLabel.text = "Installation Details"
                 cell.textView.text = detailComponentItem?.installationDetails
             }
@@ -405,8 +414,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
                 
-                wiringNotesTextView = cell.textView
-                wiringNotesTextView?.delegate = self
+                cell.textView?.delegate = self
                 cell.titleLabel.text = "Wiring Notes"
                 cell.textView.text = detailComponentItem?.wiringNotes
             }
@@ -415,8 +423,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
                 
-                installationTextField = cell.textField
-                installationTextField?.delegate = self
+                cell.textField?.delegate = self
                 cell.textField.text = detailComponentItem?.installationLocation
                 cell.titleLabel.text = "Location"
             }
@@ -425,9 +432,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                latitudeTextField = cell.textField
-                latitudeTextField?.keyboardType = .DecimalPad
-                latitudeTextField?.delegate = self
+                cell.textField?.keyboardType = .DecimalPad
+                cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
@@ -442,21 +448,19 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                longitudeTextField = cell.textField
-                longitudeTextField?.keyboardType = .DecimalPad
-                longitudeTextField?.delegate = self
+                cell.textField?.keyboardType = .DecimalPad
+                cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
 
-                if let longitudeString = detailComponentItem?.latitude {
+                if let longitudeString = detailComponentItem?.longitude {
                     cell.textField.text = numberFormatter.stringFromNumber(longitudeString)
                 }
                 cell.titleLabel.text = "Longitude"
             }
         case (0, 19):
             if let cell = cell as? DateDisplayCell {
-                lastCalibratedDateLabel = cell.detailLabel
                 
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
@@ -474,71 +478,64 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
 
-                lastCalibratedYearDatePicker = cell.datePicker
-                lastCalibratedYearDatePicker?.datePickerMode = .Date
-                lastCalibratedYearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                cell.datePicker?.datePickerMode = .Date
+                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
                 
                 if let date = detailComponentItem?.lastCalibratedDate {
                     let calendar = NSCalendar.currentCalendar()
                     let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
-                    lastCalibratedYearDatePicker?.date = normalizedDate ?? NSDate()
+                    cell.datePicker?.date = normalizedDate ?? NSDate()
                 }
             }
         case (0, 21):
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
                 
-                lastCalibratedTimeDatePicker = cell.datePicker
-                lastCalibratedTimeDatePicker?.datePickerMode = .Time
-                lastCalibratedTimeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                cell.datePicker?.datePickerMode = .Time
+                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
                 
                 if let date = detailComponentItem?.lastCalibratedDate {
                     let calendar = NSCalendar.currentCalendar()
                     let dateComponents = calendar.components([.Hour, .Minute] , fromDate: date)
                     let normalizedDate = calendar.dateFromComponents(dateComponents)
-                    lastCalibratedTimeDatePicker?.date = normalizedDate ?? NSDate()
+                    cell.datePicker?.date = normalizedDate ?? NSDate()
                 }
             }
         case (0, 22):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                dataIntervalTextField = cell.textField
-                dataIntervalTextField?.delegate = self
-                dataIntervalTextField?.text = detailComponentItem?.dataInterval
+                cell.textField?.delegate = self
+                cell.textField?.text = detailComponentItem?.dataInterval
                 cell.titleLabel.text = "Interval"
             }
         case (0, 23):
             if let cell = cell as? NotesCell {
                 cell.textView.userInteractionEnabled = self.editing
 
-                NSLog(">>> assigned %i %i", indexPath.section, indexPath.row)
-                dataStreamDetails = cell.textView
-                dataStreamDetails?.delegate = self
+                cell.textView?.delegate = self
                 cell.titleLabel.text = "Data Stream Details"
-                dataStreamDetails?.text = detailComponentItem?.dataStreamDetails
+                cell.textView?.text = detailComponentItem?.dataStreamDetails
             }
         case (0, 24):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                measurementPropertyTextField = cell.textField
-                measurementPropertyTextField?.delegate = self
-                measurementPropertyTextField?.text = detailComponentItem?.measurementProperty
+                cell.textField?.delegate = self
+                cell.textField?.text = detailComponentItem?.measurementProperty
                 cell.titleLabel.text = "Measurement"
             }
         case (0, 25):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                minimumOperatingRangeTextField = cell.textField
-                minimumOperatingRangeTextField?.delegate = self
+                cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
                 
                 if let minimum = detailComponentItem?.minimumOperatingRange {
-                    minimumOperatingRangeTextField?.text = numberFormatter.stringFromNumber(minimum)
+                    cell.textField?.text = numberFormatter.stringFromNumber(minimum)
                 }
                 
                 cell.titleLabel.text = "Min Range"
@@ -547,13 +544,12 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                maximumOperatingRangeTextField = cell.textField
-                maximumOperatingRangeTextField?.delegate = self
+                cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
                 
                 if let maximum = detailComponentItem?.maximumOperatingRange {
-                    maximumOperatingRangeTextField?.text = numberFormatter.stringFromNumber(maximum)
+                    cell.textField?.text = numberFormatter.stringFromNumber(maximum)
                 }
                 
                 cell.titleLabel.text = "Max Range"
@@ -562,13 +558,12 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                minimumAccuracyBoundTextField = cell.textField
-                minimumAccuracyBoundTextField?.delegate = self
+                cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
                 
                 if let minimum = detailComponentItem?.minimumAccuracyBound {
-                    minimumAccuracyBoundTextField?.text = numberFormatter.stringFromNumber(minimum)
+                    cell.textField?.text = numberFormatter.stringFromNumber(minimum)
                 }
                 
                 cell.titleLabel.text = "Min Accuracy"
@@ -577,25 +572,22 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                maximumAccuracyBoundTextField = cell.textField
-                maximumAccuracyBoundTextField = cell.textField
-                maximumAccuracyBoundTextField?.delegate = self
+                cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
                 
                 if let maximum = detailComponentItem?.maximumAccuracyBound {
-                    maximumAccuracyBoundTextField?.text = numberFormatter.stringFromNumber(maximum)
+                    cell.textField?.text = numberFormatter.stringFromNumber(maximum)
                 }
                 
-                cell.titleLabel.text = "Max Range"
+                cell.titleLabel.text = "Max Accuracy"
             }
         case (0, 29):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
 
-                parentLoggerTextField = cell.textField
-                parentLoggerTextField?.delegate = self
-                parentLoggerTextField?.text = detailComponentItem?.parentLogger
+                cell.textField?.delegate = self
+                cell.textField?.text = detailComponentItem?.parentLogger
                 cell.titleLabel.text = "Parent Logger"
             }
 
@@ -615,157 +607,73 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     // MARK: UITextFieldDelegate
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        
-        if textField == nameTextField {
-            detailComponentItem?.name = textField.text
-        }
-        if textField ==  typeNameTextField {
-            detailComponentItem?.typeName = textField.text
-        }
-        if textField ==  modelTextField {
-            detailComponentItem?.model = textField.text
-        }
-        if textField ==  serialNumberTextField {
-            detailComponentItem?.serialNumber = textField.text
-        }
-        if textField ==  vendorTextField {
-            detailComponentItem?.vendor = textField.text
-        }
-        if textField ==  manufacturerTextField {
-            detailComponentItem?.manufacturer = textField.text
-        }
-        if textField ==  supplierTextField {
-            detailComponentItem?.supplier = textField.text
-        }
-        if textField ==  centerOffset {
-            let numberFormatter = NSNumberFormatter()
-            detailComponentItem?.centerOffset = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  heightFromGroundTextField {
-            let numberFormatter = NSNumberFormatter()
-            detailComponentItem?.heightFromGround = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  installationTextField {
-            detailComponentItem?.installationLocation = textField.text
-        }
-        if textField ==  latitudeTextField{
-            let numberFormatter = NSNumberFormatter()
-
-            detailComponentItem?.latitude = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  longitudeTextField {
-            let numberFormatter = NSNumberFormatter()
-
-            detailComponentItem?.longitude = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  dataIntervalTextField {
-            detailComponentItem?.dataInterval = textField.text
-        }
-        if textField ==  measurementPropertyTextField {
-            detailComponentItem?.measurementProperty = textField.text
-        }
-        if textField ==  minimumOperatingRangeTextField {
-            let numberFormatter = NSNumberFormatter()
-
-            detailComponentItem?.minimumOperatingRange = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  maximumOperatingRangeTextField{
-            let numberFormatter = NSNumberFormatter()
-
-            detailComponentItem?.maximumOperatingRange = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  minimumAccuracyBoundTextField{
-            let numberFormatter = NSNumberFormatter()
-
-            detailComponentItem?.minimumAccuracyBound = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  maximumAccuracyBoundTextField{
-            let numberFormatter = NSNumberFormatter()
-
-            detailComponentItem?.maximumAccuracyBound = numberFormatter.numberFromString(textField.text ?? "")
-        }
-        if textField ==  parentLoggerTextField {
-            detailComponentItem?.parentLogger = textField.text
+        if let contentView = textField.superview, tableViewCell = contentView.superview, indexPath = tableView.indexPathForCell(tableViewCell as! UITableViewCell) {
+            NSLog(">>> indexPath %@", indexPath)
+            
+            let tableItem = tableItems[indexPath.row]
+            
+            if tableItem.valueType == "number" {
+                let numberFormatter = NSNumberFormatter()
+                detailComponentItem?.setValue(numberFormatter.numberFromString(textField.text ?? ""), forKey: tableItem.propertyName)
+            }
+            else if tableItem.valueType == "text" {
+                detailComponentItem?.setValue(textField.text ?? "", forKey: tableItem.propertyName)
+            }
         }
         
         return true
     }
     
     func dateValueChanged(sender: UIDatePicker) {
-        switch (sender) {
-        case installationYearDatePicker!:
-            yearAndDayInstallationDate = installationYearDatePicker!.date
-        case installationTimeDatePicker!:
-            timeInstallationDate = installationTimeDatePicker!.date
-        case lastCalibratedYearDatePicker!:
-            yearAndDayLastCalibratedDate = lastCalibratedYearDatePicker!.date
-        case lastCalibratedTimeDatePicker!:
-            timeLastCalibratedDate = lastCalibratedTimeDatePicker!.date
-        default:
-            print("No picker found")
+        if let contentView = sender.superview, tableViewCell = contentView.superview, indexPath = tableView.indexPathForCell(tableViewCell as! UITableViewCell) {
+            switch (indexPath.row) {
+            case 12:
+                yearAndDayInstallationDate = sender.date
+            case 13:
+                timeInstallationDate = sender.date
+            case 20:
+                yearAndDayLastCalibratedDate = sender.date
+            case 21:
+                timeLastCalibratedDate = sender.date
+            default:
+                break
+            }
         }
         
         let calendar = NSCalendar.currentCalendar()
-        if let yearDate = yearAndDayInstallationDate {
-            if let timeDate = timeInstallationDate {
-                let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
-                let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
-                yearDateComponents.hour = timeDateComponents.hour
-                yearDateComponents.minute = timeDateComponents.minute
-                
-                detailComponentItem?.installationDate = calendar.dateFromComponents(yearDateComponents)
-                tableView.reloadData()
-            }
+        if let yearDate = yearAndDayInstallationDate, timeDate = timeInstallationDate {
+            let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
+            let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
+            yearDateComponents.hour = timeDateComponents.hour
+            yearDateComponents.minute = timeDateComponents.minute
+            
+            detailComponentItem?.installationDate = calendar.dateFromComponents(yearDateComponents)
+            tableView.reloadData()
         }
-        if let yearDate = yearAndDayLastCalibratedDate {
-            if let timeDate = timeLastCalibratedDate {
-                let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
-                let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
-                yearDateComponents.hour = timeDateComponents.hour
-                yearDateComponents.minute = timeDateComponents.minute
-                
-                detailComponentItem?.lastCalibratedDate = calendar.dateFromComponents(yearDateComponents)
-                tableView.reloadData()
-            }
+        if let yearDate = yearAndDayLastCalibratedDate, timeDate = timeLastCalibratedDate {
+            let yearDateComponents = calendar.components([.Year, .Month, .Day], fromDate: yearDate)
+            let timeDateComponents = calendar.components([.Hour, .Minute], fromDate: timeDate)
+            yearDateComponents.hour = timeDateComponents.hour
+            yearDateComponents.minute = timeDateComponents.minute
+            
+            detailComponentItem?.lastCalibratedDate = calendar.dateFromComponents(yearDateComponents)
+            tableView.reloadData()
         }
     }
-    
-    
-    // MARK: UITextViewDelegate
-    
+
+
+
+// MARK: UITextViewDelegate
+
     func textViewDidChange(textView: UITextView) {
         
     }
     
     func textViewShouldEndEditing(textView: UITextView) -> Bool {
-        NSLog(">>> should end")
-        if textView == purposeTextView {
-            NSLog(">>> here 0")
-            detailComponentItem?.purpose = textView.text
+        if let contentView = textView.superview, tableViewCell = contentView.superview, indexPath = tableView.indexPathForCell(tableViewCell as! UITableViewCell) {
+            let propertyName = tableItems[indexPath.row].propertyName
+            detailComponentItem?.setValue(textView.text, forKey: propertyName)
         }
-            /*
-        else if textView == unitDescriptionTextView {
-            NSLog(">>> here 1")
-
-            detailComponentItem?.unitDescription = textView.text
-        }
-*/
-        else if textView == installationDetailsTextView {
-            NSLog(">>> here 2")
-
-            detailComponentItem?.installationDetails = textView.text
-        }
-        else if textView == wiringNotesTextView {
-            NSLog(">>> here 3")
-
-            detailComponentItem?.wiringNotes = textView.text
-        }
-        else if textView == dataStreamDetails {
-            NSLog(">>> here 4")
-
-            detailComponentItem?.dataStreamDetails = textView.text
-        }
-        
         return true
     }
     
