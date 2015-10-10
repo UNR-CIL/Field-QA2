@@ -118,6 +118,10 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         return cell
     }
     
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showUserDetailViewController", sender: indexPath)
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.editing {
             self.performSegueWithIdentifier("showUserDetailViewController", sender: self)
@@ -145,7 +149,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
             
             do {
                 try context.save()
@@ -170,7 +174,8 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
             cell.textLabel?.text = "A Person"
             cell.textLabel?.textColor = UIColor.darkGrayColor()
         }
-        
+        cell.detailTextLabel?.text = person.email
+        cell.detailTextLabel?.textColor = UIColor.blueColor()
     }
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -188,7 +193,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: NSManagedObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
@@ -219,15 +224,25 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-        
-        let indexPath = self.tableView.indexPathForSelectedRow
-        let person = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Person
-        let controller = segue.destinationViewController as! UserDetailViewController
-        controller.detailUser = person
-        controller.navigationItem.leftItemsSupplementBackButton = true
+        if (segue.identifier == "showUserDetailViewController") {
+            if let indexPath = sender as? NSIndexPath {
+                let person = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Person
+                let controller = segue.destinationViewController as! UserDetailViewController
+                controller.detailUser = person
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
+        else {
+            
+            // Get the new view controller using [segue destinationViewController].
+            // Pass the selected object to the new view controller.
+            
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let person = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Person
+            let controller = segue.destinationViewController as! UserDetailViewController
+            controller.detailUser = person
+            controller.navigationItem.leftItemsSupplementBackButton = true
+        }
     }
 
 }
