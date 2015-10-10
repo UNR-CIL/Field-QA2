@@ -50,7 +50,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
         }
         
-        let addSystemBarButton = UIBarButtonItem(title: "+ Component", style: UIBarButtonItemStyle.Plain, target: self, action: "addComponentToSystem:")
+        let addSystemBarButton = UIBarButtonItem(title: "+ Component", style: UIBarButtonItemStyle.Plain, target: self, action: "addDeploymentToSystem:")
         let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToSystem:")
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
@@ -74,9 +74,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         case 0:
             return "System Details"
         case 1:
-            return detailSystemItem?.components.count > 0 ? "Components" : nil
+            return detailSystemItem?.deployments?.count > 0 ? "Deployments" : nil
         case 2:
-            return detailSystemItem?.serviceEntries.count > 0 ? "Service Entries" : nil
+            return detailSystemItem?.serviceEntries?.count > 0 ? "Service Entries" : nil
         default:
             return nil
         }
@@ -112,11 +112,11 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
     }
     
-    func addComponentToSystem(sender: UIBarButtonItem) {
+    func addDeploymentToSystem(sender: UIBarButtonItem) {
         if let context = detailSystemItem?.managedObjectContext {
-            let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as! Component
-            newComponent.system = detailSystemItem
-            newComponent.newlyCreated = true
+            let newDeployment = NSEntityDescription.insertNewObjectForEntityForName("Deployment", inManagedObjectContext: context) as! Deployment
+            newDeployment.system = detailSystemItem
+            newDeployment.newlyCreated = true
             
             do {
                 try context.save()
@@ -124,7 +124,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             catch {
                 abort()
             }
-            self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: newComponent)
+            self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: newDeployment)
         }
     }
 
@@ -194,6 +194,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         let doubleNumberFormatter = NSNumberFormatter()
         doubleNumberFormatter.numberStyle = NSNumberFormatterStyle.NoStyle
         
+        // >>> TODO: Lat Lon now in components
+        /*
         if let latitudeString = self.latitudeTextField.text {
             if let latitude = doubleNumberFormatter.numberFromString(latitudeString) {
                 detailSystemItem!.latitude = latitude
@@ -219,6 +221,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         else {
             detailSystemItem!.longitude = nil
         }
+        */
         
         if let installationDate = self.installationDate {
             detailSystemItem!.installationDate = installationDate
@@ -259,7 +262,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         case 0:
             return 8
         case 1:
-            if let components = detailSystemItem?.components {
+            if let components = detailSystemItem?.deployments {
                 return components.count
             }
             return 0
@@ -349,21 +352,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
 
-                if let latitudeNumber = detailSystemItem?.latitude {
-                    cell.textField.text = numberFormatter.stringFromNumber(latitudeNumber)
-                }
-                  
-                if detailSystemItem?.latitude == nil || detailSystemItem?.latitude?.integerValue == 0 {
-                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    
-                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
-                        let latitude = location.coordinate.latitude
-                        cell.textField.text = numberFormatter.stringFromNumber(latitude)
-                    }
-                }
-                else {
-                    cell.textField.text = nil
-                }
+
             }
         case (0, 4):
             if let cell: TextFieldCell = cell as? TextFieldCell {
@@ -376,22 +365,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
-                if let longitude = detailSystemItem?.longitude {
-                    cell.textField.text = numberFormatter.stringFromNumber(longitude)
-                }
-
-                if detailSystemItem?.longitude == nil || detailSystemItem?.longitude?.integerValue == 0 {
-                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
-                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
-                        let longitude = location.coordinate.longitude
-                        cell.textField.text = numberFormatter.stringFromNumber(longitude)
-                    }
-                }
-                else {
-                    cell.textField.text = nil
-                }
-                
             }
         case (0, 5):
             if let cell: DateDisplayCell = cell as? DateDisplayCell {
@@ -442,7 +415,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 }
             }
         case (1, _):
-            let components = sortedComponentsForSystem(detailSystemItem)
+            let components = sortedDeploymentsForSystem(detailSystemItem)
             if components.count == 0 {
                 return
             }
@@ -485,12 +458,13 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         
     }
     
-    func sortedComponentsForSystem(system: System?) -> [AnyObject] {
+    func sortedDeploymentsForSystem(system: System?) -> [AnyObject] {
         if let system = system {
-            let components = system.components
             let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-            let sortedComponents = NSArray(array:components.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
-            return sortedComponents
+            if let deployments = system.deployments {
+                let sortedComponents = NSArray(array:deployments.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+                return sortedComponents
+            }
         }
         return [Component]()
     }
@@ -498,8 +472,10 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     func sortedServiceEntriesForSystem(system: System?) -> [AnyObject] {
         if let system = system {
             let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-            let sortedServiceEntries = NSArray(array: system.serviceEntries.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
-            return sortedServiceEntries
+            if let serviceEntries = system.serviceEntries {
+                let sortedServiceEntries = NSArray(array: serviceEntries.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+                return sortedServiceEntries
+            }
         }
         return [ServiceEntry]()
     }
@@ -512,7 +488,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         }
         else if indexPath.section == 1 {
             if let _ = detailSystemItem?.managedObjectContext {
-                let components = sortedComponentsForSystem(detailSystemItem)
+                let components = sortedDeploymentsForSystem(detailSystemItem)
                 let selectedComponent = components[indexPath.row] as? Component
                 self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
             }
@@ -530,19 +506,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             detailSystemItem?.installationLocation = textField.text
         }
         
-        if textField == latitudeTextField {
-            if let text = textField.text {
-                let numberFormatter = NSNumberFormatter()
-                detailSystemItem?.latitude = numberFormatter.numberFromString(text)
-            }
-        }
-        
-        if textField == longitudeTextField {
-            if let text = textField.text {
-                let numberFormatter = NSNumberFormatter()
-                detailSystemItem?.longitude = numberFormatter.numberFromString(text)
-            }
-        }
+
         
         return true
     }

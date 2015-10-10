@@ -15,7 +15,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
 
     var detailComponentItem : Component? {
         didSet {
-            self.installationDate = detailComponentItem?.installationDate
             self.configureView()
         }
     }
@@ -94,20 +93,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         if detailComponentItem?.newlyCreated == true {
             self.setEditing(true, animated: false)
 
-            if let parentSystem = detailComponentItem?.system {
-                if detailComponentItem?.installationDate == nil {
-                    detailComponentItem?.installationDate = parentSystem.installationDate
-                }
-                if detailComponentItem?.installationLocation == nil {
-                    detailComponentItem?.installationLocation = parentSystem.installationLocation
-                }
-                if detailComponentItem?.latitude == nil {
-                    detailComponentItem?.latitude = parentSystem.latitude
-                }
-                if detailComponentItem?.longitude == nil {
-                    detailComponentItem?.longitude = parentSystem.longitude
-                }
-            }
+
 
         }
         else {
@@ -127,7 +113,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         case 0:
             return "Component Details"
         case 1:
-            return detailComponentItem?.serviceEntries.count > 0 ? "Service Entries" : nil
+            return detailComponentItem?.serviceEntries!.count > 0 ? "Service Entries" : nil
         default:
             return nil
         }
@@ -334,12 +320,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                cell.textField?.delegate = self
             
                let numberFormatter = NSNumberFormatter()
-                if let offsetNumber = detailComponentItem?.centerOffset {
-                    cell.textField.text = numberFormatter.stringFromNumber(offsetNumber)
-                }
-                else {
-                    cell.textField.text = nil
-                }
+
                 cell.titleLabel.text = "Center Offset"
                 cell.textField.keyboardType = UIKeyboardType.NumberPad
             }
@@ -350,12 +331,9 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.textField?.delegate = self
                 
                 let numberFormatter = NSNumberFormatter()
-                if let offsetNumber = detailComponentItem?.heightFromGround {
-                    cell.textField.text = numberFormatter.stringFromNumber(offsetNumber)
-                }
-                else {
-                    cell.textField.text = nil
-                }
+                
+                // >>> TODO: Height from ground removed
+
                 cell.titleLabel.text = "Height"
                 cell.textField.keyboardType = UIKeyboardType.NumberPad
             }
@@ -366,12 +344,8 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 dateFormatter.dateStyle = .MediumStyle
                 cell.titleLabel.text = "Installation Date"
                 
-                if let date = detailComponentItem?.installationDate {
-                    cell.detailLabel.text = dateFormatter.stringFromDate(date)
-                }
-                else {
-                    cell.detailLabel.text = ""
-                }
+                // Installation date removed
+
             }
         case (0, 12):
             if let cell = cell as? DatePickerCell {
@@ -382,12 +356,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 cell.datePicker?.tag = 1
                 
-                if let date = detailComponentItem?.installationDate {
-                    let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
-                    let normalizedDate = calendar.dateFromComponents(dateComponents)
-                    cell.datePicker?.date = normalizedDate ?? NSDate()
-                }
+                // Installation date removed
 
             }
         case (0, 13):
@@ -397,13 +366,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.datePicker?.datePickerMode = .Time
                 cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
                 cell.datePicker?.tag = 2
-                
-                if let date = detailComponentItem?.installationDate {
-                    let calendar = NSCalendar.currentCalendar()
-                    let dateComponents = calendar.components([.Hour, .Minute] , fromDate: date)
-                    let normalizedDate = calendar.dateFromComponents(dateComponents)
-                    cell.datePicker?.date = normalizedDate ?? NSDate()
-                }
             }
         case (0, 14):
             if let cell = cell as? NotesCell {
@@ -441,22 +403,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
 
-                if let latitudeNumber = detailComponentItem?.latitude {
-                    cell.textField.text = numberFormatter.stringFromNumber(latitudeNumber)
-                }
-                
-                if detailComponentItem?.latitude == nil || detailComponentItem?.latitude?.integerValue == 0 {
-                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    
-                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
-                        let latitude = location.coordinate.latitude
-                        cell.textField.text = numberFormatter.stringFromNumber(latitude)
-                    }
-                }
-                else {
-                    cell.textField.text = nil
-                }
-                
+
                 cell.titleLabel.text = "Latitude"
                 
             }
@@ -470,21 +417,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 let numberFormatter = NSNumberFormatter()
                 numberFormatter.minimumFractionDigits = 6
 
-                if let longitudeNumber = detailComponentItem?.longitude {
-                    cell.textField.text = numberFormatter.stringFromNumber(longitudeNumber)
-                }
-                
-                if detailComponentItem?.longitude == nil || detailComponentItem?.longitude?.integerValue == 0 {
-                    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    
-                    if let locationManager = appDelegate.locationManager, location = locationManager.location {
-                        let longitude = location.coordinate.longitude
-                        cell.textField.text = numberFormatter.stringFromNumber(longitude)
-                    }
-                }
-                else {
-                    cell.textField.text = nil
-                }
                 
                 cell.titleLabel.text = "Longitude"
             }
@@ -620,7 +552,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.textField.userInteractionEnabled = self.editing
 
                 cell.textField?.delegate = self
-                cell.textField?.text = detailComponentItem?.parentLogger
                 cell.titleLabel.text = "Parent Logger"
             }
 
@@ -678,7 +609,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             yearDateComponents.hour = timeDateComponents.hour
             yearDateComponents.minute = timeDateComponents.minute
             
-            detailComponentItem?.installationDate = calendar.dateFromComponents(yearDateComponents)
             tableView.reloadData()
         }
         if let yearDate = yearAndDayLastCalibratedDate, timeDate = timeLastCalibratedDate {

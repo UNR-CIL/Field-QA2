@@ -1,5 +1,5 @@
 //
-//  Document.swift
+//  Deployment.swift
 //  Field QA2
 //
 //  Created by John Jusayan on 10/10/15.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class Document: NSManagedObject {
+class Deployment: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
     var newlyCreated: Bool = false

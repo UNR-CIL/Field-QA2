@@ -2,22 +2,16 @@
 //  LogicalDevice.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 11/20/14.
-//  Copyright (c) 2014 University of Nevada, Reno. All rights reserved.
+//  Created by John Jusayan on 10/10/15.
+//  Copyright © 2015 University of Nevada, Reno. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
 class LogicalDevice: NSManagedObject {
-    @NSManaged var uniqueIdentifier: String?
-    @NSManaged var deviceId: String?
-    @NSManaged var name: String?
-    @NSManaged var component: Component?
-    
-    @NSManaged var creationDate: NSDate?
-    @NSManaged var modificationDate: NSDate?
-    
+
+// Insert code here to add functionality to your managed object subclass
     var newlyCreated: Bool = false
     
     override func awakeFromInsert() {
@@ -27,4 +21,5 @@ class LogicalDevice: NSManagedObject {
         creationDate = NSDate()
         modificationDate = NSDate()
     }
+    
 }
