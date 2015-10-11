@@ -22,4 +22,55 @@ class Project: NSManagedObject {
         modificationDate = NSDate()
     }
     
+    private lazy var dictionaryValue: NSMutableDictionary? = {
+        var dictionary = NSMutableDictionary()
+        
+        for entityProperty in self.entity.propertiesByName {
+            let propertyName: NSString = entityProperty.1.name
+            
+            switch  propertyName {
+            case "startedDate":
+                if let date = self.valueForKey(propertyName as String) as? NSDate {
+                    dictionary[propertyName] = date.timeIntervalSince1970
+                }
+            case "creationDate":
+                if let date = self.valueForKey(propertyName as String) as? NSDate {
+                    dictionary[propertyName] = date.timeIntervalSince1970
+                }
+            case "modificationDate":
+                if let date = self.valueForKey(propertyName as String) as? NSDate {
+                    dictionary[propertyName] = date.timeIntervalSince1970
+                }
+            case "principalInvestigator":
+                if let person = self.valueForKey(propertyName as String) as? Person {
+                    dictionary[propertyName] = [person.uniqueIdentifier!]
+                }
+            case "systems":
+                fallthrough
+            case "documents":
+                fallthrough
+            case "serviceEntries":
+                if let set = self.valueForKey(propertyName as String) as? NSSet {
+                    var itemIds = [AnyObject]()
+                    for item in set {
+                        itemIds.append(item.valueForKey("uniqueIdentifier")!)
+                    }
+                    dictionary[propertyName] = itemIds
+                }
+            default:
+                if let value: AnyObject = self.valueForKey(propertyName as String) {
+                    dictionary[propertyName] = value
+                }
+            }
+        }
+        return dictionary
+        }()
+    
+    private func json() -> NSData? {
+        do {
+            return try NSJSONSerialization.dataWithJSONObject(self.dictionaryValue!, options: NSJSONWritingOptions())
+        } catch _ {
+            return nil
+        }
+    }
 }
