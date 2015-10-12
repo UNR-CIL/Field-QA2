@@ -27,8 +27,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var latitudeTextField: UITextField!
-    @IBOutlet weak var longitudeTextField: UITextField!
     
     weak var datePicker: UIDatePicker? = nil
     weak var dateLabel: UILabel? = nil
@@ -244,7 +242,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             return 52.0
         case (0, 1):
             return 162.0
-        case(0, 6...7):
+        case(0, 4...5):
             return 162.0
         default:
             return 44.0
@@ -260,7 +258,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         // Return the number of rows in the section.
         switch (section) {
         case 0:
-            return 8
+            return 6
         case 1:
             if let components = detailSystemItem?.deployments {
                 return components.count
@@ -283,13 +281,13 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             cellIdentifier = "PhotoTextFieldCell"
-        case (0, 2...4):
-            cellIdentifier = "TextFieldCell"
         case (0, 1):
             cellIdentifier = "NotesCell"
-        case (0, 5):
+        case (0, 2):
+            cellIdentifier = "TextFieldCell"
+        case (0, 3):
             cellIdentifier = "DateDisplayCell"
-        case (0, 6...7):
+        case (0, 4...5):
             cellIdentifier = "DatePickerCell"
         default:
             cellIdentifier = "Cell"
@@ -341,32 +339,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 cell.textField.text = detailSystemItem?.installationLocation
             }
         case (0, 3):
-            if let cell: TextFieldCell = cell as? TextFieldCell {
-                cell.textField.userInteractionEnabled = self.editing
-
-                latitudeTextField = cell.textField
-                latitudeTextField?.keyboardType = .DecimalPad
-                latitudeTextField?.delegate = self
-                cell.titleLabel.text = "Latitude"
-                
-                let numberFormatter = NSNumberFormatter()
-                numberFormatter.minimumFractionDigits = 6
-
-
-            }
-        case (0, 4):
-            if let cell: TextFieldCell = cell as? TextFieldCell {
-                cell.textField.userInteractionEnabled = self.editing
-
-                longitudeTextField = cell.textField
-                longitudeTextField?.keyboardType = .DecimalPad
-                longitudeTextField?.delegate = self
-                cell.titleLabel.text = "Longitude"
-                
-                let numberFormatter = NSNumberFormatter()
-                numberFormatter.minimumFractionDigits = 6
-            }
-        case (0, 5):
             if let cell: DateDisplayCell = cell as? DateDisplayCell {
                 dateLabel = cell.detailLabel
                 let dateFormatter = NSDateFormatter()
@@ -380,7 +352,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                     cell.detailLabel.text = ""
                 }
             }
-        case (0, 6):
+        case (0, 4):
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
                 
@@ -398,7 +370,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 }
                 
             }
-        case (0, 7):
+        case (0, 5):
             if let cell = cell as? DatePickerCell {
                 cell.datePicker.userInteractionEnabled = self.editing
                 

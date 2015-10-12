@@ -9,15 +9,6 @@
 import UIKit
 import CoreData
 
-enum DisplayMode: String {
-    case NotShowingDatePicker = "NotShowingDatePicker"
-    case ShowingFirstDatePicker = "ShowingFirstDatePicker"
-    case ShowingSecondDatePicker = "ShowingSecondDatePicker"
-    case ShowingThirdDatePicker = "ShowingThirdDatePicker"
-    case ShowingFourthDatePicker = "ShowingFourthDatePicker"
-    case ShowingFifthDatePicker = "ShowingFifthDatePicker"
-}
-
 class ProjectDetailViewController: UITableViewController, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate  {
     
     var detailProjectItem : Project? {

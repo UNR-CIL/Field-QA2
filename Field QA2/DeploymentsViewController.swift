@@ -1,34 +1,33 @@
 //
-//  ComponentsViewController.swift
+//  DeploymentsViewController.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 9/4/14.
-//  Copyright (c) 2014 University of Nevada, Reno. All rights reserved.
+//  Created by John Jusayan on 10/12/15.
+//  Copyright © 2015 University of Nevada, Reno. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class ComponentsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    // MARK: - Properties
-    
-    var componentsPredicate : NSPredicate?
-    var managedObjectContext: NSManagedObjectContext?
-    var currentlySelectedComponent: Component?
-    var _fetchedResultsController: NSFetchedResultsController? = nil
+class DeploymentsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+    // MARK: - Properties
+    var managedObjectContext: NSManagedObjectContext?
+    var currentlySelectedDeployment: Deployment?
+    var _fetchedResultsController: NSFetchedResultsController? = nil
+    
     // MARK: - Fetched results controller
     
     var fetchedResultsController: NSFetchedResultsController {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
-            
+        
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Component", inManagedObjectContext: self.managedObjectContext!)
+        let entity = NSEntityDescription.entityForName("Deployment", inManagedObjectContext: self.managedObjectContext!)
         fetchRequest.entity = entity
-            
+        
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
@@ -42,7 +41,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!,sectionNameKeyPath: nil, cacheName:nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
-            
+        
         do {
             try _fetchedResultsController!.performFetch()
         } catch {
@@ -51,7 +50,7 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
         }
-            
+        
         return _fetchedResultsController!
     }
     
@@ -63,9 +62,10 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -73,31 +73,31 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
         self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.leftItemsSupplementBackButton = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     // MARK: - New Object
-
+    
     func insertNewObject(sender: AnyObject) {
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: self.managedObjectContext!) as! Component
+        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Deployment", inManagedObjectContext: self.managedObjectContext!) as! Deployment
         
         // If appropriate, configure the new managed object.
         // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-
+        
         do {
             try self.managedObjectContext!.save()
         }
         catch {
             abort()
         }
-
+        
         newManagedObject.newlyCreated = true
         self.tableView.reloadData()
     }
-
+    
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -110,10 +110,11 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ComponentCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("DeploymentCell", forIndexPath: indexPath) as UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
+    
     
     // MARK: - Table View
     
@@ -139,14 +140,14 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let component = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Component
+        let deployment = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Deployment
         
-        if let _ = component.name {
-            cell.textLabel?.text = component.name
+        if let _ = deployment.name {
+            cell.textLabel?.text = deployment.name
             cell.textLabel?.textColor = UIColor.darkTextColor()
         }
         else {
-            cell.textLabel?.text = "A Component"
+            cell.textLabel?.text = "A Deployment"
             cell.textLabel?.textColor = UIColor.darkGrayColor()
         }
         
@@ -202,10 +203,10 @@ class ComponentsViewController: UITableViewController, NSFetchedResultsControlle
         // Pass the selected object to the new view controller.
         
         let indexPath = self.tableView.indexPathForSelectedRow
-        let component = self.fetchedResultsController.objectAtIndexPath(indexPath!) as? Component
-        currentlySelectedComponent = component
-        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! ComponentDetailViewController
-        controller.detailComponentItem = component
+        let deployment = self.fetchedResultsController.objectAtIndexPath(indexPath!) as? Deployment
+        currentlySelectedDeployment = deployment
+        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DeploymentDetailViewController
+        controller.detailDeploymentItem = deployment
         controller.navigationItem.leftBarButtonItems = [self.splitViewController!.displayModeButtonItem(), controller.editButtonItem()]
         controller.navigationItem.leftItemsSupplementBackButton = true
     }

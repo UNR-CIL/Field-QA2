@@ -21,6 +21,7 @@ extension Component {
     @NSManaged var dataStreamDetails: String?
     @NSManaged var installationDetails: String?
     @NSManaged var installationLocation: String?
+    @NSManaged var installationDate: NSDate?
     @NSManaged var lastCalibratedDate: NSDate?
     @NSManaged var manufacturer: String?
     @NSManaged var maximumAccuracyBound: NSNumber?

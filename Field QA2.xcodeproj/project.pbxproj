@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47239F701BCB9FFF00A3E299 /* SitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F6F1BCB9FFF00A3E299 /* SitesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		47239F721BCBA02A00A3E299 /* SiteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F711BCBA02A00A3E299 /* SiteDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		47239F741BCBA05300A3E299 /* DeploymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F731BCBA05300A3E299 /* DeploymentsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		47239F761BCBA06600A3E299 /* DeploymentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F751BCBA06600A3E299 /* DeploymentDetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		478F57931B531C68000D6F2C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 478F57921B531C68000D6F2C /* Launch Screen.storyboard */; };
 		47E3C17A1B52418600B7E08B /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */; };
 		47E3C17D1B524F9600B7E08B /* NEXJSONExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E3C17C1B524F9600B7E08B /* NEXJSONExporter.m */; };
@@ -63,6 +67,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47239F6F1BCB9FFF00A3E299 /* SitesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SitesViewController.swift; sourceTree = "<group>"; };
+		47239F711BCBA02A00A3E299 /* SiteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteDetailViewController.swift; sourceTree = "<group>"; };
+		47239F731BCBA05300A3E299 /* DeploymentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeploymentsViewController.swift; sourceTree = "<group>"; };
+		47239F751BCBA06600A3E299 /* DeploymentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeploymentDetailViewController.swift; sourceTree = "<group>"; };
 		478F57921B531C68000D6F2C /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		47E3C1781B52407A00B7E08B /* Field_QA 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Field_QA 2.xcdatamodel"; sourceTree = "<group>"; };
 		47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
@@ -218,6 +226,8 @@
 				AB6B9E9B19B9825C003734A1 /* ComponentsViewController.swift */,
 				ABFD086819C8900700742185 /* DatePicker.storyboard */,
 				ABFD086619C88FF600742185 /* DatePickerViewController.swift */,
+				47239F731BCBA05300A3E299 /* DeploymentsViewController.swift */,
+				47239F751BCBA06600A3E299 /* DeploymentDetailViewController.swift */,
 				ABD3D119199982370064F8A0 /* DetailViewController.swift */,
 				ABD3D11E199982370064F8A0 /* Images.xcassets */,
 				ABD3D134199C4C9A0064F8A0 /* ImageToDataTransformer.swift */,
@@ -231,6 +241,8 @@
 				ABC08F661A6728A30066E8BE /* PhotoDetailViewController.swift */,
 				ABA4879019F83E8D0024BFF2 /* ProjectDetailViewController.swift */,
 				ABA4879219F83F100024BFF2 /* ProjectsViewController.swift */,
+				47239F6F1BCB9FFF00A3E299 /* SitesViewController.swift */,
+				47239F711BCBA02A00A3E299 /* SiteDetailViewController.swift */,
 				AB6B9E9919B9824A003734A1 /* ServiceEntriesViewController.swift */,
 				ABFD086E19C8F83800742185 /* ServiceEntryDetailViewController.swift */,
 				ABD3D110199982370064F8A0 /* Supporting Files */,
@@ -335,6 +347,7 @@
 				47F88C301BC90C7700D9AF3F /* LogicalDevice+CoreDataProperties.swift in Sources */,
 				AB052B441A65DE940076FD15 /* CDJSONExporter.m in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
+				47239F721BCBA02A00A3E299 /* SiteDetailViewController.swift in Sources */,
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
 				ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */,
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
@@ -345,6 +358,7 @@
 				47F88C291BC90C7700D9AF3F /* ServiceEntry.swift in Sources */,
 				AB052B4C1A65FDD00076FD15 /* TNImageToDataTransformer.m in Sources */,
 				47F88C2A1BC90C7700D9AF3F /* Site+CoreDataProperties.swift in Sources */,
+				47239F741BCBA05300A3E299 /* DeploymentsViewController.swift in Sources */,
 				47F88C2E1BC90C7700D9AF3F /* System+CoreDataProperties.swift in Sources */,
 				47F88C261BC90C7700D9AF3F /* Component+CoreDataProperties.swift in Sources */,
 				47F88C2D1BC90C7700D9AF3F /* Document.swift in Sources */,
@@ -355,6 +369,7 @@
 				47F88C321BC90C7700D9AF3F /* Deployment+CoreDataProperties.swift in Sources */,
 				47F88C2F1BC90C7700D9AF3F /* System.swift in Sources */,
 				AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */,
+				47239F761BCBA06600A3E299 /* DeploymentDetailViewController.swift in Sources */,
 				ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */,
 				AB052B481A65DEB80076FD15 /* CodingValueTransformer.m in Sources */,
 				ABFD086D19C8F68600742185 /* LogicalDeviceDetailViewController.swift in Sources */,
@@ -372,6 +387,7 @@
 				47F88C271BC90C7700D9AF3F /* Component.swift in Sources */,
 				AB6B9E9E19B98284003734A1 /* PersonsViewController.swift in Sources */,
 				47F88C251BC90C7700D9AF3F /* Project.swift in Sources */,
+				47239F701BCB9FFF00A3E299 /* SitesViewController.swift in Sources */,
 				47F88C281BC90C7700D9AF3F /* ServiceEntry+CoreDataProperties.swift in Sources */,
 				AB864A9B19FE4E87007FD1E9 /* DateDisplayCell.swift in Sources */,
 			);

@@ -17,8 +17,10 @@ extension Deployment {
     @NSManaged var uniqueIdentifier: String?
     @NSManaged var name: String?
     @NSManaged var purpose: String?
-    @NSManaged var centerOffset: String?
+    @NSManaged var centerOffset: NSNumber?
     @NSManaged var location: String?
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var longitude: NSNumber?
     @NSManaged var heightFromGround: NSNumber?
     @NSManaged var parentLogger: String?
     @NSManaged var establishedDate: NSDate?

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Automatic">
-    <entity name="Component" representedClassName="Field_QA2.Component" syncable="YES">
+    <entity name="Component" representedClassName=".Component" syncable="YES">
         <attribute name="calibrationStatus" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dataInterval" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dataStreamDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="installationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="installationDetails" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="installationLocation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastCalibratedDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -30,13 +31,15 @@
         <relationship name="logicalDevices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LogicalDevice" inverseName="component" inverseEntity="LogicalDevice" syncable="YES"/>
         <relationship name="serviceEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="component" inverseEntity="ServiceEntry" syncable="YES"/>
     </entity>
-    <entity name="Deployment" representedClassName="Deployment" syncable="YES">
+    <entity name="Deployment" representedClassName=".Deployment" syncable="YES">
         <attribute name="abandonedDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="centerOffset" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="centerOffset" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="establishedDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="heightFromGround" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parentLogger" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,7 +49,7 @@
         <relationship name="documents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="deployment" inverseEntity="Document" syncable="YES"/>
         <relationship name="system" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="System" inverseName="deployments" inverseEntity="System" syncable="YES"/>
     </entity>
-    <entity name="Document" representedClassName="Field_QA2.Document" syncable="YES">
+    <entity name="Document" representedClassName=".Document" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -59,7 +62,7 @@
         <relationship name="serviceEntry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="documents" inverseEntity="ServiceEntry" syncable="YES"/>
         <relationship name="site" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Site" inverseName="documents" inverseEntity="Site" syncable="YES"/>
     </entity>
-    <entity name="LogicalDevice" representedClassName="Field_QA2.LogicalDevice" syncable="YES">
+    <entity name="LogicalDevice" representedClassName=".LogicalDevice" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deviceId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -67,7 +70,7 @@
         <attribute name="uniqueIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="component" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Component" inverseName="logicalDevices" inverseEntity="Component" syncable="YES"/>
     </entity>
-    <entity name="Person" representedClassName="Field_QA2.Person" syncable="YES">
+    <entity name="Person" representedClassName=".Person" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
@@ -81,7 +84,7 @@
         <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="principalInvestigator" inverseEntity="Project" syncable="YES"/>
         <relationship name="serviceEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="creator" inverseEntity="ServiceEntry" syncable="YES"/>
     </entity>
-    <entity name="Project" representedClassName="Field_QA2.Project" syncable="YES">
+    <entity name="Project" representedClassName=".Project" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="grantNumberString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="institutionName" optional="YES" attributeType="String" syncable="YES"/>
@@ -95,7 +98,7 @@
         <relationship name="serviceEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceEntry" inverseName="project" inverseEntity="ServiceEntry" syncable="YES"/>
         <relationship name="sites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Site" inverseName="project" inverseEntity="Site" syncable="YES"/>
     </entity>
-    <entity name="ServiceEntry" representedClassName="Field_QA2.ServiceEntry" syncable="YES">
+    <entity name="ServiceEntry" representedClassName=".ServiceEntry" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -110,7 +113,7 @@
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="serviceEntries" inverseEntity="Project" syncable="YES"/>
         <relationship name="system" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="System" inverseName="serviceEntries" inverseEntity="System" syncable="YES"/>
     </entity>
-    <entity name="Site" representedClassName="Site" syncable="YES">
+    <entity name="Site" representedClassName=".Site" syncable="YES">
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="gpsLandmark" optional="YES" attributeType="String" syncable="YES"/>
@@ -129,7 +132,7 @@
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="sites" inverseEntity="Project" syncable="YES"/>
         <relationship name="systems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="System" inverseName="site" inverseEntity="System" syncable="YES"/>
     </entity>
-    <entity name="System" representedClassName="Field_QA2.System">
+    <entity name="System" representedClassName=".System">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="installationDate" optional="YES" attributeType="Date">
@@ -148,14 +151,14 @@
         <userInfo/>
     </entity>
     <elements>
-        <element name="Component" positionX="261" positionY="198" width="128" height="465"/>
+        <element name="Component" positionX="261" positionY="198" width="128" height="480"/>
+        <element name="Deployment" positionX="288" positionY="342" width="128" height="285"/>
         <element name="Document" positionX="288" positionY="324" width="128" height="210"/>
         <element name="LogicalDevice" positionX="306" positionY="360" width="128" height="135"/>
         <element name="Person" positionX="288" positionY="216" width="128" height="225"/>
         <element name="Project" positionX="279" positionY="315" width="128" height="225"/>
-        <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="238"/>
-        <element name="System" positionX="261" positionY="189" width="128" height="240"/>
-        <element name="Deployment" positionX="288" positionY="342" width="128" height="255"/>
+        <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="240"/>
         <element name="Site" positionX="297" positionY="351" width="128" height="300"/>
+        <element name="System" positionX="261" positionY="189" width="128" height="240"/>
     </elements>
 </model>
