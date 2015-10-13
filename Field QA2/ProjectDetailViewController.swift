@@ -102,7 +102,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 abort()
             }
 
-            self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: newSite)
+            // TODO: >>>
+            //self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: newSite)
         }
     }
     
@@ -112,6 +113,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        // TODO: >>>
         if (segue.identifier == "ProjectDetailToSystemDetail") {
             if let systemDetailViewController = segue.destinationViewController as? SystemDetailViewController {
                 if let newSystem = sender as? System {
@@ -422,7 +425,9 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             if let _ = detailProjectItem?.managedObjectContext {
                 let systems = sortedSitesForProject(detailProjectItem)
                 let selectedSystem = systems[indexPath.row] as? System
-                self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: selectedSystem)
+                
+                // TODO: >>>>
+                // self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: selectedSystem)
             }
         }
         else {

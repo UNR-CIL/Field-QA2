@@ -754,7 +754,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="zD7-nt-n9v"/>
                     <connections>
-                        <segue destination="n5R-iL-SBJ" kind="show" identifier="SystemDetailToComponentDetail" id="oTe-wD-cwN"/>
+                        <segue destination="kCS-HH-oQ1" kind="show" identifier="SystemDetailToDeploymentDetail" id="NYK-Sd-Axt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8hE-6t-d9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -764,7 +764,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4788" y="-1652"/>
+            <point key="canvasLocation" x="2785" y="-762"/>
         </scene>
         <!--Component Detail View Controller-->
         <scene sceneID="6Ei-tx-flK">
@@ -1064,7 +1064,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2801" y="624"/>
+            <point key="canvasLocation" x="2785" y="624"/>
         </scene>
         <!--Deployments View Controller-->
         <scene sceneID="vE0-6N-py2">
@@ -1536,7 +1536,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="UC3-MK-EWd"/>
                     <connections>
-                        <segue destination="Ra1-pI-cdp" kind="show" identifier="ProjectDetailToSystemDetail" id="imY-oF-RkE"/>
+                        <segue destination="c1Z-Ud-bqY" kind="show" identifier="ProjectDetailToSiteDetail" id="jAS-Wp-Nc9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4K-tb-bnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1748,6 +1748,48 @@
                                     <outlet property="datePicker" destination="nmb-YF-W6z" id="HGA-ZG-Llg"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotesCell" rowHeight="162" id="Xxr-ZH-qTd" customClass="NotesCell" customModule="Field_QA2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="459.5" width="600" height="162"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xxr-ZH-qTd" id="eBG-MT-J7c">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="161.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHH-iJ-mjW">
+                                            <rect key="frame" x="23" y="8" width="564" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="564" id="0dX-ZR-45T"/>
+                                                <constraint firstAttribute="height" constant="21" id="yCk-8D-dmb"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqH-L8-9lS">
+                                            <rect key="frame" x="23" y="37" width="564" height="117"/>
+                                            <animations/>
+                                            <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="PqH-L8-9lS" secondAttribute="trailing" constant="5" id="2OK-qO-HMK"/>
+                                        <constraint firstItem="tHH-iJ-mjW" firstAttribute="leading" secondItem="eBG-MT-J7c" secondAttribute="leadingMargin" constant="15" id="CM7-Ow-TLu"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="PqH-L8-9lS" secondAttribute="bottom" constant="-0.5" id="Dbv-Zu-FS8"/>
+                                        <constraint firstItem="tHH-iJ-mjW" firstAttribute="top" secondItem="eBG-MT-J7c" secondAttribute="topMargin" id="Vkq-xX-Hga"/>
+                                        <constraint firstItem="PqH-L8-9lS" firstAttribute="top" secondItem="tHH-iJ-mjW" secondAttribute="bottom" constant="8" id="lKE-M6-uQ8"/>
+                                        <constraint firstItem="PqH-L8-9lS" firstAttribute="leading" secondItem="eBG-MT-J7c" secondAttribute="leadingMargin" constant="15" id="m29-qu-Lwg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="textView" destination="PqH-L8-9lS" id="5zx-g9-Wsw"/>
+                                    <outlet property="titleLabel" destination="tHH-iJ-mjW" id="UjU-tM-nIf"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="c1Z-Ud-bqY" id="NBq-Q1-M0K"/>
@@ -1755,6 +1797,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="4FU-xs-Gfg"/>
+                    <connections>
+                        <segue destination="Ra1-pI-cdp" kind="show" identifier="SiteDetailToSystemDetail" id="qWw-oZ-EZw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4y6-gR-Suq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2032,10 +2077,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="WXv-an-ehh"/>
+                    <connections>
+                        <segue destination="n5R-iL-SBJ" kind="show" identifier="DeploymentDetailToComponentDetail" id="BLC-Dc-XNe"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBW-ae-Bbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2961" y="-50"/>
+            <point key="canvasLocation" x="2785" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sLf-6u-LyY">
@@ -2349,7 +2397,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rsf-BG-0fV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2149" y="-50"/>
+            <point key="canvasLocation" x="2120" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oPa-s2-PcC">
@@ -2375,7 +2423,9 @@
         <image name="Preferences" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="imY-oF-RkE"/>
-        <segue reference="EDq-cg-oaP"/>
+        <segue reference="jAS-Wp-Nc9"/>
+        <segue reference="qWw-oZ-EZw"/>
+        <segue reference="NYK-Sd-Axt"/>
+        <segue reference="BLC-Dc-XNe"/>
     </inferredMetricsTieBreakers>
 </document>

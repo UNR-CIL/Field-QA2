@@ -2,7 +2,7 @@
 //  Component+CoreDataProperties.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 10/10/15.
+//  Created by John Jusayan on 10/12/15.
 //  Copyright © 2015 University of Nevada, Reno. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,7 +21,6 @@ extension Component {
     @NSManaged var dataStreamDetails: String?
     @NSManaged var installationDetails: String?
     @NSManaged var installationLocation: String?
-    @NSManaged var installationDate: NSDate?
     @NSManaged var lastCalibratedDate: NSDate?
     @NSManaged var manufacturer: String?
     @NSManaged var maximumAccuracyBound: NSNumber?
@@ -40,9 +39,10 @@ extension Component {
     @NSManaged var unitDescription: String?
     @NSManaged var vendor: String?
     @NSManaged var wiringNotes: String?
+    @NSManaged var installationDate: NSDate?
+    @NSManaged var deployment: Deployment?
     @NSManaged var documents: NSSet?
     @NSManaged var logicalDevices: NSSet?
     @NSManaged var serviceEntries: NSSet?
-    @NSManaged var deployment: Deployment?
 
 }

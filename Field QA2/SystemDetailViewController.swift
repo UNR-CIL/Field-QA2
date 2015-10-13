@@ -122,7 +122,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             catch {
                 abort()
             }
-            self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: newDeployment)
+            
+            // TODO: >>>
+            //self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: newDeployment)
         }
     }
 
@@ -132,6 +134,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        // TODO: >>>>>>
         if (segue.identifier == "SystemDetailToComponentDetail") {
             if let componentDetailViewController = segue.destinationViewController as? ComponentDetailViewController {
                 if let newComponent = sender as? Component {
@@ -392,13 +396,13 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 return
             }
             else {
-                let component = components[indexPath.row] as! Component
-                cell.textLabel?.text = component.name
+                let deployment = components[indexPath.row] as! Deployment
+                cell.textLabel?.text = deployment.name
                 
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
                 dateFormatter.dateStyle = .MediumStyle
-                if let date = component.creationDate {
+                if let date = deployment.creationDate {
                     cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
                 }
                 else {
@@ -462,7 +466,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             if let _ = detailSystemItem?.managedObjectContext {
                 let components = sortedDeploymentsForSystem(detailSystemItem)
                 let selectedComponent = components[indexPath.row] as? Component
-                self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
+                
+                // TODO: >>>>
+                //self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
             }
         }
     }

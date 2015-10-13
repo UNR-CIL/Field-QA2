@@ -2,7 +2,7 @@
 //  Document+CoreDataProperties.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 10/10/15.
+//  Created by John Jusayan on 10/12/15.
 //  Copyright © 2015 University of Nevada, Reno. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,9 +21,9 @@ extension Document {
     @NSManaged var path: String?
     @NSManaged var uniqueIdentifier: String?
     @NSManaged var component: Component?
+    @NSManaged var deployment: Deployment?
     @NSManaged var project: Project?
     @NSManaged var serviceEntry: ServiceEntry?
     @NSManaged var site: Site?
-    @NSManaged var deployment: Deployment?
 
 }

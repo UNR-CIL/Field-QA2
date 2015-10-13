@@ -10,6 +10,8 @@ import UIKit
 
 class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDelegate {
     
+    
+    
     var detailLogicalDeviceItem : LogicalDevice? {
         didSet {
             self.configureView()
@@ -25,7 +27,7 @@ class LogicalDeviceDetailViewController: UIViewController, UIPopoverControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
-            let viewHeight = self.view.bounds.size.height
+            _ = self.view.bounds.size.height
             let userInfo = notification.userInfo as NSDictionary!
             let keyboardValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
             let keyboardRect = keyboardValue.CGRectValue()

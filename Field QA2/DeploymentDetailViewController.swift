@@ -485,7 +485,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
     // MARK: UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let image = info[UIImagePickerControllerEditedImage] as? UIImage
+        _ = info[UIImagePickerControllerEditedImage] as? UIImage
         
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             self.tableView.reloadData()

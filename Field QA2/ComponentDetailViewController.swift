@@ -16,11 +16,6 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             self.configureView()
         }
     }
-    
-    var installationDatePopoverController: UIPopoverController?
-    var lastCallibrationDatePopoverController: UIPopoverController?
-    var logicalDevicePopoverController: UIPopoverController?
-    var serviceEntriesPopoverController: UIPopoverController?
 
     var installationDate: NSDate?
     var lastCalibratedDate: NSDate?
