@@ -62,9 +62,8 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
         NSNotificationCenter.defaultCenter().addObserverForName("SegmentedValueChanged", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
         }
         
-        
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToComponent:")
-        navigationItem.rightBarButtonItems = [addServiceEntryBarButton]
+        let addComponentBarButton = UIBarButtonItem(title: "+Component", style: .Plain, target: self, action: "addComponentToDeployment:")
+        navigationItem.rightBarButtonItems = [addComponentBarButton]
         
         if detailDeploymentItem?.newlyCreated == true {
             self.setEditing(true, animated: false)
@@ -98,22 +97,11 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
         // Dispose of any resources that can be recreated.
     }
     
-    func addServiceEntryToComponent(sender: UIBarButtonItem) {
+    func addComponentToDeployment(sender: UIBarButtonItem) {
         if let context = detailDeploymentItem?.managedObjectContext {
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
-            serviceEntryDetailViewController.presentedAsFormStyle = true
-            
-            let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
-            navigationController.modalPresentationStyle = .FormSheet
-            self.presentViewController(navigationController, animated: true, completion: nil)
-            
-            let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
-            
-            
-            newServiceEntry.newlyCreated = true
-            serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
+            let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as! Component
+            newComponent.deployment = detailDeploymentItem
+            newComponent.newlyCreated = true
             
             do {
                 try context.save()
@@ -121,10 +109,12 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
             catch {
                 abort()
             }
+            
+            self.performSegueWithIdentifier("DeploymentDetailToComponentDetail", sender: newComponent)
         }
-        
     }
     
+
     func popoverControllerShouldDismissPopover(popoverController: UIPopoverController) -> Bool {
 
         return true
@@ -475,9 +465,11 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "ComponentsViewControllerPopover") {
-            if let _ = segue.destinationViewController as? ComponentsViewController {
-                
+        if (segue.identifier == "DeploymentDetailToComponentDetail") {
+            if let componentDetailViewController = segue.destinationViewController as? ComponentDetailViewController {
+                if let newComponent = sender as? Component {
+                    componentDetailViewController.detailComponentItem = newComponent
+                }
             }
         }
     }

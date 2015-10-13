@@ -48,8 +48,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
         }
         
-        let addSystemBarButton = UIBarButtonItem(title: "+ Component", style: UIBarButtonItemStyle.Plain, target: self, action: "addDeploymentToSystem:")
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToSystem:")
+        let addSystemBarButton = UIBarButtonItem(title: "+Deployment", style: UIBarButtonItemStyle.Plain, target: self, action: "addDeploymentToSystem:")
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: "addServiceEntryToSystem:")
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
         if detailSystemItem?.newlyCreated == true {
@@ -123,8 +123,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 abort()
             }
             
-            // TODO: >>>
-            //self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: newDeployment)
+            self.performSegueWithIdentifier("SystemDetailToDeploymentDetail", sender: newDeployment)
         }
     }
 
@@ -135,11 +134,10 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         
-        // TODO: >>>>>>
-        if (segue.identifier == "SystemDetailToComponentDetail") {
-            if let componentDetailViewController = segue.destinationViewController as? ComponentDetailViewController {
-                if let newComponent = sender as? Component {
-                    componentDetailViewController.detailComponentItem = newComponent
+        if (segue.identifier == "SystemDetailToDeploymentDetail") {
+            if let deploymentDetailViewController = segue.destinationViewController as? DeploymentDetailViewController {
+                if let newDeployment = sender as? Deployment {
+                    deploymentDetailViewController.detailDeploymentItem = newDeployment
                 }
             }
         }
@@ -442,7 +440,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 return sortedComponents
             }
         }
-        return [Component]()
+        return [Deployment]()
     }
     
     func sortedServiceEntriesForSystem(system: System?) -> [AnyObject] {
@@ -465,10 +463,9 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         else if indexPath.section == 1 {
             if let _ = detailSystemItem?.managedObjectContext {
                 let components = sortedDeploymentsForSystem(detailSystemItem)
-                let selectedComponent = components[indexPath.row] as? Component
+                let selectedComponent = components[indexPath.row] as? Deployment
                 
-                // TODO: >>>>
-                //self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
+                self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
             }
         }
     }

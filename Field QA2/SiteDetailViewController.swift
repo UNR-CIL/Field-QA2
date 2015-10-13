@@ -52,7 +52,7 @@ class SiteDetailViewController: UITableViewController, UIPopoverControllerDelega
             
         }
         
-        let addSystemToSite = UIBarButtonItem(title: "+ System", style: .Plain, target: self, action: "addSystemToSite:")
+        let addSystemToSite = UIBarButtonItem(title: "+System", style: .Plain, target: self, action: "addSystemToSite:")
         navigationItem.rightBarButtonItems = [addSystemToSite]
         
         if detailSiteItem?.newlyCreated == true {
@@ -102,8 +102,7 @@ class SiteDetailViewController: UITableViewController, UIPopoverControllerDelega
                 abort()
             }
             
-            // TODO: >>>>
-            // self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: newSystem)
+            self.performSegueWithIdentifier("SiteDetailToSystemDetail", sender: newSystem)
         }
         
     }
@@ -295,9 +294,11 @@ class SiteDetailViewController: UITableViewController, UIPopoverControllerDelega
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "ComponentsViewControllerPopover") {
-            if let _ = segue.destinationViewController as? ComponentsViewController {
-                
+        if (segue.identifier == "SiteDetailToSystemDetail") {
+            if let systemDetailViewController = segue.destinationViewController as? SystemDetailViewController {
+                if let newSystem = sender as? System {
+                    systemDetailViewController.detailSystemItem = newSystem
+                }
             }
         }
     }

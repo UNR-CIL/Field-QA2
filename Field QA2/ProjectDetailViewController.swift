@@ -40,8 +40,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             _ = keyboardRect.size.height
         }
         
-        let addSystemBarButton = UIBarButtonItem(title: "+ System", style: UIBarButtonItemStyle.Plain, target: self, action: "addSiteToProject:")
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToProject:")
+        let addSystemBarButton = UIBarButtonItem(title: "+Site", style: UIBarButtonItemStyle.Plain, target: self, action: "addSiteToProject:")
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: "addServiceEntryToProject:")
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
         if detailProjectItem?.newlyCreated == true {
@@ -102,8 +102,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 abort()
             }
 
-            // TODO: >>>
-            //self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: newSite)
+            self.performSegueWithIdentifier("ProjectDetailToSiteDetail", sender: newSite)
         }
     }
     
@@ -114,11 +113,10 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         
-        // TODO: >>>
-        if (segue.identifier == "ProjectDetailToSystemDetail") {
-            if let systemDetailViewController = segue.destinationViewController as? SystemDetailViewController {
-                if let newSystem = sender as? System {
-                    systemDetailViewController.detailSystemItem = newSystem
+        if (segue.identifier == "ProjectDetailToSiteDetail") {
+            if let siteDetailViewController = segue.destinationViewController as? SiteDetailViewController {
+                if let newSite = sender as? Site {
+                    siteDetailViewController.detailSiteItem = newSite
                 }
             }
         }

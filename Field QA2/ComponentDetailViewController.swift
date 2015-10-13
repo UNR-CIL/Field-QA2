@@ -75,7 +75,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         }
         
         
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+ Service Entry", style: .Plain, target: self, action: "addServiceEntryToComponent:")
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: "addServiceEntryToComponent:")
         navigationItem.rightBarButtonItems = [addServiceEntryBarButton]
         
         if detailComponentItem?.newlyCreated == true {
