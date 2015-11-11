@@ -2,7 +2,7 @@
 //  ServiceEntry+CoreDataProperties.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 10/12/15.
+//  Created by John Jusayan on 11/11/15.
 //  Copyright © 2015 University of Nevada, Reno. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -23,6 +23,10 @@ extension ServiceEntry {
     @NSManaged var operation: String?
     @NSManaged var photo: UIImage?
     @NSManaged var uniqueIdentifier: String?
+    @NSManaged var componentIdentifer: String?
+    @NSManaged var creatorIdentifier: String?
+    @NSManaged var projectIdentifier: String?
+    @NSManaged var systemIdentifier: String?
     @NSManaged var component: Component?
     @NSManaged var creator: Person?
     @NSManaged var documents: NSSet?

@@ -11,15 +11,15 @@
 		47239F721BCBA02A00A3E299 /* SiteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F711BCBA02A00A3E299 /* SiteDetailViewController.swift */; };
 		47239F741BCBA05300A3E299 /* DeploymentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F731BCBA05300A3E299 /* DeploymentsViewController.swift */; };
 		47239F761BCBA06600A3E299 /* DeploymentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F751BCBA06600A3E299 /* DeploymentDetailViewController.swift */; };
-		47239F801BCC478F00A3E299 /* ServiceEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F771BCC478F00A3E299 /* ServiceEntry+CoreDataProperties.swift */; };
-		47239F811BCC478F00A3E299 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F781BCC478F00A3E299 /* Project+CoreDataProperties.swift */; };
-		47239F821BCC478F00A3E299 /* Component+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F791BCC478F00A3E299 /* Component+CoreDataProperties.swift */; };
-		47239F831BCC478F00A3E299 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F7A1BCC478F00A3E299 /* Person+CoreDataProperties.swift */; };
-		47239F841BCC478F00A3E299 /* LogicalDevice+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F7B1BCC478F00A3E299 /* LogicalDevice+CoreDataProperties.swift */; };
-		47239F851BCC478F00A3E299 /* Site+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F7C1BCC478F00A3E299 /* Site+CoreDataProperties.swift */; };
-		47239F861BCC478F00A3E299 /* System+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F7D1BCC478F00A3E299 /* System+CoreDataProperties.swift */; };
-		47239F871BCC478F00A3E299 /* Document+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F7E1BCC478F00A3E299 /* Document+CoreDataProperties.swift */; };
-		47239F881BCC478F00A3E299 /* Deployment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47239F7F1BCC478F00A3E299 /* Deployment+CoreDataProperties.swift */; };
+		473E6EC41BF32D6300A437F2 /* LogicalDevice+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EBB1BF32D6300A437F2 /* LogicalDevice+CoreDataProperties.swift */; };
+		473E6EC51BF32D6300A437F2 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EBC1BF32D6300A437F2 /* Project+CoreDataProperties.swift */; };
+		473E6EC61BF32D6300A437F2 /* System+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EBD1BF32D6300A437F2 /* System+CoreDataProperties.swift */; };
+		473E6EC71BF32D6300A437F2 /* Document+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EBE1BF32D6300A437F2 /* Document+CoreDataProperties.swift */; };
+		473E6EC81BF32D6300A437F2 /* ServiceEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EBF1BF32D6300A437F2 /* ServiceEntry+CoreDataProperties.swift */; };
+		473E6EC91BF32D6300A437F2 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EC01BF32D6300A437F2 /* Person+CoreDataProperties.swift */; };
+		473E6ECA1BF32D6300A437F2 /* Site+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EC11BF32D6300A437F2 /* Site+CoreDataProperties.swift */; };
+		473E6ECB1BF32D6300A437F2 /* Component+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EC21BF32D6300A437F2 /* Component+CoreDataProperties.swift */; };
+		473E6ECC1BF32D6300A437F2 /* Deployment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473E6EC31BF32D6300A437F2 /* Deployment+CoreDataProperties.swift */; };
 		478F57931B531C68000D6F2C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 478F57921B531C68000D6F2C /* Launch Screen.storyboard */; };
 		47E3C17A1B52418600B7E08B /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */; };
 		47E3C17D1B524F9600B7E08B /* NEXJSONExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E3C17C1B524F9600B7E08B /* NEXJSONExporter.m */; };
@@ -71,15 +71,15 @@
 		47239F711BCBA02A00A3E299 /* SiteDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteDetailViewController.swift; sourceTree = "<group>"; };
 		47239F731BCBA05300A3E299 /* DeploymentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeploymentsViewController.swift; sourceTree = "<group>"; };
 		47239F751BCBA06600A3E299 /* DeploymentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeploymentDetailViewController.swift; sourceTree = "<group>"; };
-		47239F771BCC478F00A3E299 /* ServiceEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServiceEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F781BCC478F00A3E299 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F791BCC478F00A3E299 /* Component+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Component+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F7A1BCC478F00A3E299 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F7B1BCC478F00A3E299 /* LogicalDevice+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LogicalDevice+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F7C1BCC478F00A3E299 /* Site+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Site+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F7D1BCC478F00A3E299 /* System+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "System+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F7E1BCC478F00A3E299 /* Document+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Document+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		47239F7F1BCC478F00A3E299 /* Deployment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deployment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EBB1BF32D6300A437F2 /* LogicalDevice+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LogicalDevice+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EBC1BF32D6300A437F2 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EBD1BF32D6300A437F2 /* System+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "System+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EBE1BF32D6300A437F2 /* Document+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Document+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EBF1BF32D6300A437F2 /* ServiceEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServiceEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EC01BF32D6300A437F2 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EC11BF32D6300A437F2 /* Site+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Site+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EC21BF32D6300A437F2 /* Component+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Component+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		473E6EC31BF32D6300A437F2 /* Deployment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Deployment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		478F57921B531C68000D6F2C /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		47E3C1781B52407A00B7E08B /* Field_QA 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Field_QA 2.xcdatamodel"; sourceTree = "<group>"; };
 		47E3C1791B52418600B7E08B /* SegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
@@ -177,15 +177,15 @@
 		ABCE55F319F769E0003B685B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				47239F771BCC478F00A3E299 /* ServiceEntry+CoreDataProperties.swift */,
-				47239F781BCC478F00A3E299 /* Project+CoreDataProperties.swift */,
-				47239F791BCC478F00A3E299 /* Component+CoreDataProperties.swift */,
-				47239F7A1BCC478F00A3E299 /* Person+CoreDataProperties.swift */,
-				47239F7B1BCC478F00A3E299 /* LogicalDevice+CoreDataProperties.swift */,
-				47239F7C1BCC478F00A3E299 /* Site+CoreDataProperties.swift */,
-				47239F7D1BCC478F00A3E299 /* System+CoreDataProperties.swift */,
-				47239F7E1BCC478F00A3E299 /* Document+CoreDataProperties.swift */,
-				47239F7F1BCC478F00A3E299 /* Deployment+CoreDataProperties.swift */,
+				473E6EBB1BF32D6300A437F2 /* LogicalDevice+CoreDataProperties.swift */,
+				473E6EBC1BF32D6300A437F2 /* Project+CoreDataProperties.swift */,
+				473E6EBD1BF32D6300A437F2 /* System+CoreDataProperties.swift */,
+				473E6EBE1BF32D6300A437F2 /* Document+CoreDataProperties.swift */,
+				473E6EBF1BF32D6300A437F2 /* ServiceEntry+CoreDataProperties.swift */,
+				473E6EC01BF32D6300A437F2 /* Person+CoreDataProperties.swift */,
+				473E6EC11BF32D6300A437F2 /* Site+CoreDataProperties.swift */,
+				473E6EC21BF32D6300A437F2 /* Component+CoreDataProperties.swift */,
+				473E6EC31BF32D6300A437F2 /* Deployment+CoreDataProperties.swift */,
 				47F88C111BC90C7700D9AF3F /* Person.swift */,
 				47F88C131BC90C7700D9AF3F /* Project.swift */,
 				47F88C151BC90C7700D9AF3F /* Component.swift */,
@@ -343,32 +343,31 @@
 				AB867F2419A299C7001E7E5E /* SystemsViewController.swift in Sources */,
 				ABD3D113199982370064F8A0 /* AppDelegate.swift in Sources */,
 				AB3991721A12E37B00046045 /* NotesCell.swift in Sources */,
-				47239F881BCC478F00A3E299 /* Deployment+CoreDataProperties.swift in Sources */,
+				473E6ECC1BF32D6300A437F2 /* Deployment+CoreDataProperties.swift in Sources */,
 				ABC08F671A6728A30066E8BE /* PhotoDetailViewController.swift in Sources */,
-				47239F821BCC478F00A3E299 /* Component+CoreDataProperties.swift in Sources */,
 				AB052B441A65DE940076FD15 /* CDJSONExporter.m in Sources */,
 				ABD3D135199C4C9A0064F8A0 /* ImageToDataTransformer.swift in Sources */,
 				47239F721BCBA02A00A3E299 /* SiteDetailViewController.swift in Sources */,
+				473E6EC61BF32D6300A437F2 /* System+CoreDataProperties.swift in Sources */,
+				473E6ECB1BF32D6300A437F2 /* Component+CoreDataProperties.swift in Sources */,
 				AB867F2219A28CAF001E7E5E /* SystemDetailViewController.swift in Sources */,
 				ABA4879119F83E8D0024BFF2 /* ProjectDetailViewController.swift in Sources */,
-				47239F811BCC478F00A3E299 /* Project+CoreDataProperties.swift in Sources */,
+				473E6EC51BF32D6300A437F2 /* Project+CoreDataProperties.swift in Sources */,
 				ABD3D116199982370064F8A0 /* Field_QA2.xcdatamodeld in Sources */,
+				473E6ECA1BF32D6300A437F2 /* Site+CoreDataProperties.swift in Sources */,
 				AB6B9E9C19B9825C003734A1 /* ComponentsViewController.swift in Sources */,
-				47239F861BCC478F00A3E299 /* System+CoreDataProperties.swift in Sources */,
-				47239F851BCC478F00A3E299 /* Site+CoreDataProperties.swift in Sources */,
 				47F88C331BC90C7700D9AF3F /* Deployment.swift in Sources */,
 				47F88C291BC90C7700D9AF3F /* ServiceEntry.swift in Sources */,
+				473E6EC71BF32D6300A437F2 /* Document+CoreDataProperties.swift in Sources */,
 				AB052B4C1A65FDD00076FD15 /* TNImageToDataTransformer.m in Sources */,
 				47239F741BCBA05300A3E299 /* DeploymentsViewController.swift in Sources */,
 				47F88C2D1BC90C7700D9AF3F /* Document.swift in Sources */,
 				ABFD086F19C8F83800742185 /* ServiceEntryDetailViewController.swift in Sources */,
 				47F88C231BC90C7700D9AF3F /* Person.swift in Sources */,
 				47E3C17A1B52418600B7E08B /* SegmentedControlCell.swift in Sources */,
-				47239F841BCC478F00A3E299 /* LogicalDevice+CoreDataProperties.swift in Sources */,
 				ABFD086B19C8DEA100742185 /* ComponentDetailViewController.swift in Sources */,
 				47F88C2F1BC90C7700D9AF3F /* System.swift in Sources */,
 				AB6B9E9819B98150003734A1 /* LogicalDevicesViewController.swift in Sources */,
-				47239F871BCC478F00A3E299 /* Document+CoreDataProperties.swift in Sources */,
 				47239F761BCBA06600A3E299 /* DeploymentDetailViewController.swift in Sources */,
 				ABFD086719C88FF600742185 /* DatePickerViewController.swift in Sources */,
 				AB052B481A65DEB80076FD15 /* CodingValueTransformer.m in Sources */,
@@ -379,14 +378,15 @@
 				47F88C311BC90C7700D9AF3F /* LogicalDevice.swift in Sources */,
 				ABD3D118199982370064F8A0 /* MasterViewController.swift in Sources */,
 				AB86B0E91A3D762300B5E02D /* UsersViewController.swift in Sources */,
+				473E6EC81BF32D6300A437F2 /* ServiceEntry+CoreDataProperties.swift in Sources */,
 				ABD3D11A199982370064F8A0 /* DetailViewController.swift in Sources */,
+				473E6EC41BF32D6300A437F2 /* LogicalDevice+CoreDataProperties.swift in Sources */,
 				47E3C17D1B524F9600B7E08B /* NEXJSONExporter.m in Sources */,
 				AB864A9E19FE50B2007FD1E9 /* CoordinateCell.swift in Sources */,
-				47239F801BCC478F00A3E299 /* ServiceEntry+CoreDataProperties.swift in Sources */,
 				AB6B9E9A19B9824A003734A1 /* ServiceEntriesViewController.swift in Sources */,
 				47F88C271BC90C7700D9AF3F /* Component.swift in Sources */,
 				AB6B9E9E19B98284003734A1 /* PersonsViewController.swift in Sources */,
-				47239F831BCC478F00A3E299 /* Person+CoreDataProperties.swift in Sources */,
+				473E6EC91BF32D6300A437F2 /* Person+CoreDataProperties.swift in Sources */,
 				47F88C251BC90C7700D9AF3F /* Project.swift in Sources */,
 				47239F701BCB9FFF00A3E299 /* SitesViewController.swift in Sources */,
 				AB864A9B19FE4E87007FD1E9 /* DateDisplayCell.swift in Sources */,

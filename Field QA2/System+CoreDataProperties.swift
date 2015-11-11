@@ -2,7 +2,7 @@
 //  System+CoreDataProperties.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 10/12/15.
+//  Created by John Jusayan on 11/11/15.
 //  Copyright © 2015 University of Nevada, Reno. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -24,6 +24,8 @@ extension System {
     @NSManaged var photo: UIImage?
     @NSManaged var power: String?
     @NSManaged var uniqueIdentifier: String?
+    @NSManaged var siteIdentifier: String?
+    @NSManaged var managerIdentifier: String?
     @NSManaged var deployments: NSSet?
     @NSManaged var manager: Person?
     @NSManaged var serviceEntries: NSSet?

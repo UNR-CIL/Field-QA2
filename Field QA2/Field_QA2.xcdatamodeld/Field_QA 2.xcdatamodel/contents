@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
     <entity name="Component" representedClassName=".Component" syncable="YES">
         <attribute name="calibrationStatus" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dataInterval" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dataStreamDetails" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deploymentIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="installationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="installationDetails" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="installationLocation" optional="YES" attributeType="String" syncable="YES"/>
@@ -44,6 +45,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="parentLogger" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="purpose" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="systemIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uniqueIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="components" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Component" inverseName="deployment" inverseEntity="Component" syncable="YES"/>
         <relationship name="documents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="deployment" inverseEntity="Document" syncable="YES"/>
@@ -99,13 +101,17 @@
         <relationship name="sites" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Site" inverseName="project" inverseEntity="Site" syncable="YES"/>
     </entity>
     <entity name="ServiceEntry" representedClassName=".ServiceEntry" syncable="YES">
+        <attribute name="componentIdentifer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="creatorIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="operation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
+        <attribute name="projectIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="systemIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uniqueIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="component" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Component" inverseName="serviceEntries" inverseEntity="Component" syncable="YES"/>
         <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="serviceEntries" inverseEntity="Person" syncable="YES"/>
@@ -124,6 +130,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="permitHolder" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeZoneAbbreviation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeZoneName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeZoneOffset" optional="YES" attributeType="String" syncable="YES"/>
@@ -139,10 +146,12 @@
             <userInfo/>
         </attribute>
         <attribute name="installationLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="managerIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photo" optional="YES" attributeType="Transformable" valueTransformerName="ImageToDataTransformer" syncable="YES"/>
         <attribute name="power" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="siteIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uniqueIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="deployments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Deployment" inverseName="system" inverseEntity="Deployment" syncable="YES"/>
         <relationship name="manager" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="managedSystems" inverseEntity="Person" syncable="YES"/>
@@ -151,14 +160,14 @@
         <userInfo/>
     </entity>
     <elements>
-        <element name="Component" positionX="261" positionY="198" width="128" height="480"/>
-        <element name="Deployment" positionX="288" positionY="342" width="128" height="285"/>
-        <element name="Document" positionX="288" positionY="324" width="128" height="210"/>
-        <element name="LogicalDevice" positionX="306" positionY="360" width="128" height="135"/>
-        <element name="Person" positionX="288" positionY="216" width="128" height="225"/>
-        <element name="Project" positionX="279" positionY="315" width="128" height="225"/>
-        <element name="ServiceEntry" positionX="306" positionY="288" width="128" height="240"/>
-        <element name="Site" positionX="297" positionY="351" width="128" height="300"/>
-        <element name="System" positionX="261" positionY="189" width="128" height="240"/>
+        <element name="Component" positionX="-99" positionY="558" width="128" height="493"/>
+        <element name="Deployment" positionX="162" positionY="318" width="128" height="298"/>
+        <element name="Document" positionX="583" positionY="45" width="128" height="210"/>
+        <element name="LogicalDevice" positionX="88" positionY="684" width="128" height="135"/>
+        <element name="Person" positionX="108" positionY="27" width="128" height="225"/>
+        <element name="Project" positionX="313" positionY="774" width="128" height="225"/>
+        <element name="ServiceEntry" positionX="646" positionY="279" width="128" height="298"/>
+        <element name="Site" positionX="495" positionY="546" width="128" height="313"/>
+        <element name="System" positionX="-126" positionY="189" width="128" height="268"/>
     </elements>
 </model>

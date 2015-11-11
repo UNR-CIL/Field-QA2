@@ -2,7 +2,7 @@
 //  Site+CoreDataProperties.swift
 //  Field QA2
 //
-//  Created by John Jusayan on 10/12/15.
+//  Created by John Jusayan on 11/11/15.
 //  Copyright © 2015 University of Nevada, Reno. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -29,6 +29,7 @@ extension Site {
     @NSManaged var timeZoneName: String?
     @NSManaged var timeZoneOffset: String?
     @NSManaged var uniqueIdentifier: String?
+    @NSManaged var projectIdentifier: String?
     @NSManaged var documents: NSSet?
     @NSManaged var project: Project?
     @NSManaged var systems: NSSet?
