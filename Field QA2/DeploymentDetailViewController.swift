@@ -101,6 +101,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
         if let context = detailDeploymentItem?.managedObjectContext {
             let newComponent = NSEntityDescription.insertNewObjectForEntityForName("Component", inManagedObjectContext: context) as! Component
             newComponent.deployment = detailDeploymentItem
+            newComponent.deploymentIdentifier = detailDeploymentItem?.uniqueIdentifier
             newComponent.newlyCreated = true
             
             do {

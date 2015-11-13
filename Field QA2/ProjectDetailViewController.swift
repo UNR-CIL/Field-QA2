@@ -40,9 +40,9 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             _ = keyboardRect.size.height
         }
         
-        let addSystemBarButton = UIBarButtonItem(title: "+Site", style: UIBarButtonItemStyle.Plain, target: self, action: "addSiteToProject:")
+        let addSiteBarButton = UIBarButtonItem(title: "+Site", style: UIBarButtonItemStyle.Plain, target: self, action: "addSiteToProject:")
         let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: "addServiceEntryToProject:")
-        navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
+        navigationItem.rightBarButtonItems = [addSiteBarButton, addServiceEntryBarButton]
         
         if detailProjectItem?.newlyCreated == true {
             self.setEditing(true, animated: false)
@@ -76,6 +76,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             
             let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.project = detailProjectItem
+            newServiceEntry.projectIdentifier = detailProjectItem?.uniqueIdentifier
             newServiceEntry.newlyCreated = true
             serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
             
@@ -93,6 +94,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
     
             let newSite = NSEntityDescription.insertNewObjectForEntityForName("Site", inManagedObjectContext: context) as! Site
             newSite.project = detailProjectItem
+            newSite.projectIdentifier = detailProjectItem?.uniqueIdentifier
             newSite.newlyCreated = true
             
             do {
@@ -232,8 +234,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         case 0:
             return 7
         case 1:
-            if let systems = detailProjectItem?.sites {
-                return systems.count
+            if let sites = detailProjectItem?.sites {
+                return sites.count
             }
             return 0
         case 2:
@@ -353,18 +355,18 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                     }
                 }
             case (1, _):
-                let systems = sortedSitesForProject(detailProjectItem)
-                if systems.count == 0 {
+                let sites = sortedSitesForProject(detailProjectItem)
+                if sites.count == 0 {
                     return
                 }
                 else {
-                    let system = systems[indexPath.row] as! System
-                    cell.textLabel?.text = system.name
+                    let site = sites[indexPath.row] as! Site
+                    cell.textLabel?.text = site.name
                     
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeStyle = .MediumStyle
                     dateFormatter.dateStyle = .MediumStyle
-                    if let date = system.creationDate {
+                    if let date = site.creationDate {
                         cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
                     }
                     else {
@@ -399,10 +401,10 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         if let project = project {
             let sites = project.sites!
             let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-            let sortedSystems = NSArray(array:sites.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
-            return sortedSystems
+            let sortedSites = NSArray(array:sites.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+            return sortedSites
         }
-        return [System]()
+        return [Site]()
     }
     
     func sortedServiceEntriesForProject(project: Project?) -> [AnyObject] {
@@ -421,11 +423,11 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         }
         else if indexPath.section == 1 {
             if let _ = detailProjectItem?.managedObjectContext {
-                let systems = sortedSitesForProject(detailProjectItem)
-                let selectedSystem = systems[indexPath.row] as? System
+                let sites = sortedSitesForProject(detailProjectItem)
+                let selectedSite = sites[indexPath.row] as? Site
                 
                 // TODO: >>>>
-                // self.performSegueWithIdentifier("ProjectDetailToSystemDetail", sender: selectedSystem)
+                // self.performSegueWithIdentifier("ProjectDetailToSiteDetail", sender: selectedSite)
             }
         }
         else {
@@ -438,7 +440,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
         case 0:
             return "Project Details"
         case 1:
-            return detailProjectItem?.sites?.count > 0 ? "Systems" : nil
+            return detailProjectItem?.sites?.count > 0 ? "Sites" : nil
         case 2:
             return detailProjectItem?.serviceEntries!.count > 0 ? "Service Entries" : nil
         default:

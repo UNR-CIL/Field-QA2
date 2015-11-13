@@ -132,6 +132,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
             
             let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.component = detailComponentItem
+            newServiceEntry.componentIdentifer = detailComponentItem?.uniqueIdentifier
             newServiceEntry.newlyCreated = true
             serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
             

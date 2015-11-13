@@ -98,6 +98,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
             let newServiceEntry = NSEntityDescription.insertNewObjectForEntityForName("ServiceEntry", inManagedObjectContext: context) as! ServiceEntry
             newServiceEntry.system = detailSystemItem
+            newServiceEntry.systemIdentifier = detailSystemItem?.uniqueIdentifier
             newServiceEntry.newlyCreated = true
             serviceEntryDetailViewController.detailServiceEntryItem = newServiceEntry
             
@@ -114,6 +115,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         if let context = detailSystemItem?.managedObjectContext {
             let newDeployment = NSEntityDescription.insertNewObjectForEntityForName("Deployment", inManagedObjectContext: context) as! Deployment
             newDeployment.system = detailSystemItem
+            newDeployment.systemIdentifier = detailSystemItem?.uniqueIdentifier
             newDeployment.newlyCreated = true
             
             do {

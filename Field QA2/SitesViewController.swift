@@ -32,9 +32,10 @@ class SitesViewController: UITableViewController, NSFetchedResultsControllerDele
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
+        let projectSortDescriptor = NSSortDescriptor(key: "projectIdentifier", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [projectSortDescriptor, sortDescriptor]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
@@ -98,6 +99,23 @@ class SitesViewController: UITableViewController, NSFetchedResultsControllerDele
     
     // MARK: - Table view data source
 
+    
+//    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+//        
+//    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController.sections, let section = sections[section].objects, let site = section[0] as? Site else {
+            return nil
+        }
+        if let projectName = site.project?.name {
+            return projectName
+        }
+        else {
+            return "A Project"
+        }
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
     }
