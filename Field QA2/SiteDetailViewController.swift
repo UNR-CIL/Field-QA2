@@ -93,6 +93,7 @@ class SiteDetailViewController: UITableViewController, UIPopoverControllerDelega
             
             let newSystem = NSEntityDescription.insertNewObjectForEntityForName("System", inManagedObjectContext: context) as! System
             newSystem.site = detailSiteItem
+            newSystem.siteIdentifier = detailSiteItem?.uniqueIdentifier
             newSystem.newlyCreated = true
             
             do {
