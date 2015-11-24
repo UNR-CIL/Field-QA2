@@ -32,13 +32,14 @@ class DeploymentsViewController: UITableViewController, NSFetchedResultsControll
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
+        let systemSortDescriptor = NSSortDescriptor(key: "systemIdentifier", ascending: true)
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [systemSortDescriptor, sortDescriptor]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!,sectionNameKeyPath: nil, cacheName:nil)
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!,sectionNameKeyPath: "systemIdentifier", cacheName:nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
@@ -97,6 +98,18 @@ class DeploymentsViewController: UITableViewController, NSFetchedResultsControll
     }
     
     // MARK: - Table view data source
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController.sections, let section = sections[section].objects, let deployment = section[0] as? Deployment else {
+            return nil
+        }
+        if let systemName = deployment.system?.name {
+            return systemName
+        }
+        else {
+            return "A System"
+        }
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0

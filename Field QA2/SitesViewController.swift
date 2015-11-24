@@ -39,7 +39,7 @@ class SitesViewController: UITableViewController, NSFetchedResultsControllerDele
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!,sectionNameKeyPath: nil, cacheName:nil)
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!,sectionNameKeyPath: "projectIdentifier", cacheName:nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         

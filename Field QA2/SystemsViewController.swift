@@ -32,13 +32,14 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
         fetchRequest.fetchBatchSize = 20
             
         // Edit the sort key as appropriate.
+        let siteSortDescriptor = NSSortDescriptor(key: "siteIdentifier", ascending: true)
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [siteSortDescriptor, sortDescriptor]
             
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName:nil)
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "siteIdentifier", cacheName:nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
             
@@ -100,6 +101,18 @@ class SystemsViewController: UITableViewController, NSFetchedResultsControllerDe
     }
     
     // MARK: - Table view data source
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = fetchedResultsController.sections, let section = sections[section].objects, let system = section[0] as? System else {
+            return nil
+        }
+        if let siteName = system.site?.name {
+            return siteName
+        }
+        else {
+            return "A Site"
+        }
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
