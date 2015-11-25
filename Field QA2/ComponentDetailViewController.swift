@@ -166,16 +166,30 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableItems.count
+        if section == 0 {
+            return tableItems.count
+        }
+        return sortedServiceEntriesForComponent(detailComponentItem).count
     }
-    
+
+    func sortedServiceEntriesForComponent(component: Component?) -> [AnyObject] {
+        if let component = component {
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            let sortedServiceEntries = NSArray(array: component.serviceEntries!.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+            return sortedServiceEntries
+        }
+        return [ServiceEntry]()
+    }
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cellIdentifier = tableItems[indexPath.row].cellIdentifier
+        var cellIdentifier = "Cell"
+        if indexPath.section == 0 {
+            cellIdentifier = tableItems[indexPath.row].cellIdentifier
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
@@ -453,17 +467,56 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 
                 cell.titleLabel.text = "Max Accuracy"
             }
-            
+        case (1, _):
+            let serviceEntries = sortedServiceEntriesForComponent(detailComponentItem)
+            if serviceEntries.count == 0 {
+                return
+            }
+            else {
+                let serviceEntry = serviceEntries[indexPath.row] as! ServiceEntry
+                cell.textLabel?.text = serviceEntry.name ?? "A Service Entry"
+
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                if let date = serviceEntry.creationDate {
+                    cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailTextLabel?.text = "No Date"
+                }
+            }
         default:
             break
         }
         
     }
-    
+
+    func presentServiceEntryDetailViewController(selectedItem: ServiceEntry) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
+        serviceEntryDetailViewController.presentedAsFormStyle = true
+
+        let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
+        navigationController.modalPresentationStyle = .FormSheet
+        self.presentViewController(navigationController, animated: true, completion: nil)
+        serviceEntryDetailViewController.detailServiceEntryItem = selectedItem
+    }
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        
+        if indexPath.section == 0 {
+
+        }
+        else if indexPath.section == 1 {
+            if let _ = detailComponentItem?.managedObjectContext {
+                let serviceEntries = sortedServiceEntriesForComponent(detailComponentItem)
+                if let selectedServiceEntry = serviceEntries[indexPath.row] as? ServiceEntry {
+                    presentServiceEntryDetailViewController(selectedServiceEntry)
+                }
+            }
+        }
     }
     
     // MARK: UITextFieldDelegate

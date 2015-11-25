@@ -361,7 +361,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
                 else {
                     let site = sites[indexPath.row] as! Site
-                    cell.textLabel?.text = site.name
+                    cell.textLabel?.text = site.name ?? "A Site"
                     
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeStyle = .MediumStyle
@@ -370,7 +370,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                         cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
                     }
                     else {
-                        cell.detailTextLabel?.text = ""
+                        cell.detailTextLabel?.text = "No Date"
                     }
                 }
             case (2, _):
@@ -380,7 +380,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 }
                 else {
                     let serviceEntry = serviceEntries[indexPath.row] as! ServiceEntry
-                    cell.textLabel?.text = serviceEntry.name
+                    cell.textLabel?.text = serviceEntry.name ?? "A Service Entry"
                     
                     let dateFormatter = NSDateFormatter()
                     dateFormatter.timeStyle = .MediumStyle
@@ -389,7 +389,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                         cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
                     }
                     else {
-                        cell.detailTextLabel?.text = ""
+                        cell.detailTextLabel?.text = "No Date"
                     }
                 }
             default:
@@ -426,13 +426,29 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                 let sites = sortedSitesForProject(detailProjectItem)
                 let selectedSite = sites[indexPath.row] as? Site
                 
-                // TODO: >>>>
-                // self.performSegueWithIdentifier("ProjectDetailToSiteDetail", sender: selectedSite)
+                self.performSegueWithIdentifier("ProjectDetailToSiteDetail", sender: selectedSite)
             }
         }
-        else {
+        else if indexPath.section == 2 {
+            if let _ = detailProjectItem?.managedObjectContext {
+                let serviceEntries = sortedServiceEntriesForProject(detailProjectItem)
+                if let selectedServiceEntry = serviceEntries[indexPath.row] as? ServiceEntry {
+                    presentServiceEntryDetailViewController(selectedServiceEntry)
+                }
+            }
             
         }
+    }
+
+    func presentServiceEntryDetailViewController(selectedItem: ServiceEntry) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
+        serviceEntryDetailViewController.presentedAsFormStyle = true
+
+        let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
+        navigationController.modalPresentationStyle = .FormSheet
+        self.presentViewController(navigationController, animated: true, completion: nil)
+        serviceEntryDetailViewController.detailServiceEntryItem = selectedItem
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

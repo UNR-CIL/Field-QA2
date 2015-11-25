@@ -254,7 +254,6 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections.
         return 3
     }
     
@@ -391,13 +390,13 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 }
             }
         case (1, _):
-            let components = sortedDeploymentsForSystem(detailSystemItem)
-            if components.count == 0 {
+            let deployments = sortedDeploymentsForSystem(detailSystemItem)
+            if deployments.count == 0 {
                 return
             }
             else {
-                let deployment = components[indexPath.row] as! Deployment
-                cell.textLabel?.text = deployment.name
+                let deployment = deployments[indexPath.row] as! Deployment
+                cell.textLabel?.text = deployment.name ?? "A Deployment"
                 
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
@@ -406,7 +405,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                     cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
                 }
                 else {
-                    cell.detailTextLabel?.text = ""
+                    cell.detailTextLabel?.text = "No Date"
                 }
             }
         case (2, _):
@@ -416,7 +415,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             }
             else {
                 let serviceEntry = serviceEntries[indexPath.row] as! ServiceEntry
-                cell.textLabel?.text = serviceEntry.name
+                cell.textLabel?.text = serviceEntry.name ?? "A Service Entry"
                 
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
@@ -425,7 +424,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                     cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
                 }
                 else {
-                    cell.detailTextLabel?.text = ""
+                    cell.detailTextLabel?.text = "No Date"
                 }
             }
         default:
@@ -438,8 +437,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         if let system = system {
             let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
             if let deployments = system.deployments {
-                let sortedComponents = NSArray(array:deployments.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
-                return sortedComponents
+                let sortedDeployments = NSArray(array:deployments.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+                return sortedDeployments
             }
         }
         return [Deployment]()
@@ -467,9 +466,28 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 let components = sortedDeploymentsForSystem(detailSystemItem)
                 let selectedComponent = components[indexPath.row] as? Deployment
                 
-                self.performSegueWithIdentifier("SystemDetailToComponentDetail", sender: selectedComponent)
+                self.performSegueWithIdentifier("SystemDetailToDeploymentDetail", sender: selectedComponent)
             }
         }
+        else if indexPath.section == 2 {
+            if let _ = detailSystemItem?.managedObjectContext {
+                let serviceEntries = sortedServiceEntriesForSystem(detailSystemItem)
+                if let selectedServiceEntry = serviceEntries[indexPath.row] as? ServiceEntry {
+                    presentServiceEntryDetailViewController(selectedServiceEntry)
+                }
+            }
+        }
+    }
+
+    func presentServiceEntryDetailViewController(selectedItem: ServiceEntry) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let serviceEntryDetailViewController = storyboard.instantiateViewControllerWithIdentifier("ServiceEntryDetailViewController") as! ServiceEntryDetailViewController
+        serviceEntryDetailViewController.presentedAsFormStyle = true
+
+        let navigationController = UINavigationController(rootViewController: serviceEntryDetailViewController)
+        navigationController.modalPresentationStyle = .FormSheet
+        self.presentViewController(navigationController, animated: true, completion: nil)
+        serviceEntryDetailViewController.detailServiceEntryItem = selectedItem
     }
 
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
@@ -482,9 +500,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
         if textField == locationTextField {
             detailSystemItem?.installationLocation = textField.text
         }
-        
 
-        
         return true
     }
     

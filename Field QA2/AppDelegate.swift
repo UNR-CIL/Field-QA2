@@ -50,13 +50,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let status = CLLocationManager.authorizationStatus()
         if status == .Restricted || status == .Denied {
             // TODO: Display alert and prompt user to allow location monitoring
+
+            let alertController = UIAlertController(title: nil, message: "Please enable Location Monitoring in Preferences", preferredStyle: UIAlertControllerStyle.Alert)
+            window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
         }
         else {
             locationManager = CLLocationManager()
-            if locationManager != nil {
-                locationManager!.delegate = self
+            if let locationManager = locationManager {
+                locationManager.delegate = self
                 
-                locationManager!.requestWhenInUseAuthorization()
+                locationManager.requestWhenInUseAuthorization()
             }
         }
         return true

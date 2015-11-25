@@ -35,7 +35,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
         (propertyName: "purpose", title: "Purpose", cellIdentifier: "NotesCell", valueType: "text"),
         (propertyName: "centerOffset", title: "Center Offset", cellIdentifier: "TextFieldCell", valueType: "number"),
         (propertyName: "heightFromGround", title: "Height", cellIdentifier: "TextFieldCell",valueType: "number"),
-        (propertyName: "establishedDate", title: "Established Date", cellIdentifier: "DateDisplayCell", valueType: "date"),
+        (propertyName: "establishedDate", title: "Established", cellIdentifier: "DateDisplayCell", valueType: "date"),
         (propertyName: "establishedDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
         (propertyName: "establishedDate", title: "", cellIdentifier: "DatePickerCell", valueType: "date"),
         (propertyName: "installationLocation", title: "Location", cellIdentifier: "TextFieldCell", valueType: "text"),
@@ -138,16 +138,21 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableItems.count
+        if section == 0 {
+            return tableItems.count
+        }
+        return sortedComponentsForDeployment(detailDeploymentItem).count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cellIdentifier = tableItems[indexPath.row].cellIdentifier
+        var cellIdentifier = "Cell"
+        if indexPath.section == 0 {
+            cellIdentifier = tableItems[indexPath.row].cellIdentifier
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
@@ -211,7 +216,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
                 dateFormatter.dateStyle = .MediumStyle
-                cell.titleLabel.text = "Established Date"
+                cell.titleLabel.text = "Established"
                 
                 if let date = detailDeploymentItem?.establishedDate {
                     cell.detailLabel.text = dateFormatter.stringFromDate(date)
@@ -320,7 +325,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.timeStyle = .MediumStyle
                 dateFormatter.dateStyle = .MediumStyle
-                cell.titleLabel.text = "Established"
+                cell.titleLabel.text = "Abandoned"
 
                 if let date = detailDeploymentItem?.establishedDate {
                     cell.detailLabel.text = dateFormatter.stringFromDate(date)
@@ -358,7 +363,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                     cell.datePicker?.date = normalizedDate ?? NSDate()
                 }
             }
-        case (0, 20):
+        case (0, 13):
             if let cell = cell as? TextFieldCell {
                 cell.textField.userInteractionEnabled = self.editing
                 
@@ -366,17 +371,49 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                 cell.textField?.text = detailDeploymentItem?.parentLogger
                 cell.titleLabel.text = "Parent Logger"
             }
-            
+        case (1, _):
+            let components = sortedComponentsForDeployment(detailDeploymentItem)
+            if components.count == 0 {
+                return
+            }
+            else {
+                let component = components[indexPath.row] as! Component
+                cell.textLabel?.text = component.name ?? "A Component"
+
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                if let date = component.creationDate {
+                    cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailTextLabel?.text = "No Date"
+                }
+            }
         default:
             break
         }
-        
+
     }
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        
+
+        if indexPath.section == 0 {
+
+        }
+        else if indexPath.section == 1 {
+            if let _ = detailDeploymentItem?.managedObjectContext {
+                let sites = sortedComponentsForDeployment(detailDeploymentItem)
+                let selectedComponent = sites[indexPath.row] as? Component
+
+                self.performSegueWithIdentifier("DeploymentDetailToComponentDetail", sender: selectedComponent)
+            }
+        }
+        else {
+
+        }
+
     }
     
     // MARK: UITextFieldDelegate
@@ -460,8 +497,18 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
     func configureView() {
         
     }
-    
-    
+
+    func sortedComponentsForDeployment(deployment: Deployment?) -> [AnyObject] {
+        if let deployment = deployment {
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            if let components = deployment.components {
+                let sortedComponents = NSArray(array:components.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+                return sortedComponents
+            }
+        }
+        return [Component]()
+    }
+
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

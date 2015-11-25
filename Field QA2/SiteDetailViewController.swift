@@ -128,16 +128,31 @@ class SiteDetailViewController: UITableViewController, UIPopoverControllerDelega
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2;
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableItems.count
+        switch (section) {
+        case 0:
+            return tableItems.count
+        case 1:
+            if let systems = detailSiteItem?.systems {
+                return systems.count
+            }
+            return 0
+        default:
+            return 0
+        }
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cellIdentifier = tableItems[indexPath.row].cellIdentifier
+        var cellIdentifier: String
+        if indexPath.section == 0 {
+            cellIdentifier = tableItems[indexPath.row].cellIdentifier
+        }
+        else {
+            cellIdentifier = "Cell"
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as UITableViewCell
         configureCell(cell, forIndexPath: indexPath)
         
@@ -231,17 +246,57 @@ class SiteDetailViewController: UITableViewController, UIPopoverControllerDelega
                 cell.textField.text = detailSiteItem?.valueForKey(tableItems[indexPath.row].propertyName) as! String?
                 cell.titleLabel.text = tableItems[indexPath.row].title
             }
-            
+        case (1, _):
+            let systems = sortedSystemsForSite(detailSiteItem)
+            if systems.count == 0 {
+                return
+            }
+            else {
+                let system = systems[indexPath.row] as! System
+                cell.textLabel?.text = system.name ?? "A System"
+
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.timeStyle = .MediumStyle
+                dateFormatter.dateStyle = .MediumStyle
+                if let date = system.creationDate {
+                    cell.detailTextLabel?.text = dateFormatter.stringFromDate(date)
+                }
+                else {
+                    cell.detailTextLabel?.text = "No Date"
+                }
+            }
         default:
             break
         }
         
     }
-    
+
+    func sortedSystemsForSite(site: Site?) -> [AnyObject] {
+        if let site = site {
+            let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+            if let systems = site.systems {
+                let sortedSystems = NSArray(array:systems.allObjects).sortedArrayUsingDescriptors([sortDescriptor])
+                return sortedSystems
+            }
+        }
+        return [System]()
+    }
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        
+
+        if indexPath.section == 0 {
+
+        }
+        else if indexPath.section == 1 {
+            if let _ = detailSiteItem?.managedObjectContext {
+                let systems = sortedSystemsForSite(detailSiteItem)
+                let selectedComponent = systems[indexPath.row] as? System
+
+                self.performSegueWithIdentifier("SiteDetailToSystemDetail", sender: selectedComponent)
+            }
+        }
+
     }
     
     // MARK: UITextFieldDelegate
