@@ -75,7 +75,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
         }
         
         
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: "addServiceEntryToComponent:")
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: #selector(ComponentDetailViewController.addServiceEntryToComponent(_:)))
         navigationItem.rightBarButtonItems = [addServiceEntryBarButton]
         
         if detailComponentItem?.newlyCreated == true {
@@ -296,7 +296,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.datePicker.userInteractionEnabled = self.editing
 
                 cell.datePicker?.datePickerMode = .Date
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(ComponentDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 
                 if let date = detailComponentItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
@@ -310,7 +310,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.datePicker.userInteractionEnabled = self.editing
                 
                 cell.datePicker?.datePickerMode = .Time
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(ComponentDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 
                 if let date = detailComponentItem?.installationDate {
                     let calendar = NSCalendar.currentCalendar()
@@ -359,7 +359,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.datePicker.userInteractionEnabled = self.editing
 
                 cell.datePicker?.datePickerMode = .Date
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(ComponentDetailViewController.dateValueChanged(_:)), forControlEvents: .ValueChanged)
                 
                 if let date = detailComponentItem?.lastCalibratedDate {
                     let calendar = NSCalendar.currentCalendar()
@@ -373,7 +373,7 @@ class ComponentDetailViewController: UITableViewController, UIPopoverControllerD
                 cell.datePicker.userInteractionEnabled = self.editing
                 
                 cell.datePicker?.datePickerMode = .Time
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(ComponentDetailViewController.dateValueChanged(_:)), forControlEvents: .ValueChanged)
                 
                 if let date = detailComponentItem?.lastCalibratedDate {
                     let calendar = NSCalendar.currentCalendar()

@@ -62,7 +62,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
         NSNotificationCenter.defaultCenter().addObserverForName("SegmentedValueChanged", object: nil, queue: NSOperationQueue.mainQueue()) { (notification) -> Void in
         }
         
-        let addComponentBarButton = UIBarButtonItem(title: "+Component", style: .Plain, target: self, action: "addComponentToDeployment:")
+        let addComponentBarButton = UIBarButtonItem(title: "+Component", style: .Plain, target: self, action: #selector(DeploymentDetailViewController.addComponentToDeployment(_:)))
         navigationItem.rightBarButtonItems = [addComponentBarButton]
         
         if detailDeploymentItem?.newlyCreated == true {
@@ -230,7 +230,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                 cell.datePicker.userInteractionEnabled = self.editing
                 
                 cell.datePicker?.datePickerMode = .Date
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(DeploymentDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 
                 if let date = detailDeploymentItem?.establishedDate {
                     let calendar = NSCalendar.currentCalendar()
@@ -244,7 +244,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                 cell.datePicker.userInteractionEnabled = self.editing
                 
                 cell.datePicker?.datePickerMode = .Time
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(DeploymentDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 
                 if let date = detailDeploymentItem?.establishedDate {
                     let calendar = NSCalendar.currentCalendar()
@@ -340,7 +340,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                 cell.datePicker.userInteractionEnabled = self.editing
                 
                 cell.datePicker?.datePickerMode = .Date
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(DeploymentDetailViewController.dateValueChanged(_:)), forControlEvents: .ValueChanged)
                 
                 if let date = detailDeploymentItem?.establishedDate {
                     let calendar = NSCalendar.currentCalendar()
@@ -354,7 +354,7 @@ class DeploymentDetailViewController: UITableViewController, UIPopoverController
                 cell.datePicker.userInteractionEnabled = self.editing
                 
                 cell.datePicker?.datePickerMode = .Time
-                cell.datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: .ValueChanged)
+                cell.datePicker?.addTarget(self, action: #selector(DeploymentDetailViewController.dateValueChanged(_:)), forControlEvents: .ValueChanged)
                 
                 if let date = detailDeploymentItem?.establishedDate {
                     let calendar = NSCalendar.currentCalendar()

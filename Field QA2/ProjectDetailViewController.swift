@@ -40,8 +40,8 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
             _ = keyboardRect.size.height
         }
         
-        let addSiteBarButton = UIBarButtonItem(title: "+Site", style: UIBarButtonItemStyle.Plain, target: self, action: "addSiteToProject:")
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: "addServiceEntryToProject:")
+        let addSiteBarButton = UIBarButtonItem(title: "+Site", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ProjectDetailViewController.addSiteToProject(_:)))
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: #selector(ProjectDetailViewController.addServiceEntryToProject(_:)))
         navigationItem.rightBarButtonItems = [addSiteBarButton, addServiceEntryBarButton]
         
         if detailProjectItem?.newlyCreated == true {
@@ -329,7 +329,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
 
                     yearDatePicker = cell.datePicker
                     yearDatePicker?.datePickerMode = .Date
-                    yearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                    yearDatePicker?.addTarget(self, action: #selector(ProjectDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                     
                     if let date = detailProjectItem?.startedDate {
                         let calendar = NSCalendar.currentCalendar()
@@ -345,7 +345,7 @@ class ProjectDetailViewController: UITableViewController, UIPopoverControllerDel
                     
                     timeDatePicker = cell.datePicker
                     timeDatePicker?.datePickerMode = .Time
-                    timeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                    timeDatePicker?.addTarget(self, action: #selector(ProjectDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                     
                     if let date = detailProjectItem?.startedDate {
                         let calendar = NSCalendar.currentCalendar()

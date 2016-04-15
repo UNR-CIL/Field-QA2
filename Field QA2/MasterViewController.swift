@@ -64,7 +64,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             return
         }
         
-        let exportButton = UIBarButtonItem(title: "Export", style: UIBarButtonItemStyle.Plain, target: self, action: "export:")
+        let exportButton = UIBarButtonItem(title: "Export", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MasterViewController.export(_:)))
         self.navigationItem.leftBarButtonItem = exportButton
     }
     

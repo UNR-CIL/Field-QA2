@@ -52,7 +52,7 @@ class SiteDetailViewController: UITableViewController, UIPopoverControllerDelega
             
         }
         
-        let addSystemToSite = UIBarButtonItem(title: "+System", style: .Plain, target: self, action: "addSystemToSite:")
+        let addSystemToSite = UIBarButtonItem(title: "+System", style: .Plain, target: self, action: #selector(SiteDetailViewController.addSystemToSite(_:)))
         navigationItem.rightBarButtonItems = [addSystemToSite]
         
         if detailSiteItem?.newlyCreated == true {

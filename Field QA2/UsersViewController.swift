@@ -73,7 +73,7 @@ class UsersViewController: UITableViewController, NSFetchedResultsControllerDele
         self.managedObjectContext = DataManager.sharedManager.managedObjectContext
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(UsersViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.leftItemsSupplementBackButton = true
         self.title = "Users"

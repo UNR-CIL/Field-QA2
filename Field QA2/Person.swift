@@ -25,12 +25,10 @@ class Person: NSManagedObject {
     func personWithIdentifier(identifier: String, inManagedObjectContext context: NSManagedObjectContext) -> Person? {
         let fetchRequest = NSFetchRequest(entityName: "Person")
         fetchRequest.predicate = NSPredicate(format: "uniqueIdentifier == %@", identifier)
-        var error: NSError?
         let results: [AnyObject]?
         do {
             results = try context.executeFetchRequest(fetchRequest)
-        } catch let error1 as NSError {
-            error = error1
+        } catch _ as NSError {
             results = nil
         }
         

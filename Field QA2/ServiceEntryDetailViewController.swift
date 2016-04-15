@@ -55,7 +55,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
         }
         
         if presentedAsFormStyle {
-            let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+            let doneBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(ServiceEntryDetailViewController.done(_:)))
             self.navigationItem.rightBarButtonItem = doneBarButtonItem
         }
         
@@ -123,11 +123,9 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
             detailServiceEntryItem!.notes = nil
         }
 
-        var error : NSError?
         do {
             try self.detailServiceEntryItem?.managedObjectContext!.save()
-        } catch let error1 as NSError {
-            error = error1
+        } catch _ as NSError {
         }
     }
     
@@ -274,7 +272,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
                 
                 yearDatePicker = cell.datePicker
                 yearDatePicker?.datePickerMode = .Date
-                yearDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                yearDatePicker?.addTarget(self, action: #selector(ServiceEntryDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 
                 if let date = detailServiceEntryItem?.date {
                     let calendar = NSCalendar.currentCalendar()
@@ -290,7 +288,7 @@ class ServiceEntryDetailViewController: UITableViewController, UIPopoverControll
                 
                 timeDatePicker = cell.datePicker
                 timeDatePicker?.datePickerMode = .Time
-                timeDatePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                timeDatePicker?.addTarget(self, action: #selector(ServiceEntryDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 
                 if let date = detailServiceEntryItem?.date {
                     let calendar = NSCalendar.currentCalendar()

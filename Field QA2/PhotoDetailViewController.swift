@@ -23,7 +23,7 @@ class PhotoDetailViewController: UIViewController {
         }
         
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(PhotoDetailViewController.done(_:)))
         }
     }
 

@@ -48,8 +48,8 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
             
         }
         
-        let addSystemBarButton = UIBarButtonItem(title: "+Deployment", style: UIBarButtonItemStyle.Plain, target: self, action: "addDeploymentToSystem:")
-        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: "addServiceEntryToSystem:")
+        let addSystemBarButton = UIBarButtonItem(title: "+Deployment", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SystemDetailViewController.addDeploymentToSystem(_:)))
+        let addServiceEntryBarButton = UIBarButtonItem(title: "+SE", style: .Plain, target: self, action: #selector(SystemDetailViewController.addServiceEntryToSystem(_:)))
         navigationItem.rightBarButtonItems = [addSystemBarButton, addServiceEntryBarButton]
         
         if detailSystemItem?.newlyCreated == true {
@@ -362,7 +362,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 
                 datePicker = cell.datePicker
                 datePicker?.datePickerMode = .Date
-                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                datePicker?.addTarget(self, action: #selector(SystemDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 datePicker?.tag = 1
                 
                 if let date = detailSystemItem?.installationDate {
@@ -379,7 +379,7 @@ class SystemDetailViewController: UITableViewController, UIPopoverControllerDele
                 
                 datePicker = cell.datePicker
                 datePicker?.datePickerMode = .Time
-                datePicker?.addTarget(self, action: "dateValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+                datePicker?.addTarget(self, action: #selector(SystemDetailViewController.dateValueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 datePicker?.tag = 2
                 
                 if let date = detailSystemItem?.installationDate {
